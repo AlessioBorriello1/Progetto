@@ -30,16 +30,48 @@ import javax.swing.JLabel;
 import java.awt.CardLayout;
 import javax.swing.BoxLayout;
 import java.awt.Font;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.SpringLayout;
 
 public class MainFrame extends JFrame {
 	
 	private MainController controller; //Controller che chiama il JFrame
 	private Point mouseClickPoint; //Posizione mouse
+	private JFrame currentFrame; //Frame che sta mostrando nella parte destra del MainFrame
+	
+	//Palette colori
+	public Color turquoise = new Color(63, 224, 208);
+	public Color powder = new Color(196, 243, 249);
+	public Color sky = new Color(149, 200, 216);
+	public Color electric = new Color(126, 249, 255);
+	public Color airForce = new Color(88, 139, 174);
+	public Color babyBlue = new Color(137, 207, 240);
+	public Color tiffany = new Color(129, 216, 208);
+	public Color steel = new Color(70, 130, 180);
+	public Color carolina = new Color(87, 160, 211);
+	public Color trukishBlue = new Color(79, 151, 163);
+	public Color pigeon = new Color(114, 133, 165);
+	public Color maya = new Color(115, 194, 251);
+	public Color teal = new Color(0, 128, 129);
+	public Color independence = new Color(76, 81, 109);
+	public Color cornflower = new Color(101, 147, 245);
+	public Color olympic = new Color(0, 142, 204);
+	public Color sapphire = new Color(15, 82, 186);
+	public Color azure = new Color(0, 128, 255);
+	public Color egyptian = new Color(16, 52, 166);
+	public Color yale = new Color(14, 77, 146);
+	public Color navy = new Color(0, 0, 128);
+	public Color prussian = new Color(0, 49, 82);
+	public Color space = new Color(29, 41, 81);
+	public Color royale = new Color(17, 30, 108);
+	public Color white = new Color(255, 255, 255);
 	
 	public MainFrame(MainController controller) {
 		
 		setSize(new Dimension(1000, 600)); //Dimensioni MainFrame
-		getContentPane().setBackground(new Color(240, 240, 240)); //Colore background
+		getContentPane().setBackground(white); //Colore background
 		setUndecorated(true); //Undecorated
 		setResizable(false); //Non ridimensionabile
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Quando si chiude il MainFrame chiudi applicazione
@@ -61,12 +93,12 @@ public class MainFrame extends JFrame {
 	        }
 		});
 		
-		upperPanel.setBackground(SystemColor.inactiveCaption); //Imposta colore background upper panel
+		upperPanel.setBackground(steel); //Imposta colore background upper panel
 		getContentPane().add(upperPanel); //Aggiungi upper panel al pannello principale
 		upperPanel.setLayout(null); //Imposta layout upper panel
 		
 		JButton btnClose = new JButton(); //Nuovo bottone close
-		btnClose.setBounds(970, 0, 30, 30); //Posiziona
+		btnClose.setBounds(960, 0, 30, 30); //Posiziona
 		//Impostazioni bottone close
 		btnClose.setContentAreaFilled(false);
 		btnClose.setSelectedIcon(null);
@@ -100,13 +132,12 @@ public class MainFrame extends JFrame {
 		
 		JTextPane txtpnTripadvisor = new JTextPane();
 		//Impostazioni testo
-		txtpnTripadvisor.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtpnTripadvisor.setBounds(0, 0, 96, 30);
+		txtpnTripadvisor.setFont(new Font("Tahoma", Font.BOLD, 18));
+		txtpnTripadvisor.setBounds(0, 0, 116, 30);
 		txtpnTripadvisor.setHighlighter(null);
-		txtpnTripadvisor.setForeground(SystemColor.textHighlight);
+		txtpnTripadvisor.setForeground(electric);
 		txtpnTripadvisor.setEditable(false);
-		txtpnTripadvisor.setCaretColor(SystemColor.inactiveCaptionText);
-		txtpnTripadvisor.setBackground(SystemColor.inactiveCaption);
+		txtpnTripadvisor.setBackground(upperPanel.getBackground());
 		txtpnTripadvisor.setText("TripAdvisor");
 		
 		upperPanel.add(txtpnTripadvisor); //Aggiungi testo TripAdvisor all'upper panel
@@ -121,6 +152,45 @@ public class MainFrame extends JFrame {
 		btnMinimize.setBounds(930, 0, 30, 30);
 		
 		upperPanel.add(btnMinimize); //Aggiungi bottone minimize all'upper panel
+		
+		JPanel mainPanel = new JPanel();
+		mainPanel.setBounds(10, 41, 980, 548);
+		mainPanel.setBackground(getContentPane().getBackground());
+		getContentPane().add(mainPanel);
+		
+		JPanel dashBoardPanel = new JPanel();
+		dashBoardPanel.setBackground(prussian);
+		
+		JPanel workPanel = new JPanel();
+		workPanel.setBackground(Color.LIGHT_GRAY);
+		GroupLayout gl_mainPanel = new GroupLayout(mainPanel);
+		gl_mainPanel.setHorizontalGroup(
+			gl_mainPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_mainPanel.createSequentialGroup()
+					.addComponent(dashBoardPanel, GroupLayout.PREFERRED_SIZE, 202, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(workPanel, GroupLayout.DEFAULT_SIZE, 772, Short.MAX_VALUE))
+		);
+		gl_mainPanel.setVerticalGroup(
+			gl_mainPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_mainPanel.createSequentialGroup()
+					.addGroup(gl_mainPanel.createParallelGroup(Alignment.LEADING)
+						.addComponent(dashBoardPanel, GroupLayout.PREFERRED_SIZE, 557, GroupLayout.PREFERRED_SIZE)
+						.addComponent(workPanel, GroupLayout.DEFAULT_SIZE, 546, Short.MAX_VALUE))
+					.addContainerGap())
+		);
+		SpringLayout sl_dashBoardPanel = new SpringLayout();
+		dashBoardPanel.setLayout(sl_dashBoardPanel);
+		
+		JLabel labelProfilePic = new JLabel("");
+		labelProfilePic.setHorizontalAlignment(SwingConstants.CENTER);
+		sl_dashBoardPanel.putConstraint(SpringLayout.NORTH, labelProfilePic, 10, SpringLayout.NORTH, dashBoardPanel);
+		sl_dashBoardPanel.putConstraint(SpringLayout.WEST, labelProfilePic, 0, SpringLayout.WEST, dashBoardPanel);
+		sl_dashBoardPanel.putConstraint(SpringLayout.SOUTH, labelProfilePic, 212, SpringLayout.NORTH, dashBoardPanel);
+		sl_dashBoardPanel.putConstraint(SpringLayout.EAST, labelProfilePic, 202, SpringLayout.WEST, dashBoardPanel);
+		labelProfilePic.setIcon(new ImageIcon(MainFrame.class.getResource("/icons/ProfilePic.png")));
+		dashBoardPanel.add(labelProfilePic);
+		mainPanel.setLayout(gl_mainPanel);
 		//Eventi bottone minimize
 		btnMinimize.addMouseListener(new MouseAdapter() {
 			//Quando premo il mouse minimizza il MainFrame
@@ -142,5 +212,6 @@ public class MainFrame extends JFrame {
 				
 			}
 		});
+	
 	}
 }
