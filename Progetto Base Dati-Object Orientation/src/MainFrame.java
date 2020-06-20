@@ -34,44 +34,18 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SpringLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
 
 public class MainFrame extends JFrame {
-	
+
 	private MainController controller; //Controller che chiama il JFrame
-	private Point mouseClickPoint; //Posizione mouse
-	private JFrame currentFrame; //Frame che sta mostrando nella parte destra del MainFrame
-	
-	//Palette colori
-	public Color turquoise = new Color(63, 224, 208);
-	public Color powder = new Color(196, 243, 249);
-	public Color sky = new Color(149, 200, 216);
-	public Color electric = new Color(126, 249, 255);
-	public Color airForce = new Color(88, 139, 174);
-	public Color babyBlue = new Color(137, 207, 240);
-	public Color tiffany = new Color(129, 216, 208);
-	public Color steel = new Color(70, 130, 180);
-	public Color carolina = new Color(87, 160, 211);
-	public Color trukishBlue = new Color(79, 151, 163);
-	public Color pigeon = new Color(114, 133, 165);
-	public Color maya = new Color(115, 194, 251);
-	public Color teal = new Color(0, 128, 129);
-	public Color independence = new Color(76, 81, 109);
-	public Color cornflower = new Color(101, 147, 245);
-	public Color olympic = new Color(0, 142, 204);
-	public Color sapphire = new Color(15, 82, 186);
-	public Color azure = new Color(0, 128, 255);
-	public Color egyptian = new Color(16, 52, 166);
-	public Color yale = new Color(14, 77, 146);
-	public Color navy = new Color(0, 0, 128);
-	public Color prussian = new Color(0, 49, 82);
-	public Color space = new Color(29, 41, 81);
-	public Color royale = new Color(17, 30, 108);
-	public Color white = new Color(255, 255, 255);
 	
 	public MainFrame(MainController controller) {
 		
 		setSize(new Dimension(1000, 600)); //Dimensioni MainFrame
-		getContentPane().setBackground(white); //Colore background
+		getContentPane().setBackground(controller.white); //Colore background
 		setUndecorated(true); //Undecorated
 		setResizable(false); //Non ridimensionabile
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Quando si chiude il MainFrame chiudi applicazione
@@ -82,18 +56,18 @@ public class MainFrame extends JFrame {
 		//Per poter trascinare la finestra
 		upperPanel.addMouseMotionListener(new MouseMotionAdapter() {
 			public void mouseDragged(MouseEvent e) { //Quando trascino
-	            Point newPoint = e.getLocationOnScreen(); //Posizione MainFrame sullo schermo
-	            newPoint.translate(-mouseClickPoint.x, -mouseClickPoint.y); //Trasla la posizione del MainFrame in base alla posizione del mouse (mouseClickPoint)
-	            setLocation(newPoint); //Imposta nuova posizione
-	        }
+		        Point newPoint = e.getLocationOnScreen(); //Posizione MainFrame sullo schermo
+		        newPoint.translate(-controller.mouseClickPoint.x, -controller.mouseClickPoint.y); //Trasla la posizione del MainFrame in base alla posizione del mouse (mouseClickPoint)
+		        setLocation(newPoint); //Imposta nuova posizione
+		    }
 		});
 		upperPanel.addMouseListener(new MouseAdapter(){
 			public void mousePressed(MouseEvent e) { //Quando premo il mouse
-				mouseClickPoint = e.getPoint(); //Aggiorna posizione mouse
-	        }
+				controller.mouseClickPoint = e.getPoint(); //Aggiorna posizione mouse
+		    }
 		});
 		
-		upperPanel.setBackground(steel); //Imposta colore background upper panel
+		upperPanel.setBackground(controller.steel); //Imposta colore background upper panel
 		getContentPane().add(upperPanel); //Aggiungi upper panel al pannello principale
 		upperPanel.setLayout(null); //Imposta layout upper panel
 		
@@ -128,14 +102,14 @@ public class MainFrame extends JFrame {
 				
 			}
 		});
-
+		
 		
 		JTextPane txtpnTripadvisor = new JTextPane();
 		//Impostazioni testo
 		txtpnTripadvisor.setFont(new Font("Tahoma", Font.BOLD, 18));
 		txtpnTripadvisor.setBounds(0, 0, 116, 30);
 		txtpnTripadvisor.setHighlighter(null);
-		txtpnTripadvisor.setForeground(electric);
+		txtpnTripadvisor.setForeground(controller.electric);
 		txtpnTripadvisor.setEditable(false);
 		txtpnTripadvisor.setBackground(upperPanel.getBackground());
 		txtpnTripadvisor.setText("TripAdvisor");
@@ -159,11 +133,72 @@ public class MainFrame extends JFrame {
 		getContentPane().add(mainPanel);
 		
 		JPanel dashBoardPanel = new JPanel();
-		dashBoardPanel.setBackground(prussian);
+		dashBoardPanel.setBackground(controller.prussian);
 		
-		JPanel workPanel = new JPanel();
-		workPanel.setBackground(Color.LIGHT_GRAY);
 		GroupLayout gl_mainPanel = new GroupLayout(mainPanel);
+		
+		SpringLayout sl_dashBoardPanel = new SpringLayout();
+		dashBoardPanel.setLayout(sl_dashBoardPanel);
+		
+		JLabel labelProfilePic = new JLabel("");
+		labelProfilePic.setHorizontalAlignment(SwingConstants.CENTER);
+		sl_dashBoardPanel.putConstraint(SpringLayout.NORTH, labelProfilePic, 10, SpringLayout.NORTH, dashBoardPanel);
+		sl_dashBoardPanel.putConstraint(SpringLayout.WEST, labelProfilePic, 0, SpringLayout.WEST, dashBoardPanel);
+		sl_dashBoardPanel.putConstraint(SpringLayout.SOUTH, labelProfilePic, 212, SpringLayout.NORTH, dashBoardPanel);
+		sl_dashBoardPanel.putConstraint(SpringLayout.EAST, labelProfilePic, 202, SpringLayout.WEST, dashBoardPanel);
+		labelProfilePic.setIcon(new ImageIcon(MainFrame.class.getResource("/icons/ProfilePic.png")));
+		dashBoardPanel.add(labelProfilePic);
+		
+		JPanel panelInfoUtente = new JPanel();
+		panelInfoUtente.setBackground(dashBoardPanel.getBackground());
+		sl_dashBoardPanel.putConstraint(SpringLayout.NORTH, panelInfoUtente, 6, SpringLayout.SOUTH, labelProfilePic);
+		sl_dashBoardPanel.putConstraint(SpringLayout.WEST, panelInfoUtente, 10, SpringLayout.WEST, dashBoardPanel);
+		sl_dashBoardPanel.putConstraint(SpringLayout.SOUTH, panelInfoUtente, 99, SpringLayout.SOUTH, labelProfilePic);
+		sl_dashBoardPanel.putConstraint(SpringLayout.EAST, panelInfoUtente, 192, SpringLayout.WEST, labelProfilePic);
+		dashBoardPanel.add(panelInfoUtente);
+		
+		JPanel panelControl = new JPanel();
+		panelControl.setBackground(dashBoardPanel.getBackground());
+		sl_dashBoardPanel.putConstraint(SpringLayout.NORTH, panelControl, 19, SpringLayout.SOUTH, panelInfoUtente);
+		sl_dashBoardPanel.putConstraint(SpringLayout.WEST, panelControl, 10, SpringLayout.WEST, dashBoardPanel);
+		sl_dashBoardPanel.putConstraint(SpringLayout.SOUTH, panelControl, 221, SpringLayout.SOUTH, panelInfoUtente);
+		sl_dashBoardPanel.putConstraint(SpringLayout.EAST, panelControl, 0, SpringLayout.EAST, panelInfoUtente);
+		dashBoardPanel.add(panelControl);
+		SpringLayout sl_panelControl = new SpringLayout();
+		panelControl.setLayout(sl_panelControl);
+		
+		JButton buttonHome = new JButton("Home");
+		sl_panelControl.putConstraint(SpringLayout.EAST, buttonHome, -10, SpringLayout.EAST, panelControl);
+		panelControl.add(buttonHome);
+		
+		JButton btnGestisciLocali = new JButton("Gestisci locali");
+		sl_panelControl.putConstraint(SpringLayout.WEST, btnGestisciLocali, 10, SpringLayout.WEST, panelControl);
+		sl_panelControl.putConstraint(SpringLayout.EAST, btnGestisciLocali, -10, SpringLayout.EAST, panelControl);
+		sl_panelControl.putConstraint(SpringLayout.WEST, buttonHome, 0, SpringLayout.WEST, btnGestisciLocali);
+		sl_panelControl.putConstraint(SpringLayout.SOUTH, buttonHome, -6, SpringLayout.NORTH, btnGestisciLocali);
+		panelControl.add(btnGestisciLocali);
+		
+		JButton btnGestisciRecensioni = new JButton("Gestisci recensioni");
+		sl_panelControl.putConstraint(SpringLayout.NORTH, btnGestisciRecensioni, 104, SpringLayout.NORTH, panelControl);
+		sl_panelControl.putConstraint(SpringLayout.WEST, btnGestisciRecensioni, 10, SpringLayout.WEST, panelControl);
+		sl_panelControl.putConstraint(SpringLayout.EAST, btnGestisciRecensioni, -10, SpringLayout.EAST, panelControl);
+		sl_panelControl.putConstraint(SpringLayout.SOUTH, btnGestisciLocali, -6, SpringLayout.NORTH, btnGestisciRecensioni);
+		panelControl.add(btnGestisciRecensioni);
+		
+		JButton btnLogout = new JButton("Logout");
+		sl_panelControl.putConstraint(SpringLayout.NORTH, btnLogout, 6, SpringLayout.SOUTH, btnGestisciRecensioni);
+		sl_panelControl.putConstraint(SpringLayout.WEST, btnLogout, 10, SpringLayout.WEST, panelControl);
+		sl_panelControl.putConstraint(SpringLayout.EAST, btnLogout, -10, SpringLayout.EAST, panelControl);
+		panelControl.add(btnLogout);
+		
+		JButton buttonLogin = new JButton("Login");
+		sl_panelControl.putConstraint(SpringLayout.NORTH, buttonLogin, 6, SpringLayout.SOUTH, btnLogout);
+		sl_panelControl.putConstraint(SpringLayout.WEST, buttonLogin, 10, SpringLayout.WEST, panelControl);
+		sl_panelControl.putConstraint(SpringLayout.EAST, buttonLogin, 172, SpringLayout.WEST, panelControl);
+		panelControl.add(buttonLogin);
+		
+		//Imposta la schermata iniziale al pannello HomePanel
+		JPanel workPanel = new HomePanel(this);
 		gl_mainPanel.setHorizontalGroup(
 			gl_mainPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_mainPanel.createSequentialGroup()
@@ -179,17 +214,7 @@ public class MainFrame extends JFrame {
 						.addComponent(workPanel, GroupLayout.DEFAULT_SIZE, 546, Short.MAX_VALUE))
 					.addContainerGap())
 		);
-		SpringLayout sl_dashBoardPanel = new SpringLayout();
-		dashBoardPanel.setLayout(sl_dashBoardPanel);
 		
-		JLabel labelProfilePic = new JLabel("");
-		labelProfilePic.setHorizontalAlignment(SwingConstants.CENTER);
-		sl_dashBoardPanel.putConstraint(SpringLayout.NORTH, labelProfilePic, 10, SpringLayout.NORTH, dashBoardPanel);
-		sl_dashBoardPanel.putConstraint(SpringLayout.WEST, labelProfilePic, 0, SpringLayout.WEST, dashBoardPanel);
-		sl_dashBoardPanel.putConstraint(SpringLayout.SOUTH, labelProfilePic, 212, SpringLayout.NORTH, dashBoardPanel);
-		sl_dashBoardPanel.putConstraint(SpringLayout.EAST, labelProfilePic, 202, SpringLayout.WEST, dashBoardPanel);
-		labelProfilePic.setIcon(new ImageIcon(MainFrame.class.getResource("/icons/ProfilePic.png")));
-		dashBoardPanel.add(labelProfilePic);
 		mainPanel.setLayout(gl_mainPanel);
 		//Eventi bottone minimize
 		btnMinimize.addMouseListener(new MouseAdapter() {
@@ -212,6 +237,7 @@ public class MainFrame extends JFrame {
 				
 			}
 		});
-	
+		
 	}
+	
 }
