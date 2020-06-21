@@ -22,8 +22,8 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class MainController {
 	
-	private boolean loggedIn = false;
-	private Utente utente = null;
+	private boolean loggedIn = false; //Utente ha fatto il login o meno
+	private Utente utente = null; //Puntatore all'utente che ha fatto il login (null se non sono loggato)
 	
 	//Palette colori
 	public Color turquoise = new Color(63, 224, 208);
@@ -60,35 +60,46 @@ public class MainController {
 		mainFrame.setVisible(true);
 	
 	}
-
+	
+	//Getter per variabile loggedIn
 	public boolean isLoggedIn() {
 		return loggedIn;
 	}
 
+	//Setter per variabile loggedIn
 	public void setLoggedIn(boolean loggedIn) {
 		this.loggedIn = loggedIn;
 	}
 
+	//Getter per variabile utente
 	public Utente getUtente() {
 		return utente;
 	}
 
+	//Setter oer variabile utente
 	public void setUtente(Utente utente) {
 		this.utente = utente;
 	}
 	
+	/**
+	 * Bottone login nel pannello login premuto, istanzia un UtenteDAO per vedere se i valori
+	 * nomeUtente/email e password appartengono a qualcuno nel database.
+	 * @param nomeUtente Nome Utente o Email da cercare nel database
+	 * @param password Password corrispondente a Nome Utente o Email da cercare nel database
+	 * @param mainFrame Frame applicazione per aver accesso ad alcune delle sue funzioni
+	 */
 	public void loginButtonOnLoginPanelPressed(String nomeUtente, String password, MainFrame mainFrame) {
 		
-		UtenteDAO dao = new UtenteDAO();
-		Utente u = dao.getUtente(nomeUtente, password);
-		setUtente(u); //Restituisce l'utente al controller
+		UtenteDAO dao = new UtenteDAO(); //Istanzia un UtenteDAO per eseguire la ricerca
+		Utente u = dao.getUtente(nomeUtente, password); //Funzione UtenteDAO che restituisce (se lo trova) un utente
+		setUtente(u); //Imposta il nuovo utente trovato (o meno) nella variabile utente del controller
 		
-		if(u != null) { //Utente trovato
+		if(u != null) { //Se utente trovato
 			
-			u.stampaInfo();
-			setLoggedIn(true);
-			mainFrame.refreshaLoginButton();
-			mainFrame.cambiaPannelloLavoroAHomePanel(mainFrame.getWorkPanel());
+			u.stampaInfo(); //Stampa info utente trovato (Per debug)
+			setLoggedIn(true); //Imposta la variabile del controller loggedIn a vero
+			mainFrame.refreshaLoginButton(); //Ricarica il bottone di login/logout del mainFrame per fargli mostrare l'icona corretta
+			mainFrame.cambiaPannelloLavoroAHomePanel(mainFrame.getWorkPanel()); //Vai a pannello HomePanel
 			
 		}
 		
