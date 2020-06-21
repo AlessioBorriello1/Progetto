@@ -23,6 +23,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 public class MainController {
 	
 	private boolean loggedIn = false; //Utente ha fatto il login o meno
+	private JPanel currentPanel = null; //Pannello attualmente mostrato nel workPanel
 	private Utente utente = null; //Puntatore all'utente che ha fatto il login (null se non sono loggato)
 	
 	//Palette colori
@@ -76,7 +77,7 @@ public class MainController {
 		return utente;
 	}
 
-	//Setter oer variabile utente
+	//Setter per variabile utente
 	public void setUtente(Utente utente) {
 		this.utente = utente;
 	}
@@ -103,6 +104,18 @@ public class MainController {
 			
 		}
 		
+	}
+
+	
+	//Getter per variabile currentPanel
+	public JPanel getCurrentPanel() {
+		return currentPanel;
+	}
+	
+	//Setter per variabile currentPanel
+
+	public void setCurrentPanel(JPanel currentPanel) {
+		this.currentPanel = currentPanel;
 	}
 
 }

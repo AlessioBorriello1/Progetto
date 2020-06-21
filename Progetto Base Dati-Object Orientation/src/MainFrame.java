@@ -349,15 +349,19 @@ public class MainFrame extends JFrame {
 	 */
 	public void cambiaPannelloLavoroALoginPanel(JPanel workPanel) {
 		
-		//Rimuovi vecchio panel dal workPanel
-		workPanel.removeAll();
-		workPanel.repaint();
-		workPanel.revalidate();
-		
-		//Aggiungi nuovo LoginPanel al workPanel
-		workPanel.add(new LoginPanel(controller, this, workPanel));
-		workPanel.repaint();
-		workPanel.revalidate();
+		if(!controller.getCurrentPanel().getClass().toString().contentEquals("class LoginPanel")) { //Se non sono già sullo stesso panel
+			//Rimuovi vecchio panel dal workPanel
+			workPanel.removeAll();
+			workPanel.repaint();
+			workPanel.revalidate();
+			
+			//Aggiungi nuovo LoginPanel al workPanel
+			LoginPanel panel = new LoginPanel(controller, this, workPanel);
+			controller.setCurrentPanel(panel); //Imposta il pannello appena creato nella variabile currentPanel del controller
+			workPanel.add(panel);
+			workPanel.repaint();
+			workPanel.revalidate();
+		}
 		
 	}
 	
@@ -367,15 +371,19 @@ public class MainFrame extends JFrame {
 	 */
 	public void cambiaPannelloLavoroAHomePanel(JPanel workPanel) {
 		
-		//Rimuovi vecchio panel dal workPanel
-		workPanel.removeAll();
-		workPanel.repaint();
-		workPanel.revalidate();
-		
-		//Aggiungi nuovo HomePanel al workPanel
-		workPanel.add(new HomePanel(controller, this, workPanel));
-		workPanel.repaint();
-		workPanel.revalidate();
+		if(controller.getCurrentPanel() == null || !controller.getCurrentPanel().getClass().toString().contentEquals("class HomePanel")) { //Se non sono già sullo stesso panel
+			//Rimuovi vecchio panel dal workPanel
+			workPanel.removeAll();
+			workPanel.repaint();
+			workPanel.revalidate();
+			
+			//Aggiungi nuovo HomePanel al workPanel
+			HomePanel panel = new HomePanel(controller, this, workPanel);
+			controller.setCurrentPanel(panel); //Imposta il pannello appena creato nella variabile currentPanel del controller
+			workPanel.add(panel);
+			workPanel.repaint();
+			workPanel.revalidate();
+		}
 		
 	}
 	
@@ -385,15 +393,19 @@ public class MainFrame extends JFrame {
 	 */
 	public void cambiaPannelloLavoroALocaliPanel(JPanel workPanel) {
 		
-		//Rimuovi vecchio panel dal workPanel
-		workPanel.removeAll();
-		workPanel.repaint();
-		workPanel.revalidate();
-		
-		//Aggiungi nuovo LocaliPanel al workPanel
-		workPanel.add(new LocaliPanel(controller, this, workPanel));
-		workPanel.repaint();
-		workPanel.revalidate();
+		if(controller.getCurrentPanel() == null || !controller.getCurrentPanel().getClass().toString().contentEquals("class LocalPanel")) { //Se non sono già sullo stesso panel
+			//Rimuovi vecchio panel dal workPanel
+			workPanel.removeAll();
+			workPanel.repaint();
+			workPanel.revalidate();
+			
+			//Aggiungi nuovo LocaliPanel al workPanel
+			LocaliPanel panel = new LocaliPanel(controller, this, workPanel);
+			controller.setCurrentPanel(panel); //Imposta il pannello appena creato nella variabile currentPanel del controller
+			workPanel.add(panel);
+			workPanel.repaint();
+			workPanel.revalidate();
+		}
 		
 	}
 	
@@ -403,15 +415,19 @@ public class MainFrame extends JFrame {
 	 */
 	public void cambiaPannelloLavoroARecensioniPanel(JPanel workPanel) {
 		
-		//Rimuovi vecchio panel dal workPanel
-		workPanel.removeAll();
-		workPanel.repaint();
-		workPanel.revalidate();
-		
-		//Aggiungi nuovo RecensioniPanel al workPanel
-		workPanel.add(new RecensioniPanel(controller, this, workPanel));
-		workPanel.repaint();
-		workPanel.revalidate();
+		if(controller.getCurrentPanel() == null || !controller.getCurrentPanel().getClass().toString().contentEquals("class RecensioniPanel")) { //Se non sono già sullo stesso panel
+			//Rimuovi vecchio panel dal workPanel
+			workPanel.removeAll();
+			workPanel.repaint();
+			workPanel.revalidate();
+			
+			//Aggiungi nuovo RecensioniPanel al workPanel
+			RecensioniPanel panel = new RecensioniPanel(controller, this, workPanel);
+			controller.setCurrentPanel(panel); //Imposta il pannello appena creato nella variabile currentPanel del controller
+			workPanel.add(panel);
+			workPanel.repaint();
+			workPanel.revalidate();
+		}
 		
 	}
 	
@@ -421,15 +437,19 @@ public class MainFrame extends JFrame {
 	 */
 	public void cambiaPannelloLavoroARegistrazionePanel(JPanel workPanel) {
 		
-		//Rimuovi vecchio panel dal workPanel
-		workPanel.removeAll();
-		workPanel.repaint();
-		workPanel.revalidate();
-		
-		//Aggiungi nuovo RegistrazionePanel al workPanel
-		workPanel.add(new RegistrazionePanel(controller, this, workPanel));
-		workPanel.repaint();
-		workPanel.revalidate();
+		if(controller.getCurrentPanel() == null || !controller.getCurrentPanel().getClass().toString().contentEquals("class RegistrazionePanel")) { //Se non sono già sullo stesso panel
+			//Rimuovi vecchio panel dal workPanel
+			workPanel.removeAll();
+			workPanel.repaint();
+			workPanel.revalidate();
+			
+			//Aggiungi nuovo RegistrazionePanel al workPanel
+			RegistrazionePanel panel = new RegistrazionePanel(controller, this, workPanel);
+			controller.setCurrentPanel(panel); //Imposta il pannello appena creato nella variabile currentPanel del controller
+			workPanel.add(panel);
+			workPanel.repaint();
+			workPanel.revalidate();
+		}
 		
 	}
 
@@ -448,7 +468,7 @@ public class MainFrame extends JFrame {
 		
 	}
 
-	//Getter per variabile workPanel (Per passarlo ad altre classi)
+	//Getter per variabile workPanel (P)
 	public JPanel getWorkPanel() {
 		
 		return this.workPanel;

@@ -69,7 +69,7 @@ public class LoginPanel extends JPanel {
 			
 			}
 		});
-		buttonLogin.setBounds(402, 268, 220, 30);
+		buttonLogin.setBounds(402, 267, 220, 30);
 		add(buttonLogin);
 		
 		JLabel lblRegistrati = new JLabel("Oppure registrati");
@@ -79,6 +79,11 @@ public class LoginPanel extends JPanel {
 		add(lblRegistrati);
 		
 		JButton buttonRegistrati = new JButton("Registrati");
+		buttonRegistrati.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				mainFrame.cambiaPannelloLavoroARegistrazionePanel(workPanel);
+			}
+		});
 		buttonRegistrati.setBounds(402, 374, 220, 30);
 		add(buttonRegistrati);
 		
