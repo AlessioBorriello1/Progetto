@@ -238,6 +238,9 @@ public class MainFrame extends JFrame {
 		sl_panelControl.putConstraint(SpringLayout.SOUTH, btnGestisciRecensioni, 112, SpringLayout.NORTH, panelControl);
 		panelControl.add(btnGestisciRecensioni);
 		
+		JButton btnRegistrati = new JButton("Registrati");
+		btnRegistrati.setEnabled(!controller.isLoggedIn());
+		btnRegistrati.setVisible(btnRegistrati.isEnabled());
 		
 		JButton buttonLogin = new JButton();
 		buttonLogin.setIcon(new ImageIcon(MainFrame.class.getResource("/icons/buttonLogin.png"))); //Per anteprima nella tab design
@@ -259,6 +262,8 @@ public class MainFrame extends JFrame {
 				
 				//Per testing solo (clicca per loggare e sloggare automaticamente)
 				controller.setLoggedIn(!controller.isLoggedIn());
+				btnRegistrati.setEnabled(!controller.isLoggedIn());
+				btnRegistrati.setVisible(btnRegistrati.isEnabled());
 				if(controller.isLoggedIn()) {
 					buttonLogin.setIcon(new ImageIcon(MainFrame.class.getResource("/icons/buttonLogout highlighted.png")));
 				}else {
@@ -288,6 +293,13 @@ public class MainFrame extends JFrame {
 			}
 			
 		});
+		
+		sl_panelControl.putConstraint(SpringLayout.NORTH, btnRegistrati, 6, SpringLayout.SOUTH, buttonLogin);
+		sl_panelControl.putConstraint(SpringLayout.WEST, btnRegistrati, 0, SpringLayout.WEST, buttonHome);
+		sl_panelControl.putConstraint(SpringLayout.SOUTH, btnRegistrati, 36, SpringLayout.SOUTH, buttonLogin);
+		sl_panelControl.putConstraint(SpringLayout.EAST, btnRegistrati, 0, SpringLayout.EAST, buttonHome);
+		panelControl.add(btnRegistrati);
+		
 		panelControl.add(buttonLogin);
 		
 		mainPanel.setLayout(gl_mainPanel);
@@ -366,6 +378,20 @@ public class MainFrame extends JFrame {
 		
 		//Aggiungi nuovo panel
 		workPanel.add(new RecensioniPanel(controller, this, workPanel));
+		workPanel.repaint();
+		workPanel.revalidate();
+		
+	}
+	
+	public void cambiaPannelloLavoroARegistrazionePanel(JPanel workPanel) {
+		
+		//Rimuovi vecchio panel
+		workPanel.removeAll();
+		workPanel.repaint();
+		workPanel.revalidate();
+		
+		//Aggiungi nuovo panel
+		workPanel.add(new RegistrazionePanel(controller, this, workPanel));
 		workPanel.repaint();
 		workPanel.revalidate();
 		
