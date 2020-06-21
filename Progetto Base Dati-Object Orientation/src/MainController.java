@@ -105,6 +105,21 @@ public class MainController {
 		}
 		
 	}
+	
+	public boolean registrazioneButtonOnRegistrazionePanelPressed(String nomeUtente, String password, String email, MainFrame mainFrame) {
+		
+		UtenteDAO dao = new UtenteDAO();
+		if(dao.registraUtente(nomeUtente, email, password)) {
+			
+			return true;
+			
+		}else {
+			
+			return false;
+			
+		}
+		
+	}
 
 	
 	//Getter per variabile currentPanel

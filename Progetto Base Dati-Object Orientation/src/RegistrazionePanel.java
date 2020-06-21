@@ -12,6 +12,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class RegistrazionePanel extends JPanel {
 
@@ -64,6 +66,22 @@ public class RegistrazionePanel extends JPanel {
 		add(lblPassword);
 		
 		JButton buttonRegistrati = new JButton("Submit");
+		buttonRegistrati.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				
+				String nomeUtente = nomeUtenteField.getText(); //Prendi nome utente dal rispettivo campo
+				String email = emailField.getText(); //Prendi email dal rispettivo campo
+				String password = String.valueOf(passwordField.getPassword()); //Prendi password dal rispettivo campo
+				
+				if(controller.registrazioneButtonOnRegistrazionePanelPressed(nomeUtente, password, email, mainFrame)) {
+					System.out.println("Registrazione riuscita");
+					mainFrame.cambiaPannelloLavoroALoginPanel(workPanel);//Vai a pannello login
+				}else {
+					System.out.println("Registrazione fallita");
+				}
+				
+			}
+		});
 		buttonRegistrati.setBounds(486, 308, 220, 30);
 		add(buttonRegistrati);
 		
