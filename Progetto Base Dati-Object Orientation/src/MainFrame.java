@@ -349,7 +349,7 @@ public class MainFrame extends JFrame {
 	 */
 	public void cambiaPannelloLavoroALoginPanel(JPanel workPanel) {
 		
-		if(!controller.getCurrentPanel().getClass().toString().contentEquals("class LoginPanel")) { //Se non sono già sullo stesso panel
+		if(controller.getCurrentPanel() == null || !controller.getCurrentPanel().getClass().toString().contentEquals("class LoginPanel")) { //Se non sono già sullo stesso panel
 			//Rimuovi vecchio panel dal workPanel
 			workPanel.removeAll();
 			workPanel.repaint();
