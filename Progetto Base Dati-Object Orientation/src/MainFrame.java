@@ -167,7 +167,35 @@ public class MainFrame extends JFrame {
 		SpringLayout sl_panelControl = new SpringLayout();
 		panelControl.setLayout(sl_panelControl);
 		
+		//Crea pannello di lavoro
+		JPanel workPanel = new JPanel();
+		workPanel.setBackground(Color.LIGHT_GRAY);
+		gl_mainPanel.setHorizontalGroup(
+			gl_mainPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_mainPanel.createSequentialGroup()
+					.addComponent(dashBoardPanel, GroupLayout.PREFERRED_SIZE, 202, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(workPanel, GroupLayout.DEFAULT_SIZE, 772, Short.MAX_VALUE))
+		);
+		gl_mainPanel.setVerticalGroup(
+			gl_mainPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_mainPanel.createSequentialGroup()
+					.addGroup(gl_mainPanel.createParallelGroup(Alignment.LEADING)
+						.addComponent(dashBoardPanel, GroupLayout.PREFERRED_SIZE, 557, GroupLayout.PREFERRED_SIZE)
+						.addComponent(workPanel, GroupLayout.DEFAULT_SIZE, 546, Short.MAX_VALUE))
+					.addContainerGap())
+		);
+		workPanel.setLayout(new CardLayout(0, 0));
+		
 		JButton buttonHome = new JButton("Home");
+		buttonHome.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				
+				cambiaPannelloLavoroAHomePanel(workPanel);
+				
+			}
+		});
+		
 		sl_panelControl.putConstraint(SpringLayout.EAST, buttonHome, -10, SpringLayout.EAST, panelControl);
 		panelControl.add(buttonHome);
 		
@@ -192,28 +220,18 @@ public class MainFrame extends JFrame {
 		panelControl.add(btnLogout);
 		
 		JButton buttonLogin = new JButton("Login");
+		buttonLogin.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				
+				cambiaPannelloLavoroALoginPanel(workPanel);
+				
+			}
+			
+		});
 		sl_panelControl.putConstraint(SpringLayout.NORTH, buttonLogin, 6, SpringLayout.SOUTH, btnLogout);
 		sl_panelControl.putConstraint(SpringLayout.WEST, buttonLogin, 10, SpringLayout.WEST, panelControl);
 		sl_panelControl.putConstraint(SpringLayout.EAST, buttonLogin, 172, SpringLayout.WEST, panelControl);
 		panelControl.add(buttonLogin);
-		
-		//Imposta la schermata iniziale al pannello HomePanel
-		JPanel workPanel = new HomePanel(this);
-		gl_mainPanel.setHorizontalGroup(
-			gl_mainPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_mainPanel.createSequentialGroup()
-					.addComponent(dashBoardPanel, GroupLayout.PREFERRED_SIZE, 202, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(workPanel, GroupLayout.DEFAULT_SIZE, 772, Short.MAX_VALUE))
-		);
-		gl_mainPanel.setVerticalGroup(
-			gl_mainPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_mainPanel.createSequentialGroup()
-					.addGroup(gl_mainPanel.createParallelGroup(Alignment.LEADING)
-						.addComponent(dashBoardPanel, GroupLayout.PREFERRED_SIZE, 557, GroupLayout.PREFERRED_SIZE)
-						.addComponent(workPanel, GroupLayout.DEFAULT_SIZE, 546, Short.MAX_VALUE))
-					.addContainerGap())
-		);
 		
 		mainPanel.setLayout(gl_mainPanel);
 		//Eventi bottone minimize
@@ -237,6 +255,34 @@ public class MainFrame extends JFrame {
 				
 			}
 		});
+		
+	}
+	
+	public void cambiaPannelloLavoroALoginPanel(JPanel workPanel) {
+		
+		//Rimuovi vecchio panel
+		workPanel.removeAll();
+		workPanel.repaint();
+		workPanel.revalidate();
+		
+		//Aggiungi nuovo panel
+		workPanel.add(new LoginPanel(controller));
+		workPanel.repaint();
+		workPanel.revalidate();
+		
+	}
+	
+	public void cambiaPannelloLavoroAHomePanel(JPanel workPanel) {
+		
+		//Rimuovi vecchio panel
+		workPanel.removeAll();
+		workPanel.repaint();
+		workPanel.revalidate();
+		
+		//Aggiungi nuovo panel
+		workPanel.add(new HomePanel(controller));
+		workPanel.repaint();
+		workPanel.revalidate();
 		
 	}
 	

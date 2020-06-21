@@ -6,15 +6,16 @@ import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import java.awt.Color;
+import java.awt.Container;
+import java.awt.FlowLayout;
 
 public class LoginPanel extends JPanel {
 	
 	MainController controller;
-	MainFrame mainFrame;
 
-	public LoginPanel(MainFrame mainFrame) {
+	public LoginPanel(MainController controller) {
 		
-		this.mainFrame = mainFrame;
+		this.controller = controller;
 		
 		setBackground(Color.GRAY);
 		
@@ -23,5 +24,5 @@ public class LoginPanel extends JPanel {
 		add(txtpnTripadvisor);
 		
 	}
-
+	
 }

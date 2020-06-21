@@ -11,11 +11,10 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 public class HomePanel extends JPanel {
 
 	MainController controller;
-	MainFrame mainFrame;
 
-	public HomePanel(MainFrame mainFrame) {
+	public HomePanel(MainController controller) {
 		
-		this.mainFrame = mainFrame;
+		this.controller = controller;
 		
 		setBackground(Color.GRAY);
 		

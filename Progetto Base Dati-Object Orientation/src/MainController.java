@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Point;
@@ -57,22 +58,6 @@ public class MainController {
 		MainFrame mainFrame = new MainFrame(controller);
 		mainFrame.setVisible(true);
 	
-	}
-	
-	public JPanel createLoginPanel(MainFrame mainFrame){
-		
-		LoginPanel loginPanel = new LoginPanel(mainFrame);
-		currentPanel = loginPanel;
-		return loginPanel;
-		
-	}
-	
-	public JPanel createHomePanel(MainFrame mainFrame){
-		
-		HomePanel homePanel = new HomePanel(mainFrame);
-		currentPanel = homePanel;
-		return homePanel;
-		
 	}
 
 }
