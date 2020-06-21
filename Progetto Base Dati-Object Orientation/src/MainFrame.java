@@ -107,8 +107,8 @@ public class MainFrame extends JFrame {
 		
 		JTextPane txtpnTripadvisor = new JTextPane();
 		//Impostazioni testo
-		txtpnTripadvisor.setFont(new Font("Tahoma", Font.BOLD, 18));
-		txtpnTripadvisor.setBounds(0, 0, 116, 30);
+		txtpnTripadvisor.setFont(new Font("Tahoma", Font.BOLD, 20));
+		txtpnTripadvisor.setBounds(0, 0, 128, 30);
 		txtpnTripadvisor.setHighlighter(null);
 		txtpnTripadvisor.setForeground(controller.electric);
 		txtpnTripadvisor.setEditable(false);
@@ -222,6 +222,13 @@ public class MainFrame extends JFrame {
 		sl_panelControl.putConstraint(SpringLayout.WEST, btnGestisciLocali, 0, SpringLayout.WEST, panelControl);
 		sl_panelControl.putConstraint(SpringLayout.EAST, btnGestisciLocali, 0, SpringLayout.EAST, panelControl);
 		panelControl.add(btnGestisciLocali);
+		btnGestisciLocali.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+			
+				cambiaPannelloLavoroALocaliPanel(workPanel);
+			
+			}
+		});
 		
 		JButton btnGestisciRecensioni = new JButton("Gestisci recensioni");
 		sl_panelControl.putConstraint(SpringLayout.NORTH, btnGestisciRecensioni, 82, SpringLayout.NORTH, panelControl);
@@ -230,6 +237,7 @@ public class MainFrame extends JFrame {
 		sl_panelControl.putConstraint(SpringLayout.SOUTH, btnGestisciLocali, -6, SpringLayout.NORTH, btnGestisciRecensioni);
 		sl_panelControl.putConstraint(SpringLayout.SOUTH, btnGestisciRecensioni, 112, SpringLayout.NORTH, panelControl);
 		panelControl.add(btnGestisciRecensioni);
+		
 		
 		JButton buttonLogin = new JButton();
 		buttonLogin.setIcon(new ImageIcon(MainFrame.class.getResource("/icons/buttonLogin.png"))); //Per anteprima nella tab design
@@ -330,6 +338,34 @@ public class MainFrame extends JFrame {
 		
 		//Aggiungi nuovo panel
 		workPanel.add(new HomePanel(controller));
+		workPanel.repaint();
+		workPanel.revalidate();
+		
+	}
+	
+	public void cambiaPannelloLavoroALocaliPanel(JPanel workPanel) {
+		
+		//Rimuovi vecchio panel
+		workPanel.removeAll();
+		workPanel.repaint();
+		workPanel.revalidate();
+		
+		//Aggiungi nuovo panel
+		workPanel.add(new LocaliPanel(controller));
+		workPanel.repaint();
+		workPanel.revalidate();
+		
+	}
+	
+	public void cambiaPannelloLavoroARecensioniPanel(JPanel workPanel) {
+		
+		//Rimuovi vecchio panel
+		workPanel.removeAll();
+		workPanel.repaint();
+		workPanel.revalidate();
+		
+		//Aggiungi nuovo panel
+		workPanel.add(new RecensioniPanel(controller));
 		workPanel.repaint();
 		workPanel.revalidate();
 		
