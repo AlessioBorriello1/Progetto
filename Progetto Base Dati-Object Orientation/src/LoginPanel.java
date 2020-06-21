@@ -65,7 +65,7 @@ public class LoginPanel extends JPanel {
 				String nomeUtente = nomeUtenteField.getText(); //Prendi nome utente dal rispettivo campo
 				String password = String.valueOf(passwordField.getPassword()); //Prendi password dal rispettivo campo
 				
-				controller.loginButtonOnLoginPanelPressed(nomeUtente, password);
+				controller.loginButtonOnLoginPanelPressed(nomeUtente, password, mainFrame);
 			
 			}
 		});

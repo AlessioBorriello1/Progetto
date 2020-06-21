@@ -42,7 +42,10 @@ import java.awt.Cursor;
 public class MainFrame extends JFrame {
 
 	private MainController controller; //Controller che chiama il JFrame
-	public Point mouseClickPoint; //Posizione mouse
+	private Point mouseClickPoint; //Posizione mouse
+	private JButton btnRegistrati;
+	private JButton buttonLogin;
+	private JPanel workPanel;
 	
 	public MainFrame(MainController controller) {
 		
@@ -172,7 +175,7 @@ public class MainFrame extends JFrame {
 		panelControl.setLayout(sl_panelControl);
 		
 		//Crea pannello di lavoro
-		JPanel workPanel = new JPanel();
+		workPanel = new JPanel();
 		workPanel.setBackground(Color.LIGHT_GRAY);
 		gl_mainPanel.setHorizontalGroup(
 			gl_mainPanel.createParallelGroup(Alignment.LEADING)
@@ -251,7 +254,7 @@ public class MainFrame extends JFrame {
 		sl_panelControl.putConstraint(SpringLayout.SOUTH, btnGestisciRecensioni, 112, SpringLayout.NORTH, panelControl);
 		panelControl.add(btnGestisciRecensioni);
 		
-		JButton btnRegistrati = new JButton("Registrati");
+		btnRegistrati = new JButton("Registrati");
 		btnRegistrati.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 			
@@ -263,7 +266,7 @@ public class MainFrame extends JFrame {
 		btnRegistrati.setEnabled(!controller.isLoggedIn());
 		btnRegistrati.setVisible(btnRegistrati.isEnabled());
 		
-		JButton buttonLogin = new JButton();
+		buttonLogin = new JButton();
 		buttonLogin.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		buttonLogin.setIcon(new ImageIcon(MainFrame.class.getResource("/icons/buttonLogin.png"))); //Per anteprima nella tab design
 		buttonLogin.setBorder(null);
@@ -280,19 +283,14 @@ public class MainFrame extends JFrame {
 		buttonLogin.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				
-				cambiaPannelloLavoroALoginPanel(workPanel);
-				
-				//Per testing solo (clicca per loggare e sloggare automaticamente)
-				/*
-				controller.setLoggedIn(!controller.isLoggedIn());
-				btnRegistrati.setEnabled(!controller.isLoggedIn());
-				btnRegistrati.setVisible(btnRegistrati.isEnabled());
-				if(controller.isLoggedIn()) {
-					buttonLogin.setIcon(new ImageIcon(MainFrame.class.getResource("/icons/buttonLogout highlighted.png")));
+				if(!controller.isLoggedIn()) {
+					cambiaPannelloLavoroALoginPanel(workPanel);
 				}else {
-					buttonLogin.setIcon(new ImageIcon(MainFrame.class.getResource("/icons/buttonLogin highlighted.png")));
+					controller.setLoggedIn(false);
+					controller.setUtente(null);
+					refreshaLoginButton();
+					cambiaPannelloLavoroAHomePanel(workPanel);
 				}
-				*/
 				
 			}
 			//Quando il mouse passa sull'icona cambia icona
@@ -421,5 +419,22 @@ public class MainFrame extends JFrame {
 		
 	}
 
-
+	public void refreshaLoginButton() {
+		
+		btnRegistrati.setEnabled(!controller.isLoggedIn());
+		btnRegistrati.setVisible(btnRegistrati.isEnabled());
+		if(controller.isLoggedIn()) {
+			buttonLogin.setIcon(new ImageIcon(MainFrame.class.getResource("/icons/buttonLogout.png")));
+		}else {
+			buttonLogin.setIcon(new ImageIcon(MainFrame.class.getResource("/icons/buttonLogin Highlighted.png")));
+		}
+		
+	}
+	
+	public JPanel getWorkPanel() {
+		
+		return this.workPanel;
+		
+	}
+	
 }

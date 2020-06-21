@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -76,7 +77,7 @@ public class MainController {
 		this.utente = utente;
 	}
 	
-	public void loginButtonOnLoginPanelPressed(String nomeUtente, String password) {
+	public void loginButtonOnLoginPanelPressed(String nomeUtente, String password, MainFrame mainFrame) {
 		
 		UtenteDAO dao = new UtenteDAO();
 		Utente u = dao.getUtente(nomeUtente, password);
@@ -85,6 +86,9 @@ public class MainController {
 		if(u != null) { //Utente trovato
 			
 			u.stampaInfo();
+			setLoggedIn(true);
+			mainFrame.refreshaLoginButton();
+			mainFrame.cambiaPannelloLavoroAHomePanel(mainFrame.getWorkPanel());
 			
 		}
 		
