@@ -11,10 +11,14 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 public class LocaliPanel extends JPanel {
 
 	MainController controller;
+	MainFrame mainFrame;
+	JPanel workPanel;
 
-	public LocaliPanel(MainController controller) {
+	public LocaliPanel(MainController controller, MainFrame mainFrame, JPanel workPanel) {
 		
 		this.controller = controller;
+		this.mainFrame = mainFrame;
+		this.workPanel = workPanel;
 		
 		setBackground(Color.GRAY);
 		

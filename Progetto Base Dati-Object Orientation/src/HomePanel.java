@@ -11,10 +11,14 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 public class HomePanel extends JPanel {
 
 	MainController controller;
+	MainFrame mainFrame;
+	JPanel workPanel;
 
-	public HomePanel(MainController controller) {
+	public HomePanel(MainController controller, MainFrame mainFrame, JPanel workPanel) {
 		
 		this.controller = controller;
+		this.mainFrame = mainFrame;
+		this.workPanel = workPanel;
 		
 		setBackground(Color.GRAY);
 		

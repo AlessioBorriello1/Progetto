@@ -323,7 +323,7 @@ public class MainFrame extends JFrame {
 		workPanel.revalidate();
 		
 		//Aggiungi nuovo panel
-		workPanel.add(new LoginPanel(controller));
+		workPanel.add(new LoginPanel(controller, this, workPanel));
 		workPanel.repaint();
 		workPanel.revalidate();
 		
@@ -337,7 +337,7 @@ public class MainFrame extends JFrame {
 		workPanel.revalidate();
 		
 		//Aggiungi nuovo panel
-		workPanel.add(new HomePanel(controller));
+		workPanel.add(new HomePanel(controller, this, workPanel));
 		workPanel.repaint();
 		workPanel.revalidate();
 		
@@ -351,7 +351,7 @@ public class MainFrame extends JFrame {
 		workPanel.revalidate();
 		
 		//Aggiungi nuovo panel
-		workPanel.add(new LocaliPanel(controller));
+		workPanel.add(new LocaliPanel(controller, this, workPanel));
 		workPanel.repaint();
 		workPanel.revalidate();
 		
@@ -365,7 +365,7 @@ public class MainFrame extends JFrame {
 		workPanel.revalidate();
 		
 		//Aggiungi nuovo panel
-		workPanel.add(new RecensioniPanel(controller));
+		workPanel.add(new RecensioniPanel(controller, this, workPanel));
 		workPanel.repaint();
 		workPanel.revalidate();
 		

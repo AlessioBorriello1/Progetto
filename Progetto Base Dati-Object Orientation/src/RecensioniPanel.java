@@ -11,10 +11,14 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 public class RecensioniPanel extends JPanel {
 
 	MainController controller;
+	MainFrame mainFrame;
+	JPanel workPanel;
 
-	public RecensioniPanel(MainController controller) {
+	public RecensioniPanel(MainController controller, MainFrame mainFrame, JPanel workPanel) {
 		
 		this.controller = controller;
+		this.mainFrame = mainFrame;
+		this.workPanel = workPanel;
 		
 		setBackground(Color.GRAY);
 		
