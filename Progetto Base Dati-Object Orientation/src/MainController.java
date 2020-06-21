@@ -21,8 +21,8 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class MainController {
 	
-	public Point mouseClickPoint; //Posizione mouse
-	public JPanel currentPanel;
+	private JPanel currentPanel;
+	private boolean loggedIn = false;
 	
 	//Palette colori
 	public Color turquoise = new Color(63, 224, 208);
@@ -58,6 +58,14 @@ public class MainController {
 		MainFrame mainFrame = new MainFrame(controller);
 		mainFrame.setVisible(true);
 	
+	}
+
+	public boolean isLoggedIn() {
+		return loggedIn;
+	}
+
+	public void setLoggedIn(boolean loggedIn) {
+		this.loggedIn = loggedIn;
 	}
 
 }

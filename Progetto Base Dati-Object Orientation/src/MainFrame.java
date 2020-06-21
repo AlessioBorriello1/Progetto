@@ -41,6 +41,7 @@ import java.awt.Insets;
 public class MainFrame extends JFrame {
 
 	private MainController controller; //Controller che chiama il JFrame
+	public Point mouseClickPoint; //Posizione mouse
 	
 	public MainFrame(MainController controller) {
 		
@@ -57,13 +58,13 @@ public class MainFrame extends JFrame {
 		upperPanel.addMouseMotionListener(new MouseMotionAdapter() {
 			public void mouseDragged(MouseEvent e) { //Quando trascino
 		        Point newPoint = e.getLocationOnScreen(); //Posizione MainFrame sullo schermo
-		        newPoint.translate(-controller.mouseClickPoint.x, -controller.mouseClickPoint.y); //Trasla la posizione del MainFrame in base alla posizione del mouse (mouseClickPoint)
+		        newPoint.translate(-mouseClickPoint.x, -mouseClickPoint.y); //Trasla la posizione del MainFrame in base alla posizione del mouse (mouseClickPoint)
 		        setLocation(newPoint); //Imposta nuova posizione
 		    }
 		});
 		upperPanel.addMouseListener(new MouseAdapter(){
 			public void mousePressed(MouseEvent e) { //Quando premo il mouse
-				controller.mouseClickPoint = e.getPoint(); //Aggiorna posizione mouse
+				mouseClickPoint = e.getPoint(); //Aggiorna posizione mouse
 		    }
 		});
 		
@@ -158,11 +159,11 @@ public class MainFrame extends JFrame {
 		dashBoardPanel.add(panelInfoUtente);
 		
 		JPanel panelControl = new JPanel();
+		sl_dashBoardPanel.putConstraint(SpringLayout.WEST, panelControl, 0, SpringLayout.WEST, labelProfilePic);
+		sl_dashBoardPanel.putConstraint(SpringLayout.EAST, panelControl, 0, SpringLayout.EAST, labelProfilePic);
 		panelControl.setBackground(dashBoardPanel.getBackground());
 		sl_dashBoardPanel.putConstraint(SpringLayout.NORTH, panelControl, 19, SpringLayout.SOUTH, panelInfoUtente);
-		sl_dashBoardPanel.putConstraint(SpringLayout.WEST, panelControl, 10, SpringLayout.WEST, dashBoardPanel);
 		sl_dashBoardPanel.putConstraint(SpringLayout.SOUTH, panelControl, 221, SpringLayout.SOUTH, panelInfoUtente);
-		sl_dashBoardPanel.putConstraint(SpringLayout.EAST, panelControl, 0, SpringLayout.EAST, panelInfoUtente);
 		dashBoardPanel.add(panelControl);
 		SpringLayout sl_panelControl = new SpringLayout();
 		panelControl.setLayout(sl_panelControl);
@@ -187,50 +188,98 @@ public class MainFrame extends JFrame {
 		);
 		workPanel.setLayout(new CardLayout(0, 0));
 		
-		JButton buttonHome = new JButton("Home");
+		//Imposta primo pannello di lavoro a HomePanel
+		cambiaPannelloLavoroAHomePanel(workPanel);
+		
+		JButton buttonHome = new JButton("");
+		buttonHome.setIcon(new ImageIcon(MainFrame.class.getResource("/icons/buttonHome.png")));
+		buttonHome.setBorder(null);
+		sl_panelControl.putConstraint(SpringLayout.NORTH, buttonHome, 10, SpringLayout.NORTH, panelControl);
+		sl_panelControl.putConstraint(SpringLayout.WEST, buttonHome, 0, SpringLayout.WEST, panelControl);
+		sl_panelControl.putConstraint(SpringLayout.SOUTH, buttonHome, -162, SpringLayout.SOUTH, panelControl);
+		sl_panelControl.putConstraint(SpringLayout.EAST, buttonHome, 0, SpringLayout.EAST, panelControl);
 		buttonHome.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				
 				cambiaPannelloLavoroAHomePanel(workPanel);
 				
 			}
+			public void mouseEntered(MouseEvent e) {
+			
+				buttonHome.setIcon(new ImageIcon(MainFrame.class.getResource("/icons/buttonHome Highlighted.png")));
+				
+			}
+			public void mouseExited(MouseEvent e) {
+				
+				buttonHome.setIcon(new ImageIcon(MainFrame.class.getResource("/icons/buttonHome.png")));
+				
+			}
 		});
-		
-		sl_panelControl.putConstraint(SpringLayout.EAST, buttonHome, -10, SpringLayout.EAST, panelControl);
 		panelControl.add(buttonHome);
 		
 		JButton btnGestisciLocali = new JButton("Gestisci locali");
-		sl_panelControl.putConstraint(SpringLayout.WEST, btnGestisciLocali, 10, SpringLayout.WEST, panelControl);
-		sl_panelControl.putConstraint(SpringLayout.EAST, btnGestisciLocali, -10, SpringLayout.EAST, panelControl);
-		sl_panelControl.putConstraint(SpringLayout.WEST, buttonHome, 0, SpringLayout.WEST, btnGestisciLocali);
-		sl_panelControl.putConstraint(SpringLayout.SOUTH, buttonHome, -6, SpringLayout.NORTH, btnGestisciLocali);
+		sl_panelControl.putConstraint(SpringLayout.NORTH, btnGestisciLocali, 46, SpringLayout.NORTH, panelControl);
+		sl_panelControl.putConstraint(SpringLayout.WEST, btnGestisciLocali, 0, SpringLayout.WEST, panelControl);
+		sl_panelControl.putConstraint(SpringLayout.EAST, btnGestisciLocali, 0, SpringLayout.EAST, panelControl);
 		panelControl.add(btnGestisciLocali);
 		
 		JButton btnGestisciRecensioni = new JButton("Gestisci recensioni");
-		sl_panelControl.putConstraint(SpringLayout.NORTH, btnGestisciRecensioni, 104, SpringLayout.NORTH, panelControl);
-		sl_panelControl.putConstraint(SpringLayout.WEST, btnGestisciRecensioni, 10, SpringLayout.WEST, panelControl);
-		sl_panelControl.putConstraint(SpringLayout.EAST, btnGestisciRecensioni, -10, SpringLayout.EAST, panelControl);
+		sl_panelControl.putConstraint(SpringLayout.NORTH, btnGestisciRecensioni, 82, SpringLayout.NORTH, panelControl);
+		sl_panelControl.putConstraint(SpringLayout.WEST, btnGestisciRecensioni, 0, SpringLayout.WEST, panelControl);
+		sl_panelControl.putConstraint(SpringLayout.EAST, btnGestisciRecensioni, 0, SpringLayout.EAST, panelControl);
 		sl_panelControl.putConstraint(SpringLayout.SOUTH, btnGestisciLocali, -6, SpringLayout.NORTH, btnGestisciRecensioni);
+		sl_panelControl.putConstraint(SpringLayout.SOUTH, btnGestisciRecensioni, 112, SpringLayout.NORTH, panelControl);
 		panelControl.add(btnGestisciRecensioni);
 		
-		JButton btnLogout = new JButton("Logout");
-		sl_panelControl.putConstraint(SpringLayout.NORTH, btnLogout, 6, SpringLayout.SOUTH, btnGestisciRecensioni);
-		sl_panelControl.putConstraint(SpringLayout.WEST, btnLogout, 10, SpringLayout.WEST, panelControl);
-		sl_panelControl.putConstraint(SpringLayout.EAST, btnLogout, -10, SpringLayout.EAST, panelControl);
-		panelControl.add(btnLogout);
+		JButton buttonLogin = new JButton();
+		buttonLogin.setIcon(new ImageIcon(MainFrame.class.getResource("/icons/buttonLogin.png"))); //Per anteprima nella tab design
+		buttonLogin.setBorder(null);
+		if(controller.isLoggedIn()) {
+			buttonLogin.setIcon(new ImageIcon(MainFrame.class.getResource("/icons/buttonLogout.png")));
+		}else {
+			buttonLogin.setIcon(new ImageIcon(MainFrame.class.getResource("/icons/buttonLogin.png")));
+		}
 		
-		JButton buttonLogin = new JButton("Login");
+		sl_panelControl.putConstraint(SpringLayout.NORTH, buttonLogin, 6, SpringLayout.SOUTH, btnGestisciRecensioni);
+		sl_panelControl.putConstraint(SpringLayout.WEST, buttonLogin, 0, SpringLayout.WEST, buttonHome);
+		sl_panelControl.putConstraint(SpringLayout.SOUTH, buttonLogin, -54, SpringLayout.SOUTH, panelControl);
+		sl_panelControl.putConstraint(SpringLayout.EAST, buttonLogin, 0, SpringLayout.EAST, panelControl);
 		buttonLogin.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				
 				cambiaPannelloLavoroALoginPanel(workPanel);
 				
+				//Per testing solo (clicca per loggare e sloggare automaticamente)
+				controller.setLoggedIn(!controller.isLoggedIn());
+				if(controller.isLoggedIn()) {
+					buttonLogin.setIcon(new ImageIcon(MainFrame.class.getResource("/icons/buttonLogout highlighted.png")));
+				}else {
+					buttonLogin.setIcon(new ImageIcon(MainFrame.class.getResource("/icons/buttonLogin highlighted.png")));
+				}
+				
+			}
+			//Quando il mouse passa sull'icona cambia icona
+			public void mouseEntered(MouseEvent e) {
+				
+				if(controller.isLoggedIn()) {
+					buttonLogin.setIcon(new ImageIcon(MainFrame.class.getResource("/icons/buttonLogout highlighted.png")));
+				}else {
+					buttonLogin.setIcon(new ImageIcon(MainFrame.class.getResource("/icons/buttonLogin highlighted.png")));
+				}
+				
+			}
+			//Quando il mouse esce dall'icona cambia icona
+			public void mouseExited(MouseEvent e) {
+			
+				if(controller.isLoggedIn()) {
+					buttonLogin.setIcon(new ImageIcon(MainFrame.class.getResource("/icons/buttonLogout.png")));
+				}else {
+					buttonLogin.setIcon(new ImageIcon(MainFrame.class.getResource("/icons/buttonLogin.png")));
+				}
+				
 			}
 			
 		});
-		sl_panelControl.putConstraint(SpringLayout.NORTH, buttonLogin, 6, SpringLayout.SOUTH, btnLogout);
-		sl_panelControl.putConstraint(SpringLayout.WEST, buttonLogin, 10, SpringLayout.WEST, panelControl);
-		sl_panelControl.putConstraint(SpringLayout.EAST, buttonLogin, 172, SpringLayout.WEST, panelControl);
 		panelControl.add(buttonLogin);
 		
 		mainPanel.setLayout(gl_mainPanel);
@@ -285,5 +334,6 @@ public class MainFrame extends JFrame {
 		workPanel.revalidate();
 		
 	}
-	
+
+
 }
