@@ -21,8 +21,8 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class MainController {
 	
-	private JPanel currentPanel;
 	private boolean loggedIn = false;
+	private Utente utente = null;
 	
 	//Palette colori
 	public Color turquoise = new Color(63, 224, 208);
@@ -66,6 +66,28 @@ public class MainController {
 
 	public void setLoggedIn(boolean loggedIn) {
 		this.loggedIn = loggedIn;
+	}
+
+	public Utente getUtente() {
+		return utente;
+	}
+
+	public void setUtente(Utente utente) {
+		this.utente = utente;
+	}
+	
+	public void loginButtonOnLoginPanelPressed(String nomeUtente, String password) {
+		
+		UtenteDAO dao = new UtenteDAO();
+		Utente u = dao.getUtente(nomeUtente, password);
+		setUtente(u); //Restituisce l'utente al controller
+		
+		if(u != null) { //Utente trovato
+			
+			u.stampaInfo();
+			
+		}
+		
 	}
 
 }

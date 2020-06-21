@@ -37,6 +37,7 @@ import javax.swing.SpringLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.Cursor;
 
 public class MainFrame extends JFrame {
 
@@ -44,6 +45,8 @@ public class MainFrame extends JFrame {
 	public Point mouseClickPoint; //Posizione mouse
 	
 	public MainFrame(MainController controller) {
+		
+		this.controller = controller;
 		
 		setSize(new Dimension(1000, 600)); //Dimensioni MainFrame
 		getContentPane().setBackground(controller.white); //Colore background
@@ -192,6 +195,7 @@ public class MainFrame extends JFrame {
 		cambiaPannelloLavoroAHomePanel(workPanel);
 		
 		JButton buttonHome = new JButton("");
+		buttonHome.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		buttonHome.setIcon(new ImageIcon(MainFrame.class.getResource("/icons/buttonHome.png")));
 		buttonHome.setBorder(null);
 		sl_panelControl.putConstraint(SpringLayout.NORTH, buttonHome, 10, SpringLayout.NORTH, panelControl);
@@ -218,6 +222,7 @@ public class MainFrame extends JFrame {
 		panelControl.add(buttonHome);
 		
 		JButton btnGestisciLocali = new JButton("Gestisci locali");
+		btnGestisciLocali.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		sl_panelControl.putConstraint(SpringLayout.NORTH, btnGestisciLocali, 46, SpringLayout.NORTH, panelControl);
 		sl_panelControl.putConstraint(SpringLayout.WEST, btnGestisciLocali, 0, SpringLayout.WEST, panelControl);
 		sl_panelControl.putConstraint(SpringLayout.EAST, btnGestisciLocali, 0, SpringLayout.EAST, panelControl);
@@ -231,6 +236,14 @@ public class MainFrame extends JFrame {
 		});
 		
 		JButton btnGestisciRecensioni = new JButton("Gestisci recensioni");
+		btnGestisciRecensioni.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+			
+				cambiaPannelloLavoroARecensioniPanel(workPanel);
+			
+			}
+		});
+		btnGestisciRecensioni.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		sl_panelControl.putConstraint(SpringLayout.NORTH, btnGestisciRecensioni, 82, SpringLayout.NORTH, panelControl);
 		sl_panelControl.putConstraint(SpringLayout.WEST, btnGestisciRecensioni, 0, SpringLayout.WEST, panelControl);
 		sl_panelControl.putConstraint(SpringLayout.EAST, btnGestisciRecensioni, 0, SpringLayout.EAST, panelControl);
@@ -239,10 +252,19 @@ public class MainFrame extends JFrame {
 		panelControl.add(btnGestisciRecensioni);
 		
 		JButton btnRegistrati = new JButton("Registrati");
+		btnRegistrati.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+			
+				cambiaPannelloLavoroARegistrazionePanel(workPanel);
+			
+			}
+		});
+		btnRegistrati.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRegistrati.setEnabled(!controller.isLoggedIn());
 		btnRegistrati.setVisible(btnRegistrati.isEnabled());
 		
 		JButton buttonLogin = new JButton();
+		buttonLogin.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		buttonLogin.setIcon(new ImageIcon(MainFrame.class.getResource("/icons/buttonLogin.png"))); //Per anteprima nella tab design
 		buttonLogin.setBorder(null);
 		if(controller.isLoggedIn()) {
@@ -261,6 +283,7 @@ public class MainFrame extends JFrame {
 				cambiaPannelloLavoroALoginPanel(workPanel);
 				
 				//Per testing solo (clicca per loggare e sloggare automaticamente)
+				/*
 				controller.setLoggedIn(!controller.isLoggedIn());
 				btnRegistrati.setEnabled(!controller.isLoggedIn());
 				btnRegistrati.setVisible(btnRegistrati.isEnabled());
@@ -269,6 +292,7 @@ public class MainFrame extends JFrame {
 				}else {
 					buttonLogin.setIcon(new ImageIcon(MainFrame.class.getResource("/icons/buttonLogin highlighted.png")));
 				}
+				*/
 				
 			}
 			//Quando il mouse passa sull'icona cambia icona

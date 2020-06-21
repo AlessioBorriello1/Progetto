@@ -59,6 +59,16 @@ public class LoginPanel extends JPanel {
 		add(lblPassword);
 		
 		JButton buttonLogin = new JButton("Login");
+		buttonLogin.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+			
+				String nomeUtente = nomeUtenteField.getText(); //Prendi nome utente dal rispettivo campo
+				String password = String.valueOf(passwordField.getPassword()); //Prendi password dal rispettivo campo
+				
+				controller.loginButtonOnLoginPanelPressed(nomeUtente, password);
+			
+			}
+		});
 		buttonLogin.setBounds(402, 268, 220, 30);
 		add(buttonLogin);
 		
