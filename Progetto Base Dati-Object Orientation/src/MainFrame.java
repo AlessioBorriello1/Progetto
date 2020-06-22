@@ -41,6 +41,8 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.Cursor;
 import javax.swing.border.LineBorder;
+import javax.swing.border.MatteBorder;
+import javax.swing.border.TitledBorder;
 
 public class MainFrame extends JFrame {
 
@@ -175,7 +177,7 @@ public class MainFrame extends JFrame {
 		
 		JPanel panelInfoUtente = new JPanel(); //Nuovo label per info utente (se ha fatto il login)
 		panelInfoUtente.setName("panelInfoUtente"); //Imposta nome
-		panelInfoUtente.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
+		panelInfoUtente.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panelInfoUtente.setBackground(dashBoardPanel.getBackground()); //Colore background (Uguale a quello del pannello dove si trova(dashBoardPanel))
 		//Costraints per limitarne la posizione in base al layout
 		sl_dashBoardPanel.putConstraint(SpringLayout.NORTH, panelInfoUtente, 6, SpringLayout.SOUTH, labelProfilePic);
@@ -192,7 +194,7 @@ public class MainFrame extends JFrame {
 		
 		JLabel lblNotLogged = new JLabel("Effettua il login"); //Nuovo label notLogged
 		lblNotLogged.setName("lblNotLogged"); //Imposta nome
-		lblNotLogged.setFont(new Font("Tahoma", Font.BOLD, 11)); //Imposta font
+		lblNotLogged.setFont(new Font("Tahoma", Font.BOLD, 16)); //Imposta font
 		lblNotLogged.setBackground(panelInfoUtente.getBackground()); //Colore background (Uguale a quello del pannello dove si trova(panelInfoUtente))
 		lblNotLogged.setForeground(Color.CYAN); //Colore font
 		lblNotLogged.setHorizontalAlignment(SwingConstants.CENTER); //Allinea il testo al centro
@@ -244,13 +246,11 @@ public class MainFrame extends JFrame {
 				.addGroup(gl_panelLogged.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_panelLogged.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panelLogged.createSequentialGroup()
-							.addGroup(gl_panelLogged.createParallelGroup(Alignment.TRAILING)
-								.addComponent(lblNomeUtente, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
-								.addComponent(lblEmail, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 158, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblNumeroLuoghi, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 158, GroupLayout.PREFERRED_SIZE))
-							.addContainerGap())
-						.addComponent(btnUtenteSettings, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)))
+						.addComponent(lblNomeUtente, GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+						.addComponent(lblEmail, GroupLayout.PREFERRED_SIZE, 158, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblNumeroLuoghi, GroupLayout.PREFERRED_SIZE, 158, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnUtenteSettings, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap())
 		);
 		//Allinea verticale
 		gl_panelLogged.setVerticalGroup(
@@ -263,8 +263,7 @@ public class MainFrame extends JFrame {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(lblNumeroLuoghi)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnUtenteSettings, GroupLayout.PREFERRED_SIZE, 18, Short.MAX_VALUE)
-					.addGap(5))
+					.addComponent(btnUtenteSettings, GroupLayout.PREFERRED_SIZE, 18, Short.MAX_VALUE))
 		);
 		panelLogged.setLayout(gl_panelLogged); //Imposta layout gl_panelLogged in panelLogged
 		
@@ -347,7 +346,12 @@ public class MainFrame extends JFrame {
 		btnGestisciLocali.addMouseListener(new MouseAdapter() {
 			//Quando premo il mouse
 			public void mouseClicked(MouseEvent e) {
-				cambiaPannelloLavoroALocaliPanel(workPanel); //Imposta il pannello di lavoro (workPanel) a LocaliPanel
+				if(controller.isLoggedIn()) { //Se sono loggato
+					cambiaPannelloLavoroALocaliPanel(workPanel); //Imposta il pannello di lavoro (workPanel) a LocaliPanel
+				}else { //Se non sono loggato
+					createNotificationFrame("Devi prima eseguire il Login!");
+					cambiaPannelloLavoroALoginPanel(workPanel);
+				}
 			}
 		});
 		panelControl.add(btnGestisciLocali); //Aggiungi bottone Gestisci Locali al pannello di controllo
@@ -365,7 +369,12 @@ public class MainFrame extends JFrame {
 		btnGestisciRecensioni.addMouseListener(new MouseAdapter() {
 			//Quando premo il mouse
 			public void mouseClicked(MouseEvent e) {
-				cambiaPannelloLavoroARecensioniPanel(workPanel); //Imposta il pannello di lavoro (workPanel) a RecensioniPanel
+				if(controller.isLoggedIn()) { //Se sono loggato
+					cambiaPannelloLavoroARecensioniPanel(workPanel); //Imposta il pannello di lavoro (workPanel) a RecensioniPanel
+				}else { //Se non sono loggato
+					createNotificationFrame("Devi prima eseguire il Login!");
+					cambiaPannelloLavoroALoginPanel(workPanel);
+				}
 			}
 		});
 		panelControl.add(btnGestisciRecensioni); //Aggiungi bottone Gestisci Recensioni al pannello di controllo

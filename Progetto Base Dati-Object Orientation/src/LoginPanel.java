@@ -63,11 +63,6 @@ public class LoginPanel extends JPanel {
 				String password = String.valueOf(passwordField.getPassword()); //Prendi password dal rispettivo campo
 				
 				controller.loginButtonOnLoginPanelPressed(nomeUtente, password, mainFrame); //Bottone login premuto
-				if(controller.isLoggedIn()) { //Se sono loggato con successo
-					mainFrame.createNotificationFrame("Login riuscito! Benvenuto " + controller.getUtente().getNomeUtente());
-				}else { //Se non sono loggato con successo
-					mainFrame.createNotificationFrame("Qualcosa è andato storto!");
-				}
 			
 			}
 		});
