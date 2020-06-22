@@ -16,6 +16,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.event.PopupMenuListener;
 import javax.swing.event.PopupMenuEvent;
+import javax.swing.border.LineBorder;
 
 public class CreazioneLuogoPanel extends JPanel {
 
@@ -88,6 +89,7 @@ public class CreazioneLuogoPanel extends JPanel {
 		labelSpecializzazione.setFont(new Font("Tahoma", Font.BOLD, 16));
 		
 		JPanel panelAttributiAggiuntivi = new JPanel();
+		panelAttributiAggiuntivi.setBorder(new LineBorder(new Color(0, 0, 0)));
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -158,6 +160,125 @@ public class CreazioneLuogoPanel extends JPanel {
 					.addGap(138))
 		);
 		panelAttributiAggiuntivi.setLayout(new CardLayout(0, 0));
+		
+		JPanel panelImpostazioniAggiuntivePizzeria = new JPanel();
+		panelAttributiAggiuntivi.add(panelImpostazioniAggiuntivePizzeria, "name_303890672166500");
+		
+		JLabel lblImpostazioniAggiuntivePizzeria = new JLabel("Impostazioni aggiuntive pizzeria:");
+		lblImpostazioniAggiuntivePizzeria.setFont(new Font("Tahoma", Font.BOLD, 14));
+		GroupLayout gl_panelImpostazioniAggiuntivePizzeria = new GroupLayout(panelImpostazioniAggiuntivePizzeria);
+		gl_panelImpostazioniAggiuntivePizzeria.setHorizontalGroup(
+			gl_panelImpostazioniAggiuntivePizzeria.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelImpostazioniAggiuntivePizzeria.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblImpostazioniAggiuntivePizzeria, GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		gl_panelImpostazioniAggiuntivePizzeria.setVerticalGroup(
+			gl_panelImpostazioniAggiuntivePizzeria.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelImpostazioniAggiuntivePizzeria.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblImpostazioniAggiuntivePizzeria)
+					.addContainerGap(168, Short.MAX_VALUE))
+		);
+		panelImpostazioniAggiuntivePizzeria.setLayout(gl_panelImpostazioniAggiuntivePizzeria);
+		
+		JPanel panelImpostazioniAggiuntiveBraceria = new JPanel();
+		panelImpostazioniAggiuntiveBraceria.setEnabled(false);
+		panelImpostazioniAggiuntiveBraceria.setVisible(false);
+		panelAttributiAggiuntivi.add(panelImpostazioniAggiuntiveBraceria, "name_303954089338700");
+		
+		JLabel lblImpostazioniAggiuntiveBraceria = new JLabel("Impostazioni aggiuntive braceria:");
+		lblImpostazioniAggiuntiveBraceria.setFont(new Font("Tahoma", Font.BOLD, 14));
+		GroupLayout gl_panelImpostazioniAggiuntiveBraceria = new GroupLayout(panelImpostazioniAggiuntiveBraceria);
+		gl_panelImpostazioniAggiuntiveBraceria.setHorizontalGroup(
+			gl_panelImpostazioniAggiuntiveBraceria.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelImpostazioniAggiuntiveBraceria.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblImpostazioniAggiuntiveBraceria, GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		gl_panelImpostazioniAggiuntiveBraceria.setVerticalGroup(
+			gl_panelImpostazioniAggiuntiveBraceria.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelImpostazioniAggiuntiveBraceria.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblImpostazioniAggiuntiveBraceria, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(168, Short.MAX_VALUE))
+		);
+		panelImpostazioniAggiuntiveBraceria.setLayout(gl_panelImpostazioniAggiuntiveBraceria);
+		
+		JPanel panelImpostazioniAggiuntiveRistorante = new JPanel();
+		panelImpostazioniAggiuntiveRistorante.setEnabled(false);
+		panelImpostazioniAggiuntiveRistorante.setVisible(false);
+		panelAttributiAggiuntivi.add(panelImpostazioniAggiuntiveRistorante, "name_303977415333000");
+		
+		JLabel lblImpostazioniAggiuntiveRistorante = new JLabel("Impostazioni aggiuntive ristorante:");
+		lblImpostazioniAggiuntiveRistorante.setFont(new Font("Tahoma", Font.BOLD, 14));
+		GroupLayout gl_panelImpostazioniAggiuntiveRistorante = new GroupLayout(panelImpostazioniAggiuntiveRistorante);
+		gl_panelImpostazioniAggiuntiveRistorante.setHorizontalGroup(
+			gl_panelImpostazioniAggiuntiveRistorante.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelImpostazioniAggiuntiveRistorante.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblImpostazioniAggiuntiveRistorante, GroupLayout.PREFERRED_SIZE, 318, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		gl_panelImpostazioniAggiuntiveRistorante.setVerticalGroup(
+			gl_panelImpostazioniAggiuntiveRistorante.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelImpostazioniAggiuntiveRistorante.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblImpostazioniAggiuntiveRistorante, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(168, Short.MAX_VALUE))
+		);
+		panelImpostazioniAggiuntiveRistorante.setLayout(gl_panelImpostazioniAggiuntiveRistorante);
+		
+		JPanel panelImpostazioniAggiuntiveAlloggio = new JPanel();
+		panelImpostazioniAggiuntiveAlloggio.setEnabled(false);
+		panelImpostazioniAggiuntiveAlloggio.setVisible(false);
+		panelAttributiAggiuntivi.add(panelImpostazioniAggiuntiveAlloggio, "name_304047772595500");
+		
+		JLabel lblImpostazioniAggiuntiveAlloggio = new JLabel("Impostazioni aggiuntive alloggio:");
+		lblImpostazioniAggiuntiveAlloggio.setFont(new Font("Tahoma", Font.BOLD, 14));
+		GroupLayout gl_panelImpostazioniAggiuntiveAlloggio = new GroupLayout(panelImpostazioniAggiuntiveAlloggio);
+		gl_panelImpostazioniAggiuntiveAlloggio.setHorizontalGroup(
+			gl_panelImpostazioniAggiuntiveAlloggio.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelImpostazioniAggiuntiveAlloggio.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblImpostazioniAggiuntiveAlloggio, GroupLayout.PREFERRED_SIZE, 318, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		gl_panelImpostazioniAggiuntiveAlloggio.setVerticalGroup(
+			gl_panelImpostazioniAggiuntiveAlloggio.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelImpostazioniAggiuntiveAlloggio.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblImpostazioniAggiuntiveAlloggio, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(168, Short.MAX_VALUE))
+		);
+		panelImpostazioniAggiuntiveAlloggio.setLayout(gl_panelImpostazioniAggiuntiveAlloggio);
+		
+		JPanel panelNessunaImpostazioneAggiuntiva = new JPanel();
+		panelNessunaImpostazioneAggiuntiva.setEnabled(false);
+		panelNessunaImpostazioneAggiuntiva.setVisible(false);
+		panelAttributiAggiuntivi.add(panelNessunaImpostazioneAggiuntiva, "name_304077949539800");
+		
+		JLabel lblNessunaImpostazioneAggiuntiva = new JLabel("Nessuna impostazione aggiuntiva");
+		lblNessunaImpostazioneAggiuntiva.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNessunaImpostazioneAggiuntiva.setFont(new Font("Tahoma", Font.BOLD, 14));
+		GroupLayout gl_panelNessunaImpostazioneAggiuntiva = new GroupLayout(panelNessunaImpostazioneAggiuntiva);
+		gl_panelNessunaImpostazioneAggiuntiva.setHorizontalGroup(
+			gl_panelNessunaImpostazioneAggiuntiva.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelNessunaImpostazioneAggiuntiva.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblNessunaImpostazioneAggiuntiva, GroupLayout.PREFERRED_SIZE, 318, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		gl_panelNessunaImpostazioneAggiuntiva.setVerticalGroup(
+			gl_panelNessunaImpostazioneAggiuntiva.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelNessunaImpostazioneAggiuntiva.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblNessunaImpostazioneAggiuntiva, GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		panelNessunaImpostazioneAggiuntiva.setLayout(gl_panelNessunaImpostazioneAggiuntiva);
 		setLayout(groupLayout);
 	}
 	
