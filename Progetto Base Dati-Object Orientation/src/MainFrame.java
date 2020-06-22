@@ -564,6 +564,28 @@ public class MainFrame extends JFrame {
 		}
 		
 	}
+	
+	/**
+	 * Fa mostrare il pannello Creazione Luogo nel workPanel
+	 * @param workPanel pannello dove mostrare il pannello
+	 */
+	public void cambiaPannelloLavoroACreazioneLuogoPanel(JPanel workPanel) {
+		
+		if(controller.getCurrentPanel() == null || !controller.getCurrentPanel().getClass().toString().contentEquals("class CreazioneLuogoPanel")) { //Se non sono già sullo stesso panel
+			//Rimuovi vecchio panel dal workPanel
+			workPanel.removeAll();
+			workPanel.repaint();
+			workPanel.revalidate();
+			
+			//Aggiungi nuovo RegistrazionePanel al workPanel
+			CreazioneLuogoPanel panel = new CreazioneLuogoPanel(controller, this, workPanel);
+			controller.setCurrentPanel(panel); //Imposta il pannello appena creato nella variabile currentPanel del controller
+			workPanel.add(panel);
+			workPanel.repaint();
+			workPanel.revalidate();
+		}
+		
+	}
 
 	/**
 	 * Ricarica bottone login/logout per mostrare la giusta icona (Se di login o di logout)
