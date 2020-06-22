@@ -20,30 +20,27 @@ public class RegistrazionePanel extends JPanel {
 	MainController controller;
 	MainFrame mainFrame;
 	JPanel workPanel;
-	private JTextField nomeUtenteField;
-	private JTextField emailField;
-	private JPasswordField passwordField;
 
-	public RegistrazionePanel(MainController controller, MainFrame mainFrame, JPanel workPanel) {
+	public RegistrazionePanel(MainController controller, MainFrame mainFrame, JPanel wP) {
 		
 		this.controller = controller;
 		this.mainFrame = mainFrame;
-		this.workPanel = workPanel;
+		JPanel workPanel = wP;
 		
 		setBackground(Color.LIGHT_GRAY);
 		setLayout(null);
 		
-		nomeUtenteField = new JTextField();
+		JTextField nomeUtenteField = new JTextField();
 		nomeUtenteField.setBounds(486, 110, 220, 30);
 		add(nomeUtenteField);
 		nomeUtenteField.setColumns(10);
 		
-		emailField = new JTextField();
+		JTextField emailField = new JTextField();
 		emailField.setColumns(10);
 		emailField.setBounds(486, 167, 220, 30);
 		add(emailField);
 		
-		passwordField = new JPasswordField();
+		JPasswordField passwordField = new JPasswordField();
 		passwordField.setBounds(486, 225, 220, 30);
 		add(passwordField);
 		

@@ -24,25 +24,22 @@ public class LoginPanel extends JPanel {
 	
 	MainController controller;
 	MainFrame mainFrame;
-	JPanel workPanel;
-	private JTextField nomeUtenteField;
-	private JPasswordField passwordField;
 
-	public LoginPanel(MainController controller, MainFrame mainFrame, JPanel workPanel) {
+	public LoginPanel(MainController controller, MainFrame mainFrame, JPanel wP) {
 		
+		JPanel workPanel = wP;
 		this.controller = controller;
 		this.mainFrame = mainFrame;
-		this.workPanel = workPanel;
 		
 		setBackground(Color.LIGHT_GRAY);
 		setLayout(null);
 		
-		nomeUtenteField = new JTextField();
+		JTextField nomeUtenteField = new JTextField();
 		nomeUtenteField.setBounds(402, 140, 220, 30);
 		add(nomeUtenteField);
 		nomeUtenteField.setColumns(10);
 		
-		passwordField = new JPasswordField();
+		JPasswordField passwordField = new JPasswordField();
 		passwordField.setBounds(402, 197, 220, 30);
 		add(passwordField);
 		
