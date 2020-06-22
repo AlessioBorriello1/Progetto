@@ -45,10 +45,13 @@ import javax.swing.border.LineBorder;
 public class MainFrame extends JFrame {
 
 	private MainController controller; //Controller che chiama il mainFrame
-	private Point mouseClickPoint; //Posizione mouse
+	private Point mouseClickPoint; //Posizione mouse (per trascinare finestra)
+	
 	private JButton btnRegistrati; //Bottone registrati (per far cambiare alcune sue proprietà da altre classi)
 	private JButton buttonLogin; //Bottone login (per far cambiare alcune sue proprietà da altre classi)
 	private JPanel workPanel; //Pannello workPanel (Pannello dove viene mostrata l'attività corrente) (Per poter chiamare alcune funzioni che richiedono workPanel)
+	private JPanel panelNotLogged;
+	private JPanel panelLogged;
 	
 	public MainFrame(MainController controller) {
 		
@@ -177,20 +180,20 @@ public class MainFrame extends JFrame {
 		sl_dashBoardPanel.putConstraint(SpringLayout.WEST, panelInfoUtente, 10, SpringLayout.WEST, dashBoardPanel);
 		sl_dashBoardPanel.putConstraint(SpringLayout.SOUTH, panelInfoUtente, 99, SpringLayout.SOUTH, labelProfilePic);
 		sl_dashBoardPanel.putConstraint(SpringLayout.EAST, panelInfoUtente, 192, SpringLayout.WEST, labelProfilePic);
+		panelInfoUtente.setLayout(new CardLayout(0, 0)); //Imposta layout
 		dashBoardPanel.add(panelInfoUtente); //Aggiungi panelInfoUtente alla dashboard (dashBoardPanel)
 		
-		panelInfoUtente.setLayout(new CardLayout(0, 0));
-		panelInfoUtente.setBackground(dashBoardPanel.getBackground());
+		panelNotLogged = new JPanel(); //Nuovo pannello notLogged
+		panelNotLogged.setBackground(dashBoardPanel.getBackground()); //Colore background (Uguale a quello del pannello dove si trova(dashBoardPanel))
+		panelInfoUtente.add(panelNotLogged, "name_254773764256500"); //Aggiungi pannello al pannello panelInfoUtente
 		
-		JPanel panelNotLogged = new JPanel();
-		panelNotLogged.setBackground(dashBoardPanel.getBackground());
-		panelInfoUtente.add(panelNotLogged, "name_254773764256500");
-		JLabel lblNotLogged = new JLabel("Effettua il login");
-		lblNotLogged.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNotLogged.setBackground(panelInfoUtente.getBackground());
-		lblNotLogged.setForeground(Color.CYAN);
-		lblNotLogged.setHorizontalAlignment(SwingConstants.CENTER);
-		GroupLayout gl_panelNotLogged = new GroupLayout(panelNotLogged);
+		JLabel lblNotLogged = new JLabel("Effettua il login"); //Nuovo label notLogged
+		lblNotLogged.setFont(new Font("Tahoma", Font.BOLD, 11)); //Imposta font
+		lblNotLogged.setBackground(panelInfoUtente.getBackground()); //Colore background (Uguale a quello del pannello dove si trova(panelInfoUtente))
+		lblNotLogged.setForeground(Color.CYAN); //Colore font
+		lblNotLogged.setHorizontalAlignment(SwingConstants.CENTER); //Allinea il testo al centro
+		GroupLayout gl_panelNotLogged = new GroupLayout(panelNotLogged); //GroupLayout per panelNotLogged (e salvato in gl_panelNotLogged)
+		//Allinea orizzontale
 		gl_panelNotLogged.setHorizontalGroup(
 			gl_panelNotLogged.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelNotLogged.createSequentialGroup()
@@ -198,6 +201,7 @@ public class MainFrame extends JFrame {
 					.addComponent(lblNotLogged, GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
 					.addContainerGap())
 		);
+		//Allinea verticale
 		gl_panelNotLogged.setVerticalGroup(
 			gl_panelNotLogged.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelNotLogged.createSequentialGroup()
@@ -205,26 +209,30 @@ public class MainFrame extends JFrame {
 					.addComponent(lblNotLogged, GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
 					.addContainerGap())
 		);
-		panelNotLogged.setLayout(gl_panelNotLogged);
+		panelNotLogged.setLayout(gl_panelNotLogged); //Imposta layout gl_panelNotLogged in panelNotLogged
 		
-		JPanel panelLogged = new JPanel();
-		panelInfoUtente.add(panelLogged, "name_254788425247100");
-		panelLogged.setBackground(dashBoardPanel.getBackground());
+		panelLogged = new JPanel(); //Nuovo pannello logged
+		panelInfoUtente.add(panelLogged, "name_254788425247100"); //Aggiungi pannello al pannello panelInfoUtente
+		panelLogged.setBackground(dashBoardPanel.getBackground()); //Colore background (Uguale a quello del pannello dove si trova(dashBoardPanel))
 		
-		JLabel lblNomeUtente = new JLabel("Nome utente:");
-		lblNomeUtente.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNomeUtente.setForeground(Color.CYAN);
+		JLabel lblNomeUtente = new JLabel("Nome utente:"); //Nuovo label Nome utente
+		lblNomeUtente.setName("lblNomeUtente"); //Dai nome al label per trovarlo poi
+		lblNomeUtente.setFont(new Font("Tahoma", Font.BOLD, 11)); //Imposta font
+		lblNomeUtente.setForeground(Color.CYAN); //Imposta colore font
 		
-		JLabel lblEmail = new JLabel("Email:");
-		lblEmail.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblEmail.setForeground(Color.CYAN);
+		JLabel lblEmail = new JLabel("Email:"); //Nuovo label Email
+		lblEmail.setName("lblEmail"); //Dai nome al label per trovarlo poi
+		lblEmail.setFont(new Font("Tahoma", Font.BOLD, 11)); //Imposta font
+		lblEmail.setForeground(Color.CYAN); //Imposta colore font
 		
-		JLabel lblNumeroLuoghi = new JLabel("Numero luoghi:");
-		lblNumeroLuoghi.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNumeroLuoghi.setForeground(Color.CYAN);
+		JLabel lblNumeroLuoghi = new JLabel("Numero luoghi:"); //Nuovo label Numero luoghi
+		lblNumeroLuoghi.setName("lblNumeroLuoghi"); //Dai nome al label per trovarlo poi
+		lblNumeroLuoghi.setFont(new Font("Tahoma", Font.BOLD, 11)); //Imposta font
+		lblNumeroLuoghi.setForeground(Color.CYAN); //Imposta colore font
 		
-		JButton btnUtenteSettings = new JButton("");
-		GroupLayout gl_panelLogged = new GroupLayout(panelLogged);
+		JButton btnUtenteSettings = new JButton(""); //Nuovo bottone per settare nome utente/ password dell'utente
+		GroupLayout gl_panelLogged = new GroupLayout(panelLogged); //GroupLayout per panelLogged (e salvato in gl_panelLogged)
+		//Allinea orizzontale
 		gl_panelLogged.setHorizontalGroup(
 			gl_panelLogged.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelLogged.createSequentialGroup()
@@ -238,6 +246,7 @@ public class MainFrame extends JFrame {
 							.addContainerGap())
 						.addComponent(btnUtenteSettings, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)))
 		);
+		//Allinea verticale
 		gl_panelLogged.setVerticalGroup(
 			gl_panelLogged.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelLogged.createSequentialGroup()
@@ -251,7 +260,7 @@ public class MainFrame extends JFrame {
 					.addComponent(btnUtenteSettings, GroupLayout.PREFERRED_SIZE, 18, Short.MAX_VALUE)
 					.addGap(5))
 		);
-		panelLogged.setLayout(gl_panelLogged);
+		panelLogged.setLayout(gl_panelLogged); //Imposta layout gl_panelLogged in panelLogged
 		
 		
 		JPanel panelControl = new JPanel(); //Nuovo pannello (sulla dashboard, dove si trovano i bottoni HOME/LOGIN etc)
@@ -388,6 +397,8 @@ public class MainFrame extends JFrame {
 					controller.setLoggedIn(false); //Imposta loggedIn del controller a falso
 					controller.setUtente(null); //Imposta utente del controller a null
 					refreshaLoginButton(); //Refresha il bottone (per vedere quale icona deve mostrare)
+					refreshaPannelloInfo(); //Cambia pannello info utente se sono loggato o meno
+					createNotificationFrame("Non sei più collegato al tuo account"); //Notifica che l'utente ha sloggato
 					cambiaPannelloLavoroAHomePanel(workPanel); //Vai al pannello HomePanel
 				}
 			}
@@ -547,6 +558,46 @@ public class MainFrame extends JFrame {
 		
 	}
 
+	/**
+	 * Ricarica il pannello info utente se sono loggato o meno
+	 * Se sono loggato mostra info sull'utente
+	 * Se non sono loggato mostra la scritta "Effettua il login"
+	 */
+	public void refreshaPannelloInfo() {
+		
+		if(controller.isLoggedIn()) { //Se sono loggato
+			
+			panelNotLogged.setVisible(false); //Rendi il pannello notLogged invisibile
+			panelNotLogged.setEnabled(false); //Rendi il pannello notLogged inattivo
+			
+			panelLogged.setVisible(true); //Rendi il pannello logged visibile
+			panelLogged.setEnabled(true); //Rendi il pannello logged attivo
+			
+			for(Component lbl: panelLogged.getComponents()) { //Per tutte le componenti del pannello logged
+				
+				if(lbl.getClass().getName().toString().contentEquals("javax.swing.JLabel")) { //Se la classe della componente è JLabel
+					JLabel label = (JLabel) lbl; //Converti a classe Jlabel
+					switch(label.getName()) { //Switch per il nome del label
+					case "lblNomeUtente": label.setText("Nome Utente: " + controller.getUtente().getNomeUtente()); break; //Se il nome è lblNomeUtente
+					case "lblEmail": label.setText("Email: " + controller.getUtente().getEmail()); break; //Se il nome è lblEmail
+					case "lblNumeroLuoghi": label.setText("Numero luoghi: " + controller.getUtente().getNumeroLuoghi()); break; //Se il nome è lblNumeroLuoghi
+					default: break;
+					}
+				}
+			}
+			
+		}else { //Se non sono loggato
+			
+			panelLogged.setVisible(false); //Rendi il pannello logged invisibile
+			panelLogged.setEnabled(false);  //Rendi il pannello logged inattivo
+			
+			panelNotLogged.setVisible(true); //Rendi il pannello notLogged visibile
+			panelNotLogged.setEnabled(true); //Rendi il pannello notLogged attivo
+			panelNotLogged.repaint(); //Repainta pannello
+		}
+		
+	}
+	
 	//Getter per variabile workPanel (P)
 	public JPanel getWorkPanel() {
 		

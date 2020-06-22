@@ -100,6 +100,7 @@ public class MainController {
 			u.stampaInfo(); //Stampa info utente trovato (Per debug)
 			setLoggedIn(true); //Imposta la variabile del controller loggedIn a vero
 			mainFrame.refreshaLoginButton(); //Ricarica il bottone di login/logout del mainFrame per fargli mostrare l'icona corretta
+			mainFrame.refreshaPannelloInfo(); //Cambia pannello info utente se sono loggato o meno
 			mainFrame.cambiaPannelloLavoroAHomePanel(mainFrame.getWorkPanel()); //Vai a pannello HomePanel
 			
 		}
