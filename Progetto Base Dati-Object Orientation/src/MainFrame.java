@@ -40,6 +40,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.Cursor;
+import javax.swing.border.LineBorder;
 
 public class MainFrame extends JFrame {
 
@@ -169,6 +170,7 @@ public class MainFrame extends JFrame {
 		
 		
 		JPanel panelInfoUtente = new JPanel(); //Nuovo label per info utente (se ha fatto il login)
+		panelInfoUtente.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
 		panelInfoUtente.setBackground(dashBoardPanel.getBackground()); //Colore background (Uguale a quello del pannello dove si trova(dashBoardPanel))
 		//Costraints per limitarne la posizione in base al layout
 		sl_dashBoardPanel.putConstraint(SpringLayout.NORTH, panelInfoUtente, 6, SpringLayout.SOUTH, labelProfilePic);
@@ -177,6 +179,80 @@ public class MainFrame extends JFrame {
 		sl_dashBoardPanel.putConstraint(SpringLayout.EAST, panelInfoUtente, 192, SpringLayout.WEST, labelProfilePic);
 		dashBoardPanel.add(panelInfoUtente); //Aggiungi panelInfoUtente alla dashboard (dashBoardPanel)
 		
+		panelInfoUtente.setLayout(new CardLayout(0, 0));
+		panelInfoUtente.setBackground(dashBoardPanel.getBackground());
+		
+		JPanel panelNotLogged = new JPanel();
+		panelNotLogged.setBackground(dashBoardPanel.getBackground());
+		panelInfoUtente.add(panelNotLogged, "name_254773764256500");
+		JLabel lblNotLogged = new JLabel("Effettua il login");
+		lblNotLogged.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNotLogged.setBackground(panelInfoUtente.getBackground());
+		lblNotLogged.setForeground(Color.CYAN);
+		lblNotLogged.setHorizontalAlignment(SwingConstants.CENTER);
+		GroupLayout gl_panelNotLogged = new GroupLayout(panelNotLogged);
+		gl_panelNotLogged.setHorizontalGroup(
+			gl_panelNotLogged.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelNotLogged.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblNotLogged, GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		gl_panelNotLogged.setVerticalGroup(
+			gl_panelNotLogged.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelNotLogged.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblNotLogged, GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		panelNotLogged.setLayout(gl_panelNotLogged);
+		
+		JPanel panelLogged = new JPanel();
+		panelInfoUtente.add(panelLogged, "name_254788425247100");
+		panelLogged.setBackground(dashBoardPanel.getBackground());
+		
+		JLabel lblNomeUtente = new JLabel("Nome utente:");
+		lblNomeUtente.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNomeUtente.setForeground(Color.CYAN);
+		
+		JLabel lblEmail = new JLabel("Email:");
+		lblEmail.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblEmail.setForeground(Color.CYAN);
+		
+		JLabel lblNumeroLuoghi = new JLabel("Numero luoghi:");
+		lblNumeroLuoghi.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNumeroLuoghi.setForeground(Color.CYAN);
+		
+		JButton btnUtenteSettings = new JButton("");
+		GroupLayout gl_panelLogged = new GroupLayout(panelLogged);
+		gl_panelLogged.setHorizontalGroup(
+			gl_panelLogged.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelLogged.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_panelLogged.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panelLogged.createSequentialGroup()
+							.addGroup(gl_panelLogged.createParallelGroup(Alignment.TRAILING)
+								.addComponent(lblNomeUtente, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+								.addComponent(lblEmail, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 158, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblNumeroLuoghi, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 158, GroupLayout.PREFERRED_SIZE))
+							.addContainerGap())
+						.addComponent(btnUtenteSettings, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)))
+		);
+		gl_panelLogged.setVerticalGroup(
+			gl_panelLogged.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelLogged.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblNomeUtente)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblEmail)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblNumeroLuoghi)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnUtenteSettings, GroupLayout.PREFERRED_SIZE, 18, Short.MAX_VALUE)
+					.addGap(5))
+		);
+		panelLogged.setLayout(gl_panelLogged);
+		
 		
 		JPanel panelControl = new JPanel(); //Nuovo pannello (sulla dashboard, dove si trovano i bottoni HOME/LOGIN etc)
 		//Costraints per limitarne la posizione in base al layout
@@ -184,6 +260,7 @@ public class MainFrame extends JFrame {
 		sl_dashBoardPanel.putConstraint(SpringLayout.EAST, panelControl, 0, SpringLayout.EAST, labelProfilePic);
 		sl_dashBoardPanel.putConstraint(SpringLayout.NORTH, panelControl, 19, SpringLayout.SOUTH, panelInfoUtente);
 		sl_dashBoardPanel.putConstraint(SpringLayout.SOUTH, panelControl, 221, SpringLayout.SOUTH, panelInfoUtente);
+		
 		panelControl.setBackground(dashBoardPanel.getBackground()); //Colore background (Uguale a quello del pannello dove si trova(dashBoardPanel))
 		dashBoardPanel.add(panelControl); //Aggiungi panelControl alla dashboard (dashBoardPanel)
 		SpringLayout sl_panelControl = new SpringLayout(); //SpringLayout per panelControl (e salvato in sl_panelControl)
