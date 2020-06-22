@@ -106,17 +106,22 @@ public class MainController {
 		
 	}
 	
+	/**
+	 * Bottone registrazione nel pannello registrazione premuto, istanza un UtenteDAO per vedere se i valori
+	 * nomeUtente, email non appartengono a nessuno per poter completare la registrazione
+	 * @param nomeUtente Nome Utente del nuovo utente da creare
+	 * @param password Password del nuovo utente da creare
+	 * @param email Email del nuovo utente da creare
+	 * @param mainFrame Frame applicazione per aver accesso ad alcune delle sue funzioni
+	 * @return Boolean se l'operazione è riuscita o meno
+	 */
 	public boolean registrazioneButtonOnRegistrazionePanelPressed(String nomeUtente, String password, String email, MainFrame mainFrame) {
 		
-		UtenteDAO dao = new UtenteDAO();
-		if(dao.registraUtente(nomeUtente, email, password)) {
-			
+		UtenteDAO dao = new UtenteDAO(); //Istanzia un UtenteDAO per eseguire la ricerca
+		if(dao.registraUtente(nomeUtente, email, password)) { //Funzione UtenteDAO che restituisce vero se la creazione è avvenuta con successo
 			return true;
-			
 		}else {
-			
 			return false;
-			
 		}
 		
 	}

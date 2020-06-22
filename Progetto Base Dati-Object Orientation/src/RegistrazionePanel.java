@@ -75,9 +75,11 @@ public class RegistrazionePanel extends JPanel {
 				
 				if(controller.registrazioneButtonOnRegistrazionePanelPressed(nomeUtente, password, email, mainFrame)) {
 					System.out.println("Registrazione riuscita");
+					mainFrame.createNotificationFrame("Registrazione riuscita");
 					mainFrame.cambiaPannelloLavoroALoginPanel(workPanel);//Vai a pannello login
 				}else {
 					System.out.println("Registrazione fallita");
+					mainFrame.createNotificationFrame("Registrazione non riuscita");
 				}
 				
 			}

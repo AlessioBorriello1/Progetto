@@ -9,6 +9,8 @@ import javax.swing.border.EtchedBorder;
 import java.awt.Color;
 import java.awt.Rectangle;
 import javax.swing.JButton;
+import javax.swing.JDialog;
+
 import java.awt.ComponentOrientation;
 import java.awt.Component;
 import javax.swing.border.BevelBorder;
@@ -475,4 +477,10 @@ public class MainFrame extends JFrame {
 		
 	}
 	
+	public void createNotificationFrame(String notification) {
+		
+		notificationFrame frame = new notificationFrame(notification, this);
+		frame.setVisible(true);
+		
+	}
 }
