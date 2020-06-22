@@ -22,7 +22,10 @@ import javax.swing.SwingConstants;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+
 public class MainController {
+	
+	static String URL = "jdbc:mysql://localhost:3306/progetto?autoReconnect=true&useSSL=false"; //URL del database
 	
 	private boolean loggedIn = false; //Utente ha fatto il login o meno
 	private JPanel currentPanel = null; //Pannello attualmente mostrato nel workPanel

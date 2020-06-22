@@ -24,7 +24,7 @@ public class UtenteDAO {
 			String q = "Select * from utente where (Idutente = '" + nomeUtente + "' OR Email = '" + nomeUtente + "') AND Password = '" + password + "'" ; //Inizializzo query
 			Utente u = new Utente(); //Instanzio nuovo utente
 			
-			String connectionURL = "jdbc:mysql://localhost:3306/progetto?autoReconnect=true&useSSL=false"; //URL di connessione
+			String connectionURL = MainController.URL; //URL di connessione
 
 	        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
 			Statement st = con.createStatement(); //Creo statement
@@ -84,7 +84,7 @@ public class UtenteDAO {
 				String q = "INSERT INTO utente(Idutente, Email, Password, NumeroRecensioni, NumeroLuoghi)\r\n" + 
 						"VALUES ('"+ nomeUtente +"','"+ email +"', '"+ password+ "','0','0');"; //Inizializzo query
 				
-				String connectionURL = "jdbc:mysql://localhost:3306/progetto?autoReconnect=true&useSSL=false"; //URL di connessione
+				String connectionURL = MainController.URL; //URL di connessione
 	
 		        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
 				Statement st = con.createStatement(); //Creo statement
@@ -114,7 +114,7 @@ public class UtenteDAO {
 			Class.forName("com.mysql.jdbc.Driver");
 			String q = "Select * from utente where Idutente = '" + nomeUtente + "' OR Email = '" + email + "'" ; //Inizializzo query
 			
-			String connectionURL = "jdbc:mysql://localhost:3306/progetto?autoReconnect=true&useSSL=false"; //URL di connessione
+			String connectionURL = MainController.URL; //URL di connessione
 
 	        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
 			Statement st = con.createStatement(); //Creo statement
