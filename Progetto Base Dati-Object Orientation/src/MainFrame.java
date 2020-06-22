@@ -65,6 +65,7 @@ public class MainFrame extends JFrame {
 		
 		
 		JPanel upperPanel = new JPanel(); //Nuovo pannello (Upper panel)
+		upperPanel.setName("upperPanel"); //Imposta nome
 		upperPanel.setBounds(0, 0, 1000, 30); //Posiziona upper panel
 		getContentPane().setLayout(null); //Imposta layout pannello principale
 		//Per poter trascinare la finestra
@@ -86,6 +87,7 @@ public class MainFrame extends JFrame {
 		
 		
 		JButton btnClose = new JButton(); //Nuovo bottone close
+		btnClose.setName("btnClose"); //Imposta nome
 		btnClose.setBounds(960, 0, 30, 30); //Posizione e dimensioni
 		//Impostazioni bottone close
 		btnClose.setContentAreaFilled(false); //Lascia trasparente il bottone (mostra solo icona di esso)
@@ -110,6 +112,7 @@ public class MainFrame extends JFrame {
 		
 		
 		JButton btnMinimize = new JButton(); //Nuovo bottone minimize
+		btnMinimize.setName("btnMinimize"); //Imposta nome
 		//Impostazioni bottone minimize
 		btnMinimize.setIcon(new ImageIcon(MainFrame.class.getResource("/icons/Minimize.png"))); //Imposta icona a "Minimize"
 		btnMinimize.setContentAreaFilled(false); //Lascia trasparente il bottone (mostra solo icona di esso)
@@ -133,6 +136,7 @@ public class MainFrame extends JFrame {
 		
 		
 		JTextPane txtpnTripadvisor = new JTextPane(); //Nuovo pannello di testo ("Titolo finestra")
+		txtpnTripadvisor.setName("txtpnTripadvisor"); //Imposta nome
 		//Impostazioni testo
 		txtpnTripadvisor.setFont(new Font("Tahoma", Font.BOLD, 20)); //Font
 		txtpnTripadvisor.setBounds(0, 0, 128, 30); //Posizione e dimensioni
@@ -145,12 +149,14 @@ public class MainFrame extends JFrame {
 		
 		
 		JPanel mainPanel = new JPanel(); //Nuovo pannello (Pannello principale in cui vi sono workPanel e dashboardPanel)
+		mainPanel.setName("mainPanel"); //Imposta nome
 		mainPanel.setBounds(10, 41, 980, 548); //Posizione e dimensioni
 		mainPanel.setBackground(getContentPane().getBackground()); //Imposta colore mainPanel (Uguale a quello dello sfondo del mainFrame)
 		getContentPane().add(mainPanel); //Aggiungi mainPanel al mainFrame
 		
 		
 		JPanel dashBoardPanel = new JPanel(); //Nuovo pannello (pannello dashboard (Alla sinistra del mainFrame))
+		dashBoardPanel.setName("dashBoardPanel"); //Imposta nome
 		dashBoardPanel.setBackground(controller.prussian); //Imposta colore dashBoardPanel
 		
 		
@@ -162,6 +168,7 @@ public class MainFrame extends JFrame {
 		
 		
 		JLabel labelProfilePic = new JLabel(""); //Nuovo label per l'immagine dell'utente
+		labelProfilePic.setName("labelProfilePic"); //Imposta nome
 		labelProfilePic.setHorizontalAlignment(SwingConstants.CENTER); //Allignment
 		//Costraints per limitarne la posizione in base al layout
 		sl_dashBoardPanel.putConstraint(SpringLayout.NORTH, labelProfilePic, 10, SpringLayout.NORTH, dashBoardPanel);
@@ -173,6 +180,7 @@ public class MainFrame extends JFrame {
 		
 		
 		JPanel panelInfoUtente = new JPanel(); //Nuovo label per info utente (se ha fatto il login)
+		panelInfoUtente.setName("panelInfoUtente"); //Imposta nome
 		panelInfoUtente.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
 		panelInfoUtente.setBackground(dashBoardPanel.getBackground()); //Colore background (Uguale a quello del pannello dove si trova(dashBoardPanel))
 		//Costraints per limitarne la posizione in base al layout
@@ -184,10 +192,12 @@ public class MainFrame extends JFrame {
 		dashBoardPanel.add(panelInfoUtente); //Aggiungi panelInfoUtente alla dashboard (dashBoardPanel)
 		
 		panelNotLogged = new JPanel(); //Nuovo pannello notLogged
+		panelNotLogged.setName("panelNotLogged"); //Imposta nome
 		panelNotLogged.setBackground(dashBoardPanel.getBackground()); //Colore background (Uguale a quello del pannello dove si trova(dashBoardPanel))
 		panelInfoUtente.add(panelNotLogged, "name_254773764256500"); //Aggiungi pannello al pannello panelInfoUtente
 		
 		JLabel lblNotLogged = new JLabel("Effettua il login"); //Nuovo label notLogged
+		lblNotLogged.setName("lblNotLogged"); //Imposta nome
 		lblNotLogged.setFont(new Font("Tahoma", Font.BOLD, 11)); //Imposta font
 		lblNotLogged.setBackground(panelInfoUtente.getBackground()); //Colore background (Uguale a quello del pannello dove si trova(panelInfoUtente))
 		lblNotLogged.setForeground(Color.CYAN); //Colore font
@@ -212,25 +222,27 @@ public class MainFrame extends JFrame {
 		panelNotLogged.setLayout(gl_panelNotLogged); //Imposta layout gl_panelNotLogged in panelNotLogged
 		
 		panelLogged = new JPanel(); //Nuovo pannello logged
+		panelLogged.setName("panelLogged"); //Imposta nome
 		panelInfoUtente.add(panelLogged, "name_254788425247100"); //Aggiungi pannello al pannello panelInfoUtente
 		panelLogged.setBackground(dashBoardPanel.getBackground()); //Colore background (Uguale a quello del pannello dove si trova(dashBoardPanel))
 		
 		JLabel lblNomeUtente = new JLabel("Nome utente:"); //Nuovo label Nome utente
-		lblNomeUtente.setName("lblNomeUtente"); //Dai nome al label per trovarlo poi
+		lblNomeUtente.setName("lblNomeUtente"); //Imposta nome
 		lblNomeUtente.setFont(new Font("Tahoma", Font.BOLD, 11)); //Imposta font
 		lblNomeUtente.setForeground(Color.CYAN); //Imposta colore font
 		
 		JLabel lblEmail = new JLabel("Email:"); //Nuovo label Email
-		lblEmail.setName("lblEmail"); //Dai nome al label per trovarlo poi
+		lblEmail.setName("lblEmail"); //Imposta nome
 		lblEmail.setFont(new Font("Tahoma", Font.BOLD, 11)); //Imposta font
 		lblEmail.setForeground(Color.CYAN); //Imposta colore font
 		
 		JLabel lblNumeroLuoghi = new JLabel("Numero luoghi:"); //Nuovo label Numero luoghi
-		lblNumeroLuoghi.setName("lblNumeroLuoghi"); //Dai nome al label per trovarlo poi
+		lblNumeroLuoghi.setName("lblNumeroLuoghi"); //Imposta nome
 		lblNumeroLuoghi.setFont(new Font("Tahoma", Font.BOLD, 11)); //Imposta font
 		lblNumeroLuoghi.setForeground(Color.CYAN); //Imposta colore font
 		
 		JButton btnUtenteSettings = new JButton(""); //Nuovo bottone per settare nome utente/ password dell'utente
+		btnUtenteSettings.setName("btnUtenteSettings"); //Imposta nome
 		GroupLayout gl_panelLogged = new GroupLayout(panelLogged); //GroupLayout per panelLogged (e salvato in gl_panelLogged)
 		//Allinea orizzontale
 		gl_panelLogged.setHorizontalGroup(
@@ -264,6 +276,7 @@ public class MainFrame extends JFrame {
 		
 		
 		JPanel panelControl = new JPanel(); //Nuovo pannello (sulla dashboard, dove si trovano i bottoni HOME/LOGIN etc)
+		panelControl.setName("panelControl"); //Imposta nome
 		//Costraints per limitarne la posizione in base al layout
 		sl_dashBoardPanel.putConstraint(SpringLayout.WEST, panelControl, 0, SpringLayout.WEST, labelProfilePic);
 		sl_dashBoardPanel.putConstraint(SpringLayout.EAST, panelControl, 0, SpringLayout.EAST, labelProfilePic);
@@ -277,6 +290,7 @@ public class MainFrame extends JFrame {
 		
 		
 		workPanel = new JPanel(); //Crea pannello di lavoro (già dichiarato come variabile privata fuori)
+		workPanel.setName("workPanel"); //Imposta nome
 		workPanel.setBackground(Color.LIGHT_GRAY); //Imposta colore
 		//Allinea orizzontale
 		gl_mainPanel.setHorizontalGroup(
@@ -303,6 +317,7 @@ public class MainFrame extends JFrame {
 		
 		
 		JButton buttonHome = new JButton(""); //Nuovo bottone Home
+		buttonHome.setName("buttonHome"); //Imposta nome
 		buttonHome.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); //Quando il mouse passa sopra rendi l'icona del mouse quella della mano
 		buttonHome.setIcon(new ImageIcon(MainFrame.class.getResource("/icons/buttonHome.png"))); //Imposta icona bottone a "buttonHome"
 		buttonHome.setBorder(null); //Nessun bordo
@@ -329,6 +344,7 @@ public class MainFrame extends JFrame {
 		
 		
 		JButton btnGestisciLocali = new JButton("Gestisci locali"); //Nuovo bottone Gestisci Locali
+		btnGestisciLocali.setName("btnGestisciLocali"); //Imposta nome
 		btnGestisciLocali.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); //Quando il mouse passa sopra rendi l'icona del mouse quella della mano
 		//Costraints per limitarne la posizione in base al layout
 		sl_panelControl.putConstraint(SpringLayout.NORTH, btnGestisciLocali, 46, SpringLayout.NORTH, panelControl);
@@ -344,6 +360,7 @@ public class MainFrame extends JFrame {
 		
 		
 		JButton btnGestisciRecensioni = new JButton("Gestisci recensioni"); //Nuovo bottone Gestisci Recensioni
+		btnGestisciRecensioni.setName("btnGestisciRecensioni"); //Imposta nome
 		btnGestisciRecensioni.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); //Quando il mouse passa sopra rendi l'icona del mouse quella della mano
 		//Costraints per limitarne la posizione in base al layout
 		sl_panelControl.putConstraint(SpringLayout.NORTH, btnGestisciRecensioni, 82, SpringLayout.NORTH, panelControl);
@@ -361,6 +378,7 @@ public class MainFrame extends JFrame {
 		
 		
 		btnRegistrati = new JButton("Registrati"); //Nuovo bottone Registrati
+		btnRegistrati.setName("btnRegistrati"); //Imposta nome
 		btnRegistrati.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); //Quando il mouse passa sopra rendi l'icona del mouse quella della mano
 		btnRegistrati.setEnabled(!controller.isLoggedIn()); //Abilita solo se IsLoggedIn del controller = 0
 		btnRegistrati.setVisible(btnRegistrati.isEnabled()); //Rendi visibile solo se è abilitato
@@ -374,6 +392,7 @@ public class MainFrame extends JFrame {
 		
 		
 		buttonLogin = new JButton(); //Nuovo bottone Login (o logout)
+		buttonLogin.setName("buttonLogin"); //Imposta nome
 		buttonLogin.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); //Quando il mouse passa sopra rendi l'icona del mouse quella della mano
 		buttonLogin.setIcon(new ImageIcon(MainFrame.class.getResource("/icons/buttonLogin.png"))); //Per anteprima del bottone nella tab design (non necessario)
 		buttonLogin.setBorder(null); //Nessun bordo
@@ -431,6 +450,7 @@ public class MainFrame extends JFrame {
 		
 		mainPanel.setLayout(gl_mainPanel); //Imposta layout gl_mainPanel (Salvato prima, riga 150) in mainPanel
 		
+		controller.getComponentByName(this, "workPanel");
 	}
 	
 	/**

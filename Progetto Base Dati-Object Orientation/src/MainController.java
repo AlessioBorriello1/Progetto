@@ -7,6 +7,8 @@ import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
@@ -127,16 +129,53 @@ public class MainController {
 		
 	}
 
-	
 	//Getter per variabile currentPanel
 	public JPanel getCurrentPanel() {
 		return currentPanel;
 	}
 	
 	//Setter per variabile currentPanel
-
 	public void setCurrentPanel(JPanel currentPanel) {
 		this.currentPanel = currentPanel;
+	}
+
+	/**
+	 * Cerca una component nel container specificato, se la trova la restituisce
+	 * @param container Container in cui cercare la component
+	 * @param nome Nome della component da cercare
+	 * @return Component cercata o null
+	 */
+	public Component getComponentByName(Container container, String nome) {
+		
+		List<Component> lista = getAllComponents(container); //Prendi tutte le componenti del container
+		
+		for(Component c: lista) { //Scorrile tutte
+			System.out.println(c.getName());
+			if(c.getName() != null && c.getName().contentEquals(nome)) { //Componente trovata
+				return c; //Restituiscila
+			}
+		}
+		
+		return null;
+		
+	}
+
+	/**
+	 * Crea una lista con tutte le componenti presenti nel container specificato
+	 * @param container Container di cui vogliamo sapere le components
+	 * @return lista di tutte le components presenti nel container specificato
+	 */
+	public List<Component> getAllComponents(Container container) {
+		
+	    Component[] components = container.getComponents(); //Prendi tutte le componenti del contenitore più esterno
+	    List<Component> listaComponents = new ArrayList<Component>(); //Crea lista che contiene il tipo Component
+	    for (Component c: components) { //Per tutte le componenti in components
+	    	listaComponents.add(c); //Aggiungi la component alla lista
+	        if (c instanceof Container) //Se la component è a sua volta un container, allora ricorsivamente
+	        	listaComponents.addAll(getAllComponents((Container) c)); //Aggiungi alla lista tutti gli elementi aggiunti dalla chiamata ricorsiva
+	    }
+	    return listaComponents; //Restituisci lista
+	    
 	}
 
 }
