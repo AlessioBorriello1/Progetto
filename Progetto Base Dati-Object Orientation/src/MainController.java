@@ -103,7 +103,7 @@ public class MainController {
 			setLoggedIn(true); //Imposta la variabile del controller loggedIn a vero
 			mainFrame.refreshaLoginButton(); //Ricarica il bottone di login/logout del mainFrame per fargli mostrare l'icona corretta
 			mainFrame.refreshaPannelloInfo(); //Cambia pannello info utente se sono loggato o meno
-			mainFrame.cambiaPannelloLavoroAHomePanel(mainFrame.getWorkPanel()); //Vai a pannello HomePanel
+			mainFrame.cambiaPannelloLavoroAHomePanel((JPanel)getComponentByName(mainFrame, "workPanel")); //Vai a pannello HomePanel
 			
 		}
 		
@@ -150,7 +150,6 @@ public class MainController {
 		List<Component> lista = getAllComponents(container); //Prendi tutte le componenti del container
 		
 		for(Component c: lista) { //Scorrile tutte
-			System.out.println(c.getName());
 			if(c.getName() != null && c.getName().contentEquals(nome)) { //Componente trovata
 				return c; //Restituiscila
 			}

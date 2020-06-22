@@ -47,12 +47,6 @@ public class MainFrame extends JFrame {
 	private MainController controller; //Controller che chiama il mainFrame
 	private Point mouseClickPoint; //Posizione mouse (per trascinare finestra)
 	
-	private JButton btnRegistrati; //Bottone registrati (per far cambiare alcune sue proprietà da altre classi)
-	private JButton buttonLogin; //Bottone login (per far cambiare alcune sue proprietà da altre classi)
-	private JPanel workPanel; //Pannello workPanel (Pannello dove viene mostrata l'attività corrente) (Per poter chiamare alcune funzioni che richiedono workPanel)
-	private JPanel panelNotLogged;
-	private JPanel panelLogged;
-	
 	public MainFrame(MainController controller) {
 		
 		this.controller = controller; //Collega variabile controller al controller che ha creato il mainFrame
@@ -191,7 +185,7 @@ public class MainFrame extends JFrame {
 		panelInfoUtente.setLayout(new CardLayout(0, 0)); //Imposta layout
 		dashBoardPanel.add(panelInfoUtente); //Aggiungi panelInfoUtente alla dashboard (dashBoardPanel)
 		
-		panelNotLogged = new JPanel(); //Nuovo pannello notLogged
+		JPanel panelNotLogged = new JPanel(); //Nuovo pannello notLogged
 		panelNotLogged.setName("panelNotLogged"); //Imposta nome
 		panelNotLogged.setBackground(dashBoardPanel.getBackground()); //Colore background (Uguale a quello del pannello dove si trova(dashBoardPanel))
 		panelInfoUtente.add(panelNotLogged, "name_254773764256500"); //Aggiungi pannello al pannello panelInfoUtente
@@ -221,7 +215,7 @@ public class MainFrame extends JFrame {
 		);
 		panelNotLogged.setLayout(gl_panelNotLogged); //Imposta layout gl_panelNotLogged in panelNotLogged
 		
-		panelLogged = new JPanel(); //Nuovo pannello logged
+		JPanel panelLogged = new JPanel(); //Nuovo pannello logged
 		panelLogged.setName("panelLogged"); //Imposta nome
 		panelInfoUtente.add(panelLogged, "name_254788425247100"); //Aggiungi pannello al pannello panelInfoUtente
 		panelLogged.setBackground(dashBoardPanel.getBackground()); //Colore background (Uguale a quello del pannello dove si trova(dashBoardPanel))
@@ -289,7 +283,7 @@ public class MainFrame extends JFrame {
 		panelControl.setLayout(sl_panelControl); //Imposta lo SpringLayout sl_panelControl per il panelControl
 		
 		
-		workPanel = new JPanel(); //Crea pannello di lavoro (già dichiarato come variabile privata fuori)
+		JPanel workPanel = new JPanel(); //Crea pannello di lavoro (già dichiarato come variabile privata fuori)
 		workPanel.setName("workPanel"); //Imposta nome
 		workPanel.setBackground(Color.LIGHT_GRAY); //Imposta colore
 		//Allinea orizzontale
@@ -377,7 +371,7 @@ public class MainFrame extends JFrame {
 		panelControl.add(btnGestisciRecensioni); //Aggiungi bottone Gestisci Recensioni al pannello di controllo
 		
 		
-		btnRegistrati = new JButton("Registrati"); //Nuovo bottone Registrati
+		JButton btnRegistrati = new JButton("Registrati"); //Nuovo bottone Registrati
 		btnRegistrati.setName("btnRegistrati"); //Imposta nome
 		btnRegistrati.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); //Quando il mouse passa sopra rendi l'icona del mouse quella della mano
 		btnRegistrati.setEnabled(!controller.isLoggedIn()); //Abilita solo se IsLoggedIn del controller = 0
@@ -391,7 +385,7 @@ public class MainFrame extends JFrame {
 		panelControl.add(btnRegistrati); //Aggiungi bottone Registrati al pannello di controllo
 		
 		
-		buttonLogin = new JButton(); //Nuovo bottone Login (o logout)
+		JButton buttonLogin = new JButton(); //Nuovo bottone Login (o logout)
 		buttonLogin.setName("buttonLogin"); //Imposta nome
 		buttonLogin.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); //Quando il mouse passa sopra rendi l'icona del mouse quella della mano
 		buttonLogin.setIcon(new ImageIcon(MainFrame.class.getResource("/icons/buttonLogin.png"))); //Per anteprima del bottone nella tab design (non necessario)
@@ -450,7 +444,6 @@ public class MainFrame extends JFrame {
 		
 		mainPanel.setLayout(gl_mainPanel); //Imposta layout gl_mainPanel (Salvato prima, riga 150) in mainPanel
 		
-		controller.getComponentByName(this, "workPanel");
 	}
 	
 	/**
@@ -567,6 +560,9 @@ public class MainFrame extends JFrame {
 	 * Ricarica bottone login/logout per mostrare la giusta icona (Se di login o di logout)
 	 */
 	public void refreshaLoginButton() {
+
+		JButton btnRegistrati = (JButton)controller.getComponentByName(this, "btnRegistrati"); //Trova le components
+		JButton buttonLogin = (JButton)controller.getComponentByName(this, "buttonLogin");
 		
 		btnRegistrati.setEnabled(!controller.isLoggedIn()); //Abilita il bottone registrati se non sono loggato e lo disattiva se sono loggato
 		btnRegistrati.setVisible(btnRegistrati.isEnabled()); //Rende visibile il bottone registrati solo se è abilitato
@@ -586,6 +582,9 @@ public class MainFrame extends JFrame {
 	public void refreshaPannelloInfo() {
 		
 		if(controller.isLoggedIn()) { //Se sono loggato
+			
+			JPanel panelNotLogged = (JPanel)controller.getComponentByName(this,  "panelNotLogged"); //Trova le components
+			JPanel panelLogged = (JPanel)controller.getComponentByName(this,  "panelLogged");
 			
 			panelNotLogged.setVisible(false); //Rendi il pannello notLogged invisibile
 			panelNotLogged.setEnabled(false); //Rendi il pannello notLogged inattivo
@@ -608,6 +607,9 @@ public class MainFrame extends JFrame {
 			
 		}else { //Se non sono loggato
 			
+			JPanel panelNotLogged = (JPanel)controller.getComponentByName(this,  "panelNotLogged"); //Trova le components
+			JPanel panelLogged = (JPanel)controller.getComponentByName(this,  "panelLogged");
+			
 			panelLogged.setVisible(false); //Rendi il pannello logged invisibile
 			panelLogged.setEnabled(false);  //Rendi il pannello logged inattivo
 			
@@ -617,13 +619,8 @@ public class MainFrame extends JFrame {
 		}
 		
 	}
-	
 	//Getter per variabile workPanel (P)
-	public JPanel getWorkPanel() {
-		
-		return this.workPanel;
-		
-	}
+
 	
 	public void createNotificationFrame(String notification) {
 		
