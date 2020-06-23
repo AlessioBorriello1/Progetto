@@ -15,6 +15,8 @@ public class PanelImpostazioniAggiuntiveMotel extends JPanel {
 	public PanelImpostazioniAggiuntiveMotel() {
 		setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		
+		setName("panelImpostazioniAggiuntiveMotel");
+		
 		JLabel lblImpostazioniAggiuntiveMotel = new JLabel("Impostazioni aggiuntive motel");
 		lblImpostazioniAggiuntiveMotel.setFont(new Font("Tahoma", Font.BOLD, 14));
 		

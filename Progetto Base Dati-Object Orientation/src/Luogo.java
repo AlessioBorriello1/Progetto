@@ -71,10 +71,11 @@ public class Luogo {
 	public Luogo creaLuogo(String nome, String indirizzo, double telefono, String proprietario, String tipoAttivita, String specializzazione, JPanel pannelloImpostazioniAggiuntive) {
 		
 		String pannello = pannelloImpostazioniAggiuntive.getName();
+		System.out.println(pannello);
 		int i;
 		Luogo l = null;
 		
-		if(pannello.contentEquals("panelImpostazioniAggiuntivePizzeria") || pannello.contentEquals("panelImpostazioniAggiuntiveBraceria") || pannello.contentEquals("panelImpostazioniAggiuntivePub")) {
+		if(pannello.contentEquals("panelImpostazioniAggiuntivePizzeria") || pannello.contentEquals("panelImpostazioniAggiuntiveBracieria") || pannello.contentEquals("panelImpostazioniAggiuntivePub")) {
 			i = 0;
 		}else if(pannello.contentEquals("panelImpostazioniAggiuntiveHotel") || pannello.contentEquals("panelImpostazioniAggiuntiveBB") || pannello.contentEquals("panelImpostazioniAggiuntiveMotel")) {
 			i = 1;
@@ -84,8 +85,8 @@ public class Luogo {
 		
 		switch(i) {
 		case 0:{
-			LuogoTipoRistorante luogo = new LuogoTipoRistorante();
-			l = luogo.creaLuogoTipoRistorante(nome, indirizzo, telefono, proprietario, tipoAttivita, specializzazione, pannelloImpostazioniAggiuntive);
+			Ristorante luogo = new Ristorante();
+			l = luogo.creaRistorante(nome, indirizzo, telefono, proprietario, tipoAttivita, specializzazione, pannelloImpostazioniAggiuntive);
 		}break;
 		case 1:{
 			//Caso alloggio
@@ -94,8 +95,8 @@ public class Luogo {
 			//Caso attrazione
 		}break;
 		default:{
-			LuogoTipoRistorante luogo = new LuogoTipoRistorante();
-			l = luogo.creaLuogoTipoRistorante(nome, indirizzo, telefono, proprietario, tipoAttivita, specializzazione, pannelloImpostazioniAggiuntive);
+			Ristorante luogo = new Ristorante();
+			l = luogo.creaRistorante(nome, indirizzo, telefono, proprietario, tipoAttivita, specializzazione, pannelloImpostazioniAggiuntive);
 		}
 		}
 		

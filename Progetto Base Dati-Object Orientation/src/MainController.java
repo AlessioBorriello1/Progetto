@@ -148,7 +148,6 @@ public class MainController {
 			return false;
 		}else {
 			System.out.println("Riuscito");
-			System.out.println(l.getNome());
 			return true;
 		}
 		

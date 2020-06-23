@@ -13,6 +13,8 @@ public class PanelImpostazioniAggiuntivePub extends JPanel {
 	public PanelImpostazioniAggiuntivePub() {
 		setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		
+		setName("panelImpostazioniAggiuntivePub");
+		
 		JLabel lblImpostazioniAggiuntivePub = new JLabel("Impostazioni aggiuntive pub");
 		lblImpostazioniAggiuntivePub.setFont(new Font("Tahoma", Font.BOLD, 14));
 		
