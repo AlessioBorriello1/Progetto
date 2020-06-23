@@ -40,6 +40,8 @@ public class LuogoTipoRistorante extends Luogo{
 		switch(s) {
 		case "panelImpostazioniAggiuntivePizzeria":{
 			System.out.println("Pizzeria");
+			Pizzeria l = new Pizzeria();
+			
 		}break;
 		case "panelImpostazioniAggiuntiveBraceria":{
 			System.out.println("Braceria");

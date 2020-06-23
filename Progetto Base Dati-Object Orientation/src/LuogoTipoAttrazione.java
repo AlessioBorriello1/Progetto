@@ -16,11 +16,14 @@ public class LuogoTipoAttrazione extends Luogo{
 		String s = pannelloImpostazioniAggiuntive.getName();
 		
 		switch(s) {
-		case "panelImpostazioniAggiuntiveIntrattenimento":{
-			System.out.println("Intrattenimento");
+		case "panelImpostazioniAggiuntiveMuseo":{
+			System.out.println("Museo");
 		}break;
-		case "panelImpostazioniAggiuntiveCulturale":{
-			System.out.println("Culturale");
+		case "panelImpostazioniAggiuntiveZoo":{
+			System.out.println("Zoo");
+		}break;
+		case "panelImpostazioniAggiuntiveParco":{
+			System.out.println("Parco");
 		}break;
 		}
 		
