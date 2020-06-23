@@ -133,6 +133,24 @@ public class MainController {
 		
 	}
 
+	public boolean creaLuogo(MainFrame mainFrame, String nome, String indirizzo, int telefono, String proprietario, String tipoAttivita, String specializzazione, JPanel pannelloImpostazioniAggiuntive) {
+		
+		Luogo l = new Luogo();
+		if(nome.contentEquals("") || indirizzo.contentEquals("") || proprietario.contentEquals("") || telefono == -1) {
+			mainFrame.createNotificationFrame("Qualcosa è andato storto");
+			return false;
+		}
+		
+		l = l.creaLuogo(nome, indirizzo, telefono, proprietario, tipoAttivita, specializzazione, pannelloImpostazioniAggiuntive);
+		
+		if(l == null) {
+			return false;
+		}else {
+			return true;
+		}
+		
+	}
+	
 	//Getter per variabile currentPanel
 	public JPanel getCurrentPanel() {
 		return currentPanel;

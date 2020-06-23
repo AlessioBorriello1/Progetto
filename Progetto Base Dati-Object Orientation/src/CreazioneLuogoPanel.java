@@ -15,8 +15,12 @@ import java.awt.CardLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.event.PopupMenuListener;
+
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.border.LineBorder;
+import javax.swing.JFormattedTextField;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class CreazioneLuogoPanel extends JPanel {
 
@@ -40,6 +44,27 @@ public class CreazioneLuogoPanel extends JPanel {
 		textFieldIndirizzo.setColumns(10);
 		
 		JTextField textFieldTelefono = new JTextField();
+		textFieldTelefono.addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent e) {
+				String s = textFieldTelefono.getText();
+				int l = s.length();
+				char c = e.getKeyChar();
+				
+				if(c >= '0' && c <= '9') {
+					if(l < 10) {
+						textFieldTelefono.setEditable(true);
+					}else {
+						textFieldTelefono.setEditable(false);
+					}
+				}else {
+					if(e.getKeyCode() == KeyEvent.VK_BACK_SPACE || e.getKeyCode() == KeyEvent.VK_DELETE) {
+						textFieldTelefono.setEditable(true);
+					}else {
+						textFieldTelefono.setEditable(false);
+					}
+				}
+			}
+		});
 		textFieldTelefono.setColumns(10);
 		
 		JTextField textFieldNomePropretario = new JTextField();
@@ -103,9 +128,13 @@ public class CreazioneLuogoPanel extends JPanel {
 		JPanel panelAttributiAggiuntivi = new JPanel();
 		panelAttributiAggiuntivi.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panelAttributiAggiuntivi.setName("panelAttributiAggiuntivi");
+		
+		JButton btnCreaLuogo = new JButton("Crea luogo");
+		
+
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
+			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
@@ -128,9 +157,11 @@ public class CreazioneLuogoPanel extends JPanel {
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
 								.addComponent(comboBoxTipoAttivita, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 								.addComponent(textFieldNomePropretario, GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
-								.addComponent(comboBoxSpecializzazione, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE))))
+								.addComponent(comboBoxSpecializzazione, 0, 207, Short.MAX_VALUE))))
 					.addGap(18)
-					.addComponent(panelAttributiAggiuntivi, GroupLayout.PREFERRED_SIZE, 338, GroupLayout.PREFERRED_SIZE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+						.addComponent(btnCreaLuogo, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(panelAttributiAggiuntivi, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 338, Short.MAX_VALUE))
 					.addGap(27))
 		);
 		groupLayout.setVerticalGroup(
@@ -163,7 +194,9 @@ public class CreazioneLuogoPanel extends JPanel {
 								.addComponent(comboBoxSpecializzazione, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 								.addComponent(labelSpecializzazione, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)))
 						.addComponent(panelAttributiAggiuntivi, GroupLayout.PREFERRED_SIZE, 255, GroupLayout.PREFERRED_SIZE))
-					.addGap(223))
+					.addGap(44)
+					.addComponent(btnCreaLuogo)
+					.addGap(153))
 		);
 		panelAttributiAggiuntivi.setLayout(new CardLayout(0, 0));
 		
@@ -216,35 +249,30 @@ public class CreazioneLuogoPanel extends JPanel {
 		);
 		panelImpostazioniAggiuntiveBraceria.setLayout(gl_panelImpostazioniAggiuntiveBraceria);
 		
-		JPanel panelImpostazioniAggiuntiveRistorante = new JPanel();
-		panelImpostazioniAggiuntiveRistorante.setEnabled(false);
-		panelImpostazioniAggiuntiveRistorante.setVisible(false);
-		panelAttributiAggiuntivi.add(panelImpostazioniAggiuntiveRistorante, "panelImpostazioniAggiuntiveRistorante");
-		panelImpostazioniAggiuntiveRistorante.setName("panelImpostazioniAggiuntiveRistorante");
+		JPanel panelImpostazioniAggiuntivePub = new JPanel();
+		panelImpostazioniAggiuntivePub.setEnabled(false);
+		panelImpostazioniAggiuntivePub.setVisible(false);
+		panelAttributiAggiuntivi.add(panelImpostazioniAggiuntivePub, "panelImpostazioniAggiuntivePub");
+		panelImpostazioniAggiuntivePub.setName("panelImpostazioniAggiuntivePub");
 		
-		JLabel lblImpostazioniAggiuntiveRistorante = new JLabel("Impostazioni aggiuntive ristorante:");
-		lblImpostazioniAggiuntiveRistorante.setFont(new Font("Tahoma", Font.BOLD, 14));
-		GroupLayout gl_panelImpostazioniAggiuntiveRistorante = new GroupLayout(panelImpostazioniAggiuntiveRistorante);
-		gl_panelImpostazioniAggiuntiveRistorante.setHorizontalGroup(
-			gl_panelImpostazioniAggiuntiveRistorante.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelImpostazioniAggiuntiveRistorante.createSequentialGroup()
+		JLabel lblImpostazioniAggiuntivePub = new JLabel("Impostazioni aggiuntive pub:");
+		lblImpostazioniAggiuntivePub.setFont(new Font("Tahoma", Font.BOLD, 14));
+		GroupLayout gl_panelImpostazioniAggiuntivePub = new GroupLayout(panelImpostazioniAggiuntivePub);
+		gl_panelImpostazioniAggiuntivePub.setHorizontalGroup(
+			gl_panelImpostazioniAggiuntivePub.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelImpostazioniAggiuntivePub.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(lblImpostazioniAggiuntiveRistorante, GroupLayout.PREFERRED_SIZE, 318, GroupLayout.PREFERRED_SIZE)
+					.addComponent(lblImpostazioniAggiuntivePub, GroupLayout.PREFERRED_SIZE, 318, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
-		gl_panelImpostazioniAggiuntiveRistorante.setVerticalGroup(
-			gl_panelImpostazioniAggiuntiveRistorante.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelImpostazioniAggiuntiveRistorante.createSequentialGroup()
+		gl_panelImpostazioniAggiuntivePub.setVerticalGroup(
+			gl_panelImpostazioniAggiuntivePub.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelImpostazioniAggiuntivePub.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(lblImpostazioniAggiuntiveRistorante, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
+					.addComponent(lblImpostazioniAggiuntivePub, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap(168, Short.MAX_VALUE))
 		);
-		panelImpostazioniAggiuntiveRistorante.setLayout(gl_panelImpostazioniAggiuntiveRistorante);
-		
-		JPanel panelNessunaImpostazioneAggiuntiva = new JPanel();
-		panelNessunaImpostazioneAggiuntiva.setEnabled(false);
-		panelNessunaImpostazioneAggiuntiva.setVisible(false);
-		panelNessunaImpostazioneAggiuntiva.setName("panelNessunaImpostazioneAggiuntiva");
+		panelImpostazioniAggiuntivePub.setLayout(gl_panelImpostazioniAggiuntivePub);
 		
 		JPanel panelImpostazioniAggiuntiveHotel = new JPanel();
 		panelImpostazioniAggiuntiveHotel.setEnabled(false);
@@ -362,30 +390,15 @@ public class CreazioneLuogoPanel extends JPanel {
 					.addContainerGap(225, Short.MAX_VALUE))
 		);
 		panelImpostazioniAggiuntiveCulturale.setLayout(gl_panelImpostazioniAggiuntiveCulturale);
-		panelAttributiAggiuntivi.add(panelNessunaImpostazioneAggiuntiva, "name_304077949539800");
-		
-		JLabel lblNessunaImpostazioneAggiuntiva = new JLabel("Nessuna impostazione aggiuntiva");
-		lblNessunaImpostazioneAggiuntiva.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNessunaImpostazioneAggiuntiva.setFont(new Font("Tahoma", Font.BOLD, 14));
-		GroupLayout gl_panelNessunaImpostazioneAggiuntiva = new GroupLayout(panelNessunaImpostazioneAggiuntiva);
-		gl_panelNessunaImpostazioneAggiuntiva.setHorizontalGroup(
-			gl_panelNessunaImpostazioneAggiuntiva.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelNessunaImpostazioneAggiuntiva.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblNessunaImpostazioneAggiuntiva, GroupLayout.PREFERRED_SIZE, 318, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
-		gl_panelNessunaImpostazioneAggiuntiva.setVerticalGroup(
-			gl_panelNessunaImpostazioneAggiuntiva.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelNessunaImpostazioneAggiuntiva.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblNessunaImpostazioneAggiuntiva, GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-					.addContainerGap())
-		);
-		panelNessunaImpostazioneAggiuntiva.setLayout(gl_panelNessunaImpostazioneAggiuntiva);
 		setLayout(groupLayout);
 	
-		controller.getAllComponents(this);
+		btnCreaLuogo.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				String s = textFieldTelefono.getText();
+				int numero = (s.length() == 10) ? Integer.parseInt(s) : -1;
+				controller.creaLuogo(mainFrame, textFieldNome.getText(), textFieldIndirizzo.getText(), numero, textFieldNomePropretario.getText(), comboBoxTipoAttivita.getSelectedItem().toString(), comboBoxSpecializzazione.getSelectedItem().toString(), currentImpostazioniAggiuntivePanel);
+			}
+		});
 	}
 	
 	public void refreshaComboBoxSpecializzazione(JComboBox box, int index) {
@@ -396,7 +409,7 @@ public class CreazioneLuogoPanel extends JPanel {
 		case 0:{
 			box.addItem("Pizzeria");
 			box.addItem("Braceria");
-			box.addItem("Ristorante");
+			box.addItem("Pub");
 		}break;
 		case 1:{
 			box.addItem("Hotel");
@@ -410,7 +423,7 @@ public class CreazioneLuogoPanel extends JPanel {
 		default:{
 			box.addItem("Pizzeria");
 			box.addItem("Braceria");
-			box.addItem("Ristorante");
+			box.addItem("Pub");
 		}break;
 		}
 		
@@ -453,8 +466,8 @@ public class CreazioneLuogoPanel extends JPanel {
 				currentPanel = panel; //Imposta il pannello attuale al nuovo pannello
 			}
 		}break;
-		case "Ristorante":{ //Se ristorante è selezionato
-			JPanel panel = (JPanel)controller.getComponentByName(this, "panelImpostazioniAggiuntiveRistorante");
+		case "Pub":{ //Se ristorante è selezionato
+			JPanel panel = (JPanel)controller.getComponentByName(this, "panelImpostazioniAggiuntivePub");
 			if(currentPanel != null && currentPanel != panel) {
 				currentPanel.setVisible(false); //Rendi il pannello attuale invisibile
 				currentPanel.setEnabled(false); //Rendi il pannello attuale inattivo
@@ -542,5 +555,4 @@ public class CreazioneLuogoPanel extends JPanel {
 		return currentPanel; //Aggiorna il pannello attuale
 		
 	}
-
 }
