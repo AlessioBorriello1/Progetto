@@ -174,6 +174,7 @@ public class MainController {
 	    List<Component> listaComponents = new ArrayList<Component>(); //Crea lista che contiene il tipo Component
 	    for (Component c: components) { //Per tutte le componenti in components
 	    	listaComponents.add(c); //Aggiungi la component alla lista
+	    	//System.out.println(c.getName()); //Stampa nome (per debug)
 	        if (c instanceof Container) //Se la component è a sua volta un container, allora ricorsivamente
 	        	listaComponents.addAll(getAllComponents((Container) c)); //Aggiungi alla lista tutti gli elementi aggiunti dalla chiamata ricorsiva
 	    }

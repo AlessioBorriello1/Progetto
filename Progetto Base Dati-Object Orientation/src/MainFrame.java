@@ -452,7 +452,6 @@ public class MainFrame extends JFrame {
 		
 		
 		mainPanel.setLayout(gl_mainPanel); //Imposta layout gl_mainPanel (Salvato prima, riga 150) in mainPanel
-		
 	}
 	
 	/**
@@ -652,7 +651,10 @@ public class MainFrame extends JFrame {
 	}
 	//Getter per variabile workPanel (P)
 
-	
+	/**
+	 * Crea una finestra di notifica che va chiusa prima di poter tornare al mainFrame
+	 * @param notification Stringa da mostrare nella notifica
+	 */
 	public void createNotificationFrame(String notification) {
 		
 		notificationFrame frame = new notificationFrame(notification, this);
