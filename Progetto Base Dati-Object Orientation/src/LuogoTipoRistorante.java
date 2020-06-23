@@ -41,17 +41,25 @@ public class LuogoTipoRistorante extends Luogo{
 		case "panelImpostazioniAggiuntivePizzeria":{
 			System.out.println("Pizzeria");
 			Pizzeria l = new Pizzeria();
-			
-		}break;
+			l = l.creaPizzeria(nome, indirizzo, telefono, proprietario, tipoAttivita, specializzazione, pannelloImpostazioniAggiuntive);
+			return l;
+		}
 		case "panelImpostazioniAggiuntiveBraceria":{
 			System.out.println("Braceria");
-		}break;
+			Pizzeria l = new Pizzeria();
+			l = l.creaPizzeria(nome, indirizzo, telefono, proprietario, tipoAttivita, specializzazione, pannelloImpostazioniAggiuntive);
+			return l;
+		}
 		case "panelImpostazioniAggiuntivePub":{
 			System.out.println("Pub");
-		}break;
+			Pizzeria l = new Pizzeria();
+			l = l.creaPizzeria(nome, indirizzo, telefono, proprietario, tipoAttivita, specializzazione, pannelloImpostazioniAggiuntive);
+			return l;
+		}
 		}
 		
 		return null;
+	
 	}
 	
 }

@@ -72,7 +72,7 @@ public class Luogo {
 		
 		String pannello = pannelloImpostazioniAggiuntive.getName();
 		int i;
-		Luogo l;
+		Luogo l = null;
 		
 		if(pannello.contentEquals("panelImpostazioniAggiuntivePizzeria") || pannello.contentEquals("panelImpostazioniAggiuntiveBraceria") || pannello.contentEquals("panelImpostazioniAggiuntivePub")) {
 			i = 0;
@@ -101,7 +101,7 @@ public class Luogo {
 		}
 		}
 		
-		return null;
+		return l;
 	}
 
 }

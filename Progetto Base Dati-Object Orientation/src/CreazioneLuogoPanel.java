@@ -51,7 +51,7 @@ public class CreazioneLuogoPanel extends JPanel {
 				char c = e.getKeyChar();
 				
 				if(c >= '0' && c <= '9') {
-					if(l < 10) {
+					if(l < 8) {
 						textFieldTelefono.setEditable(true);
 					}else {
 						textFieldTelefono.setEditable(false);
@@ -420,7 +420,7 @@ public class CreazioneLuogoPanel extends JPanel {
 		btnCreaLuogo.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				String s = textFieldTelefono.getText();
-				int numero = (s.length() == 10) ? Integer.parseInt(s) : -1;
+				int numero = (s.length() == 8) ? Integer.parseInt(s) : -1;
 				controller.creaLuogo(mainFrame, textFieldNome.getText(), textFieldIndirizzo.getText(), numero, textFieldNomePropretario.getText(), comboBoxTipoAttivita.getSelectedItem().toString(), comboBoxSpecializzazione.getSelectedItem().toString(), currentImpostazioniAggiuntivePanel);
 			}
 		});

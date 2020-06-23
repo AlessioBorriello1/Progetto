@@ -144,8 +144,11 @@ public class MainController {
 		l = l.creaLuogo(nome, indirizzo, telefono, proprietario, tipoAttivita, specializzazione, pannelloImpostazioniAggiuntive);
 		
 		if(l == null) {
+			System.out.println("Fallito");
 			return false;
 		}else {
+			System.out.println("Riuscito");
+			System.out.println(l.getNome());
 			return true;
 		}
 		
