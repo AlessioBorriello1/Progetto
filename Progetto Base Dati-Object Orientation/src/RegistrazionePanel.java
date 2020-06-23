@@ -70,7 +70,7 @@ public class RegistrazionePanel extends JPanel {
 				String email = emailField.getText(); //Prendi email dal rispettivo campo
 				String password = String.valueOf(passwordField.getPassword()); //Prendi password dal rispettivo campo
 				
-				if(controller.registrazioneButtonOnRegistrazionePanelPressed(nomeUtente, password, email, mainFrame)) {
+				if(controller.registrazione(nomeUtente, password, email, mainFrame)) {
 					mainFrame.createNotificationFrame("Registrazione riuscita, esegui il login con quei dati");
 					mainFrame.cambiaPannelloLavoroALoginPanel(workPanel);//Vai a pannello login
 				}else {

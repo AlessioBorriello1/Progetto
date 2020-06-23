@@ -416,6 +416,13 @@ public class CreazioneLuogoPanel extends JPanel {
 		
 	}
 
+	/**
+	 * Ricarica il pannello delle impostazioni aggiuntive per mostrare le corrette opzioni
+	 * @param box comboBox delle specializzazioni
+	 * @param index index della specializzazione scelta
+	 * @param currentPanel pannello che si sta mostrando attualmente come pannello delle impostazioni aggiuntive
+	 * @return nuovo pannello impostazioni aggiuntive appena settato
+	 */
 	public JPanel refreshaPannelloImpostazioniAggiuntive(JComboBox box, int index, JPanel currentPanel) {
 		
 		String item = box.getItemAt(index).toString(); //Crea stringa con la selezione della combobox della specializzazione

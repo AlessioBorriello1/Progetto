@@ -94,7 +94,7 @@ public class MainController {
 	 * @param password Password corrispondente a Nome Utente o Email da cercare nel database
 	 * @param mainFrame Frame applicazione per aver accesso ad alcune delle sue funzioni
 	 */
-	public void loginButtonOnLoginPanelPressed(String nomeUtente, String password, MainFrame mainFrame) {
+	public void login(String nomeUtente, String password, MainFrame mainFrame) {
 		
 		UtenteDAO dao = new UtenteDAO(); //Istanzia un UtenteDAO per eseguire la ricerca
 		Utente u = dao.getUtente(nomeUtente, password); //Funzione UtenteDAO che restituisce (se lo trova) un utente
@@ -122,7 +122,7 @@ public class MainController {
 	 * @param mainFrame Frame applicazione per aver accesso ad alcune delle sue funzioni
 	 * @return Boolean se l'operazione è riuscita o meno
 	 */
-	public boolean registrazioneButtonOnRegistrazionePanelPressed(String nomeUtente, String password, String email, MainFrame mainFrame) {
+	public boolean registrazione(String nomeUtente, String password, String email, MainFrame mainFrame) {
 		
 		UtenteDAO dao = new UtenteDAO(); //Istanzia un UtenteDAO per eseguire la ricerca
 		if(dao.registraUtente(nomeUtente, email, password)) { //Funzione UtenteDAO che restituisce vero se la creazione è avvenuta con successo
