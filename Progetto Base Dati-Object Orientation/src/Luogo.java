@@ -5,7 +5,7 @@ public class Luogo {
 	private int ID; //ID unico luogo
 	private String nome; //Nome luogo
 	private String Indirizzo; //Indirizzo luogo
-	private int telefono; //Numero telefono luogo
+	private double telefono; //Numero telefono luogo
 	private String proprietario; //Nome proprietario
 	private float mediaRecensioni = 0; //Media recensioni
 	private String tipoAttivita; //Tipo attività (Ristorante, Alloggio, Attrazione)
@@ -37,7 +37,7 @@ public class Luogo {
 	public void setProprietario(String proprietario) {
 		this.proprietario = proprietario;
 	}
-	public int getTelefono() {
+	public double getTelefono() {
 		return telefono;
 	}
 	public void setTelefono(int telefono) {
@@ -68,7 +68,7 @@ public class Luogo {
 		this.nomeUtente = nomeUtente;
 	}
 	
-	public Luogo creaLuogo(String nome, String indirizzo, int telefono, String proprietario, String tipoAttivita, String specializzazione, JPanel pannelloImpostazioniAggiuntive) {
+	public Luogo creaLuogo(String nome, String indirizzo, double telefono, String proprietario, String tipoAttivita, String specializzazione, JPanel pannelloImpostazioniAggiuntive) {
 		
 		String pannello = pannelloImpostazioniAggiuntive.getName();
 		int i;
@@ -88,12 +88,10 @@ public class Luogo {
 			l = luogo.creaLuogoTipoRistorante(nome, indirizzo, telefono, proprietario, tipoAttivita, specializzazione, pannelloImpostazioniAggiuntive);
 		}break;
 		case 1:{
-			LuogoTipoAlloggio luogo = new LuogoTipoAlloggio();
-			l = luogo.creaLuogoTipoAlloggio(nome, indirizzo, telefono, proprietario, tipoAttivita, specializzazione, pannelloImpostazioniAggiuntive);
+			//Caso alloggio
 		}break;
 		case 2:{
-			LuogoTipoAttrazione luogo = new LuogoTipoAttrazione();
-			l = luogo.creaLuogoTipoAttrazione(nome, indirizzo, telefono, proprietario, tipoAttivita, specializzazione, pannelloImpostazioniAggiuntive);
+			//Caso attrazione
 		}break;
 		default:{
 			LuogoTipoRistorante luogo = new LuogoTipoRistorante();

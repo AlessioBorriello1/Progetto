@@ -133,7 +133,7 @@ public class MainController {
 		
 	}
 
-	public boolean creaLuogo(MainFrame mainFrame, String nome, String indirizzo, int telefono, String proprietario, String tipoAttivita, String specializzazione, JPanel pannelloImpostazioniAggiuntive) {
+	public boolean creaLuogo(MainFrame mainFrame, String nome, String indirizzo, double telefono, String proprietario, String tipoAttivita, String specializzazione, JPanel pannelloImpostazioniAggiuntive) {
 		
 		Luogo l = new Luogo();
 		if(nome.contentEquals("") || indirizzo.contentEquals("") || proprietario.contentEquals("") || telefono == -1) {

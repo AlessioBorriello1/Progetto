@@ -4,7 +4,6 @@ public class LuogoTipoRistorante extends Luogo{
 	
 	private int ID;
 	private String nazioneCibo;
-	private boolean vegetariano;
 	private boolean vegano;
 
 
@@ -13,12 +12,6 @@ public class LuogoTipoRistorante extends Luogo{
 	}
 	public void setNazioneCibo(String nazioneCibo) {
 		this.nazioneCibo = nazioneCibo;
-	}
-	public boolean isVegetariano() {
-		return vegetariano;
-	}
-	public void setVegetariano(boolean vegetariano) {
-		this.vegetariano = vegetariano;
 	}
 	public boolean isVegano() {
 		return vegano;
@@ -33,28 +26,19 @@ public class LuogoTipoRistorante extends Luogo{
 		ID = iD;
 	}
 	
-	public LuogoTipoRistorante creaLuogoTipoRistorante(String nome, String indirizzo, int telefono, String proprietario, String tipoAttivita, String specializzazione, JPanel pannelloImpostazioniAggiuntive) {
+	public LuogoTipoRistorante creaLuogoTipoRistorante(String nome, String indirizzo, double telefono, String proprietario, String tipoAttivita, String specializzazione, JPanel pannelloImpostazioniAggiuntive) {
 		
 		String s = pannelloImpostazioniAggiuntive.getName();
 		
 		switch(s) {
 		case "panelImpostazioniAggiuntivePizzeria":{
-			System.out.println("Pizzeria");
-			Pizzeria l = new Pizzeria();
-			l = l.creaPizzeria(nome, indirizzo, telefono, proprietario, tipoAttivita, specializzazione, pannelloImpostazioniAggiuntive);
-			return l;
+			//Caso pizzeria
 		}
 		case "panelImpostazioniAggiuntiveBraceria":{
-			System.out.println("Braceria");
-			Pizzeria l = new Pizzeria();
-			l = l.creaPizzeria(nome, indirizzo, telefono, proprietario, tipoAttivita, specializzazione, pannelloImpostazioniAggiuntive);
-			return l;
+			//Caso braceria
 		}
 		case "panelImpostazioniAggiuntivePub":{
-			System.out.println("Pub");
-			Pizzeria l = new Pizzeria();
-			l = l.creaPizzeria(nome, indirizzo, telefono, proprietario, tipoAttivita, specializzazione, pannelloImpostazioniAggiuntive);
-			return l;
+			//Caso pub
 		}
 		}
 		

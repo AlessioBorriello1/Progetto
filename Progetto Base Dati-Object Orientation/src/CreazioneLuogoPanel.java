@@ -21,6 +21,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.JFormattedTextField;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.JCheckBox;
 
 public class CreazioneLuogoPanel extends JPanel {
 
@@ -51,7 +52,7 @@ public class CreazioneLuogoPanel extends JPanel {
 				char c = e.getKeyChar();
 				
 				if(c >= '0' && c <= '9') {
-					if(l < 8) {
+					if(l < 10) {
 						textFieldTelefono.setEditable(true);
 					}else {
 						textFieldTelefono.setEditable(false);
@@ -202,6 +203,8 @@ public class CreazioneLuogoPanel extends JPanel {
 		
 		
 		
+		
+		
 		JPanel panelImpostazioniAggiuntivePizzeria = new JPanel();
 		currentImpostazioniAggiuntivePanel = panelImpostazioniAggiuntivePizzeria;
 		panelAttributiAggiuntivi.add(panelImpostazioniAggiuntivePizzeria, "panelImpostazioniAggiuntivePizzeria");
@@ -209,12 +212,13 @@ public class CreazioneLuogoPanel extends JPanel {
 		
 		JLabel lblImpostazioniAggiuntivePizzeria = new JLabel("Impostazioni aggiuntive pizzeria:");
 		lblImpostazioniAggiuntivePizzeria.setFont(new Font("Tahoma", Font.BOLD, 14));
+		
 		GroupLayout gl_panelImpostazioniAggiuntivePizzeria = new GroupLayout(panelImpostazioniAggiuntivePizzeria);
 		gl_panelImpostazioniAggiuntivePizzeria.setHorizontalGroup(
 			gl_panelImpostazioniAggiuntivePizzeria.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelImpostazioniAggiuntivePizzeria.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(lblImpostazioniAggiuntivePizzeria, GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
+					.addComponent(lblImpostazioniAggiuntivePizzeria, GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
 					.addContainerGap())
 		);
 		gl_panelImpostazioniAggiuntivePizzeria.setVerticalGroup(
@@ -222,9 +226,13 @@ public class CreazioneLuogoPanel extends JPanel {
 				.addGroup(gl_panelImpostazioniAggiuntivePizzeria.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(lblImpostazioniAggiuntivePizzeria)
-					.addContainerGap(168, Short.MAX_VALUE))
+					.addContainerGap(225, Short.MAX_VALUE))
 		);
 		panelImpostazioniAggiuntivePizzeria.setLayout(gl_panelImpostazioniAggiuntivePizzeria);
+		
+		
+		
+		
 		
 		JPanel panelImpostazioniAggiuntiveBraceria = new JPanel();
 		panelImpostazioniAggiuntiveBraceria.setEnabled(false);
@@ -239,7 +247,7 @@ public class CreazioneLuogoPanel extends JPanel {
 			gl_panelImpostazioniAggiuntiveBraceria.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelImpostazioniAggiuntiveBraceria.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(lblImpostazioniAggiuntiveBraceria, GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
+					.addComponent(lblImpostazioniAggiuntiveBraceria, GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
 					.addContainerGap())
 		);
 		gl_panelImpostazioniAggiuntiveBraceria.setVerticalGroup(
@@ -247,9 +255,12 @@ public class CreazioneLuogoPanel extends JPanel {
 				.addGroup(gl_panelImpostazioniAggiuntiveBraceria.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(lblImpostazioniAggiuntiveBraceria, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(168, Short.MAX_VALUE))
+					.addContainerGap(225, Short.MAX_VALUE))
 		);
 		panelImpostazioniAggiuntiveBraceria.setLayout(gl_panelImpostazioniAggiuntiveBraceria);
+		
+		
+		
 		
 		JPanel panelImpostazioniAggiuntivePub = new JPanel();
 		panelImpostazioniAggiuntivePub.setEnabled(false);
@@ -272,7 +283,7 @@ public class CreazioneLuogoPanel extends JPanel {
 				.addGroup(gl_panelImpostazioniAggiuntivePub.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(lblImpostazioniAggiuntivePub, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(168, Short.MAX_VALUE))
+					.addContainerGap(225, Short.MAX_VALUE))
 		);
 		panelImpostazioniAggiuntivePub.setLayout(gl_panelImpostazioniAggiuntivePub);
 		
@@ -420,7 +431,7 @@ public class CreazioneLuogoPanel extends JPanel {
 		btnCreaLuogo.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				String s = textFieldTelefono.getText();
-				int numero = (s.length() == 8) ? Integer.parseInt(s) : -1;
+				double numero = (s.length() == 10) ? Double.parseDouble(s) : -1;
 				controller.creaLuogo(mainFrame, textFieldNome.getText(), textFieldIndirizzo.getText(), numero, textFieldNomePropretario.getText(), comboBoxTipoAttivita.getSelectedItem().toString(), comboBoxSpecializzazione.getSelectedItem().toString(), currentImpostazioniAggiuntivePanel);
 			}
 		});
