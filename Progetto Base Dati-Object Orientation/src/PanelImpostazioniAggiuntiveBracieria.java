@@ -23,12 +23,12 @@ public class PanelImpostazioniAggiuntiveBracieria extends JPanel {
 		JComboBox comboBoxNazionalitaCibo = new JComboBox();
 		
 		JLabel lblNazionalitCibo = new JLabel("Nazionalit\u00E0 cibo");
-		lblNazionalitCibo.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNazionalitCibo.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		
 		JComboBox comboBox = new JComboBox();
 		
 		JLabel lblTipoCarne = new JLabel("Tipo carne");
-		lblTipoCarne.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblTipoCarne.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)

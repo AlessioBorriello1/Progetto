@@ -21,12 +21,12 @@ public class PanelImpostazioniAggiuntivePub extends JPanel {
 		JComboBox comboBoxNazionalitaCibo = new JComboBox();
 		
 		JLabel lblNazionalitaCibo = new JLabel("Nazionalit\u00E0 cibo");
-		lblNazionalitaCibo.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNazionalitaCibo.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		
 		JComboBox comboBox = new JComboBox();
 		
 		JLabel lblTipoBirra = new JLabel("Tipo birra");
-		lblTipoBirra.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblTipoBirra.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)

@@ -26,7 +26,7 @@ public class PanelImpostazioniAggiuntivePizzeria extends JPanel {
 		JComboBox comboBoxNazionalitCibo = new JComboBox();
 		
 		JLabel lblNazionalitaCibo = new JLabel("Nazionalit\u00E0 cibo");
-		lblNazionalitaCibo.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNazionalitaCibo.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		
 		JCheckBox chckbxAsporto = new JCheckBox("Asporto");
 		GroupLayout groupLayout = new GroupLayout(this);
