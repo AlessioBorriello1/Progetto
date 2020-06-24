@@ -88,7 +88,8 @@ public class Luogo {
 			l = luogo.creaRistorante(nome, indirizzo, telefono, proprietario, tipoAttivita, specializzazione, pannelloImpostazioniAggiuntive, c);
 		}break;
 		case 1:{
-			//Caso alloggio
+			Alloggio luogo = new Alloggio();
+			l = luogo.creaAlloggio(nome, indirizzo, telefono, proprietario, tipoAttivita, specializzazione, pannelloImpostazioniAggiuntive, c);
 		}break;
 		case 2:{
 			//Caso attrazione

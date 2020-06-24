@@ -4,13 +4,15 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import java.awt.Font;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+
 import javax.swing.JCheckBox;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class PanelImpostazioniAggiuntiveMotel extends JPanel {
-	private JTextField textField;
-	private JTextField textFieldNumeroStanze;
+	
 
 	public PanelImpostazioniAggiuntiveMotel() {
 		setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
@@ -21,16 +23,42 @@ public class PanelImpostazioniAggiuntiveMotel extends JPanel {
 		lblImpostazioniAggiuntiveMotel.setFont(new Font("Tahoma", Font.BOLD, 14));
 		
 		JCheckBox chckbxPiscina = new JCheckBox("Piscina");
+		chckbxPiscina.setName("chckbxPiscinaMotel");
 		
 		JCheckBox chckbxWifi = new JCheckBox("WiFi");
+		chckbxWifi.setName("chckbxWifiMotel");
 		
-		textFieldNumeroStanze = new JTextField();
+		JTextField textFieldNumeroStanze = new JTextField();
 		textFieldNumeroStanze.setColumns(10);
+		textFieldNumeroStanze.setName("textFieldNumeroStanzeMotel");
+		textFieldNumeroStanze.addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent e) {
+				String s = textFieldNumeroStanze.getText();
+				int l = s.length();
+				char c = e.getKeyChar();
+				
+				if(c >= '0' && c <= '9') {
+					if(l < 4) {
+						textFieldNumeroStanze.setEditable(true);
+					}else {
+						textFieldNumeroStanze.setEditable(false);
+					}
+				}else {
+					if(e.getKeyCode() == KeyEvent.VK_BACK_SPACE || e.getKeyCode() == KeyEvent.VK_DELETE) {
+						textFieldNumeroStanze.setEditable(true);
+					}else {
+						textFieldNumeroStanze.setEditable(false);
+					}
+				}
+			}
+		});
 		
 		JLabel lblNumeroStanze = new JLabel("Numero stanze");
 		lblNumeroStanze.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		
 		JCheckBox chckbxAssistenzaAutovetture = new JCheckBox("Assistenza autovetture");
+		chckbxAssistenzaAutovetture.setName("chckbxAssistenzaAutovetture");
+		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)

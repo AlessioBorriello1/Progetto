@@ -58,6 +58,7 @@ public class MainFrame extends JFrame {
 		setUndecorated(true); //Undecorated (Senza pulsanti chiusura/minimizzazione etc)
 		setResizable(false); //Non ridimensionabile
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Quando si chiude il MainFrame chiudi applicazione
+		setName("mainFrame");
 		
 		
 		JPanel upperPanel = new JPanel(); //Nuovo pannello (Upper panel)
@@ -649,7 +650,7 @@ public class MainFrame extends JFrame {
 		}
 		
 	}
-
+	
 	/**
 	 * Crea una finestra di notifica che va chiusa prima di poter tornare al mainFrame
 	 * @param notification Stringa da mostrare nella notifica
@@ -660,6 +661,5 @@ public class MainFrame extends JFrame {
 		frame.setVisible(true);
 		
 	}
-	
 	
 }

@@ -9,18 +9,16 @@ public class Ristorante extends Luogo{
 		
 		String pannello = pannelloImpostazioniAggiuntive.getName();
 		Ristorante r = null;
+		RistoranteDAO dao = new RistoranteDAO();
 		
 		switch(pannello) {
 		case "panelImpostazioniAggiuntivePizzeria":{
-			PizzeriaDAO dao = new PizzeriaDAO();
 			r = dao.creaPizzeria(nome, indirizzo, telefono, proprietario, tipoAttivita, specializzazione, pannelloImpostazioniAggiuntive, c);
 		}break;
 		case "panelImpostazioniAggiuntiveBracieria":{
-			BraceriaDAO dao = new BraceriaDAO();
 			r = dao.creaBraceria(nome, indirizzo, telefono, proprietario, tipoAttivita, specializzazione, pannelloImpostazioniAggiuntive, c);
 		}break;
 		case "panelImpostazioniAggiuntivePub":{
-			PubDAO dao = new PubDAO();
 			r = dao.creaPub(nome, indirizzo, telefono, proprietario, tipoAttivita, specializzazione, pannelloImpostazioniAggiuntive, c);
 		}break;
 		}

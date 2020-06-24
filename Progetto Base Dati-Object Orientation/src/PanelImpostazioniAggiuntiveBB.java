@@ -4,13 +4,16 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.border.EtchedBorder;
 import java.awt.Font;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+
 import javax.swing.JCheckBox;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
 
 public class PanelImpostazioniAggiuntiveBB extends JPanel {
-	private JTextField textFieldNumeroStanze;
 
+	
 	public PanelImpostazioniAggiuntiveBB() {
 		setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		
@@ -20,16 +23,42 @@ public class PanelImpostazioniAggiuntiveBB extends JPanel {
 		lblImpostazioniAggiuntiveBB.setFont(new Font("Tahoma", Font.BOLD, 14));
 		
 		JCheckBox chckbxPiscina = new JCheckBox("Piscina");
+		chckbxPiscina.setName("chckbxPiscinaBB");
 		
 		JCheckBox chckbxWifi = new JCheckBox("WiFi");
+		chckbxWifi.setName("chckbxWifiBB");
 		
-		textFieldNumeroStanze = new JTextField();
+		JTextField textFieldNumeroStanze = new JTextField();
 		textFieldNumeroStanze.setColumns(10);
+		textFieldNumeroStanze.setName("textFieldNumeroStanzeBB");
+		textFieldNumeroStanze.addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent e) {
+				String s = textFieldNumeroStanze.getText();
+				int l = s.length();
+				char c = e.getKeyChar();
+				
+				if(c >= '0' && c <= '9') {
+					if(l < 4) {
+						textFieldNumeroStanze.setEditable(true);
+					}else {
+						textFieldNumeroStanze.setEditable(false);
+					}
+				}else {
+					if(e.getKeyCode() == KeyEvent.VK_BACK_SPACE || e.getKeyCode() == KeyEvent.VK_DELETE) {
+						textFieldNumeroStanze.setEditable(true);
+					}else {
+						textFieldNumeroStanze.setEditable(false);
+					}
+				}
+			}
+		});
 		
 		JLabel lblNumeroStanze = new JLabel("Numero stanze");
 		lblNumeroStanze.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		
 		JCheckBox chckbxColazione = new JCheckBox("Colazione");
+		chckbxColazione.setName("chckbxColazione");
+		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)

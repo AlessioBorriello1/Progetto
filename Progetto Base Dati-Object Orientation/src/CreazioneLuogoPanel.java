@@ -79,7 +79,7 @@ public class CreazioneLuogoPanel extends JPanel {
 		lblIndirizzo.setHorizontalAlignment(SwingConstants.TRAILING);
 		lblIndirizzo.setFont(new Font("Tahoma", Font.BOLD, 16));
 		
-		JLabel lblTelefono = new JLabel("Telefono:");
+		JLabel lblTelefono = new JLabel("Telefono (10 cifre):");
 		lblTelefono.setHorizontalAlignment(SwingConstants.TRAILING);
 		lblTelefono.setFont(new Font("Tahoma", Font.BOLD, 16));
 		

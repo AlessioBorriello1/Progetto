@@ -4,6 +4,9 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.border.EtchedBorder;
 import java.awt.Font;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+
 import javax.swing.JCheckBox;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
@@ -11,7 +14,7 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 
 public class PanelImpostazioniAggiuntiveHotel extends JPanel {
-	private JTextField textFieldNumeroStanze;
+	
 
 	public PanelImpostazioniAggiuntiveHotel() {
 		setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
@@ -22,17 +25,42 @@ public class PanelImpostazioniAggiuntiveHotel extends JPanel {
 		lblImpostazioniaggiuntivehotel.setFont(new Font("Tahoma", Font.BOLD, 14));
 		
 		JCheckBox chckbxPiscina = new JCheckBox("Piscina");
+		chckbxPiscina.setName("chckbxPiscinaHotel");
 		
 		JCheckBox chckbxWifi = new JCheckBox("WiFi");
+		chckbxWifi.setName("chckbxWifiHotel");
 		
-		textFieldNumeroStanze = new JTextField();
+		JTextField textFieldNumeroStanze = new JTextField();
 		textFieldNumeroStanze.setColumns(10);
+		textFieldNumeroStanze.setName("textFieldNumeroStanzeHotel");
+		textFieldNumeroStanze.addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent e) {
+				String s = textFieldNumeroStanze.getText();
+				int l = s.length();
+				char c = e.getKeyChar();
+				
+				if(c >= '0' && c <= '9') {
+					if(l < 4) {
+						textFieldNumeroStanze.setEditable(true);
+					}else {
+						textFieldNumeroStanze.setEditable(false);
+					}
+				}else {
+					if(e.getKeyCode() == KeyEvent.VK_BACK_SPACE || e.getKeyCode() == KeyEvent.VK_DELETE) {
+						textFieldNumeroStanze.setEditable(true);
+					}else {
+						textFieldNumeroStanze.setEditable(false);
+					}
+				}
+			}
+		});
 		
 		JLabel lblNumeroStanze = new JLabel("Numero stanze");
 		lblNumeroStanze.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		
 		JSpinner spinnerNumeroStelle = new JSpinner();
 		spinnerNumeroStelle.setModel(new SpinnerNumberModel(1, 1, 5, 1));
+		spinnerNumeroStelle.setName("spinnerNumeroStelle");
 		
 		JLabel lblStelle = new JLabel("Stelle");
 		lblStelle.setFont(new Font("Tahoma", Font.BOLD, 11));
