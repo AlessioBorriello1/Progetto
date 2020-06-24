@@ -24,13 +24,13 @@ public class HomePanel extends JPanel {
 		this.mainFrame = mainFrame;
 		this.workPanel = workPanel;
 		
-		setBackground(Color.LIGHT_GRAY);
+		setBackground(controller.skyWhiter);
 		
 		JPanel panelRicerca = new JPanel();
-		panelRicerca.setBackground(Color.GRAY);
+		panelRicerca.setBackground(controller.sky);
 		
 		JPanel panelMostraLuoghi = new JPanel();
-		panelMostraLuoghi.setBackground(Color.LIGHT_GRAY);
+		panelMostraLuoghi.setBackground(getBackground());
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)

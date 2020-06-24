@@ -4,11 +4,10 @@ import javax.swing.JComboBox;
 
 public class PizzeriaDAO {
 
-	public Pizzeria creaPizzeria(String nome, String indirizzo, double telefono, String proprietario, String tipoAttivita, String specializzazione, JPanel pannelloImpostazioniAggiuntive, MainController c){
+	public Pizzeria creaPizzeria(String nome, String indirizzo, String telefono, String proprietario, String tipoAttivita, String specializzazione, JPanel pannelloImpostazioniAggiuntive, MainController c){
 		
 		Pizzeria p = new Pizzeria();
 		
-		//JCheckBox vegano = (JCheckBox)c.getComponentByName(pannelloImpostazioniAggiuntive,  "chckbxCiboVegano");
 		boolean vegano = ((JCheckBox)c.getComponentByName(pannelloImpostazioniAggiuntive,  "chckbxCiboVeganoPizzeria")).isSelected();
 		String nazionalita = ((JComboBox)c.getComponentByName(pannelloImpostazioniAggiuntive, "comboBoxNazionalitCiboPizzeria")).getSelectedItem().toString();
 		

@@ -205,9 +205,7 @@ public class CreazioneLuogoPanel extends JPanel {
 	
 		btnCreaLuogo.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				String s = textFieldTelefono.getText();
-				double numero = (s.length() == 10) ? Double.parseDouble(s) : -1;
-				controller.creaLuogo(mainFrame, textFieldNome.getText(), textFieldIndirizzo.getText(), numero, textFieldNomePropretario.getText(), comboBoxTipoAttivita.getSelectedItem().toString(), comboBoxSpecializzazione.getSelectedItem().toString(), currentImpostazioniAggiuntivePanel);
+				controller.creaLuogo(mainFrame, textFieldNome.getText(), textFieldIndirizzo.getText(), textFieldTelefono.getText(), textFieldNomePropretario.getText(), comboBoxTipoAttivita.getSelectedItem().toString(), comboBoxSpecializzazione.getSelectedItem().toString(), currentImpostazioniAggiuntivePanel);
 			}
 		});
 		

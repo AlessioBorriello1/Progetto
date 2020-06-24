@@ -35,6 +35,7 @@ public class MainController {
 	public Color turquoise = new Color(63, 224, 208);
 	public Color powder = new Color(196, 243, 249);
 	public Color sky = new Color(149, 200, 216);
+	public Color skyWhiter = new Color(200, 255, 255);
 	public Color electric = new Color(126, 249, 255);
 	public Color airForce = new Color(88, 139, 174);
 	public Color babyBlue = new Color(137, 207, 240);
@@ -133,10 +134,10 @@ public class MainController {
 		
 	}
 
-	public boolean creaLuogo(MainFrame mainFrame, String nome, String indirizzo, double telefono, String proprietario, String tipoAttivita, String specializzazione, JPanel pannelloImpostazioniAggiuntive) {
+	public boolean creaLuogo(MainFrame mainFrame, String nome, String indirizzo, String telefono, String proprietario, String tipoAttivita, String specializzazione, JPanel pannelloImpostazioniAggiuntive) {
 		
 		Luogo l = new Luogo();
-		if(nome.contentEquals("") || indirizzo.contentEquals("") || proprietario.contentEquals("") || telefono == -1) {
+		if(nome.contentEquals("") || indirizzo.contentEquals("") || proprietario.contentEquals("") || telefono.contentEquals("")) {
 			mainFrame.createNotificationFrame("Qualcosa è andato storto");
 			return false;
 		}

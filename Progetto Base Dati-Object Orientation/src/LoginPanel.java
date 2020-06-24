@@ -31,7 +31,7 @@ public class LoginPanel extends JPanel {
 		this.controller = controller;
 		this.mainFrame = mainFrame;
 		
-		setBackground(Color.LIGHT_GRAY);
+		setBackground(controller.skyWhiter);
 		setLayout(null);
 		
 		JTextField nomeUtenteField = new JTextField();

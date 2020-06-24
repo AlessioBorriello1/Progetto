@@ -19,13 +19,21 @@ public class PanelImpostazioniAggiuntivePub extends JPanel {
 		lblImpostazioniAggiuntivePub.setFont(new Font("Tahoma", Font.BOLD, 14));
 		
 		JCheckBox chckbxCiboVegano = new JCheckBox("Cibo vegano");
+		chckbxCiboVegano.setName("chckbxCiboVeganoPub");
 		
 		JComboBox comboBoxNazionalitaCibo = new JComboBox();
+		comboBoxNazionalitaCibo.setName("comboBoxNazionalitCiboPub");
+		comboBoxNazionalitaCibo.addItem("Italiano");
+		comboBoxNazionalitaCibo.addItem("Messicano");
+		comboBoxNazionalitaCibo.addItem("Indiano");
 		
 		JLabel lblNazionalitaCibo = new JLabel("Nazionalit\u00E0 cibo");
 		lblNazionalitaCibo.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		
-		JComboBox comboBox = new JComboBox();
+		JComboBox comboBoxTipoBirra = new JComboBox();
+		comboBoxTipoBirra.setName("comboBoxTipoBirra");
+		comboBoxTipoBirra.addItem("Spina");
+		comboBoxTipoBirra.addItem("Malto");
 		
 		JLabel lblTipoBirra = new JLabel("Tipo birra");
 		lblTipoBirra.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -38,7 +46,7 @@ public class PanelImpostazioniAggiuntivePub extends JPanel {
 						.addComponent(lblImpostazioniAggiuntivePub, GroupLayout.PREFERRED_SIZE, 221, GroupLayout.PREFERRED_SIZE)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
-								.addComponent(comboBox, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(comboBoxTipoBirra, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 								.addComponent(comboBoxNazionalitaCibo, Alignment.LEADING, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 								.addComponent(chckbxCiboVegano, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 							.addPreferredGap(ComponentPlacement.UNRELATED)
@@ -60,7 +68,7 @@ public class PanelImpostazioniAggiuntivePub extends JPanel {
 						.addComponent(lblNazionalitaCibo))
 					.addGap(26)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(comboBoxTipoBirra, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblTipoBirra))
 					.addContainerGap(136, Short.MAX_VALUE))
 		);

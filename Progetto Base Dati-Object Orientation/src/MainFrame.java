@@ -284,7 +284,7 @@ public class MainFrame extends JFrame {
 		
 		JPanel workPanel = new JPanel(); //Crea pannello di lavoro (già dichiarato come variabile privata fuori)
 		workPanel.setName("workPanel"); //Imposta nome
-		workPanel.setBackground(Color.LIGHT_GRAY); //Imposta colore
+		workPanel.setBackground(controller.pigeon); //Imposta colore
 		//Allinea orizzontale
 		gl_mainPanel.setHorizontalGroup(
 			gl_mainPanel.createParallelGroup(Alignment.LEADING)

@@ -5,7 +5,7 @@ public class Luogo {
 	private int ID; //ID unico luogo
 	private String nome; //Nome luogo
 	private String Indirizzo; //Indirizzo luogo
-	private double telefono; //Numero telefono luogo
+	private String telefono; //Numero telefono luogo
 	private String proprietario; //Nome proprietario
 	private float mediaRecensioni = 0; //Media recensioni
 	private String tipoAttivita; //Tipo attività (Ristorante, Alloggio, Attrazione)
@@ -37,10 +37,10 @@ public class Luogo {
 	public void setProprietario(String proprietario) {
 		this.proprietario = proprietario;
 	}
-	public double getTelefono() {
+	public String getTelefono() {
 		return telefono;
 	}
-	public void setTelefono(int telefono) {
+	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
 	public float getMediaRecensioni() {
@@ -68,7 +68,7 @@ public class Luogo {
 		this.nomeUtente = nomeUtente;
 	}
 	
-	public Luogo creaLuogo(String nome, String indirizzo, double telefono, String proprietario, String tipoAttivita, String specializzazione, JPanel pannelloImpostazioniAggiuntive, MainController c) {
+	public Luogo creaLuogo(String nome, String indirizzo, String telefono, String proprietario, String tipoAttivita, String specializzazione, JPanel pannelloImpostazioniAggiuntive, MainController c) {
 		
 		String pannello = pannelloImpostazioniAggiuntive.getName();
 		int i;

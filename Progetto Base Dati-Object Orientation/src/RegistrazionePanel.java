@@ -27,7 +27,7 @@ public class RegistrazionePanel extends JPanel {
 		this.mainFrame = mainFrame;
 		JPanel workPanel = wP;
 		
-		setBackground(Color.LIGHT_GRAY);
+		setBackground(controller.skyWhiter);
 		setLayout(null);
 		
 		JTextField nomeUtenteField = new JTextField();

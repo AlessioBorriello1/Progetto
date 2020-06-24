@@ -25,7 +25,7 @@ public class LocaliPanel extends JPanel {
 		this.mainFrame = mainFrame;
 		this.workPanel = workPanel;
 		
-		setBackground(Color.LIGHT_GRAY);
+		setBackground(controller.skyWhiter);
 		
 		JPanel panelLocali = new JPanel();
 		

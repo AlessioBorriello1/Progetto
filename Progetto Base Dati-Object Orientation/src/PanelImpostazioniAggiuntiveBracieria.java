@@ -19,13 +19,22 @@ public class PanelImpostazioniAggiuntiveBracieria extends JPanel {
 		lblImpostazioniAggiuntiveBracieria.setFont(new Font("Tahoma", Font.BOLD, 14));
 		
 		JCheckBox chckbxCiboVegano = new JCheckBox("Cibo vegano");
+		chckbxCiboVegano.setName("chckbxCiboVeganoBraceria");
 		
 		JComboBox comboBoxNazionalitaCibo = new JComboBox();
+		comboBoxNazionalitaCibo.setName("comboBoxNazionalitCiboBraceria");
+		comboBoxNazionalitaCibo.addItem("Italiano");
+		comboBoxNazionalitaCibo.addItem("Messicano");
+		comboBoxNazionalitaCibo.addItem("Indiano");
 		
 		JLabel lblNazionalitCibo = new JLabel("Nazionalit\u00E0 cibo");
 		lblNazionalitCibo.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		
-		JComboBox comboBox = new JComboBox();
+		JComboBox comboBoxTipoCarne = new JComboBox();
+		comboBoxTipoCarne.setName("comboBoxTipoCarne");
+		comboBoxTipoCarne.addItem("Pollo");
+		comboBoxTipoCarne.addItem("Manzo");
+		comboBoxTipoCarne.addItem("Tacchino");
 		
 		JLabel lblTipoCarne = new JLabel("Tipo carne");
 		lblTipoCarne.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -38,7 +47,7 @@ public class PanelImpostazioniAggiuntiveBracieria extends JPanel {
 						.addComponent(lblImpostazioniAggiuntiveBracieria)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
-								.addComponent(comboBox, Alignment.LEADING, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(comboBoxTipoCarne, Alignment.LEADING, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 								.addComponent(comboBoxNazionalitaCibo, Alignment.LEADING, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 								.addComponent(chckbxCiboVegano, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 							.addPreferredGap(ComponentPlacement.UNRELATED)
@@ -60,7 +69,7 @@ public class PanelImpostazioniAggiuntiveBracieria extends JPanel {
 						.addComponent(lblNazionalitCibo))
 					.addGap(26)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(comboBoxTipoCarne, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblTipoCarne))
 					.addContainerGap(136, Short.MAX_VALUE))
 		);
