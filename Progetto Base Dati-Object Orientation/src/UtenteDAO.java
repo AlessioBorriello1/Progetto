@@ -9,14 +9,24 @@ public class UtenteDAO {
 	 * Cerca nel DataBase uno specifico utente in base al suo Nome Utente o Email e Password
 	 * @param nomeUtente Nome Utente oppure Email dell'utente da cercare
 	 * @param password Password dell'utente da cercare
+	 * @param mf MainFrame per avere accesso alla funzione per creare notifiche
 	 * @return Oggetto Utente (Se presente nel DataBase)
 	 */
-	public Utente getUtente(String nomeUtente, String password) {
+	public Utente getUtente(String nomeUtente, String password, MainFrame mf) {
 		
 		try {
 			
-			if(nomeUtente.contentEquals("") || password.contentEquals("")) {
+			if(nomeUtente.contentEquals("") && password.contentEquals("")) {
 				System.out.println("Valori non inseriti");
+				mf.createNotificationFrame("Inserisci i valori Nome Utente e Password!");
+				return null; //Operazione fallita, valori non inseriti
+			}else if(nomeUtente.contentEquals("")) {
+				System.out.println("Valori non inseriti");
+				mf.createNotificationFrame("Inserisci Nome Utente!");
+				return null; //Operazione fallita, valori non inseriti
+			}else if(password.contentEquals("")) {
+				System.out.println("Valori non inseriti");
+				mf.createNotificationFrame("Inserisci Password!");
 				return null; //Operazione fallita, valori non inseriti
 			}
 			
@@ -42,6 +52,7 @@ public class UtenteDAO {
 			}else { //Se l'utente non è stato trovato (result set vuoto)
 				
 				System.out.println("Resul set vuoto");
+				mf.createNotificationFrame("I valori inseriti non sono corretti!");
 				return null; //Restituisci null
 				
 			}
@@ -63,19 +74,22 @@ public class UtenteDAO {
 	 * @param nomeUtente Nome Utente dell'utente da inserire
 	 * @param email Email dell'utente da inserire
 	 * @param password Password dell'utente da inserire
+	 * @param mf MainFrame per avere accesso alla funzione per creare notifiche
 	 * @return boolean (Se operazione riuscita)
 	 */
-	public boolean registraUtente(String nomeUtente, String email, String password) {
+	public boolean registraUtente(String nomeUtente, String email, String password, MainFrame mf) {
 			try {
 				
 				if(nomeUtente.contentEquals("") || email.contentEquals("") || password.contentEquals("")) {
 					System.out.println("Valori non inseriti");
+					mf.createNotificationFrame("Completa tutti i campi!");
 					return false; //Operazione inserimento fallita, restituisce false
 				}
 				
 				if(utenteEsiste(nomeUtente, email)) { //Controlla se l'utente è già nel database
 					
 					System.out.println("Utente già esistente");
+					mf.createNotificationFrame("Esiste già un utente con questo Nome utente o Email");
 					return false; //Operazione inserimento fallita, restituisce false
 					
 				}
@@ -93,10 +107,13 @@ public class UtenteDAO {
 				con.close(); //Chiudi connessione
 				st.close(); //Chiudi statement
 				
+				mf.createNotificationFrame("Registrazione completata!");
+				
 				return true; //Operazione inserimento riuscita, restituisce true
 				
 			}catch(Exception e) { //Error catching
 				System.out.println(e);
+				mf.createNotificationFrame("Qualcosa è andato storto!");
 				return false; //Operazione inserimento fallita, restituisce false
 			}
 		}

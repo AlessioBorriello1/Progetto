@@ -98,7 +98,7 @@ public class MainController {
 	public void login(String nomeUtente, String password, MainFrame mainFrame) {
 		
 		UtenteDAO dao = new UtenteDAO(); //Istanzia un UtenteDAO per eseguire la ricerca
-		Utente u = dao.getUtente(nomeUtente, password); //Funzione UtenteDAO che restituisce (se lo trova) un utente
+		Utente u = dao.getUtente(nomeUtente, password, mainFrame); //Funzione UtenteDAO che restituisce (se lo trova) un utente
 		setUtente(u); //Imposta il nuovo utente trovato (o meno) nella variabile utente del controller
 		
 		if(u != null) { //Se utente trovato
@@ -108,8 +108,6 @@ public class MainController {
 			mainFrame.refreshaPannelloInfo(); //Cambia pannello info utente se sono loggato o meno
 			mainFrame.createNotificationFrame("Login riuscito! Benvenuto " + getUtente().getNomeUtente());
 			mainFrame.cambiaPannelloLavoroAHomePanel((JPanel)getComponentByName(mainFrame, "workPanel")); //Vai a pannello HomePanel
-		}else { //Utente non trovato
-			mainFrame.createNotificationFrame("Qualcosa è andato storto");
 		}
 		
 	}
@@ -126,7 +124,7 @@ public class MainController {
 	public boolean registrazione(String nomeUtente, String password, String email, MainFrame mainFrame) {
 		
 		UtenteDAO dao = new UtenteDAO(); //Istanzia un UtenteDAO per eseguire la ricerca
-		if(dao.registraUtente(nomeUtente, email, password)) { //Funzione UtenteDAO che restituisce vero se la creazione è avvenuta con successo
+		if(dao.registraUtente(nomeUtente, email, password, mainFrame)) { //Funzione UtenteDAO che restituisce vero se la creazione è avvenuta con successo
 			return true;
 		}else {
 			return false;

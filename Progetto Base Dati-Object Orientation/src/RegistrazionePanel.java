@@ -71,10 +71,7 @@ public class RegistrazionePanel extends JPanel {
 				String password = String.valueOf(passwordField.getPassword()); //Prendi password dal rispettivo campo
 				
 				if(controller.registrazione(nomeUtente, password, email, mainFrame)) {
-					mainFrame.createNotificationFrame("Registrazione riuscita, esegui il login con quei dati");
 					mainFrame.cambiaPannelloLavoroALoginPanel(workPanel);//Vai a pannello login
-				}else {
-					mainFrame.createNotificationFrame("Registrazione non riuscita");
 				}
 				
 			}
