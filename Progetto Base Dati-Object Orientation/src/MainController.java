@@ -141,7 +141,7 @@ public class MainController {
 			return false;
 		}
 		
-		l = l.creaLuogo(nome, indirizzo, telefono, proprietario, tipoAttivita, specializzazione, pannelloImpostazioniAggiuntive);
+		l = l.creaLuogo(nome, indirizzo, telefono, proprietario, tipoAttivita, specializzazione, pannelloImpostazioniAggiuntive, this);
 		
 		if(l == null) {
 			System.out.println("Fallito");

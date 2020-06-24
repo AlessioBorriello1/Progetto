@@ -649,7 +649,6 @@ public class MainFrame extends JFrame {
 		}
 		
 	}
-	//Getter per variabile workPanel (P)
 
 	/**
 	 * Crea una finestra di notifica che va chiusa prima di poter tornare al mainFrame
@@ -661,4 +660,6 @@ public class MainFrame extends JFrame {
 		frame.setVisible(true);
 		
 	}
+	
+	
 }

@@ -68,10 +68,9 @@ public class Luogo {
 		this.nomeUtente = nomeUtente;
 	}
 	
-	public Luogo creaLuogo(String nome, String indirizzo, double telefono, String proprietario, String tipoAttivita, String specializzazione, JPanel pannelloImpostazioniAggiuntive) {
+	public Luogo creaLuogo(String nome, String indirizzo, double telefono, String proprietario, String tipoAttivita, String specializzazione, JPanel pannelloImpostazioniAggiuntive, MainController c) {
 		
 		String pannello = pannelloImpostazioniAggiuntive.getName();
-		System.out.println(pannello);
 		int i;
 		Luogo l = null;
 		
@@ -86,7 +85,7 @@ public class Luogo {
 		switch(i) {
 		case 0:{
 			Ristorante luogo = new Ristorante();
-			l = luogo.creaRistorante(nome, indirizzo, telefono, proprietario, tipoAttivita, specializzazione, pannelloImpostazioniAggiuntive);
+			l = luogo.creaRistorante(nome, indirizzo, telefono, proprietario, tipoAttivita, specializzazione, pannelloImpostazioniAggiuntive, c);
 		}break;
 		case 1:{
 			//Caso alloggio
@@ -96,7 +95,7 @@ public class Luogo {
 		}break;
 		default:{
 			Ristorante luogo = new Ristorante();
-			l = luogo.creaRistorante(nome, indirizzo, telefono, proprietario, tipoAttivita, specializzazione, pannelloImpostazioniAggiuntive);
+			l = luogo.creaRistorante(nome, indirizzo, telefono, proprietario, tipoAttivita, specializzazione, pannelloImpostazioniAggiuntive, c);
 		}
 		}
 		

@@ -22,13 +22,20 @@ public class PanelImpostazioniAggiuntivePizzeria extends JPanel {
 		lblImpostazioniAggiuntivePizzeria.setFont(new Font("Tahoma", Font.BOLD, 14));
 		
 		JCheckBox chckbxCiboVegano = new JCheckBox("Cibo vegano");
+		chckbxCiboVegano.setName("chckbxCiboVeganoPizzeria");
 		
 		JComboBox comboBoxNazionalitCibo = new JComboBox();
+		comboBoxNazionalitCibo.setName("comboBoxNazionalitCiboPizzeria");
+		comboBoxNazionalitCibo.addItem("Italiano");
+		comboBoxNazionalitCibo.addItem("Messicano");
+		comboBoxNazionalitCibo.addItem("Indiano");
 		
 		JLabel lblNazionalitaCibo = new JLabel("Nazionalit\u00E0 cibo");
 		lblNazionalitaCibo.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		
 		JCheckBox chckbxAsporto = new JCheckBox("Asporto");
+		chckbxAsporto.setName("chckbxAsporto");
+		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
