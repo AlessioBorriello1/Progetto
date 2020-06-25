@@ -12,6 +12,8 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.Box;
+import javax.swing.JScrollPane;
 
 public class LocaliPanel extends JPanel {
 
@@ -27,17 +29,17 @@ public class LocaliPanel extends JPanel {
 		
 		setBackground(controller.skyWhiter);
 		
-		JPanel panelLocali = new JPanel();
-		
 		JPanel panelControl = new JPanel();
+		
+		JScrollPane panelLocali = new JScrollPane();
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(panelControl, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 752, Short.MAX_VALUE)
-						.addComponent(panelLocali, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 752, Short.MAX_VALUE))
+						.addComponent(panelLocali, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 752, Short.MAX_VALUE)
+						.addComponent(panelControl, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 752, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -49,6 +51,9 @@ public class LocaliPanel extends JPanel {
 					.addComponent(panelLocali, GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE)
 					.addContainerGap())
 		);
+		
+		Box verticalBox = Box.createVerticalBox();
+		panelLocali.setViewportView(verticalBox);
 		
 		JButton btnAggiungiLuogo = new JButton("Aggiungi luogo");
 		btnAggiungiLuogo.addMouseListener(new MouseAdapter() {
@@ -84,6 +89,12 @@ public class LocaliPanel extends JPanel {
 		panelControl.setLayout(gl_panelControl);
 		setLayout(groupLayout);
 		
+		for(Luogo l : controller.getUtente().getLuoghiUtente()) {
+			
+			PanelInfoLuogoAnteprima panel = new PanelInfoLuogoAnteprima();
+			verticalBox.add(panel);
+			
+		}
+		
 	}
-
 }
