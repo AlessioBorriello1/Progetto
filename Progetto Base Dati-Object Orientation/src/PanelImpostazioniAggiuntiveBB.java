@@ -23,14 +23,14 @@ public class PanelImpostazioniAggiuntiveBB extends JPanel {
 		lblImpostazioniAggiuntiveBB.setFont(new Font("Tahoma", Font.BOLD, 14));
 		
 		JCheckBox chckbxPiscina = new JCheckBox("Piscina");
-		chckbxPiscina.setName("chckbxPiscinaBB");
+		chckbxPiscina.setName("chckbxPiscina");
 		
 		JCheckBox chckbxWifi = new JCheckBox("WiFi");
-		chckbxWifi.setName("chckbxWifiBB");
+		chckbxWifi.setName("chckbxWifi");
 		
 		JTextField textFieldNumeroStanze = new JTextField();
 		textFieldNumeroStanze.setColumns(10);
-		textFieldNumeroStanze.setName("textFieldNumeroStanzeBB");
+		textFieldNumeroStanze.setName("textFieldNumeroStanze");
 		textFieldNumeroStanze.addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent e) {
 				String s = textFieldNumeroStanze.getText();

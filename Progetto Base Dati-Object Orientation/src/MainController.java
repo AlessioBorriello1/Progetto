@@ -134,21 +134,17 @@ public class MainController {
 
 	public boolean creaLuogo(MainFrame mainFrame, String nome, String indirizzo, String telefono, String proprietario, String tipoAttivita, String specializzazione, JPanel pannelloImpostazioniAggiuntive) {
 		
-		Luogo l = new Luogo();
-		if(nome.contentEquals("") || indirizzo.contentEquals("") || proprietario.contentEquals("") || telefono.contentEquals("")) {
-			mainFrame.createNotificationFrame("Completa tutti i campi!");
-			return false;
-		}
 		
-		l = l.creaLuogo(nome, indirizzo, telefono, proprietario, tipoAttivita, specializzazione, pannelloImpostazioniAggiuntive, this);
 		
-		if(l == null) {
-			System.out.println("Fallito");
-			return false;
-		}else {
-			System.out.println("Riuscito");
+		LuogoDAO dao = new LuogoDAO();
+		if(dao.creaLuogo(this, mainFrame, nome, indirizzo, telefono, proprietario, tipoAttivita, specializzazione, pannelloImpostazioniAggiuntive, getUtente())) {
+			System.out.println("Operazione riuscita");
 			return true;
+		}else {
+			System.out.println("Operazione fallita");
+			return false;
 		}
+			
 		
 	}
 	

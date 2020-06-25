@@ -19,7 +19,7 @@ public class PanelImpostazioniAggiuntiveZoo extends JPanel {
 		lblImpostazioniAggiuntiveZoo.setFont(new Font("Tahoma", Font.BOLD, 14));
 		
 		JCheckBox chckbxPromozioneStudenti = new JCheckBox("Promozione studenti");
-		chckbxPromozioneStudenti.setName("chckbxPromozioneStudentiZoo");
+		chckbxPromozioneStudenti.setName("chckbxPromozioneStudenti");
 		
 		JComboBox comboBoxSpecie = new JComboBox();
 		comboBoxSpecie.addItem("Primati");

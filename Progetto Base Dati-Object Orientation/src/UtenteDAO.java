@@ -53,6 +53,8 @@ public class UtenteDAO {
 				
 				System.out.println("Resul set vuoto");
 				mf.createNotificationFrame("I valori inseriti non sono corretti!");
+				con.close(); //Chiudi connessione
+				st.close(); //Chiudi statement
 				return null; //Restituisci null
 				
 			}

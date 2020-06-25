@@ -10,7 +10,6 @@ public class Pizzeria extends Ristorante{
 	public void setAsporto(boolean asporto) {
 		this.asporto = asporto;
 	}
-	
-	
+
 	
 }

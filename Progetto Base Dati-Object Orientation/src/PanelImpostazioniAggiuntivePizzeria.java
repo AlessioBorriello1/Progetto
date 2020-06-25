@@ -22,10 +22,10 @@ public class PanelImpostazioniAggiuntivePizzeria extends JPanel {
 		lblImpostazioniAggiuntivePizzeria.setFont(new Font("Tahoma", Font.BOLD, 14));
 		
 		JCheckBox chckbxCiboVegano = new JCheckBox("Cibo vegano");
-		chckbxCiboVegano.setName("chckbxCiboVeganoPizzeria");
+		chckbxCiboVegano.setName("chckbxCiboVegano");
 		
 		JComboBox comboBoxNazionalitCibo = new JComboBox();
-		comboBoxNazionalitCibo.setName("comboBoxNazionalitCiboPizzeria");
+		comboBoxNazionalitCibo.setName("comboBoxNazionalitCibo");
 		comboBoxNazionalitCibo.addItem("Italiano");
 		comboBoxNazionalitCibo.addItem("Messicano");
 		comboBoxNazionalitCibo.addItem("Indiano");

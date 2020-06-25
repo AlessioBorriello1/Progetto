@@ -68,40 +68,5 @@ public class Luogo {
 		this.nomeUtente = nomeUtente;
 	}
 	
-	public Luogo creaLuogo(String nome, String indirizzo, String telefono, String proprietario, String tipoAttivita, String specializzazione, JPanel pannelloImpostazioniAggiuntive, MainController c) {
-		
-		String pannello = pannelloImpostazioniAggiuntive.getName();
-		int i;
-		Luogo l = null;
-		
-		if(pannello.contentEquals("panelImpostazioniAggiuntivePizzeria") || pannello.contentEquals("panelImpostazioniAggiuntiveBracieria") || pannello.contentEquals("panelImpostazioniAggiuntivePub")) {
-			i = 0;
-		}else if(pannello.contentEquals("panelImpostazioniAggiuntiveHotel") || pannello.contentEquals("panelImpostazioniAggiuntiveBB") || pannello.contentEquals("panelImpostazioniAggiuntiveMotel")) {
-			i = 1;
-		}else {
-			i = 2;
-		}
-		
-		switch(i) {
-		case 0:{
-			Ristorante luogo = new Ristorante();
-			l = luogo.creaRistorante(nome, indirizzo, telefono, proprietario, tipoAttivita, specializzazione, pannelloImpostazioniAggiuntive, c);
-		}break;
-		case 1:{
-			Alloggio luogo = new Alloggio();
-			l = luogo.creaAlloggio(nome, indirizzo, telefono, proprietario, tipoAttivita, specializzazione, pannelloImpostazioniAggiuntive, c);
-		}break;
-		case 2:{
-			Attrazione luogo = new Attrazione();
-			l = luogo.creaAttrazione(nome, indirizzo, telefono, proprietario, tipoAttivita, specializzazione, pannelloImpostazioniAggiuntive, c);
-		}break;
-		default:{
-			Ristorante luogo = new Ristorante();
-			l = luogo.creaRistorante(nome, indirizzo, telefono, proprietario, tipoAttivita, specializzazione, pannelloImpostazioniAggiuntive, c);
-		}
-		}
-		
-		return l;
-	}
 
 }

@@ -19,10 +19,10 @@ public class PanelImpostazioniAggiuntiveBracieria extends JPanel {
 		lblImpostazioniAggiuntiveBracieria.setFont(new Font("Tahoma", Font.BOLD, 14));
 		
 		JCheckBox chckbxCiboVegano = new JCheckBox("Cibo vegano");
-		chckbxCiboVegano.setName("chckbxCiboVeganoBraceria");
+		chckbxCiboVegano.setName("chckbxCiboVegano");
 		
 		JComboBox comboBoxNazionalitaCibo = new JComboBox();
-		comboBoxNazionalitaCibo.setName("comboBoxNazionalitCiboBraceria");
+		comboBoxNazionalitaCibo.setName("comboBoxNazionalitCibo");
 		comboBoxNazionalitaCibo.addItem("Italiano");
 		comboBoxNazionalitaCibo.addItem("Messicano");
 		comboBoxNazionalitaCibo.addItem("Indiano");
