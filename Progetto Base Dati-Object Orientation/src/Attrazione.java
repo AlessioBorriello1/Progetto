@@ -2,13 +2,16 @@ import javax.swing.JPanel;
 
 public class Attrazione extends Luogo{
 	
-	private boolean primozioneStudenti;
+	//Attributi unici attrazione
+	private boolean promozioneStudenti;
 
-	public boolean isPrimozioneStudenti() {
-		return primozioneStudenti;
+	//Getter Promozione studenti
+	public boolean isPromozioneStudenti() {
+		return promozioneStudenti;
 	}
-	public void setPrimozioneStudenti(boolean primozioneStudenti) {
-		this.primozioneStudenti = primozioneStudenti;
+	//Setter Promozione studenti
+	public void setPromozioneStudenti(boolean promozioneStudenti) {
+		this.promozioneStudenti = promozioneStudenti;
 	}
 	
 }

@@ -25,74 +25,76 @@ import javax.swing.JCheckBox;
 
 public class CreazioneLuogoPanel extends JPanel {
 
-	MainController controller;
-	MainFrame mainFrame;
-	JPanel workPanel;
-	JPanel currentImpostazioniAggiuntivePanel = null;
+	MainController controller; //Controller principale
+	MainFrame mainFrame; //Frame che ha creato il pannello
+	JPanel workPanel; //Pannello con informazioni sul luogo da creare (fisso)
+	JPanel currentImpostazioniAggiuntivePanel = null; //Pannello con informazioni aggiuntive sul luogo da creare (in base al tipo)
 	
 	public CreazioneLuogoPanel(MainController controller, MainFrame mainFrame, JPanel workPanel) {
 		
-		this.controller = controller;
-		this.mainFrame = mainFrame;
-		this.workPanel = workPanel;
+		this.controller = controller; //Collega controller
+		this.mainFrame = mainFrame; //Collega mainFrame
+		this.workPanel = workPanel; //Collega workPanel
 		
-		setBackground(Color.LIGHT_GRAY);
+		setBackground(controller.skyWhiter); //Imposta colore
 		
-		JTextField textFieldNome = new JTextField();
+		JTextField textFieldNome = new JTextField(); //Nuovo textField Nome
 		textFieldNome.setColumns(10);
 		
-		JTextField textFieldIndirizzo = new JTextField();
+		JTextField textFieldIndirizzo = new JTextField(); //Nuovo textField Indirizzo
 		textFieldIndirizzo.setColumns(10);
 		
-		JTextField textFieldTelefono = new JTextField();
+		JTextField textFieldTelefono = new JTextField(); //Nuovo textField Telefono
 		textFieldTelefono.addKeyListener(new KeyAdapter() {
+			//Tasto premuto
 			public void keyPressed(KeyEvent e) {
-				String s = textFieldTelefono.getText();
-				int l = s.length();
-				char c = e.getKeyChar();
+				String s = textFieldTelefono.getText(); //Ottieni stringa
+				int l = s.length(); //Ottieni lunghezza string
+				char c = e.getKeyChar(); //Ottieni il tasto premuto
 				
-				if(c >= '0' && c <= '9') {
-					if(l < 10) {
-						textFieldTelefono.setEditable(true);
-					}else {
-						textFieldTelefono.setEditable(false);
+				if(c >= '0' && c <= '9') { //Se il tasto premuto è un numero (tra 0 e 9)
+					if(l < 10) { //Se la stringa è più corta di 10 caratteri (numeri)
+						textFieldTelefono.setEditable(true); //Imposta campo come editabile
+					}else { //Se la stringa è più lunga di 10 caratteri (numeri)
+						textFieldTelefono.setEditable(false); ////Imposta campo come non editabile
 					}
-				}else {
-					if(e.getKeyCode() == KeyEvent.VK_BACK_SPACE || e.getKeyCode() == KeyEvent.VK_DELETE) {
-						textFieldTelefono.setEditable(true);
-					}else {
-						textFieldTelefono.setEditable(false);
+				}else { //Se non ho premuto un numero
+					if(e.getKeyCode() == KeyEvent.VK_BACK_SPACE || e.getKeyCode() == KeyEvent.VK_DELETE) { //Se ho premuto back space o delete
+						textFieldTelefono.setEditable(true); //Imposta campo come editabile
+					}else { //Se non ho premuto back space o delete
+						textFieldTelefono.setEditable(false); //Imposta campo come non editabile
 					}
 				}
 			}
 		});
 		textFieldTelefono.setColumns(10);
 		
-		JTextField textFieldNomePropretario = new JTextField();
+		JTextField textFieldNomePropretario = new JTextField(); //Nuovo textField Nome proprietario
 		textFieldNomePropretario.setColumns(10);
 		
-		JLabel lblNomeLuogo = new JLabel("Nome luogo:");
+		JLabel lblNomeLuogo = new JLabel("Nome luogo:"); //Label nome luogo
 		lblNomeLuogo.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblNomeLuogo.setHorizontalAlignment(SwingConstants.TRAILING);
 		
-		JLabel lblIndirizzo = new JLabel("Indirizzo:");
+		JLabel lblIndirizzo = new JLabel("Indirizzo:"); //Label indirizzo
 		lblIndirizzo.setHorizontalAlignment(SwingConstants.TRAILING);
 		lblIndirizzo.setFont(new Font("Tahoma", Font.BOLD, 16));
 		
-		JLabel lblTelefono = new JLabel("Telefono (10 cifre):");
+		JLabel lblTelefono = new JLabel("Telefono (10 cifre):"); //Labl telefono
 		lblTelefono.setHorizontalAlignment(SwingConstants.TRAILING);
 		lblTelefono.setFont(new Font("Tahoma", Font.BOLD, 16));
 		
-		JLabel lblNomeProprietario = new JLabel("Nome proprietario:");
+		JLabel lblNomeProprietario = new JLabel("Nome proprietario:"); //Label nome propretario
 		lblNomeProprietario.setHorizontalAlignment(SwingConstants.TRAILING);
 		lblNomeProprietario.setFont(new Font("Tahoma", Font.BOLD, 16));
 		
-		JComboBox comboBoxSpecializzazione = new JComboBox();
+		JComboBox comboBoxSpecializzazione = new JComboBox(); //ComboBox specializzazione (pizzeria, braceria, pub, hotel, motel....)
 		comboBoxSpecializzazione.addPopupMenuListener(new PopupMenuListener() {
 			public void popupMenuCanceled(PopupMenuEvent e) {
 				//Questo metodo deve esistere per forza
 			}
-			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) { //Quando il popup menu della combobox scompare
+				//Imposta il pannello impostazioni aggiuntive in base all'elemento selezionato della combobox
 				currentImpostazioniAggiuntivePanel = refreshaPannelloImpostazioniAggiuntive(comboBoxSpecializzazione, comboBoxSpecializzazione.getSelectedIndex(), currentImpostazioniAggiuntivePanel);
 			}
 			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
@@ -100,40 +102,43 @@ public class CreazioneLuogoPanel extends JPanel {
 			}
 		});
 		
-		JComboBox comboBoxTipoAttivita = new JComboBox();
+		JComboBox comboBoxTipoAttivita = new JComboBox(); //ComboBox tipo attività (ristorante, alloggio, attrazione)
 		comboBoxTipoAttivita.addPopupMenuListener(new PopupMenuListener() {
 			public void popupMenuCanceled(PopupMenuEvent e) {
 				//Questo metodo deve esistere per forza
 			}
-			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) { //Quando il popup menu della combobox scompare
+				//Fai mostrare alla combobox specializzazione le corrette specializzazioni in base al tipo di attività
 				refreshaComboBoxSpecializzazione(comboBoxSpecializzazione, comboBoxTipoAttivita.getSelectedIndex());
+				//Imposta il pannello impostazioni aggiuntive in base all'elemento selezionato della combobox
 				currentImpostazioniAggiuntivePanel = refreshaPannelloImpostazioniAggiuntive(comboBoxSpecializzazione, comboBoxSpecializzazione.getSelectedIndex(), currentImpostazioniAggiuntivePanel);
 			}
 			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
 				//Questo metodo deve esistere per forza
 			}
 		});
-		comboBoxTipoAttivita.addItem("Ristorante");
-		comboBoxTipoAttivita.addItem("Alloggio");
-		comboBoxTipoAttivita.addItem("Attrazione");
+		comboBoxTipoAttivita.addItem("Ristorante"); //Aggiungo Ristorante alla combo box
+		comboBoxTipoAttivita.addItem("Alloggio"); //Aggiungo Alloggio alla combo box
+		comboBoxTipoAttivita.addItem("Attrazione"); //Aggiungo Attrazione alla combo box
+		//Fai mostrare alla combobox specializzazione le corrette specializzazioni in base al tipo di attività
 		refreshaComboBoxSpecializzazione(comboBoxSpecializzazione, comboBoxTipoAttivita.getSelectedIndex());
 		
-		JLabel labelTipoAttivita = new JLabel("Tipo attivit\u00E0:");
+		JLabel labelTipoAttivita = new JLabel("Tipo attivit\u00E0:"); //Label tipo attività
 		labelTipoAttivita.setHorizontalAlignment(SwingConstants.TRAILING);
 		labelTipoAttivita.setFont(new Font("Tahoma", Font.BOLD, 16));
 		
-		JLabel labelSpecializzazione = new JLabel("Specializzazione:");
+		JLabel labelSpecializzazione = new JLabel("Specializzazione:"); //Label specializzazione
 		labelSpecializzazione.setHorizontalAlignment(SwingConstants.TRAILING);
 		labelSpecializzazione.setFont(new Font("Tahoma", Font.BOLD, 16));
 		
-		JPanel panelAttributiAggiuntivi = new JPanel();
-		panelAttributiAggiuntivi.setBackground(Color.LIGHT_GRAY);
+		JPanel panelAttributiAggiuntivi = new JPanel(); //Pannello attributi aggiuntivi (quello dinamico)
+		panelAttributiAggiuntivi.setBackground(controller.sky);
 		panelAttributiAggiuntivi.setBorder(null);
 		panelAttributiAggiuntivi.setName("panelAttributiAggiuntivi");
 		
-		JButton btnCreaLuogo = new JButton("Crea luogo");
+		JButton btnCreaLuogo = new JButton("Crea luogo"); //Crea bottone
 		
-
+		//Allineamento orizzontale
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
@@ -166,6 +171,7 @@ public class CreazioneLuogoPanel extends JPanel {
 						.addComponent(panelAttributiAggiuntivi, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 338, Short.MAX_VALUE))
 					.addGap(27))
 		);
+		//Allineamento verticale
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
@@ -200,42 +206,48 @@ public class CreazioneLuogoPanel extends JPanel {
 					.addComponent(btnCreaLuogo)
 					.addGap(153))
 		);
-		panelAttributiAggiuntivi.setLayout(new CardLayout(0, 0));
+		panelAttributiAggiuntivi.setLayout(new CardLayout(0, 0)); //Imposta layout pannello attributi aggiuntivi a cardLayout
 		setLayout(groupLayout);
 	
 		btnCreaLuogo.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
+			public void mouseClicked(MouseEvent e) { //Mouse cliccato
+				//Funzione crea luogo del controller, passa le informazioni scelte dall'utente nei vari pannelli
 				controller.creaLuogo(mainFrame, textFieldNome.getText(), textFieldIndirizzo.getText(), textFieldTelefono.getText(), textFieldNomePropretario.getText(), comboBoxTipoAttivita.getSelectedItem().toString(), comboBoxSpecializzazione.getSelectedItem().toString(), currentImpostazioniAggiuntivePanel);
 			}
 		});
 		
+		//Imposta il pannello impostazioni aggiuntive in base all'elemento selezionato della combobox alla creazione del pannello
 		currentImpostazioniAggiuntivePanel = refreshaPannelloImpostazioniAggiuntive(comboBoxSpecializzazione, comboBoxSpecializzazione.getSelectedIndex(), currentImpostazioniAggiuntivePanel);
 		
 		
 	}
-	
+	/**
+	 * Ricarica combo box che mostra le specializzazioni in base al tipo di attività selezionata
+	 * @param box La comboBox da ricaricare
+	 * @param index Indice dell'elemento selezionato nella combo box tipo attività
+	 */
 	public void refreshaComboBoxSpecializzazione(JComboBox box, int index) {
 		
-		box.removeAllItems();
+		box.removeAllItems(); //Rimuovi tutti gli attuali elementi dalla combo box
 		
-		switch(index) {
+		switch(index) { //In base all'index
 		case 0:{
-			box.addItem("Pizzeria");
+			box.addItem("Pizzeria"); //Aggiungi specializzazioni ristorante
 			box.addItem("Braceria");
 			box.addItem("Pub");
 		}break;
 		case 1:{
-			box.addItem("Hotel");
+			box.addItem("Hotel"); //Aggiungi specializzazioni alloggio
 			box.addItem("Motel");
 			box.addItem("B&B");
 		}break;
 		case 2:{
-			box.addItem("Museo");
+			box.addItem("Museo"); //Aggiungi specializzazioni attrazione
 			box.addItem("Zoo");
 			box.addItem("Parco");
 		}break;
 		default:{
-			box.addItem("Pizzeria");
+			box.addItem("Pizzeria"); //Aggiungi specializzazioni ristorante
 			box.addItem("Braceria");
 			box.addItem("Pub");
 		}break;
