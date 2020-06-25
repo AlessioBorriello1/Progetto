@@ -19,8 +19,13 @@ public class PanelImpostazioniAggiuntiveMuseo extends JPanel {
 		lblImpostazioniAggiuntiveMuseo.setFont(new Font("Tahoma", Font.BOLD, 14));
 		
 		JCheckBox chckbxPromozioneStudenti = new JCheckBox("Promozione studenti");
+		chckbxPromozioneStudenti.setName("chckbxPromozioneStudentiMuseo");
 		
 		JComboBox comboBoxTipoMuseo = new JComboBox();
+		comboBoxTipoMuseo.addItem("Artistico");
+		comboBoxTipoMuseo.addItem("Storico");
+		comboBoxTipoMuseo.addItem("archeologico");
+		comboBoxTipoMuseo.setName("comboBoxTipoMuseo");
 		
 		JLabel lblTipoMuseo = new JLabel("Tipo museo");
 		GroupLayout groupLayout = new GroupLayout(this);

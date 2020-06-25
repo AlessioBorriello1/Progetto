@@ -136,7 +136,7 @@ public class MainController {
 		
 		Luogo l = new Luogo();
 		if(nome.contentEquals("") || indirizzo.contentEquals("") || proprietario.contentEquals("") || telefono.contentEquals("")) {
-			mainFrame.createNotificationFrame("Qualcosa è andato storto");
+			mainFrame.createNotificationFrame("Completa tutti i campi!");
 			return false;
 		}
 		

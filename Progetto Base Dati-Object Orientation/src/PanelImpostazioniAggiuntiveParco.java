@@ -17,8 +17,11 @@ public class PanelImpostazioniAggiuntiveParco extends JPanel {
 		lblImpostazioniAggiuntiveParco.setFont(new Font("Tahoma", Font.BOLD, 14));
 		
 		JCheckBox chckbxPromozioneStudenti = new JCheckBox("Promozione studenti");
+		chckbxPromozioneStudenti.setName("chckbxPromozioneStudentiParco");
 		
 		JCheckBox chckbxIngressoGratuito = new JCheckBox("Ingresso gratuito");
+		chckbxIngressoGratuito.setName("chckbxIngressoGratuito");
+		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
