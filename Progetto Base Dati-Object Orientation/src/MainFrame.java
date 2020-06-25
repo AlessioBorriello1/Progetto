@@ -622,6 +622,7 @@ public class MainFrame extends JFrame {
 			
 			panelLogged.setVisible(true); //Rendi il pannello logged visibile
 			panelLogged.setEnabled(true); //Rendi il pannello logged attivo
+			panelLogged.repaint(); //Repainta
 			
 			for(Component lbl: panelLogged.getComponents()) { //Per tutte le componenti del pannello logged
 				

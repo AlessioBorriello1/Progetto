@@ -103,6 +103,7 @@ public class MainController {
 		
 		if(u != null) { //Se utente trovato
 			u.setLuoghiUtente(); //Inizializza array luoghi
+			u.setNumeroLuoghi(u.getLuoghiUtente().size());
 			u.stampaInfo(); //Stampa info utente trovato (Per debug)
 			setLoggedIn(true); //Imposta la variabile del controller loggedIn a vero
 			mainFrame.refreshaLoginButton(); //Ricarica il bottone di login/logout del mainFrame per fargli mostrare l'icona corretta
@@ -135,11 +136,11 @@ public class MainController {
 
 	public boolean creaLuogo(MainFrame mainFrame, String nome, String indirizzo, String telefono, String proprietario, String tipoAttivita, String specializzazione, JPanel pannelloImpostazioniAggiuntive) {
 		
-		
-		
 		LuogoDAO dao = new LuogoDAO();
 		if(dao.creaLuogo(this, mainFrame, nome, indirizzo, telefono, proprietario, tipoAttivita, specializzazione, pannelloImpostazioniAggiuntive, getUtente())) {
 			System.out.println("Operazione riuscita");
+			getUtente().setNumeroLuoghi(getUtente().getNumeroLuoghi() + 1); //Aumenta numero dei luoghi di quell'utente
+			mainFrame.refreshaPannelloInfo(); //Refresha pannello
 			return true;
 		}else {
 			System.out.println("Operazione fallita");

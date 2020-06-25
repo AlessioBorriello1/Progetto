@@ -163,8 +163,6 @@ public class LuogoDAO {
 			Statement st = con.createStatement(); //Creo statement
 			ResultSet rs = st.executeQuery(q); //Eseguo la query contenuta in stringa q
 			
-			System.out.println("Query eseguita");
-			
 			List<Luogo> luoghi = new ArrayList<Luogo>();
 			
 			while(rs.next()) {
@@ -177,8 +175,6 @@ public class LuogoDAO {
 				float mediaRecensioni = rs.getFloat("MediaRecensioni"); //Media recensioni
 				String tipoAttivita = rs.getString("tipoattivita"); //Tipo attività (Ristorante, Alloggio, Attrazione)
 				String attributoAttivita = rs.getString("attributoattivita"); //Specializzazione attività ((Pizzeria, Ristorante, Braceria) (Hotel, Motel, B&B) (Intrattenimento, Culturale))
-				
-				System.out.println(ID);
 				
 				if(tipoAttivita.contentEquals("Ristorante")) {
 					
@@ -194,8 +190,6 @@ public class LuogoDAO {
 					l.setTelefono(telefono);
 					l.setAttributoAttivita(attributoAttivita);
 					l.setTipoAttivita(tipoAttivita);
-					
-					System.out.println("Adding ristorante");
 					luoghi.add(l);
 					
 				}else if(tipoAttivita.contentEquals("Alloggio")) {
@@ -236,7 +230,107 @@ public class LuogoDAO {
 			
 			con.close(); //Chiudi connessione
 			st.close(); //Chiudi statement
-			return luoghi; //Restituisci utente
+			return luoghi; //Restituisci lista luoghi
+			
+		}catch(Exception e) { //Error catching
+			System.out.println(e);
+			return null;
+		}
+		
+	}
+
+	public Luogo getLuogoByID(int ID) {
+		
+		try {
+			
+			Class.forName("com.mysql.jdbc.Driver");
+			String q = "Select * from luogo where IdLuogo = '" + ID + "'" ; //Inizializzo query
+			
+			String connectionURL = MainController.URL; //URL di connessione
+
+	        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
+			Statement st = con.createStatement(); //Creo statement
+			ResultSet rs = st.executeQuery(q); //Eseguo la query contenuta in stringa q
+			
+			List<Luogo> luoghi = new ArrayList<Luogo>();
+			
+			if(rs.next()) { //Luogo trovato
+				
+				String nomeUtente = rs.getString("Idutente"); //Nickname utente
+				String nome = rs.getString("Nome"); //Nome luogo
+				String indirizzo = rs.getString("Indirizzo"); //Indirizzo luogo
+				String telefono = rs.getString("Telefono"); //Numero telefono luogo
+				String proprietario = rs.getString("Proprietario"); //Nome proprietario
+				float mediaRecensioni = rs.getFloat("MediaRecensioni"); //Media recensioni
+				String tipoAttivita = rs.getString("tipoattivita"); //Tipo attività (Ristorante, Alloggio, Attrazione)
+				String attributoAttivita = rs.getString("attributoattivita"); //Specializzazione attività ((Pizzeria, Ristorante, Braceria) (Hotel, Motel, B&B) (Intrattenimento, Culturale))
+				
+				System.out.println(ID);
+				
+				if(tipoAttivita.contentEquals("Ristorante")) {
+					
+					RistoranteDAO dao = new RistoranteDAO();
+					Luogo l = dao.getRistoranteByID(ID, attributoAttivita);
+					
+					l.setID(ID);
+					l.setIndirizzo(indirizzo);
+					l.setMediaRecensioni(mediaRecensioni);
+					l.setNome(nome);
+					l.setProprietario(proprietario);
+					l.setNomeUtente(nomeUtente);
+					l.setTelefono(telefono);
+					l.setAttributoAttivita(attributoAttivita);
+					l.setTipoAttivita(tipoAttivita);
+					
+					con.close(); //Chiudi connessione
+					st.close(); //Chiudi statement
+					return l; //Restituisci luogo
+					
+				}else if(tipoAttivita.contentEquals("Alloggio")) {
+					
+					AlloggioDAO dao = new AlloggioDAO();
+					Luogo l = dao.getAlloggioByID(ID, attributoAttivita);
+					
+					l.setID(ID);
+					l.setIndirizzo(indirizzo);
+					l.setMediaRecensioni(mediaRecensioni);
+					l.setNome(nome);
+					l.setProprietario(proprietario);
+					l.setNomeUtente(nomeUtente);
+					l.setTelefono(telefono);
+					l.setAttributoAttivita(attributoAttivita);
+					l.setTipoAttivita(tipoAttivita);
+					
+					con.close(); //Chiudi connessione
+					st.close(); //Chiudi statement
+					return l; //Restituisci luogo
+					
+				}else {
+					
+					AttrazioneDAO dao = new AttrazioneDAO();
+					Luogo l = dao.getAttrazioneByID(ID, attributoAttivita);
+					l.setID(ID);
+					l.setIndirizzo(indirizzo);
+					l.setMediaRecensioni(mediaRecensioni);
+					l.setNome(nome);
+					l.setProprietario(proprietario);
+					l.setNomeUtente(nomeUtente);
+					l.setTelefono(telefono);
+					l.setAttributoAttivita(attributoAttivita);
+					l.setTipoAttivita(tipoAttivita);
+					
+					con.close(); //Chiudi connessione
+					st.close(); //Chiudi statement
+					return l; //Restituisci luogo
+				}
+				
+			}else { //Luogo non trovato
+				
+				con.close(); //Chiudi connessione
+				st.close(); //Chiudi statement
+				return null; //Restituisci luogo
+				
+			}
 			
 		}catch(Exception e) { //Error catching
 			System.out.println(e);
