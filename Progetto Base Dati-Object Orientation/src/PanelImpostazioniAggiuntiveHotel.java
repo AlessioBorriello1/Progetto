@@ -15,7 +15,6 @@ import javax.swing.SpinnerNumberModel;
 
 public class PanelImpostazioniAggiuntiveHotel extends JPanel {
 	
-
 	public PanelImpostazioniAggiuntiveHotel() {
 		setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		
@@ -56,7 +55,7 @@ public class PanelImpostazioniAggiuntiveHotel extends JPanel {
 		});
 		
 		JLabel lblNumeroStanze = new JLabel("Numero stanze");
-		lblNumeroStanze.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblNumeroStanze.setFont(new Font("Tahoma", Font.BOLD, 11));
 		
 		JSpinner spinnerNumeroStelle = new JSpinner();
 		spinnerNumeroStelle.setModel(new SpinnerNumberModel(1, 1, 5, 1));
@@ -105,4 +104,5 @@ public class PanelImpostazioniAggiuntiveHotel extends JPanel {
 		setLayout(groupLayout);
 
 	}
+
 }

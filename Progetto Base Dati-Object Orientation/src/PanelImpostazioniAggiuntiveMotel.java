@@ -12,7 +12,6 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class PanelImpostazioniAggiuntiveMotel extends JPanel {
-	
 
 	public PanelImpostazioniAggiuntiveMotel() {
 		setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
@@ -54,7 +53,7 @@ public class PanelImpostazioniAggiuntiveMotel extends JPanel {
 		});
 		
 		JLabel lblNumeroStanze = new JLabel("Numero stanze");
-		lblNumeroStanze.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblNumeroStanze.setFont(new Font("Tahoma", Font.BOLD, 11));
 		
 		JCheckBox chckbxAssistenzaAutovetture = new JCheckBox("Assistenza autovetture");
 		chckbxAssistenzaAutovetture.setName("chckbxAssistenzaAutovetture");
@@ -96,4 +95,5 @@ public class PanelImpostazioniAggiuntiveMotel extends JPanel {
 		
 
 	}
+
 }

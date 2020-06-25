@@ -1,5 +1,6 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.Statement;
 
 import javax.swing.JCheckBox;
@@ -67,6 +68,75 @@ public class AlloggioDAO {
 		}catch(Exception e) { //Error catching
 			System.out.println(e);
 			return false; //Operazione inserimento fallita, restituisce false
+		}
+		
+	}
+	
+	public Alloggio getAlloggioByID(int ID, String specializzazione) {
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			String connectionURL = MainController.URL; //URL di connessione
+	
+	        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
+	        Statement st = con.createStatement(); //Creo statement
+	        
+	        String q = "SELECT * FROM alloggio WHERE idluogo = '" + ID + "'";
+	        ResultSet rs = st.executeQuery(q);
+	        
+	        rs.next(); //Vai a inizio risultati
+	        
+	        boolean piscina = rs.getBoolean("piscina");
+	        boolean wifi = rs.getBoolean("WiFi");
+	        int numeroStanze = rs.getInt("NumeroStanze");
+	        
+	        rs.close();
+	        
+			if(specializzazione.contentEquals("Hotel")) {
+				q = "SELECT * FROM hotel WHERE idalloggio = '" + ID + "'";
+				ResultSet r = st.executeQuery(q); //Eseguo la query contenuta in stringa
+				r.next(); //Vai a inizio risultati
+				int numeroStelle = r.getInt("numerostelle");
+				Hotel h = new Hotel();
+				h.setNumeroStanze(numeroStanze);
+				h.setPiscina(piscina);
+				h.setWifi(wifi);
+				h.setNumeroStelle(numeroStelle);
+				con.close(); //Chiudi connessione
+				st.close(); //Chiudi statement
+				return h;
+			}else if(specializzazione.contentEquals("Motel")) {
+				q = "SELECT * FROM motel WHERE idalloggio = '" + ID + "'";
+				ResultSet r = st.executeQuery(q); //Eseguo la query contenuta in stringa
+				r.next(); //Vai a inizio risultati
+				boolean assitenza = r.getBoolean("assistenzaautovetture");
+				Motel m = new Motel();
+				m.setNumeroStanze(numeroStanze);
+				m.setPiscina(piscina);
+				m.setWifi(wifi);
+				m.setAssistenzaAuto(assitenza);
+				con.close(); //Chiudi connessione
+				st.close(); //Chiudi statement
+				return m;
+			}else {
+				q = "SELECT * FROM bed&breakfast WHERE idalloggio = '" + ID + "'";
+				ResultSet r = st.executeQuery(q); //Eseguo la query contenuta in stringa
+				r.next(); //Vai a inizio risultati
+				boolean colazione = r.getBoolean("colazione");
+				BB b = new BB();
+				b.setNumeroStanze(numeroStanze);
+				b.setPiscina(piscina);
+				b.setWifi(wifi);
+				b.setColazione(colazione);
+				con.close(); //Chiudi connessione
+				st.close(); //Chiudi statement
+				return b;
+			}
+			
+		}catch(Exception e) { //Error catching
+			System.out.println(e);
+			return null; //Operazione inserimento fallita, restituisce false
 		}
 		
 	}

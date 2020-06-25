@@ -102,6 +102,7 @@ public class MainController {
 		setUtente(u); //Imposta il nuovo utente trovato (o meno) nella variabile utente del controller
 		
 		if(u != null) { //Se utente trovato
+			u.setLuoghiUtente(); //Inizializza array luoghi
 			u.stampaInfo(); //Stampa info utente trovato (Per debug)
 			setLoggedIn(true); //Imposta la variabile del controller loggedIn a vero
 			mainFrame.refreshaLoginButton(); //Ricarica il bottone di login/logout del mainFrame per fargli mostrare l'icona corretta

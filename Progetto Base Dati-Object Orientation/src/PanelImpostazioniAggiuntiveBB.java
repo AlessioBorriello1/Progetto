@@ -13,7 +13,6 @@ import javax.swing.JTextField;
 
 public class PanelImpostazioniAggiuntiveBB extends JPanel {
 
-	
 	public PanelImpostazioniAggiuntiveBB() {
 		setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		
@@ -54,7 +53,7 @@ public class PanelImpostazioniAggiuntiveBB extends JPanel {
 		});
 		
 		JLabel lblNumeroStanze = new JLabel("Numero stanze");
-		lblNumeroStanze.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblNumeroStanze.setFont(new Font("Tahoma", Font.BOLD, 11));
 		
 		JCheckBox chckbxColazione = new JCheckBox("Colazione");
 		chckbxColazione.setName("chckbxColazione");
@@ -95,4 +94,5 @@ public class PanelImpostazioniAggiuntiveBB extends JPanel {
 		setLayout(groupLayout);
 
 	}
+
 }

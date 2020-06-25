@@ -1,5 +1,6 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.Statement;
 
 import javax.swing.JCheckBox;
@@ -30,10 +31,10 @@ public class RistoranteDAO {
 				System.out.println("Inserimento pizzeria");
 				boolean asporto = ((JCheckBox)c.getComponentByName(pannelloImpostazioniAggiuntive,  "chckbxAsporto")).isSelected();
 				
-				String q2 = "INSERT INTO pizzeria(idristorante, asporto)\r\n" + 
-						"VALUES ('"+ ID + "','" + ((asporto) ? 1:0) + "');"; //Inizializzo query 3
+				q = "INSERT INTO pizzeria(idristorante, asporto)\r\n" + 
+					"VALUES ('"+ ID + "','" + ((asporto) ? 1:0) + "');"; //Inizializzo query 3
 				
-				st.executeUpdate(q2); //Eseguo la query contenuta in stringa q3
+				st.executeUpdate(q); //Eseguo la query contenuta in stringa q3
 				con.close(); //Chiudi connessione
 				st.close(); //Chiudi statement
 				return true;
@@ -42,10 +43,10 @@ public class RistoranteDAO {
 				System.out.println("Inserimento braceria");
 				String tipoCarne = ((JComboBox)c.getComponentByName(pannelloImpostazioniAggiuntive, "comboBoxTipoCarne")).getSelectedItem().toString();
 				
-				String q2 = "INSERT INTO braceria(idristorante, tipocarne)\r\n" + 
-						"VALUES ('"+ ID + "','" + tipoCarne + "');"; //Inizializzo query 3
+				q = "INSERT INTO braceria(idristorante, tipocarne)\r\n" + 
+					"VALUES ('"+ ID + "','" + tipoCarne + "');"; //Inizializzo query 3
 				
-				st.executeUpdate(q2); //Eseguo la query contenuta in stringa q3
+				st.executeUpdate(q); //Eseguo la query contenuta in stringa q3
 				con.close(); //Chiudi connessione
 				st.close(); //Chiudi statement
 				return true;
@@ -54,10 +55,10 @@ public class RistoranteDAO {
 				System.out.println("Inserimento pub");
 				String tipoBirra = ((JComboBox)c.getComponentByName(pannelloImpostazioniAggiuntive, "comboBoxTipoBirra")).getSelectedItem().toString();
 				
-				String q2 = "INSERT INTO braceria(idristorante, tipobirra)\r\n" + 
-						"VALUES ('"+ ID + "','" + tipoBirra + "');"; //Inizializzo query 3
+				q = "INSERT INTO braceria(idristorante, tipobirra)\r\n" + 
+					"VALUES ('"+ ID + "','" + tipoBirra + "');"; //Inizializzo query 3
 				
-				st.executeUpdate(q2); //Eseguo la query contenuta in stringa q3
+				st.executeUpdate(q); //Eseguo la query contenuta in stringa q3
 				con.close(); //Chiudi connessione
 				st.close(); //Chiudi statement
 				return true;
@@ -68,6 +69,71 @@ public class RistoranteDAO {
 			System.out.println(e);
 			return false; //Operazione inserimento fallita, restituisce false
 		}
+		
+	}
+	
+	public Ristorante getRistoranteByID(int ID, String specializzazione) {
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			String connectionURL = MainController.URL; //URL di connessione
+	
+	        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
+	        Statement st = con.createStatement(); //Creo statement
+	        
+	        String q = "SELECT * FROM ristorante WHERE idluogo = '" + ID + "'";
+	        ResultSet rs = st.executeQuery(q);
+	        
+	        rs.next(); //Vai a inizio risultati
+	        
+	        boolean vegano = rs.getBoolean("vegano");
+	        String nazione = rs.getString("tiporistorante");
+	        rs.close();
+	        
+			if(specializzazione.contentEquals("Pizzeria")) {
+				q = "SELECT * FROM pizzeria WHERE idristorante = '" + ID + "'";
+				ResultSet r = st.executeQuery(q); //Eseguo la query contenuta in stringa
+				r.next(); //Vai a inizio risultati
+				boolean asporto = r.getBoolean("asporto");
+				Pizzeria p = new Pizzeria();
+				p.setVegano(vegano);
+				p.setNazionalitaCibo(nazione);
+				p.setAsporto(asporto);
+				con.close(); //Chiudi connessione
+				st.close(); //Chiudi statement
+				return p;
+			}else if(specializzazione.contentEquals("Braceria")) {
+				q = "SELECT * FROM braceria WHERE idristorante = '" + ID + "'";
+				ResultSet r = st.executeQuery(q); //Eseguo la query contenuta in stringa
+				r.next(); //Vai a inizio risultati
+				String tipoCarne = r.getString("tipocarne");
+				Braceria b = new Braceria();
+				b.setVegano(vegano);
+				b.setNazionalitaCibo(nazione);
+				b.setTipoCarne(tipoCarne);
+				con.close(); //Chiudi connessione
+				st.close(); //Chiudi statement
+				return b;
+			}else {
+				q = "SELECT * FROM pub WHERE idristorante = '" + ID + "'";
+				ResultSet r = st.executeQuery(q); //Eseguo la query contenuta in stringa
+				r.next(); //Vai a inizio risultati
+				String tipoBirra = r.getString("tipobirra");
+				Pub p = new Pub();
+				p.setVegano(vegano);
+				p.setNazionalitaCibo(nazione);
+				p.setTipoBirra(tipoBirra);
+				con.close(); //Chiudi connessione
+				st.close(); //Chiudi statement
+				return p;
+			}
+			
+		}catch(Exception e) { //Error catching
+			System.out.println(e);
+			return null; //Operazione inserimento fallita, restituisce false
+		}
+		
 		
 	}
 	

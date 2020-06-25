@@ -70,4 +70,5 @@ public class PanelImpostazioniAggiuntivePizzeria extends JPanel {
 		setLayout(groupLayout);
 
 	}
+
 }

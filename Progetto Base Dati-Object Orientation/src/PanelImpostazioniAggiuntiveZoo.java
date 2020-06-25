@@ -60,4 +60,5 @@ public class PanelImpostazioniAggiuntiveZoo extends JPanel {
 		setLayout(groupLayout);
 
 	}
+
 }

@@ -1,5 +1,6 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.Statement;
 
 import javax.swing.JCheckBox;
@@ -67,6 +68,68 @@ public class AttrazioneDAO {
 			System.out.println(e);
 			return false; //Operazione inserimento fallita, restituisce false
 		}
+		
+	}
+	
+	public Attrazione getAttrazioneByID(int ID, String specializzazione) {
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			String connectionURL = MainController.URL; //URL di connessione
+	
+	        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
+	        Statement st = con.createStatement(); //Creo statement
+	        
+	        String q = "SELECT * FROM attrazione WHERE idluogo = '" + ID + "'";
+	        ResultSet rs = st.executeQuery(q);
+	        
+	        rs.next(); //Vai a inizio risultati
+	        
+	        boolean promozione = rs.getBoolean("promozionestudenti");
+	        
+	        rs.close();
+	        
+			if(specializzazione.contentEquals("Museo")) {
+				q = "SELECT * FROM museo WHERE idattrazione = '" + ID + "'";
+				ResultSet r = st.executeQuery(q); //Eseguo la query contenuta in stringa
+				r.next(); //Vai a inizio risultati
+				String tipoMuseo = r.getString("tipomuseo");
+				Museo m = new Museo();
+				m.setPromozioneStudenti(promozione);
+				m.setTipoMuseo(tipoMuseo);
+				con.close(); //Chiudi connessione
+				st.close(); //Chiudi statement
+				return m;
+			}else if(specializzazione.contentEquals("Zoo")) {
+				q = "SELECT * FROM zoo WHERE idattrazione = '" + ID + "'";
+				ResultSet r = st.executeQuery(q); //Eseguo la query contenuta in stringa
+				r.next(); //Vai a inizio risultati
+				String specie = r.getString("specie");
+				Zoo z = new Zoo();
+				z.setPromozioneStudenti(promozione);
+				z.setSpecie(specie);
+				con.close(); //Chiudi connessione
+				st.close(); //Chiudi statement
+				return z;
+			}else {
+				q = "SELECT * FROM parco WHERE idattrazione = '" + ID + "'";
+				ResultSet r = st.executeQuery(q); //Eseguo la query contenuta in stringa
+				r.next(); //Vai a inizio risultati
+				boolean ingresso = r.getBoolean("ingressogratuito");
+				Parco p = new Parco();
+				p.setPromozioneStudenti(promozione);
+				p.setIngressoGratuito(ingresso);
+				con.close(); //Chiudi connessione
+				st.close(); //Chiudi statement
+				return p;
+			}
+			
+		}catch(Exception e) { //Error catching
+			System.out.println(e);
+			return null; //Operazione inserimento fallita, restituisce false
+		}
+		
 		
 	}
 	

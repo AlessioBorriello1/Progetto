@@ -76,4 +76,5 @@ public class PanelImpostazioniAggiuntiveBracieria extends JPanel {
 		setLayout(groupLayout);
 
 	}
+
 }

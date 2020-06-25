@@ -1,3 +1,6 @@
+import java.awt.Component;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Utente {
 
@@ -6,12 +9,17 @@ public class Utente {
 	private int numeroRecensioni; //Numero delle recensioni dell'utente
 	private int numeroLuoghi; //Numero dei luoghi in possesso dell'utente
 	
+	private List<Luogo> luoghiUtente;
+	
 	/**
 	 * Stampa sulla console informazioni dell'oggetto utente che chiama la funzione
 	 */
 	public void stampaInfo() {
 		
 		System.out.println("Nome utente: " + nomeUtente + " Email: " + email + " Numero luoghi: " + numeroLuoghi + " Numero recensioni: " + numeroRecensioni);
+		for(Luogo l : luoghiUtente) {
+			System.out.println(l.getNome());
+		}
 		
 	}
 	
@@ -47,7 +55,21 @@ public class Utente {
 	public void setNumeroLuoghi(int numeroLuoghi) {
 		this.numeroLuoghi = numeroLuoghi;
 	}
+
 	
+	//Setter e getter lista luoghi utente
+	public List<Luogo> getLuoghiUtente() {
+		return luoghiUtente;
+	}
+	public void setLuoghiUtente(List<Luogo> luoghiUtente) {
+		this.luoghiUtente = luoghiUtente;
+	}
 	
+	public void setLuoghiUtente() {
+		
+		LuogoDAO dao = new LuogoDAO();
+		this.luoghiUtente = dao.getListaLuoghiByNomeUtente(nomeUtente);
+		
+	}
 	
 }

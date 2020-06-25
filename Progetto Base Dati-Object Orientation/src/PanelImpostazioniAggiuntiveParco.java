@@ -47,4 +47,5 @@ public class PanelImpostazioniAggiuntiveParco extends JPanel {
 		setLayout(groupLayout);
 
 	}
+
 }

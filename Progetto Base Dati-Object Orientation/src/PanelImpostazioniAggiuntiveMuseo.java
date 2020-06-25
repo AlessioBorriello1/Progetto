@@ -59,4 +59,5 @@ public class PanelImpostazioniAggiuntiveMuseo extends JPanel {
 		setLayout(groupLayout);
 
 	}
+
 }
