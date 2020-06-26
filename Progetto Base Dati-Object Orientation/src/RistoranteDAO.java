@@ -55,7 +55,7 @@ public class RistoranteDAO {
 				System.out.println("Inserimento pub");
 				String tipoBirra = ((JComboBox)c.getComponentByName(pannelloImpostazioniAggiuntive, "comboBoxTipoBirra")).getSelectedItem().toString();
 				
-				q = "INSERT INTO braceria(idristorante, tipobirra)\r\n" + 
+				q = "INSERT INTO pub(idristorante, tipobirra)\r\n" + 
 					"VALUES ('"+ ID + "','" + tipoBirra + "');"; //Inizializzo query 3
 				
 				st.executeUpdate(q); //Eseguo la query contenuta in stringa q3

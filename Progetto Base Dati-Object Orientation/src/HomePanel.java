@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Dimension;
+import java.util.List;
 
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
@@ -21,12 +22,17 @@ public class HomePanel extends JPanel {
 	MainController controller;
 	MainFrame mainFrame;
 	JPanel workPanel;
+	private List<Luogo> ricerca; //Array list che contiene la lista dei luoghi in base alla ricerca effettuata
 
 	public HomePanel(MainController controller, MainFrame mainFrame, JPanel workPanel) {
 		
 		this.controller = controller;
 		this.mainFrame = mainFrame;
 		this.workPanel = workPanel;
+		
+		//Pannello appena aperto, effettua la prima ricerca, senza filtri
+		LuogoDAO dao = new LuogoDAO();
+		ricerca = dao.getListaTuttiLuoghi();
 		
 		setBackground(controller.skyWhiter);
 		
@@ -66,15 +72,13 @@ public class HomePanel extends JPanel {
 		panelMostraLuoghi.setViewportView(verticalBox);
 		setLayout(groupLayout);
 		
-		if(controller.getUtente() != null) {
-			for(Luogo l : controller.getUtente().getLuoghiUtente()) {
-				
-				PanelInfoLuogoAnteprima panel = new PanelInfoLuogoAnteprima(controller, l);
-				verticalBox.add(panel);
-				
-				verticalBox.add(Box.createRigidArea(new Dimension(0, 10)));
-				
-			}
+		for(Luogo l : ricerca) {
+			
+			PanelInfoLuogoAnteprima panel = new PanelInfoLuogoAnteprima(controller, mainFrame, l);
+			verticalBox.add(panel);
+			
+			verticalBox.add(Box.createRigidArea(new Dimension(0, 8)));
+			
 		}
 		
 	}

@@ -143,6 +143,8 @@ public class MainController {
 			mainFrame.refreshaPannelloInfo(); //Refresha pannello
 			int ID = dao.getIDLuogoByNomeAndPossessore(nome, proprietario);
 			getUtente().getLuoghiUtente().add(dao.getLuogoByID(ID));
+			mainFrame.createNotificationFrame("Luogo aggiunto correttamente!");
+			mainFrame.cambiaPannelloLavoroALocaliPanel((JPanel)getComponentByName(mainFrame, "workPanel"));
 			return true;
 		}else {
 			System.out.println("Operazione fallita");

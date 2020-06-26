@@ -101,10 +101,10 @@ public class LocaliPanel extends JPanel {
 		
 		for(Luogo l : controller.getUtente().getLuoghiUtente()) {
 			
-			PanelInfoLuogoAnteprima panel = new PanelInfoLuogoAnteprima(controller, l);
+			PanelInfoLuogoAnteprima panel = new PanelInfoLuogoAnteprima(controller, mainFrame, l);
 			verticalBox.add(panel);
 			
-			verticalBox.add(Box.createRigidArea(new Dimension(0, 10)));
+			verticalBox.add(Box.createRigidArea(new Dimension(0, 8)));
 			
 		}
 		

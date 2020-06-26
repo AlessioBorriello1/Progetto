@@ -25,10 +25,10 @@ import javax.swing.JCheckBox;
 
 public class CreazioneLuogoPanel extends JPanel {
 
-	MainController controller; //Controller principale
-	MainFrame mainFrame; //Frame che ha creato il pannello
-	JPanel workPanel; //Pannello con informazioni sul luogo da creare (fisso)
-	JPanel currentImpostazioniAggiuntivePanel = null; //Pannello con informazioni aggiuntive sul luogo da creare (in base al tipo)
+	private MainController controller; //Controller principale
+	private MainFrame mainFrame; //Frame che ha creato il pannello
+	private JPanel workPanel; //Pannello con informazioni sul luogo da creare (fisso)
+	private JPanel currentImpostazioniAggiuntivePanel = null; //Pannello con informazioni aggiuntive sul luogo da creare (in base al tipo)
 	
 	public CreazioneLuogoPanel(MainController controller, MainFrame mainFrame, JPanel workPanel) {
 		

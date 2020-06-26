@@ -56,7 +56,7 @@ public class AlloggioDAO {
 				System.out.println("Inserimento BB");
 				boolean colazione = ((JCheckBox)c.getComponentByName(pannelloImpostazioniAggiuntive,  "chckbxColazione")).isSelected();
 				
-				String q2 = "INSERT INTO bed&breakfast(idalloggio, colazione)\r\n" + 
+				String q2 = "INSERT INTO bedbreakfast(idalloggio, colazione)\r\n" + 
 						"VALUES ('"+ ID + "','" + ((colazione) ? 1:0) + "');"; //Inizializzo query 3
 				
 				st.executeUpdate(q2); //Eseguo la query contenuta in stringa q3
@@ -120,7 +120,7 @@ public class AlloggioDAO {
 				st.close(); //Chiudi statement
 				return m;
 			}else {
-				q = "SELECT * FROM bed&breakfast WHERE idalloggio = '" + ID + "'";
+				q = "SELECT * FROM bedbreakfast WHERE idalloggio = '" + ID + "'";
 				ResultSet r = st.executeQuery(q); //Eseguo la query contenuta in stringa
 				r.next(); //Vai a inizio risultati
 				boolean colazione = r.getBoolean("colazione");
