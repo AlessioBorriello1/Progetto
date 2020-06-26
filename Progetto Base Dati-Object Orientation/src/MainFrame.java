@@ -577,7 +577,7 @@ public class MainFrame extends JFrame {
 			workPanel.repaint();
 			workPanel.revalidate();
 			
-			//Aggiungi nuovo RegistrazionePanel al workPanel
+			//Aggiungi nuovo CreazioneLuogoPanel al workPanel
 			CreazioneLuogoPanel panel = new CreazioneLuogoPanel(controller, this, workPanel);
 			controller.setCurrentPanel(panel); //Imposta il pannello appena creato nella variabile currentPanel del controller
 			workPanel.add(panel);
@@ -586,7 +586,43 @@ public class MainFrame extends JFrame {
 		}
 		
 	}
+	
+	public void cambiaPannelloLavoroAPanelInfoLuogo(JPanel workPanel, Luogo l) {
+		
+		if(controller.getCurrentPanel() == null || !controller.getCurrentPanel().getClass().toString().contentEquals("class PanelInfoLuogo")) { //Se non sono già sullo stesso panel
+			//Rimuovi vecchio panel dal workPanel
+			workPanel.removeAll();
+			workPanel.repaint();
+			workPanel.revalidate();
+			
+			//Aggiungi nuovo PanelInfoLuogo al workPanel
+			PanelInfoLuogo panel = new PanelInfoLuogo(controller, this, workPanel, l);
+			controller.setCurrentPanel(panel); //Imposta il pannello appena creato nella variabile currentPanel del controller
+			workPanel.add(panel);
+			workPanel.repaint();
+			workPanel.revalidate();
+		}
+		
+	}
 
+	public void cambiaPannelloLavoroAPanelScriviRecensione(JPanel workPanel, Luogo l) {
+		
+		if(controller.getCurrentPanel() == null || !controller.getCurrentPanel().getClass().toString().contentEquals("class PanelScriviRecensione")) { //Se non sono già sullo stesso panel
+			//Rimuovi vecchio panel dal workPanel
+			workPanel.removeAll();
+			workPanel.repaint();
+			workPanel.revalidate();
+			
+			//Aggiungi nuovo PanelInfoLuogo al workPanel
+			PanelScriviRecensione panel = new PanelScriviRecensione(controller, this, workPanel, l);
+			controller.setCurrentPanel(panel); //Imposta il pannello appena creato nella variabile currentPanel del controller
+			workPanel.add(panel);
+			workPanel.repaint();
+			workPanel.revalidate();
+		}
+		
+	}
+	
 	/**
 	 * Ricarica bottone login/logout per mostrare la giusta icona (Se di login o di logout)
 	 */

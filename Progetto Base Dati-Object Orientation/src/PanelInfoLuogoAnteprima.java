@@ -23,32 +23,39 @@ public class PanelInfoLuogoAnteprima extends JPanel {
 
 	private MainController controller;
 	private MainFrame mainFrame;
+	private JPanel workPanel;
+	boolean cliccabile;
 	
-	public PanelInfoLuogoAnteprima(MainController controller, MainFrame mainFrame, Luogo l) {
+	public PanelInfoLuogoAnteprima(MainController controller, MainFrame mainFrame, Luogo l, boolean cliccabile, JPanel workPanel) {
 		
 		this.controller = controller;
 		this.mainFrame = mainFrame;
+		this.workPanel = workPanel;
+		this.cliccabile = cliccabile;
 		
 		setMaximumSize(new Dimension(786, 130));
 		addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				
-				if(controller.getUtente() != null) {
-					if(l.getNomeUtente().contentEquals(controller.getUtente().getNomeUtente())) {
-						System.out.println("Modifica luogo");
+				if(cliccabile) {
+					if(controller.getUtente() != null) {
+						if(l.getNomeUtente().contentEquals(controller.getUtente().getNomeUtente())) {
+							System.out.println("Modifica luogo");
+						}else {
+							mainFrame.cambiaPannelloLavoroAPanelInfoLuogo(workPanel, l);
+						}
 					}else {
-						System.out.println("Visita luogo");
+						mainFrame.cambiaPannelloLavoroAPanelInfoLuogo(workPanel, l);
 					}
-				}else {
-					mainFrame.createNotificationFrame("Devi prima eseguire il Login!");
-					mainFrame.cambiaPannelloLavoroALoginPanel((JPanel)controller.getComponentByName(mainFrame, "workPanel"));
 				}
-			
 			}
 			
 		});
 		
-		setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		if(cliccabile) {
+			setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		}else {
+			setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+		}
 		setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		setBackground(controller.sky);
 		

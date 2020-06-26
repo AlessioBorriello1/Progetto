@@ -74,7 +74,7 @@ public class HomePanel extends JPanel {
 		
 		for(Luogo l : ricerca) {
 			
-			PanelInfoLuogoAnteprima panel = new PanelInfoLuogoAnteprima(controller, mainFrame, l);
+			PanelInfoLuogoAnteprima panel = new PanelInfoLuogoAnteprima(controller, mainFrame, l, true, workPanel);
 			verticalBox.add(panel);
 			
 			verticalBox.add(Box.createRigidArea(new Dimension(0, 8)));
@@ -82,4 +82,5 @@ public class HomePanel extends JPanel {
 		}
 		
 	}
+	
 }

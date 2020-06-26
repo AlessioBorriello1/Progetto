@@ -152,6 +152,7 @@ public class MainController {
 		}
 			
 	}
+
 	
 	//Getter per variabile currentPanel
 	public JPanel getCurrentPanel() {

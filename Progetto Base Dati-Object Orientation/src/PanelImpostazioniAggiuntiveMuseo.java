@@ -24,7 +24,7 @@ public class PanelImpostazioniAggiuntiveMuseo extends JPanel {
 		JComboBox comboBoxTipoMuseo = new JComboBox();
 		comboBoxTipoMuseo.addItem("Artistico");
 		comboBoxTipoMuseo.addItem("Storico");
-		comboBoxTipoMuseo.addItem("archeologico");
+		comboBoxTipoMuseo.addItem("Archeologico");
 		comboBoxTipoMuseo.setName("comboBoxTipoMuseo");
 		
 		JLabel lblTipoMuseo = new JLabel("Tipo museo");
