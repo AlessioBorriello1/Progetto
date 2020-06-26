@@ -141,13 +141,14 @@ public class MainController {
 			System.out.println("Operazione riuscita");
 			getUtente().setNumeroLuoghi(getUtente().getNumeroLuoghi() + 1); //Aumenta numero dei luoghi di quell'utente
 			mainFrame.refreshaPannelloInfo(); //Refresha pannello
+			int ID = dao.getIDLuogoByNomeAndPossessore(nome, proprietario);
+			getUtente().getLuoghiUtente().add(dao.getLuogoByID(ID));
 			return true;
 		}else {
 			System.out.println("Operazione fallita");
 			return false;
 		}
 			
-		
 	}
 	
 	//Getter per variabile currentPanel

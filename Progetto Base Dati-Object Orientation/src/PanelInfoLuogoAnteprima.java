@@ -7,50 +7,189 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.Cursor;
+import javax.swing.SwingConstants;
+import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class PanelInfoLuogoAnteprima extends JPanel {
 
-	public PanelInfoLuogoAnteprima() {
-		setBorder(new LineBorder(new Color(0, 0, 0)));
+	MainController controller;
+	
+	public PanelInfoLuogoAnteprima(MainController controller, Luogo l) {
 		
-		JLabel lblPannello = new JLabel("Pannello 2");
 		
-		JLabel lblPannello_1 = new JLabel("Pannello 1");
+		addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+			
+				if(l.getNomeUtente().contentEquals(controller.getUtente().getNomeUtente())) {
+					System.out.println("Modifica luogo");
+				}else {
+					System.out.println("Visita luogo");
+				}
+			
+			}
+		});
 		
-		JLabel lblPannello_2 = new JLabel("Pannello 3");
+		this.controller = controller;
 		
-		JLabel lblPannello_3 = new JLabel("Pannello 4");
+		setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
+		setBackground(controller.sky);
+		
+		JLabel labelImmagine = new JLabel("");
+		labelImmagine.setIcon(new ImageIcon(PanelInfoLuogoAnteprima.class.getResource("/icons/AnteprimaPizzeria.png")));
+		labelImmagine.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		JLabel lblId = new JLabel("ID: " + l.getID());
+		lblId.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblId.setFont(new Font("Tahoma", Font.BOLD, 9));
+		lblId.setForeground(controller.egyptian);
+		
+		JLabel lblCreatoDa = new JLabel("Creato da: " + l.getNomeUtente());
+		lblCreatoDa.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblCreatoDa.setFont(new Font("Tahoma", Font.BOLD, 9));
+		lblCreatoDa.setForeground(controller.egyptian);
+		
+		JLabel lblNome = new JLabel("Nome: ");
+		lblNome.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNome.setForeground(controller.egyptian);
+		
+		JLabel lblIndirizzo = new JLabel("Indirizzo: ");
+		lblIndirizzo.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblIndirizzo.setForeground(controller.egyptian);
+		
+		JLabel lblTelefono = new JLabel("Telefono: ");
+		lblTelefono.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblTelefono.setForeground(controller.egyptian);
+		
+		JLabel lblProprietario = new JLabel("Proprietario: ");
+		lblProprietario.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblProprietario.setForeground(controller.egyptian);
+		
+		JLabel lblValutazione = new JLabel("Valutazione: ");
+		lblValutazione.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblValutazione.setForeground(controller.egyptian);
+		
+		JLabel lblTipo = new JLabel("Tipo: ");
+		lblTipo.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblTipo.setForeground(controller.egyptian);
+		
+		String specializzazione = l.getAttributoAttivita();
+		JLabel lblSpecializzazione = new JLabel("Specializzazione: ");
+		lblSpecializzazione.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblSpecializzazione.setForeground(controller.egyptian);
+		
+		JPanel panelInformazioniUniche = new JPanel();
+		panelInformazioniUniche.setBackground(getBackground());
+		
+		JLabel lblNomeVariabile = new JLabel(l.getNome());
+		lblNomeVariabile.setForeground(controller.steel);
+		
+		JLabel lblIndirizzoVariabile = new JLabel(l.getIndirizzo());
+		lblIndirizzoVariabile.setForeground(controller.steel);
+		
+		JLabel lblTelefonoVariabile = new JLabel(l.getTelefono());
+		lblTelefonoVariabile.setForeground(controller.steel);
+		
+		JLabel lblProprietarioVariabile = new JLabel(l.getProprietario());
+		lblProprietarioVariabile.setForeground(controller.steel);
+		
+		JLabel lblValutazioneVariabile = new JLabel(String.valueOf(l.getMediaRecensioni()));
+		lblValutazioneVariabile.setForeground(controller.steel);
+		
+		JLabel lblTipoVariabile = new JLabel(l.getTipoAttivita());
+		lblTipoVariabile.setForeground(controller.steel);
+		
+		JLabel lblSpecializzazioneVariabile = new JLabel(specializzazione);
+		lblSpecializzazioneVariabile.setForeground(controller.steel);
+		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
+					.addComponent(labelImmagine, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(lblPannello_1)
-							.addPreferredGap(ComponentPlacement.RELATED, 510, Short.MAX_VALUE)
-							.addComponent(lblPannello_2))
+							.addComponent(lblNome)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblNomeVariabile))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(lblPannello)
-							.addPreferredGap(ComponentPlacement.RELATED, 510, Short.MAX_VALUE)
-							.addComponent(lblPannello_3)))
-					.addContainerGap())
+							.addComponent(lblIndirizzo)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblIndirizzoVariabile))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(lblTelefono)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblTelefonoVariabile))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(lblProprietario)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblProprietarioVariabile))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(lblValutazione)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblValutazioneVariabile)))
+					.addGap(79)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(lblSpecializzazione)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblSpecializzazioneVariabile))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(lblTipo)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblTipoVariabile))
+						.addComponent(panelInformazioniUniche, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+							.addComponent(lblCreatoDa)
+							.addContainerGap())
+						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+							.addComponent(lblId)
+							.addGap(19))))
 		);
 		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
+			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblPannello_1)
-						.addComponent(lblPannello_2))
-					.addPreferredGap(ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblPannello)
-						.addComponent(lblPannello_3))
+						.addComponent(lblNome)
+						.addComponent(lblNomeVariabile)
+						.addComponent(lblTipo)
+						.addComponent(lblTipoVariabile)
+						.addComponent(lblCreatoDa))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblIndirizzo)
+								.addComponent(lblIndirizzoVariabile)
+								.addComponent(lblSpecializzazione)
+								.addComponent(lblSpecializzazioneVariabile))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+										.addComponent(lblTelefono)
+										.addComponent(lblTelefonoVariabile))
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+										.addComponent(lblProprietario)
+										.addComponent(lblProprietarioVariabile))
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+										.addComponent(lblValutazione)
+										.addComponent(lblValutazioneVariabile)))
+								.addComponent(panelInformazioniUniche, GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)))
+						.addComponent(lblId))
 					.addContainerGap())
+				.addComponent(labelImmagine, GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
 		);
 		setLayout(groupLayout);
 		
 	}
-
 }

@@ -1,4 +1,6 @@
 import java.awt.Color;
+import java.awt.Dimension;
+
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.GroupLayout;
@@ -14,6 +16,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.Box;
 import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 
 public class LocaliPanel extends JPanel {
 
@@ -30,8 +33,12 @@ public class LocaliPanel extends JPanel {
 		setBackground(controller.skyWhiter);
 		
 		JPanel panelControl = new JPanel();
+		panelControl.setBackground(controller.sky);
 		
 		JScrollPane panelLocali = new JScrollPane();
+		panelLocali.setBorder(null);
+		panelLocali.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		panelLocali.getVerticalScrollBar().setUnitIncrement(16);
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -53,6 +60,9 @@ public class LocaliPanel extends JPanel {
 		);
 		
 		Box verticalBox = Box.createVerticalBox();
+		verticalBox.setOpaque(true);
+		verticalBox.setBackground(controller.skyWhiter);
+		panelLocali.setBackground(controller.skyWhiter);
 		panelLocali.setViewportView(verticalBox);
 		
 		JButton btnAggiungiLuogo = new JButton("Aggiungi luogo");
@@ -91,8 +101,10 @@ public class LocaliPanel extends JPanel {
 		
 		for(Luogo l : controller.getUtente().getLuoghiUtente()) {
 			
-			PanelInfoLuogoAnteprima panel = new PanelInfoLuogoAnteprima();
+			PanelInfoLuogoAnteprima panel = new PanelInfoLuogoAnteprima(controller, l);
 			verticalBox.add(panel);
+			
+			verticalBox.add(Box.createRigidArea(new Dimension(0, 10)));
 			
 		}
 		
