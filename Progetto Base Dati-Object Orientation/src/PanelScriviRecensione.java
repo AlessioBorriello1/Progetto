@@ -12,6 +12,10 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.JEditorPane;
 import java.awt.Color;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.LineBorder;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class PanelScriviRecensione extends JPanel {
 	
@@ -32,35 +36,44 @@ public class PanelScriviRecensione extends JPanel {
 		PanelInfoLuogoAnteprima infoLuogo = new PanelInfoLuogoAnteprima(controller, mainFrame, l, false, workPanel);
 		
 		JPanel panelRecensione = new JPanel();
+		panelRecensione.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
+		panelRecensione.setBackground(controller.sky);
 		
 		JLabel lblRecensione = new JLabel("Recensione");
-		lblRecensione.setFont(new Font("Tahoma", Font.BOLD, 17));
+		lblRecensione.setFont(new Font("Tahoma", Font.BOLD, 21));
+		
+		JLabel lblLuogo = new JLabel("Luogo");
+		lblLuogo.setFont(new Font("Tahoma", Font.BOLD, 21));
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(panelLuogo, GroupLayout.PREFERRED_SIZE, 430, Short.MAX_VALUE))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(panelRecensione, GroupLayout.DEFAULT_SIZE, 752, Short.MAX_VALUE)))
+							.addComponent(panelRecensione, GroupLayout.DEFAULT_SIZE, 752, Short.MAX_VALUE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(321)
+							.addComponent(lblRecensione))
+						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(panelLuogo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(341)
+							.addComponent(lblLuogo)))
 					.addContainerGap())
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap(344, Short.MAX_VALUE)
-					.addComponent(lblRecensione)
-					.addGap(330))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
+				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+					.addContainerGap(19, Short.MAX_VALUE)
+					.addComponent(lblLuogo, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
 					.addComponent(panelLuogo, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGap(18)
 					.addComponent(lblRecensione)
-					.addPreferredGap(ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-					.addComponent(panelRecensione, GroupLayout.PREFERRED_SIZE, 352, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(panelRecensione, GroupLayout.PREFERRED_SIZE, 295, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
 		
@@ -71,30 +84,42 @@ public class PanelScriviRecensione extends JPanel {
 		spinnerVoto.setModel(new SpinnerNumberModel(1, 1, 5, 1));
 		
 		JEditorPane editorPaneScriviRecensione = new JEditorPane();
-		editorPaneScriviRecensione.setBackground(Color.LIGHT_GRAY);
+		editorPaneScriviRecensione.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		editorPaneScriviRecensione.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		editorPaneScriviRecensione.setBackground(Color.WHITE);
 		
 		JLabel lblRecensioni = new JLabel("Scrivi la recensione:");
 		lblRecensioni.setFont(new Font("Tahoma", Font.BOLD, 16));
 		
 		JButton btnLasciaRecensione = new JButton("Lascia recensione");
+		btnLasciaRecensione.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+			
+				controller.lasciaRecensione(mainFrame, l, Integer.parseInt(spinnerVoto.getValue().toString()), editorPaneScriviRecensione.getText());
+				
+			}
+		});
 		GroupLayout gl_panelRecensione = new GroupLayout(panelRecensione);
 		gl_panelRecensione.setHorizontalGroup(
 			gl_panelRecensione.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelRecensione.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_panelRecensione.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panelRecensione.createSequentialGroup()
-							.addGroup(gl_panelRecensione.createParallelGroup(Alignment.LEADING)
-								.addComponent(editorPaneScriviRecensione, GroupLayout.DEFAULT_SIZE, 732, Short.MAX_VALUE)
-								.addGroup(gl_panelRecensione.createSequentialGroup()
-									.addComponent(lblVoto)
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(spinnerVoto, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-								.addComponent(lblRecensioni))
-							.addContainerGap())
 						.addGroup(Alignment.TRAILING, gl_panelRecensione.createSequentialGroup()
-							.addComponent(btnLasciaRecensione, GroupLayout.PREFERRED_SIZE, 180, GroupLayout.PREFERRED_SIZE)
-							.addGap(271))))
+							.addComponent(lblVoto)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(spinnerVoto, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap(662, Short.MAX_VALUE))
+						.addGroup(gl_panelRecensione.createSequentialGroup()
+							.addComponent(lblRecensioni)
+							.addContainerGap(579, Short.MAX_VALUE))
+						.addGroup(gl_panelRecensione.createSequentialGroup()
+							.addComponent(editorPaneScriviRecensione, GroupLayout.DEFAULT_SIZE, 732, Short.MAX_VALUE)
+							.addContainerGap())))
+				.addGroup(gl_panelRecensione.createSequentialGroup()
+					.addGap(285)
+					.addComponent(btnLasciaRecensione, GroupLayout.PREFERRED_SIZE, 180, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(287, Short.MAX_VALUE))
 		);
 		gl_panelRecensione.setVerticalGroup(
 			gl_panelRecensione.createParallelGroup(Alignment.LEADING)
@@ -103,13 +128,13 @@ public class PanelScriviRecensione extends JPanel {
 					.addGroup(gl_panelRecensione.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblVoto)
 						.addComponent(spinnerVoto, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(24)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(lblRecensioni)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(editorPaneScriviRecensione, GroupLayout.PREFERRED_SIZE, 158, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(editorPaneScriviRecensione, GroupLayout.PREFERRED_SIZE, 170, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
 					.addComponent(btnLasciaRecensione, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(32, Short.MAX_VALUE))
+					.addContainerGap(17, Short.MAX_VALUE))
 		);
 		panelRecensione.setLayout(gl_panelRecensione);
 		GroupLayout gl_panelLuogo = new GroupLayout(panelLuogo);

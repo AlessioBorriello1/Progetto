@@ -37,16 +37,17 @@ public class HomePanel extends JPanel {
 		setBackground(controller.skyWhiter);
 		
 		JPanel panelRicerca = new JPanel();
-		panelRicerca.setBackground(controller.sky);
+		panelRicerca.setBackground(controller.steel);
 		
 		JScrollPane panelMostraLuoghi = new JScrollPane();
 		panelMostraLuoghi.setBorder(null);
 		panelMostraLuoghi.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		panelMostraLuoghi.getVerticalScrollBar().setUnitIncrement(16);
+		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup()
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 						.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
 							.addContainerGap()
@@ -59,8 +60,8 @@ public class HomePanel extends JPanel {
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(panelRicerca, GroupLayout.PREFERRED_SIZE, 72, GroupLayout.PREFERRED_SIZE)
+					.addGap(4)
+					.addComponent(panelRicerca, GroupLayout.PREFERRED_SIZE, 79, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(panelMostraLuoghi, GroupLayout.DEFAULT_SIZE, 446, Short.MAX_VALUE)
 					.addContainerGap())

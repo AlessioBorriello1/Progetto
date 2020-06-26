@@ -49,6 +49,10 @@ public class UtenteDAO {
 				u.setNumeroLuoghi(rs.getInt("NumeroLuoghi")); //Setta variabile numeroLuoghi dell'utente "u" uguale al campo "NumeroLuoghi"
 				u.setNumeroRecensioni(rs.getInt("NumeroRecensioni")); //Setta variabile numeroRecensioni dell'utente "u" uguale al campo "NumeroRecensioni"
 				
+				con.close(); //Chiudi connessione
+				st.close(); //Chiudi statement
+				return u;
+				
 			}else { //Se l'utente non è stato trovato (result set vuoto)
 				
 				System.out.println("Resul set vuoto");
@@ -58,12 +62,6 @@ public class UtenteDAO {
 				return null; //Restituisci null
 				
 			}
-			
-			con.close(); //Chiudi connessione
-			st.close(); //Chiudi statement
-			
-			System.out.println("Utente trovato");
-			return u; //Restituisci utente
 			
 		}catch(Exception e) { //Error catching
 			System.out.println(e);
