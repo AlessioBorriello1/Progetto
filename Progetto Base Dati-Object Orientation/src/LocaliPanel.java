@@ -62,7 +62,6 @@ public class LocaliPanel extends JPanel {
 		Box verticalBox = Box.createVerticalBox();
 		verticalBox.setOpaque(true);
 		verticalBox.setBackground(controller.skyWhiter);
-		panelLocali.setBackground(controller.skyWhiter);
 		panelLocali.setViewportView(verticalBox);
 		
 		JButton btnAggiungiLuogo = new JButton("Aggiungi luogo");
@@ -74,6 +73,7 @@ public class LocaliPanel extends JPanel {
 		
 		JLabel lblIMieiLuoghi = new JLabel("I miei luoghi:");
 		lblIMieiLuoghi.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblIMieiLuoghi.setForeground(controller.egyptian);
 		GroupLayout gl_panelControl = new GroupLayout(panelControl);
 		gl_panelControl.setHorizontalGroup(
 			gl_panelControl.createParallelGroup(Alignment.LEADING)

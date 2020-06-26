@@ -1,6 +1,9 @@
 import java.awt.Color;
+import java.awt.Dimension;
+
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.GroupLayout;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
@@ -11,6 +14,7 @@ import javax.swing.JSplitPane;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import javax.swing.JScrollBar;
+import javax.swing.Box;
 
 public class HomePanel extends JPanel {
 
@@ -29,40 +33,49 @@ public class HomePanel extends JPanel {
 		JPanel panelRicerca = new JPanel();
 		panelRicerca.setBackground(controller.sky);
 		
-		JPanel panelMostraLuoghi = new JPanel();
-		panelMostraLuoghi.setBackground(getBackground());
+		JScrollPane panelMostraLuoghi = new JScrollPane();
+		panelMostraLuoghi.setBorder(null);
+		panelMostraLuoghi.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		panelMostraLuoghi.getVerticalScrollBar().setUnitIncrement(16);
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addComponent(panelRicerca, GroupLayout.DEFAULT_SIZE, 772, Short.MAX_VALUE)
-				.addComponent(panelMostraLuoghi, GroupLayout.DEFAULT_SIZE, 772, Short.MAX_VALUE)
+				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(panelRicerca, GroupLayout.DEFAULT_SIZE, 752, Short.MAX_VALUE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(10)
+							.addComponent(panelMostraLuoghi, GroupLayout.DEFAULT_SIZE, 752, Short.MAX_VALUE)))
+					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addComponent(panelRicerca, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap()
+					.addComponent(panelRicerca, GroupLayout.PREFERRED_SIZE, 72, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(panelMostraLuoghi, GroupLayout.DEFAULT_SIZE, 446, Short.MAX_VALUE)
 					.addContainerGap())
 		);
 		
-		JScrollBar scrollBar = new JScrollBar();
-		GroupLayout gl_panelMostraLuoghi = new GroupLayout(panelMostraLuoghi);
-		gl_panelMostraLuoghi.setHorizontalGroup(
-			gl_panelMostraLuoghi.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_panelMostraLuoghi.createSequentialGroup()
-					.addContainerGap(745, Short.MAX_VALUE)
-					.addComponent(scrollBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
-		);
-		gl_panelMostraLuoghi.setVerticalGroup(
-			gl_panelMostraLuoghi.createParallelGroup(Alignment.LEADING)
-				.addComponent(scrollBar, GroupLayout.DEFAULT_SIZE, 446, Short.MAX_VALUE)
-		);
-		panelMostraLuoghi.setLayout(gl_panelMostraLuoghi);
+		Box verticalBox = Box.createVerticalBox();
+		verticalBox.setOpaque(true);
+		verticalBox.setBackground(controller.skyWhiter);
+		panelMostraLuoghi.setViewportView(verticalBox);
 		setLayout(groupLayout);
 		
-		//JScrollPane scrollPane = new JScrollPane(panelMostraLuoghi, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		if(controller.getUtente() != null) {
+			for(Luogo l : controller.getUtente().getLuoghiUtente()) {
+				
+				PanelInfoLuogoAnteprima panel = new PanelInfoLuogoAnteprima(controller, l);
+				verticalBox.add(panel);
+				
+				verticalBox.add(Box.createRigidArea(new Dimension(0, 10)));
+				
+			}
+		}
 		
 	}
 }

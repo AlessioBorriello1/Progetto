@@ -8,6 +8,8 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Cursor;
+import java.awt.Dimension;
+
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
@@ -19,7 +21,7 @@ public class PanelInfoLuogoAnteprima extends JPanel {
 	
 	public PanelInfoLuogoAnteprima(MainController controller, Luogo l) {
 		
-		
+		setMaximumSize(new Dimension(786, 130));
 		addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 			
@@ -85,25 +87,25 @@ public class PanelInfoLuogoAnteprima extends JPanel {
 		panelInformazioniUniche.setBackground(getBackground());
 		
 		JLabel lblNomeVariabile = new JLabel(l.getNome());
-		lblNomeVariabile.setForeground(controller.steel);
+		lblNomeVariabile.setForeground(controller.independence);
 		
 		JLabel lblIndirizzoVariabile = new JLabel(l.getIndirizzo());
-		lblIndirizzoVariabile.setForeground(controller.steel);
+		lblIndirizzoVariabile.setForeground(controller.independence);
 		
 		JLabel lblTelefonoVariabile = new JLabel(l.getTelefono());
-		lblTelefonoVariabile.setForeground(controller.steel);
+		lblTelefonoVariabile.setForeground(controller.independence);
 		
 		JLabel lblProprietarioVariabile = new JLabel(l.getProprietario());
-		lblProprietarioVariabile.setForeground(controller.steel);
+		lblProprietarioVariabile.setForeground(controller.independence);
 		
 		JLabel lblValutazioneVariabile = new JLabel(String.valueOf(l.getMediaRecensioni()));
-		lblValutazioneVariabile.setForeground(controller.steel);
+		lblValutazioneVariabile.setForeground(controller.independence);
 		
 		JLabel lblTipoVariabile = new JLabel(l.getTipoAttivita());
-		lblTipoVariabile.setForeground(controller.steel);
+		lblTipoVariabile.setForeground(controller.independence);
 		
 		JLabel lblSpecializzazioneVariabile = new JLabel(specializzazione);
-		lblSpecializzazioneVariabile.setForeground(controller.steel);
+		lblSpecializzazioneVariabile.setForeground(controller.independence);
 		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
@@ -132,7 +134,7 @@ public class PanelInfoLuogoAnteprima extends JPanel {
 							.addComponent(lblValutazione)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(lblValutazioneVariabile)))
-					.addGap(79)
+					.addGap(76)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(lblSpecializzazione)
@@ -147,10 +149,10 @@ public class PanelInfoLuogoAnteprima extends JPanel {
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
 							.addComponent(lblCreatoDa)
-							.addContainerGap())
+							.addGap(19))
 						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
 							.addComponent(lblId)
-							.addGap(19))))
+							.addGap(27))))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -192,4 +194,5 @@ public class PanelInfoLuogoAnteprima extends JPanel {
 		setLayout(groupLayout);
 		
 	}
+
 }
