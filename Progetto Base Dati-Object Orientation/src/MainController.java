@@ -32,6 +32,7 @@ public class MainController {
 	private Utente utente = null; //Puntatore all'utente che ha fatto il login (null se non sono loggato)
 	
 	//Palette colori
+	public Color lightGrey = new Color(210, 210, 210);
 	public Color turquoise = new Color(63, 224, 208);
 	public Color powder = new Color(196, 243, 249);
 	public Color sky = new Color(149, 200, 216);

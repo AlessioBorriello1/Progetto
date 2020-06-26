@@ -4,6 +4,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RecensioneDAO {
 
@@ -83,7 +85,44 @@ public class RecensioneDAO {
 		
 		}
 	
-	
+	public List<Recensione> getListaRecensioniLuogo(Luogo l){
+		
+		try {
+			
+			Class.forName("com.mysql.jdbc.Driver");
+			String q = "Select * from recensione where IdLuogo= '" + l.getID() + "'" ; //Inizializzo query
+			
+			String connectionURL = MainController.URL; //URL di connessione
+
+	        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
+			Statement st = con.createStatement(); //Creo statement
+			ResultSet rs = st.executeQuery(q); //Eseguo la query contenuta in stringa q
+			
+			List<Recensione> recensioni = new ArrayList<Recensione>();
+			
+			while(rs.next()) {
+				
+				Recensione r = new Recensione();
+				r.setData(rs.getDate("Data"));
+				r.setIDLuogo(l.getID());
+				r.setNomeUtente(rs.getString("Idutente"));
+				r.setVoto(rs.getInt("Voto"));
+				r.setTesto(rs.getString("Testo"));
+				
+				recensioni.add(r);
+				
+			}
+			
+			con.close(); //Chiudi connessione
+			st.close(); //Chiudi statement
+			return recensioni; //Restituisci lista luoghi
+			
+		}catch(Exception e) { //Error catching
+			System.out.println(e);
+			return null;
+		}
+		
+	}
 	
 
 }
