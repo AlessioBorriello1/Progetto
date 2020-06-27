@@ -19,6 +19,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.JTextPane;
 import java.awt.Component;
 import javax.swing.border.EtchedBorder;
+import javax.swing.JTextArea;
 
 public class PanelRecensione extends JPanel {
 
@@ -41,25 +42,26 @@ public class PanelRecensione extends JPanel {
 		JLabel lblVoto = new JLabel("Voto:" + r.getVoto());
 		lblVoto.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
-		JTextPane textPane = new JTextPane();
-		textPane.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-		textPane.setEditable(false);
-		textPane.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
-		textPane.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		textPane.setText(r.getTesto());
-		
 		JLabel lblDate = new JLabel("Creata da: " + r.getNomeUtente() + " il " + r.getData().toString());
 		lblDate.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		lblDate.setHorizontalAlignment(SwingConstants.TRAILING);
 		
+		JTextArea textArea = new JTextArea();
+		textArea.setEditable(false);
+		textArea.setLineWrap(true);
+		textArea.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		textArea.setWrapStyleWord(true);
+		textArea.setFont(new Font("Monospaced", Font.PLAIN, 11));
+		textArea.setText(r.getTesto());
+		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(groupLayout.createSequentialGroup()
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(textPane, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
-						.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+						.addComponent(textArea, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
+						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(lblVoto)
 							.addPreferredGap(ComponentPlacement.RELATED, 402, Short.MAX_VALUE)
 							.addComponent(lblDate)))
@@ -68,13 +70,13 @@ public class PanelRecensione extends JPanel {
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(2)
+					.addGap(4)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblVoto)
 						.addComponent(lblDate))
-					.addGap(1)
-					.addComponent(textPane, GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
-					.addGap(6))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(textArea, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(38, Short.MAX_VALUE))
 		);
 		setLayout(groupLayout);
 		

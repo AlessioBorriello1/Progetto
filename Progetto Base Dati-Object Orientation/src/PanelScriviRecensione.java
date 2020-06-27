@@ -16,6 +16,8 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class PanelScriviRecensione extends JPanel {
 	
@@ -86,8 +88,20 @@ public class PanelScriviRecensione extends JPanel {
 		spinnerVoto.setModel(new SpinnerNumberModel(1, 1, 5, 1));
 		
 		JEditorPane editorPaneScriviRecensione = new JEditorPane();
+		editorPaneScriviRecensione.addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent e) {
+				int lenght = editorPaneScriviRecensione.getText().length();
+				if(lenght > 406) { //Se la stringa è più corta di 10 caratteri (numeri)
+					if(e.getKeyCode() != KeyEvent.VK_BACK_SPACE && e.getKeyCode() != KeyEvent.VK_DELETE) {
+						editorPaneScriviRecensione.setEditable(false);
+					}else {
+						editorPaneScriviRecensione.setEditable(true);
+					}
+				}
+			}
+		});
 		editorPaneScriviRecensione.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		editorPaneScriviRecensione.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		editorPaneScriviRecensione.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		editorPaneScriviRecensione.setBackground(Color.WHITE);
 		
 		JLabel lblRecensioni = new JLabel("Scrivi la recensione:");
@@ -99,10 +113,13 @@ public class PanelScriviRecensione extends JPanel {
 			
 				if(controller.lasciaRecensione(mainFrame, l, Integer.parseInt(spinnerVoto.getValue().toString()), editorPaneScriviRecensione.getText(), numeroRecensioni)) {
 					mainFrame.cambiaPannelloLavoroAHomePanel(workPanel);
+					UtenteDAO dao = new UtenteDAO();
+					dao.updateNumeroRecensioni(controller.getUtente());
 				}
 				
 			}
-		});
+		}); //408
+		
 		GroupLayout gl_panelRecensione = new GroupLayout(panelRecensione);
 		gl_panelRecensione.setHorizontalGroup(
 			gl_panelRecensione.createParallelGroup(Alignment.LEADING)

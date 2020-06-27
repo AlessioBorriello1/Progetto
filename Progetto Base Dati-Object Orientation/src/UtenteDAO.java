@@ -186,6 +186,36 @@ public class UtenteDAO {
 			return false; //Operazione inserimento fallita, restituisce false
 		}
 	}
+	
+	public boolean updateNumeroRecensioni(Utente u) {
+		try {
+			
+			if(!utenteEsiste(u.getNomeUtente(), u.getEmail())) { //Controlla se l'utente è già nel database
+				
+				System.out.println("Utente non esiste, impossibile aggiornare numero recensioni");
+				return false; //Operazione inserimento fallita, restituisce false
+				
+			}
+			
+			Class.forName("com.mysql.jdbc.Driver");
+			String q = "UPDATE utente SET NumeroRecensioni = " + u.getNumeroRecensioni() + " WHERE Idutente = '" + u.getNomeUtente() + "'";//Inizializzo query
+			
+			String connectionURL = MainController.URL; //URL di connessione
+
+	        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
+			Statement st = con.createStatement(); //Creo statement
+			st.executeUpdate(q); //Eseguo la query contenuta in stringa q
+			
+			con.close(); //Chiudi connessione
+			st.close(); //Chiudi statement
+			
+			return true; //Operazione inserimento riuscita, restituisce true
+			
+		}catch(Exception e) { //Error catching
+			System.out.println(e);
+			return false; //Operazione inserimento fallita, restituisce false
+		}
+	}
 
 
 }

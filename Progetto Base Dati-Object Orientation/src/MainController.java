@@ -158,7 +158,14 @@ public class MainController {
 		
 		RecensioneDAO dao = new RecensioneDAO();
 		System.out.println(numeroRecensioni);
-		return dao.lasciaRecensioneALuogo(mainFrame, utente, l, voto, recensione, numeroRecensioni);
+		if(dao.lasciaRecensioneALuogo(mainFrame, utente, l, voto, recensione, numeroRecensioni)) {
+			getUtente().setNumeroRecensioni(getUtente().getNumeroRecensioni() + 1); //Aumenta numero delle recensioni di quell'utente
+			mainFrame.refreshaPannelloInfo(); //Refresha pannello
+			return true;
+		}else {
+			System.out.println("Operazione fallita");
+			return false;
+		}
 	}
 	
 	//Getter per variabile currentPanel

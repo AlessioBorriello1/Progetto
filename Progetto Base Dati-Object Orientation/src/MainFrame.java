@@ -226,45 +226,46 @@ public class MainFrame extends JFrame {
 		JLabel lblNomeUtente = new JLabel("Nome utente:"); //Nuovo label Nome utente
 		lblNomeUtente.setName("lblNomeUtente"); //Imposta nome
 		lblNomeUtente.setFont(new Font("Tahoma", Font.BOLD, 11)); //Imposta font
-		lblNomeUtente.setForeground(Color.CYAN); //Imposta colore font
+		lblNomeUtente.setForeground(controller.steel); //Imposta colore font
 		
 		JLabel lblEmail = new JLabel("Email:"); //Nuovo label Email
 		lblEmail.setName("lblEmail"); //Imposta nome
 		lblEmail.setFont(new Font("Tahoma", Font.BOLD, 11)); //Imposta font
-		lblEmail.setForeground(Color.CYAN); //Imposta colore font
+		lblEmail.setForeground(controller.steel); //Imposta colore font
 		
 		JLabel lblNumeroLuoghi = new JLabel("Numero luoghi:"); //Nuovo label Numero luoghi
 		lblNumeroLuoghi.setName("lblNumeroLuoghi"); //Imposta nome
 		lblNumeroLuoghi.setFont(new Font("Tahoma", Font.BOLD, 11)); //Imposta font
-		lblNumeroLuoghi.setForeground(Color.CYAN); //Imposta colore font
+		lblNumeroLuoghi.setForeground(controller.steel);
 		
-		JButton btnUtenteSettings = new JButton(""); //Nuovo bottone per settare nome utente/ password dell'utente
-		btnUtenteSettings.setName("btnUtenteSettings"); //Imposta nome
-		GroupLayout gl_panelLogged = new GroupLayout(panelLogged); //GroupLayout per panelLogged (e salvato in gl_panelLogged)
-		//Allinea orizzontale
+		JLabel lblNumeroRecensioni = new JLabel("Numero recensioni:");
+		lblNumeroRecensioni.setName("lblNumeroRecensioni");
+		lblNumeroRecensioni.setForeground(controller.steel);
+		lblNumeroRecensioni.setFont(new Font("Tahoma", Font.BOLD, 11));
+		GroupLayout gl_panelLogged = new GroupLayout(panelLogged);
 		gl_panelLogged.setHorizontalGroup(
 			gl_panelLogged.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelLogged.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_panelLogged.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblNomeUtente, GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+					.addGroup(gl_panelLogged.createParallelGroup(Alignment.TRAILING)
+						.addComponent(lblNomeUtente, GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
 						.addComponent(lblEmail, GroupLayout.PREFERRED_SIZE, 158, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblNumeroLuoghi, GroupLayout.PREFERRED_SIZE, 158, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnUtenteSettings, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
+						.addComponent(lblNumeroRecensioni, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 158, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap())
 		);
-		//Allinea verticale
 		gl_panelLogged.setVerticalGroup(
 			gl_panelLogged.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelLogged.createSequentialGroup()
-					.addContainerGap()
+					.addGap(8)
 					.addComponent(lblNomeUtente)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(lblEmail)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(lblNumeroLuoghi)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnUtenteSettings, GroupLayout.PREFERRED_SIZE, 18, Short.MAX_VALUE))
+					.addComponent(lblNumeroRecensioni)
+					.addContainerGap())
 		);
 		panelLogged.setLayout(gl_panelLogged); //Imposta layout gl_panelLogged in panelLogged
 		
@@ -450,6 +451,10 @@ public class MainFrame extends JFrame {
 		sl_panelControl.putConstraint(SpringLayout.WEST, btnRegistrati, 0, SpringLayout.WEST, buttonHome);
 		sl_panelControl.putConstraint(SpringLayout.SOUTH, btnRegistrati, 36, SpringLayout.SOUTH, buttonLogin);
 		sl_panelControl.putConstraint(SpringLayout.EAST, btnRegistrati, 0, SpringLayout.EAST, buttonHome);
+		
+		JButton button = new JButton("");
+		button.setName("btnUtenteSettings");
+		dashBoardPanel.add(button);
 		
 		
 		mainPanel.setLayout(gl_mainPanel); //Imposta layout gl_mainPanel (Salvato prima, riga 150) in mainPanel
@@ -668,6 +673,7 @@ public class MainFrame extends JFrame {
 					case "lblNomeUtente": label.setText("Nome Utente: " + controller.getUtente().getNomeUtente()); break; //Se il nome è lblNomeUtente
 					case "lblEmail": label.setText("Email: " + controller.getUtente().getEmail()); break; //Se il nome è lblEmail
 					case "lblNumeroLuoghi": label.setText("Numero luoghi: " + controller.getUtente().getNumeroLuoghi()); break; //Se il nome è lblNumeroLuoghi
+					case "lblNumeroRecensioni": label.setText("Numero recensioni: " + controller.getUtente().getNumeroRecensioni()); break; //Se il nome è lblNumeroRecensioni
 					default: break;
 					}
 				}
@@ -698,5 +704,4 @@ public class MainFrame extends JFrame {
 		frame.setVisible(true);
 		
 	}
-	
 }
