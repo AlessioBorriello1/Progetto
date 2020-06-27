@@ -428,4 +428,29 @@ public class LuogoDAO {
 		
 	}
 
+	public boolean updateMediaRecensioni(Luogo l, float media) {
+		
+		try {
+			
+			Class.forName("com.mysql.jdbc.Driver");
+			String q = "UPDATE luogo SET MediaRecensioni = " + media + " WHERE IdLuogo = " + l.getID();//Inizializzo query
+			
+			String connectionURL = MainController.URL; //URL di connessione
+
+	        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
+			Statement st = con.createStatement(); //Creo statement
+			st.executeUpdate(q); //Eseguo la query contenuta in stringa q
+			
+			con.close(); //Chiudi connessione
+			st.close(); //Chiudi statement
+			
+			return true; //Operazione inserimento riuscita, restituisce true
+			
+		}catch(Exception e) { //Error catching
+			System.out.println(e);
+			return false; //Operazione inserimento fallita, restituisce false
+		}
+		
+	}
+
 }

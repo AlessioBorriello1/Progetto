@@ -24,6 +24,7 @@ public class PanelInfoLuogo extends JPanel {
 	private MainFrame mainFrame;
 	private JPanel workPanel;
 	private List<Recensione> recensioniLuogo;
+	private int numeroRecensioni;
 	
 	public PanelInfoLuogo(MainController controller, MainFrame mainFrame, JPanel workPanel, Luogo l) {
 		
@@ -45,7 +46,7 @@ public class PanelInfoLuogo extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 			
 				if(controller.getUtente()!= null) {
-					mainFrame.cambiaPannelloLavoroAPanelScriviRecensione(workPanel, l);
+					mainFrame.cambiaPannelloLavoroAPanelScriviRecensione(workPanel, l, numeroRecensioni);
 				}else {
 					mainFrame.createNotificationFrame("Devi prima eseguire il Login!");
 					mainFrame.cambiaPannelloLavoroALoginPanel(workPanel);
@@ -105,6 +106,7 @@ public class PanelInfoLuogo extends JPanel {
 		
 		RecensioneDAO dao = new RecensioneDAO();
 		recensioniLuogo = dao.getListaRecensioniLuogo(l);
+		numeroRecensioni = recensioniLuogo.size();
 		
 		
 		if(!recensioniLuogo.isEmpty()) {

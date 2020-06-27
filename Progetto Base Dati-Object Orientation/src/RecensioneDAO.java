@@ -9,7 +9,7 @@ import java.util.List;
 
 public class RecensioneDAO {
 
-	public boolean lasciaRecensioneALuogo(MainFrame mainFrame, Utente u, Luogo l, int voto, String recensione) {
+	public boolean lasciaRecensioneALuogo(MainFrame mainFrame, Utente u, Luogo l, int voto, String recensione, int numeroRecensioni) {
 		
 		try {
 			
@@ -29,6 +29,11 @@ public class RecensioneDAO {
 			st.close(); //Chiudi statement
 			
 			mainFrame.createNotificationFrame("Recensione inserita!");
+			
+			float media = (l.getMediaRecensioni() + voto) / (numeroRecensioni + 1);
+			l.setMediaRecensioni(media);
+			LuogoDAO dao = new LuogoDAO();
+			dao.updateMediaRecensioni(l, media);
 			
 			return true; //Operazione inserimento riuscita, restituisce true
 			

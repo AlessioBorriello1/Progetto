@@ -154,10 +154,11 @@ public class MainController {
 			
 	}
 
-	public boolean lasciaRecensione(MainFrame mainFrame, Luogo l, int voto, String recensione) {
+	public boolean lasciaRecensione(MainFrame mainFrame, Luogo l, int voto, String recensione, int numeroRecensioni) {
 		
 		RecensioneDAO dao = new RecensioneDAO();
-		return dao.lasciaRecensioneALuogo(mainFrame, utente, l, voto, recensione);
+		System.out.println(numeroRecensioni);
+		return dao.lasciaRecensioneALuogo(mainFrame, utente, l, voto, recensione, numeroRecensioni);
 	}
 	
 	//Getter per variabile currentPanel

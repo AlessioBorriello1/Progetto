@@ -22,12 +22,14 @@ public class PanelScriviRecensione extends JPanel {
 	private MainController controller;
 	private MainFrame mainFrame;
 	private JPanel workPanel;
+	private int numeroRecensioni;
 
-	public PanelScriviRecensione(MainController controller, MainFrame mainFrame, JPanel workPanel, Luogo l) {
+	public PanelScriviRecensione(MainController controller, MainFrame mainFrame, JPanel workPanel, Luogo l, int numeroRecensioni) {
 		
 		this.controller = controller;
 		this.mainFrame = mainFrame;
 		this.workPanel = workPanel;
+		this.numeroRecensioni = numeroRecensioni;
 		
 		setBackground(controller.skyWhiter);
 		
@@ -95,7 +97,9 @@ public class PanelScriviRecensione extends JPanel {
 		btnLasciaRecensione.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 			
-				controller.lasciaRecensione(mainFrame, l, Integer.parseInt(spinnerVoto.getValue().toString()), editorPaneScriviRecensione.getText());
+				if(controller.lasciaRecensione(mainFrame, l, Integer.parseInt(spinnerVoto.getValue().toString()), editorPaneScriviRecensione.getText(), numeroRecensioni)) {
+					mainFrame.cambiaPannelloLavoroAHomePanel(workPanel);
+				}
 				
 			}
 		});
@@ -150,4 +154,5 @@ public class PanelScriviRecensione extends JPanel {
 		setLayout(groupLayout);
 		
 	}
+
 }
