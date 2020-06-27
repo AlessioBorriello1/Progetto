@@ -10,18 +10,7 @@ public class Utente {
 	private int numeroLuoghi; //Numero dei luoghi in possesso dell'utente
 	
 	private List<Luogo> luoghiUtente;
-	
-	/**
-	 * Stampa sulla console informazioni dell'oggetto utente che chiama la funzione
-	 */
-	public void stampaInfo() {
-		
-		System.out.println("Nome utente: " + nomeUtente + " Email: " + email + " Numero luoghi: " + numeroLuoghi + " Numero recensioni: " + numeroRecensioni);
-		for(Luogo l : luoghiUtente) {
-			System.out.println(l.getNome());
-		}
-		
-	}
+	private List<Recensione> recensioniUtente;
 	
 	
 	//Setter e getter variabile nomeUtente
@@ -68,11 +57,39 @@ public class Utente {
 		this.luoghiUtente = luoghiUtente;
 	}
 	
+	//Alla creazione dell'utente prendi i suoi luoghi
 	public void setLuoghiUtente() {
 		
 		LuogoDAO dao = new LuogoDAO();
 		this.luoghiUtente = dao.getListaLuoghiByNomeUtente(nomeUtente);
 		
 	}
+	
+	//Setter e getter lista recensioni utente
+
+
+	public List<Recensione> getRecensioniUtente() {
+		return recensioniUtente;
+	}
+
+
+	public void setRecensioniUtente(List<Recensione> recensioniUtente) {
+		this.recensioniUtente = recensioniUtente;
+	}
+	
+	//Alla creazione dell'utente prendi le sue recensioni
+	public void setRecensioniUtente() {
+		
+		RecensioneDAO dao = new RecensioneDAO();
+		this.recensioniUtente = dao.getListaRecensioniByNomeUtente(nomeUtente);
+		if(recensioniUtente != null) {
+			for(Recensione r: recensioniUtente) {
+				System.out.println(r.getTesto());
+			}
+		}
+		
+	}
+	
+	
 	
 }

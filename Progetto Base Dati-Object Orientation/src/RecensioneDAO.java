@@ -59,7 +59,7 @@ public class RecensioneDAO {
 
 	        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
 			Statement st = con.createStatement(); //Creo statement
-			st.executeUpdate(q); //Eseguo la query contenuta in stringa q
+			st.executeQuery(q); //Eseguo la query contenuta in stringa q
 			ResultSet rs = st.executeQuery(q); //Eseguo la query contenuta in stringa q
 			
 			if(rs.next()) { //Se la recensione è stata trovata
@@ -120,7 +120,7 @@ public class RecensioneDAO {
 			
 			con.close(); //Chiudi connessione
 			st.close(); //Chiudi statement
-			return recensioni; //Restituisci lista luoghi
+			return recensioni; //Restituisci lista recensioni
 			
 		}catch(Exception e) { //Error catching
 			System.out.println(e);
@@ -129,5 +129,44 @@ public class RecensioneDAO {
 		
 	}
 	
+	public List<Recensione> getListaRecensioniByNomeUtente(String nomeUtente) {
+		
+		try {
+			
+			Class.forName("com.mysql.jdbc.Driver");
+			String q = "Select * from recensione where Idutente = '" + nomeUtente + "'" ; //Inizializzo query
+			
+			String connectionURL = MainController.URL; //URL di connessione
 
+	        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
+			Statement st = con.createStatement(); //Creo statement
+			ResultSet rs = st.executeQuery(q); //Eseguo la query contenuta in stringa q
+			
+			List<Recensione> recensioni = new ArrayList<Recensione>();
+			
+			while(rs.next()) {
+				
+				Recensione r = new Recensione();
+				r.setData(rs.getDate("Data"));
+				r.setNomeUtente(nomeUtente);
+				r.setTesto(rs.getString("Testo"));
+				r.setVoto(rs.getInt("Voto"));
+				r.setIDLuogo(rs.getInt("IdLuogo"));
+				
+				recensioni.add(r);
+				
+			}
+			
+			con.close(); //Chiudi connessione
+			st.close(); //Chiudi statement
+			return recensioni; //Restituisci lista luoghi
+			
+		}catch(Exception e) { //Error catching
+			System.out.println(e);
+			return null;
+		}
+		
+	}
+
+	
 }

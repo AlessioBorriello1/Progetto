@@ -39,7 +39,7 @@ public class PanelRecensione extends JPanel {
 		setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		setBackground(controller.white);
 		
-		JLabel lblVoto = new JLabel("Voto:" + r.getVoto());
+		JLabel lblVoto = new JLabel("Voto: " + r.getVoto());
 		lblVoto.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
 		JLabel lblDate = new JLabel("Creata da: " + r.getNomeUtente() + " il " + r.getData().toString());

@@ -104,8 +104,8 @@ public class MainController {
 		
 		if(u != null) { //Se utente trovato
 			u.setLuoghiUtente(); //Inizializza array luoghi
+			u.setRecensioniUtente(); //Inizializza array recensioni
 			u.setNumeroLuoghi(u.getLuoghiUtente().size());
-			u.stampaInfo(); //Stampa info utente trovato (Per debug)
 			setLoggedIn(true); //Imposta la variabile del controller loggedIn a vero
 			mainFrame.refreshaLoginButton(); //Ricarica il bottone di login/logout del mainFrame per fargli mostrare l'icona corretta
 			mainFrame.refreshaPannelloInfo(); //Cambia pannello info utente se sono loggato o meno
@@ -159,7 +159,13 @@ public class MainController {
 		RecensioneDAO dao = new RecensioneDAO();
 		System.out.println(numeroRecensioni);
 		if(dao.lasciaRecensioneALuogo(mainFrame, utente, l, voto, recensione, numeroRecensioni)) {
-			getUtente().setNumeroRecensioni(getUtente().getNumeroRecensioni() + 1); //Aumenta numero delle recensioni di quell'utente
+			utente.setNumeroRecensioni(getUtente().getNumeroRecensioni() + 1); //Aumenta numero delle recensioni di quell'utente
+			utente.getRecensioniUtente().add(dao.getRecensioneLuogoByNomeUtente(l, utente.getNomeUtente()));
+			if(utente.getRecensioniUtente() != null) {
+				for(Recensione r: utente.getRecensioniUtente()) {
+					System.out.println(r.getTesto());
+				}
+			}
 			mainFrame.refreshaPannelloInfo(); //Refresha pannello
 			return true;
 		}else {
