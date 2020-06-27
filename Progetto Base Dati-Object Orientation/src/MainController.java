@@ -161,11 +161,6 @@ public class MainController {
 		if(dao.lasciaRecensioneALuogo(mainFrame, utente, l, voto, recensione, numeroRecensioni)) {
 			utente.setNumeroRecensioni(getUtente().getNumeroRecensioni() + 1); //Aumenta numero delle recensioni di quell'utente
 			utente.getRecensioniUtente().add(dao.getRecensioneLuogoByNomeUtente(l, utente.getNomeUtente()));
-			if(utente.getRecensioniUtente() != null) {
-				for(Recensione r: utente.getRecensioniUtente()) {
-					System.out.println(r.getTesto());
-				}
-			}
 			mainFrame.refreshaPannelloInfo(); //Refresha pannello
 			return true;
 		}else {

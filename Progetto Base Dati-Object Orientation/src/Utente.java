@@ -82,11 +82,6 @@ public class Utente {
 		
 		RecensioneDAO dao = new RecensioneDAO();
 		this.recensioniUtente = dao.getListaRecensioniByNomeUtente(nomeUtente);
-		if(recensioniUtente != null) {
-			for(Recensione r: recensioniUtente) {
-				System.out.println(r.getTesto());
-			}
-		}
 		
 	}
 	

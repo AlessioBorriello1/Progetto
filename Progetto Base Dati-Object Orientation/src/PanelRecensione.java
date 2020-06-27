@@ -26,8 +26,10 @@ public class PanelRecensione extends JPanel {
 	private MainController controller;
 	private MainFrame mainFrame;
 	private JPanel workPanel;
+	private boolean cliccabile;
 	
 	public PanelRecensione(MainController controller, MainFrame mainFrame, Recensione r, JPanel workPanel) {
+		
 		setAlignmentX(Component.LEFT_ALIGNMENT);
 		
 		this.controller = controller;
@@ -35,6 +37,18 @@ public class PanelRecensione extends JPanel {
 		this.workPanel = workPanel;
 		
 		setMaximumSize(new Dimension(786, 100));
+		
+		if(controller.getUtente() != null) {
+			cliccabile = (controller.getUtente().getNomeUtente().contentEquals(r.getNomeUtente()));
+		}else {
+			cliccabile = false;
+		}
+		
+		if(cliccabile) {
+			setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		}else {
+			setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+		}
 		
 		setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		setBackground(controller.white);
@@ -81,4 +95,9 @@ public class PanelRecensione extends JPanel {
 		setLayout(groupLayout);
 		
 	}
+
+	public void setCliccabile(boolean cliccabile) {
+		this.cliccabile = cliccabile;
+	}
+	
 }
