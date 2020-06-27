@@ -16,6 +16,9 @@ import javax.swing.SwingConstants;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.LineBorder;
+import javax.swing.JTextPane;
+import java.awt.Component;
+import javax.swing.border.EtchedBorder;
 
 public class PanelRecensione extends JPanel {
 
@@ -24,43 +27,56 @@ public class PanelRecensione extends JPanel {
 	private JPanel workPanel;
 	
 	public PanelRecensione(MainController controller, MainFrame mainFrame, Recensione r, JPanel workPanel) {
+		setAlignmentX(Component.LEFT_ALIGNMENT);
 		
 		this.controller = controller;
 		this.mainFrame = mainFrame;
 		this.workPanel = workPanel;
 		
-		setMaximumSize(new Dimension(748, 100));
+		setMaximumSize(new Dimension(786, 100));
 		
 		setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
-		setBackground(controller.lightGrey);
+		setBackground(controller.white);
 		
-		JLabel lblNewLabel = new JLabel("New label");
+		JLabel lblVoto = new JLabel("Voto:" + r.getVoto());
+		lblVoto.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
-		JLabel lblNewLabel_1 = new JLabel("New label");
+		JTextPane textPane = new JTextPane();
+		textPane.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+		textPane.setEditable(false);
+		textPane.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
+		textPane.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		textPane.setText(r.getTesto());
+		
+		JLabel lblDate = new JLabel("Creata da: " + r.getNomeUtente() + " il " + r.getData().toString());
+		lblDate.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblDate.setHorizontalAlignment(SwingConstants.TRAILING);
 		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
+			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(lblNewLabel)
-					.addContainerGap(714, Short.MAX_VALUE))
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-					.addContainerGap(714, Short.MAX_VALUE)
-					.addComponent(lblNewLabel_1)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(textPane, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
+						.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+							.addComponent(lblVoto)
+							.addPreferredGap(ComponentPlacement.RELATED, 402, Short.MAX_VALUE)
+							.addComponent(lblDate)))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblNewLabel)
-					.addPreferredGap(ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
-					.addComponent(lblNewLabel_1)
-					.addContainerGap())
+					.addGap(2)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblVoto)
+						.addComponent(lblDate))
+					.addGap(1)
+					.addComponent(textPane, GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
+					.addGap(6))
 		);
 		setLayout(groupLayout);
 		
 	}
-
 }
