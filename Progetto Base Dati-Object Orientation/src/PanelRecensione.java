@@ -56,7 +56,9 @@ public class PanelRecensione extends JPanel {
 					int ID = r.getIDLuogo();
 					LuogoDAO dao = new LuogoDAO();
 					Luogo l = dao.getLuogoByID(ID);
-					mainFrame.cambiaPannelloLavoroAModificaRecensionePanel(workPanel, l, controller.getUtente().getNumeroRecensioni(), r);
+					RecensioneDAO daor = new RecensioneDAO();
+					int numeroRecensioni = daor.getListaRecensioniLuogo(l).size();
+					mainFrame.cambiaPannelloLavoroAModificaRecensionePanel(workPanel, l, numeroRecensioni, r);
 				}
 			}
 		});
@@ -67,7 +69,8 @@ public class PanelRecensione extends JPanel {
 		JLabel lblVoto = new JLabel("Voto: " + r.getVoto());
 		lblVoto.setFont(new Font("Tahoma", Font.BOLD, 12));
 		
-		JLabel lblDate = new JLabel("Creata da: " + r.getNomeUtente() + " il " + r.getData().toString());
+		LuogoDAO dao = new LuogoDAO();
+		JLabel lblDate = new JLabel("Creata da: " + r.getNomeUtente() + " il " + r.getData().toString() + " per il luogo " + dao.getLuogoByID(r.getIDLuogo()).getNome().toString() + " ID(" + r.getIDLuogo() + ")");
 		lblDate.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		lblDate.setHorizontalAlignment(SwingConstants.TRAILING);
 		
@@ -93,16 +96,18 @@ public class PanelRecensione extends JPanel {
 		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(textArea, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+							.addComponent(textArea)
+							.addContainerGap())
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(lblVoto)
-							.addPreferredGap(ComponentPlacement.RELATED, 402, Short.MAX_VALUE)
-							.addComponent(lblDate)))
-					.addContainerGap())
+							.addPreferredGap(ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+							.addComponent(lblDate)
+							.addGap(25))))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -113,7 +118,7 @@ public class PanelRecensione extends JPanel {
 						.addComponent(lblDate))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(textArea, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(38, Short.MAX_VALUE))
+					.addContainerGap(206, Short.MAX_VALUE))
 		);
 		setLayout(groupLayout);
 		
