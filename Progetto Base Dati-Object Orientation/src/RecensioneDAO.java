@@ -13,40 +13,96 @@ public class RecensioneDAO {
 		
 		try {
 			
-			LocalDateTime now = LocalDateTime.now();  
+		RecensioneDAO daor = new RecensioneDAO();
+		int somma = 0;
+		for(Recensione r: daor.getListaRecensioniLuogo(l)) {
+			somma += r.getVoto();
+		}
 			
-			Class.forName("com.mysql.jdbc.Driver");
-			String q = "INSERT INTO recensione(IdLuogo, Voto, Idutente, Data, Testo)\r\n" + 
-					"VALUES ('"+ l.getID() +"','"+ voto +"', '"+ u.getNomeUtente()+ "','" +  now +"','" + recensione +"');"; //Inizializzo query
-			
-			String connectionURL = MainController.URL; //URL di connessione
+		LocalDateTime now = LocalDateTime.now();  
+		
+		Class.forName("com.mysql.jdbc.Driver");
+		String q = "INSERT INTO recensione(IdLuogo, Voto, Idutente, Data, Testo)\r\n" + 
+				"VALUES ('"+ l.getID() +"','"+ voto +"', '"+ u.getNomeUtente()+ "','" +  now +"','" + recensione +"');"; //Inizializzo query
+		
+		String connectionURL = MainController.URL; //URL di connessione
 
-	        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
-			Statement st = con.createStatement(); //Creo statement
-			st.executeUpdate(q); //Eseguo la query contenuta in stringa q
-			
-			con.close(); //Chiudi connessione
-			st.close(); //Chiudi statement
-			
-			mainFrame.createNotificationFrame("Recensione inserita!");
-			
-			float media = (l.getMediaRecensioni() + voto) / (numeroRecensioni + 1);
-			l.setMediaRecensioni(media);
-			LuogoDAO dao = new LuogoDAO();
-			dao.updateMediaRecensioni(l, media);
-			
-			return true; //Operazione inserimento riuscita, restituisce true
-			
-			}catch(Exception e) { //Error catching
-				if(e.getClass().toString().contentEquals("class com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException")) {
-					mainFrame.createNotificationFrame("Hai già creato una recensione per questo luogo!");
-					return false; //Operazione inserimento fallita, restituisce false
-				}
-				mainFrame.createNotificationFrame("Qualcosa è andato storto!");
+        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
+		Statement st = con.createStatement(); //Creo statement
+		st.executeUpdate(q); //Eseguo la query contenuta in stringa q
+		
+		con.close(); //Chiudi connessione
+		st.close(); //Chiudi statement
+		
+		mainFrame.createNotificationFrame("Recensione inserita!");
+		
+		float media = (float)(somma + voto) / (numeroRecensioni + 1);
+		l.setMediaRecensioni(media);
+		LuogoDAO dao = new LuogoDAO();
+		dao.updateMediaRecensioni(l, media);
+		
+		return true; //Operazione inserimento riuscita, restituisce true
+		
+		}catch(Exception e) { //Error catching
+			if(e.getClass().toString().contentEquals("class com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException")) {
+				mainFrame.createNotificationFrame("Hai già creato una recensione per questo luogo!");
 				return false; //Operazione inserimento fallita, restituisce false
 			}
-		
+			mainFrame.createNotificationFrame("Qualcosa è andato storto!");
+			return false; //Operazione inserimento fallita, restituisce false
 		}
+		
+	}
+	
+	public boolean modificaRecensioneLuogo(MainFrame mainFrame, Utente u, Luogo l, int voto, String recensione, int numeroRecensioni, Recensione r) {
+		
+		try {
+			
+			
+		RecensioneDAO daor = new RecensioneDAO();
+		int somma = 0;
+		for(Recensione rev: daor.getListaRecensioniLuogo(l)) {
+			somma += rev.getVoto();
+		}
+		
+		LocalDateTime now = LocalDateTime.now();  
+		
+		Class.forName("com.mysql.jdbc.Driver");
+		String q = "UPDATE recensione SET Voto = " + voto + ", Testo = '" + recensione  + "' WHERE IdLuogo = " + l.getID() + " AND Idutente = '" + u.getNomeUtente() + "'";
+		
+		String connectionURL = MainController.URL; //URL di connessione
+
+        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
+		Statement st = con.createStatement(); //Creo statement
+		st.executeUpdate(q); //Eseguo la query contenuta in stringa q
+		
+		con.close(); //Chiudi connessione
+		st.close(); //Chiudi statement
+		
+		mainFrame.createNotificationFrame("Recensione modificata!");
+		
+		float media = (float)(somma - r.getVoto() + voto) / (numeroRecensioni);
+		l.setMediaRecensioni(media);
+		LuogoDAO dao = new LuogoDAO();
+		dao.updateMediaRecensioni(l, media);
+		
+		r.setTesto(recensione);
+		r.setVoto(voto);
+		
+		return true; //Operazione inserimento riuscita, restituisce true
+		
+		}catch(Exception e) { //Error catching
+			if(e.getClass().toString().contentEquals("class com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException")) {
+				System.out.println(e);
+				mainFrame.createNotificationFrame("Hai già creato una recensione per questo luogo!");
+				return false; //Operazione inserimento fallita, restituisce false
+			}
+			System.out.println(e);
+			mainFrame.createNotificationFrame("Qualcosa è andato storto!");
+			return false; //Operazione inserimento fallita, restituisce false
+		}
+		
+	}
 	
 	public Recensione getRecensioneLuogoByNomeUtente(Luogo l, String nomeUtente) {
 		

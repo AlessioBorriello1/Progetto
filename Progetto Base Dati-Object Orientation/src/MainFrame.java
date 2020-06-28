@@ -628,6 +628,24 @@ public class MainFrame extends JFrame {
 		
 	}
 	
+	public void cambiaPannelloLavoroAModificaRecensionePanel(JPanel workPanel, Luogo l, int numeroRecensioni, Recensione r) {
+		
+		if(controller.getCurrentPanel() == null || !controller.getCurrentPanel().getClass().toString().contentEquals("class PanelModificaRecensione")) { //Se non sono già sullo stesso panel
+			//Rimuovi vecchio panel dal workPanel
+			workPanel.removeAll();
+			workPanel.repaint();
+			workPanel.revalidate();
+			
+			//Aggiungi nuovo PanelInfoLuogo al workPanel
+			PanelModificaRecensione panel = new PanelModificaRecensione(controller, this, workPanel, l, numeroRecensioni, r);
+			controller.setCurrentPanel(panel); //Imposta il pannello appena creato nella variabile currentPanel del controller
+			workPanel.add(panel);
+			workPanel.repaint();
+			workPanel.revalidate();
+		}
+		
+	}
+	
 	/**
 	 * Ricarica bottone login/logout per mostrare la giusta icona (Se di login o di logout)
 	 */
@@ -704,4 +722,5 @@ public class MainFrame extends JFrame {
 		frame.setVisible(true);
 		
 	}
+
 }

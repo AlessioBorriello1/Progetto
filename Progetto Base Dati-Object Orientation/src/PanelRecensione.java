@@ -50,6 +50,17 @@ public class PanelRecensione extends JPanel {
 			setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		}
 		
+		addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				if(cliccabile) {
+					int ID = r.getIDLuogo();
+					LuogoDAO dao = new LuogoDAO();
+					Luogo l = dao.getLuogoByID(ID);
+					mainFrame.cambiaPannelloLavoroAModificaRecensionePanel(workPanel, l, controller.getUtente().getNumeroRecensioni(), r);
+				}
+			}
+		});
+		
 		setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		setBackground(controller.white);
 		
@@ -61,6 +72,18 @@ public class PanelRecensione extends JPanel {
 		lblDate.setHorizontalAlignment(SwingConstants.TRAILING);
 		
 		JTextArea textArea = new JTextArea();
+		textArea.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				if(cliccabile) {
+					int ID = r.getIDLuogo();
+					LuogoDAO dao = new LuogoDAO();
+					Luogo l = dao.getLuogoByID(ID);
+					RecensioneDAO daor = new RecensioneDAO();
+					int numeroRecensioni = daor.getListaRecensioniLuogo(l).size();
+					mainFrame.cambiaPannelloLavoroAModificaRecensionePanel(workPanel, l, numeroRecensioni, r);
+				}
+			}
+		});
 		textArea.setEditable(false);
 		textArea.setLineWrap(true);
 		textArea.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));

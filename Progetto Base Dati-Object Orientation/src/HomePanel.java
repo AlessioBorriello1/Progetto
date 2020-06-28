@@ -1,10 +1,12 @@
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.util.List;
 
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
 import javax.swing.GroupLayout;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
@@ -73,12 +75,22 @@ public class HomePanel extends JPanel {
 		panelMostraLuoghi.setViewportView(verticalBox);
 		setLayout(groupLayout);
 		
-		for(Luogo l : ricerca) {
+		if(!ricerca.isEmpty()) {
+			for(Luogo l : ricerca) {
+				
+				PanelInfoLuogoAnteprima panel = new PanelInfoLuogoAnteprima(controller, mainFrame, l, true, workPanel);
+				verticalBox.add(panel);
+				
+				verticalBox.add(Box.createRigidArea(new Dimension(0, 8)));
+				
+			}
+		}else {
 			
-			PanelInfoLuogoAnteprima panel = new PanelInfoLuogoAnteprima(controller, mainFrame, l, true, workPanel);
-			verticalBox.add(panel);
-			
-			verticalBox.add(Box.createRigidArea(new Dimension(0, 8)));
+			JLabel lblNessunLuogo = new JLabel("  Nessun luogo");
+			lblNessunLuogo.setFont(new Font("Tahoma", Font.BOLD, 21));
+			lblNessunLuogo.setHorizontalTextPosition(SwingConstants.CENTER);
+			verticalBox.add(Box.createRigidArea(new Dimension(0, 14)));
+			verticalBox.add(lblNessunLuogo);
 			
 		}
 		

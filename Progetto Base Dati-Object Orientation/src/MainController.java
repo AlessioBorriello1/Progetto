@@ -157,7 +157,6 @@ public class MainController {
 	public boolean lasciaRecensione(MainFrame mainFrame, Luogo l, int voto, String recensione, int numeroRecensioni) {
 		
 		RecensioneDAO dao = new RecensioneDAO();
-		System.out.println(numeroRecensioni);
 		if(dao.lasciaRecensioneALuogo(mainFrame, utente, l, voto, recensione, numeroRecensioni)) {
 			utente.setNumeroRecensioni(getUtente().getNumeroRecensioni() + 1); //Aumenta numero delle recensioni di quell'utente
 			utente.getRecensioniUtente().add(dao.getRecensioneLuogoByNomeUtente(l, utente.getNomeUtente()));
@@ -169,6 +168,13 @@ public class MainController {
 		}
 	}
 	
+	public boolean modificaRecensione(MainFrame mainFrame, Luogo l, int voto, String recensione, int numeroRecensioni, Recensione r) {
+		
+		RecensioneDAO dao = new RecensioneDAO();
+		return dao.modificaRecensioneLuogo(mainFrame, utente, l, voto, recensione, numeroRecensioni, r);
+	
+	}
+
 	//Getter per variabile currentPanel
 	public JPanel getCurrentPanel() {
 		return currentPanel;

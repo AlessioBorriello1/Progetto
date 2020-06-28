@@ -14,9 +14,12 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
+
 import javax.swing.Box;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
 
 public class LocaliPanel extends JPanel {
 
@@ -99,12 +102,24 @@ public class LocaliPanel extends JPanel {
 		panelControl.setLayout(gl_panelControl);
 		setLayout(groupLayout);
 		
-		for(Luogo l : controller.getUtente().getLuoghiUtente()) {
+		List<Luogo> luoghiUtente = controller.getUtente().getLuoghiUtente();
+		
+		if(!luoghiUtente.isEmpty()) {
+			for(Luogo l : controller.getUtente().getLuoghiUtente()) {
+				
+				PanelInfoLuogoAnteprima panel = new PanelInfoLuogoAnteprima(controller, mainFrame, l, true, workPanel);
+				verticalBox.add(panel);
+				
+				verticalBox.add(Box.createRigidArea(new Dimension(0, 8)));
+				
+			}
+		}else {
 			
-			PanelInfoLuogoAnteprima panel = new PanelInfoLuogoAnteprima(controller, mainFrame, l, true, workPanel);
-			verticalBox.add(panel);
-			
-			verticalBox.add(Box.createRigidArea(new Dimension(0, 8)));
+			JLabel lblNessunLuogo = new JLabel("  Nessun luogo");
+			lblNessunLuogo.setFont(new Font("Tahoma", Font.BOLD, 21));
+			lblNessunLuogo.setHorizontalTextPosition(SwingConstants.CENTER);
+			verticalBox.add(Box.createRigidArea(new Dimension(0, 14)));
+			verticalBox.add(lblNessunLuogo);
 			
 		}
 		
