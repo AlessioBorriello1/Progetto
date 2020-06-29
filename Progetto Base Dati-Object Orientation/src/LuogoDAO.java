@@ -265,8 +265,6 @@ public class LuogoDAO {
 				String tipoAttivita = rs.getString("tipoattivita"); //Tipo attività (Ristorante, Alloggio, Attrazione)
 				String attributoAttivita = rs.getString("attributoattivita"); //Specializzazione attività ((Pizzeria, Ristorante, Braceria) (Hotel, Motel, B&B) (Intrattenimento, Culturale))
 				
-				System.out.println(ID);
-				
 				if(tipoAttivita.contentEquals("Ristorante")) {
 					
 					RistoranteDAO dao = new RistoranteDAO();

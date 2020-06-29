@@ -110,11 +110,13 @@ public class PanelScriviRecensione extends JPanel {
 		JButton btnLasciaRecensione = new JButton("Lascia recensione");
 		btnLasciaRecensione.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-			
-				if(controller.lasciaRecensione(mainFrame, l, Integer.parseInt(spinnerVoto.getValue().toString()), editorPaneScriviRecensione.getText(), numeroRecensioni)) {
-					mainFrame.cambiaPannelloLavoroAHomePanel(workPanel);
-					UtenteDAO dao = new UtenteDAO();
-					dao.updateNumeroRecensioni(controller.getUtente());
+				
+				if(mainFrame.createConfirmationFrame("Lasciare questa recensione?")) {
+					if(controller.lasciaRecensione(mainFrame, l, Integer.parseInt(spinnerVoto.getValue().toString()), editorPaneScriviRecensione.getText(), numeroRecensioni)) {
+						mainFrame.cambiaPannelloLavoroAHomePanel(workPanel);
+						UtenteDAO dao = new UtenteDAO();
+						dao.updateNumeroRecensioni(controller.getUtente());
+					}
 				}
 				
 			}

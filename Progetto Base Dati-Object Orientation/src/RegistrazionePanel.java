@@ -66,14 +66,15 @@ public class RegistrazionePanel extends JPanel {
 		buttonRegistrati.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				
-				String nomeUtente = nomeUtenteField.getText(); //Prendi nome utente dal rispettivo campo
-				String email = emailField.getText(); //Prendi email dal rispettivo campo
-				String password = String.valueOf(passwordField.getPassword()); //Prendi password dal rispettivo campo
-				
-				if(controller.registrazione(nomeUtente, password, email, mainFrame)) {
-					mainFrame.cambiaPannelloLavoroALoginPanel(workPanel);//Vai a pannello login
+				if(mainFrame.createConfirmationFrame("Creare account con queste informazioni?")) {
+					String nomeUtente = nomeUtenteField.getText(); //Prendi nome utente dal rispettivo campo
+					String email = emailField.getText(); //Prendi email dal rispettivo campo
+					String password = String.valueOf(passwordField.getPassword()); //Prendi password dal rispettivo campo
+					
+					if(controller.registrazione(nomeUtente, password, email, mainFrame)) {
+						mainFrame.cambiaPannelloLavoroALoginPanel(workPanel);//Vai a pannello login
+					}
 				}
-				
 			}
 		});
 		buttonRegistrati.setBounds(486, 308, 220, 30);

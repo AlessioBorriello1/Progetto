@@ -156,23 +156,34 @@ public class MainController {
 
 	public boolean lasciaRecensione(MainFrame mainFrame, Luogo l, int voto, String recensione, int numeroRecensioni) {
 		
-		RecensioneDAO dao = new RecensioneDAO();
-		if(dao.lasciaRecensioneALuogo(mainFrame, utente, l, voto, recensione, numeroRecensioni)) {
-			utente.setNumeroRecensioni(getUtente().getNumeroRecensioni() + 1); //Aumenta numero delle recensioni di quell'utente
-			utente.getRecensioniUtente().add(dao.getRecensioneLuogoByNomeUtente(l, utente.getNomeUtente()));
-			mainFrame.refreshaPannelloInfo(); //Refresha pannello
-			return true;
+		if(!recensione.contentEquals("")) {
+			RecensioneDAO dao = new RecensioneDAO();
+			if(dao.lasciaRecensioneALuogo(mainFrame, utente, l, voto, recensione, numeroRecensioni)) {
+				utente.setNumeroRecensioni(getUtente().getNumeroRecensioni() + 1); //Aumenta numero delle recensioni di quell'utente
+				utente.getRecensioniUtente().add(dao.getRecensioneLuogoByNomeUtente(l, utente.getNomeUtente()));
+				mainFrame.refreshaPannelloInfo(); //Refresha pannello
+				return true;
+			}else {
+				System.out.println("Operazione fallita");
+				return false;
+			}
 		}else {
 			System.out.println("Operazione fallita");
+			mainFrame.createNotificationFrame("Inserire il testo della recensione!");
 			return false;
 		}
 	}
 	
 	public boolean modificaRecensione(MainFrame mainFrame, Luogo l, int voto, String recensione, int numeroRecensioni, Recensione r) {
-		
-		RecensioneDAO dao = new RecensioneDAO();
-		return dao.modificaRecensioneLuogo(mainFrame, utente, l, voto, recensione, numeroRecensioni, r);
-	
+		if(!recensione.contentEquals("")) {
+			RecensioneDAO dao = new RecensioneDAO();
+			return dao.modificaRecensioneLuogo(mainFrame, utente, l, voto, recensione, numeroRecensioni, r);
+		}else {
+			System.out.println("Operazione fallita");
+			mainFrame.createNotificationFrame("Inserire il testo della recensione!");
+			return false;
+		}
+			
 	}
 
 	//Getter per variabile currentPanel
