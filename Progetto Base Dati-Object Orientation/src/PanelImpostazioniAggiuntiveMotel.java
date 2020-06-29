@@ -13,7 +13,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class PanelImpostazioniAggiuntiveMotel extends JPanel {
 
-	public PanelImpostazioniAggiuntiveMotel() {
+	public PanelImpostazioniAggiuntiveMotel(boolean piscina, boolean wifi, String numeroStanze, boolean assistenza) {
 		setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		
 		setName("panelImpostazioniAggiuntiveMotel");
@@ -23,13 +23,16 @@ public class PanelImpostazioniAggiuntiveMotel extends JPanel {
 		
 		JCheckBox chckbxPiscina = new JCheckBox("Piscina");
 		chckbxPiscina.setName("chckbxPiscina");
+		chckbxPiscina.setSelected(piscina);
 		
 		JCheckBox chckbxWifi = new JCheckBox("WiFi");
 		chckbxWifi.setName("chckbxWifi");
+		chckbxWifi.setSelected(wifi);
 		
 		JTextField textFieldNumeroStanze = new JTextField();
 		textFieldNumeroStanze.setColumns(10);
 		textFieldNumeroStanze.setName("textFieldNumeroStanze");
+		textFieldNumeroStanze.setText(numeroStanze);
 		textFieldNumeroStanze.addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent e) {
 				String s = textFieldNumeroStanze.getText();
@@ -57,6 +60,7 @@ public class PanelImpostazioniAggiuntiveMotel extends JPanel {
 		
 		JCheckBox chckbxAssistenzaAutovetture = new JCheckBox("Assistenza autovetture");
 		chckbxAssistenzaAutovetture.setName("chckbxAssistenzaAutovetture");
+		chckbxAssistenzaAutovetture.setSelected(assistenza);
 		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(

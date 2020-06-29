@@ -109,7 +109,7 @@ public class RecensioniPanel extends JPanel {
 					public void mouseClicked(MouseEvent e) {
 						boolean answer = mainFrame.createConfirmationFrame("Sei sicuro di voler cancellare questa recensione?");
 						if(answer) {
-							System.out.println("Cancellazione recensione");
+							System.out.println("Rimuovi recensione");
 						}
 					}
 				});

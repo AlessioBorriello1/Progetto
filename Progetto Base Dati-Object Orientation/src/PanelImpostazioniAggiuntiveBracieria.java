@@ -10,7 +10,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class PanelImpostazioniAggiuntiveBracieria extends JPanel {
 
-	public PanelImpostazioniAggiuntiveBracieria() {
+	public PanelImpostazioniAggiuntiveBracieria(boolean vegano, String nazionalita, String tipoCarne) {
 		setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		
 		setName("panelImpostazioniAggiuntiveBracieria");
@@ -20,12 +20,14 @@ public class PanelImpostazioniAggiuntiveBracieria extends JPanel {
 		
 		JCheckBox chckbxCiboVegano = new JCheckBox("Cibo vegano");
 		chckbxCiboVegano.setName("chckbxCiboVegano");
+		chckbxCiboVegano.setSelected(vegano);
 		
 		JComboBox comboBoxNazionalitaCibo = new JComboBox();
 		comboBoxNazionalitaCibo.setName("comboBoxNazionalitCibo");
 		comboBoxNazionalitaCibo.addItem("Italiano");
 		comboBoxNazionalitaCibo.addItem("Messicano");
 		comboBoxNazionalitaCibo.addItem("Indiano");
+		comboBoxNazionalitaCibo.setSelectedItem(nazionalita);
 		
 		JLabel lblNazionalitCibo = new JLabel("Nazionalit\u00E0 cibo");
 		lblNazionalitCibo.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -35,6 +37,7 @@ public class PanelImpostazioniAggiuntiveBracieria extends JPanel {
 		comboBoxTipoCarne.addItem("Pollo");
 		comboBoxTipoCarne.addItem("Manzo");
 		comboBoxTipoCarne.addItem("Tacchino");
+		comboBoxTipoCarne.setSelectedItem(tipoCarne);
 		
 		JLabel lblTipoCarne = new JLabel("Tipo carne");
 		lblTipoCarne.setFont(new Font("Tahoma", Font.PLAIN, 11));

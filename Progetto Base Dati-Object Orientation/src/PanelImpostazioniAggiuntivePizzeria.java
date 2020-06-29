@@ -11,8 +11,8 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.EtchedBorder;
 
 public class PanelImpostazioniAggiuntivePizzeria extends JPanel {
-
-	public PanelImpostazioniAggiuntivePizzeria() {
+	
+	public PanelImpostazioniAggiuntivePizzeria(boolean vegano, String nazionalita, boolean asporto) {
 		setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		setBackground(Color.WHITE);
 		
@@ -23,18 +23,21 @@ public class PanelImpostazioniAggiuntivePizzeria extends JPanel {
 		
 		JCheckBox chckbxCiboVegano = new JCheckBox("Cibo vegano");
 		chckbxCiboVegano.setName("chckbxCiboVegano");
+		chckbxCiboVegano.setSelected(vegano);
 		
 		JComboBox comboBoxNazionalitCibo = new JComboBox();
 		comboBoxNazionalitCibo.setName("comboBoxNazionalitCibo");
 		comboBoxNazionalitCibo.addItem("Italiano");
 		comboBoxNazionalitCibo.addItem("Messicano");
 		comboBoxNazionalitCibo.addItem("Indiano");
+		comboBoxNazionalitCibo.setSelectedItem(nazionalita);
 		
 		JLabel lblNazionalitaCibo = new JLabel("Nazionalit\u00E0 cibo");
 		lblNazionalitaCibo.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		
 		JCheckBox chckbxAsporto = new JCheckBox("Asporto");
 		chckbxAsporto.setName("chckbxAsporto");
+		chckbxAsporto.setSelected(asporto);
 		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(

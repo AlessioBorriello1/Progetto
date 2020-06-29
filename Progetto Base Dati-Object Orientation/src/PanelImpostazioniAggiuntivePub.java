@@ -9,8 +9,8 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class PanelImpostazioniAggiuntivePub extends JPanel {
-
-	public PanelImpostazioniAggiuntivePub() {
+	
+	public PanelImpostazioniAggiuntivePub(boolean vegano, String nazione, String tipoBirra) {
 		setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		
 		setName("panelImpostazioniAggiuntivePub");
@@ -20,12 +20,14 @@ public class PanelImpostazioniAggiuntivePub extends JPanel {
 		
 		JCheckBox chckbxCiboVegano = new JCheckBox("Cibo vegano");
 		chckbxCiboVegano.setName("chckbxCiboVegano");
+		chckbxCiboVegano.setSelected(vegano);
 		
 		JComboBox comboBoxNazionalitaCibo = new JComboBox();
 		comboBoxNazionalitaCibo.setName("comboBoxNazionalitCibo");
 		comboBoxNazionalitaCibo.addItem("Italiano");
 		comboBoxNazionalitaCibo.addItem("Messicano");
 		comboBoxNazionalitaCibo.addItem("Indiano");
+		comboBoxNazionalitaCibo.setSelectedItem(nazione);
 		
 		JLabel lblNazionalitaCibo = new JLabel("Nazionalit\u00E0 cibo");
 		lblNazionalitaCibo.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -34,6 +36,7 @@ public class PanelImpostazioniAggiuntivePub extends JPanel {
 		comboBoxTipoBirra.setName("comboBoxTipoBirra");
 		comboBoxTipoBirra.addItem("Spina");
 		comboBoxTipoBirra.addItem("Malto");
+		comboBoxTipoBirra.setSelectedItem(tipoBirra);
 		
 		JLabel lblTipoBirra = new JLabel("Tipo birra");
 		lblTipoBirra.setFont(new Font("Tahoma", Font.PLAIN, 11));

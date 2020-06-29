@@ -23,14 +23,14 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.JCheckBox;
 
-public class CreazioneLuogoPanel extends JPanel {
+public class PanelModificaLuogo extends JPanel {
 
 	private MainController controller; //Controller principale
 	private MainFrame mainFrame; //Frame che ha creato il pannello
 	private JPanel workPanel; //Pannello con informazioni sul luogo da creare (fisso)
 	private JPanel currentImpostazioniAggiuntivePanel = null; //Pannello con informazioni aggiuntive sul luogo da creare (in base al tipo)
 	
-	public CreazioneLuogoPanel(MainController controller, MainFrame mainFrame, JPanel workPanel) {
+	public PanelModificaLuogo(MainController controller, MainFrame mainFrame, JPanel workPanel, Luogo l) {
 		
 		this.controller = controller; //Collega controller
 		this.mainFrame = mainFrame; //Collega mainFrame
@@ -38,13 +38,13 @@ public class CreazioneLuogoPanel extends JPanel {
 		
 		setBackground(controller.skyWhiter); //Imposta colore
 		
-		JTextField textFieldNome = new JTextField(); //Nuovo textField Nome
+		JTextField textFieldNome = new JTextField(l.getNome()); //Nuovo textField Nome
 		textFieldNome.setColumns(10);
 		
-		JTextField textFieldIndirizzo = new JTextField(); //Nuovo textField Indirizzo
+		JTextField textFieldIndirizzo = new JTextField(l.getIndirizzo()); //Nuovo textField Indirizzo
 		textFieldIndirizzo.setColumns(10);
 		
-		JTextField textFieldTelefono = new JTextField(); //Nuovo textField Telefono
+		JTextField textFieldTelefono = new JTextField(l.getTelefono()); //Nuovo textField Telefono
 		textFieldTelefono.addKeyListener(new KeyAdapter() {
 			//Tasto premuto
 			public void keyPressed(KeyEvent e) {
@@ -69,7 +69,7 @@ public class CreazioneLuogoPanel extends JPanel {
 		});
 		textFieldTelefono.setColumns(10);
 		
-		JTextField textFieldNomePropretario = new JTextField(); //Nuovo textField Nome proprietario
+		JTextField textFieldNomePropretario = new JTextField(l.getProprietario()); //Nuovo textField Nome proprietario
 		textFieldNomePropretario.setColumns(10);
 		
 		JLabel lblNomeLuogo = new JLabel("Nome luogo:"); //Label nome luogo
@@ -95,7 +95,7 @@ public class CreazioneLuogoPanel extends JPanel {
 			}
 			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) { //Quando il popup menu della combobox scompare
 				//Imposta il pannello impostazioni aggiuntive in base all'elemento selezionato della combobox
-				currentImpostazioniAggiuntivePanel = refreshaPannelloImpostazioniAggiuntive(comboBoxSpecializzazione, comboBoxSpecializzazione.getSelectedIndex(), currentImpostazioniAggiuntivePanel);
+				currentImpostazioniAggiuntivePanel = refreshaPannelloImpostazioniAggiuntive(comboBoxSpecializzazione, comboBoxSpecializzazione.getSelectedIndex(), currentImpostazioniAggiuntivePanel, l);
 			}
 			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
 				//Questo metodo deve esistere per forza
@@ -111,7 +111,7 @@ public class CreazioneLuogoPanel extends JPanel {
 				//Fai mostrare alla combobox specializzazione le corrette specializzazioni in base al tipo di attività
 				refreshaComboBoxSpecializzazione(comboBoxSpecializzazione, comboBoxTipoAttivita.getSelectedIndex());
 				//Imposta il pannello impostazioni aggiuntive in base all'elemento selezionato della combobox
-				currentImpostazioniAggiuntivePanel = refreshaPannelloImpostazioniAggiuntive(comboBoxSpecializzazione, comboBoxSpecializzazione.getSelectedIndex(), currentImpostazioniAggiuntivePanel);
+				currentImpostazioniAggiuntivePanel = refreshaPannelloImpostazioniAggiuntive(comboBoxSpecializzazione, comboBoxSpecializzazione.getSelectedIndex(), currentImpostazioniAggiuntivePanel, l);
 			}
 			public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
 				//Questo metodo deve esistere per forza
@@ -120,8 +120,10 @@ public class CreazioneLuogoPanel extends JPanel {
 		comboBoxTipoAttivita.addItem("Ristorante"); //Aggiungo Ristorante alla combo box
 		comboBoxTipoAttivita.addItem("Alloggio"); //Aggiungo Alloggio alla combo box
 		comboBoxTipoAttivita.addItem("Attrazione"); //Aggiungo Attrazione alla combo box
+		comboBoxTipoAttivita.setSelectedItem(l.getTipoAttivita());
 		//Fai mostrare alla combobox specializzazione le corrette specializzazioni in base al tipo di attività
 		refreshaComboBoxSpecializzazione(comboBoxSpecializzazione, comboBoxTipoAttivita.getSelectedIndex());
+		comboBoxSpecializzazione.setSelectedItem(l.getAttributoAttivita());
 		
 		JLabel labelTipoAttivita = new JLabel("Tipo attivit\u00E0:"); //Label tipo attività
 		labelTipoAttivita.setHorizontalAlignment(SwingConstants.TRAILING);
@@ -136,7 +138,7 @@ public class CreazioneLuogoPanel extends JPanel {
 		panelAttributiAggiuntivi.setBorder(null);
 		panelAttributiAggiuntivi.setName("panelAttributiAggiuntivi");
 		
-		JButton btnCreaLuogo = new JButton("Crea luogo"); //Crea bottone
+		JButton btnModificaLuogo = new JButton("Modifica luogo"); //Crea bottone
 		
 		//Allineamento orizzontale
 		GroupLayout groupLayout = new GroupLayout(this);
@@ -167,7 +169,7 @@ public class CreazioneLuogoPanel extends JPanel {
 								.addComponent(comboBoxSpecializzazione, 0, 207, Short.MAX_VALUE))))
 					.addGap(18)
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
-						.addComponent(btnCreaLuogo, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(btnModificaLuogo, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 						.addComponent(panelAttributiAggiuntivi, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 338, Short.MAX_VALUE))
 					.addGap(27))
 		);
@@ -203,23 +205,27 @@ public class CreazioneLuogoPanel extends JPanel {
 								.addComponent(labelSpecializzazione, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)))
 						.addComponent(panelAttributiAggiuntivi, GroupLayout.PREFERRED_SIZE, 255, GroupLayout.PREFERRED_SIZE))
 					.addGap(44)
-					.addComponent(btnCreaLuogo)
+					.addComponent(btnModificaLuogo)
 					.addGap(153))
 		);
 		panelAttributiAggiuntivi.setLayout(new CardLayout(0, 0)); //Imposta layout pannello attributi aggiuntivi a cardLayout
 		setLayout(groupLayout);
 	
-		btnCreaLuogo.addMouseListener(new MouseAdapter() {
+		btnModificaLuogo.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) { //Mouse cliccato
 				//Funzione crea luogo del controller, passa le informazioni scelte dall'utente nei vari pannelli
-				if(mainFrame.createConfirmationFrame("Creare luogo con queste informazioni?")) {
-					controller.creaLuogo(mainFrame, textFieldNome.getText(), textFieldIndirizzo.getText(), textFieldTelefono.getText(), textFieldNomePropretario.getText(), comboBoxTipoAttivita.getSelectedItem().toString(), comboBoxSpecializzazione.getSelectedItem().toString(), currentImpostazioniAggiuntivePanel);
+				if(mainFrame.createConfirmationFrame("Modificare luogo con queste nuove informazioni?")) {
+					System.out.println("Modifica");
 				}
 			}
 		});
 		
+		//Inizializza currentImpostazioniAggiuntivePanel a PanelImpostazioniAggiuntivePizzeria (di base, poi controlla effettivamente la selezione)
+		JPanel panel = new JPanel();
+		currentImpostazioniAggiuntivePanel = panel;
+		
 		//Imposta il pannello impostazioni aggiuntive in base all'elemento selezionato della combobox alla creazione del pannello
-		currentImpostazioniAggiuntivePanel = refreshaPannelloImpostazioniAggiuntive(comboBoxSpecializzazione, comboBoxSpecializzazione.getSelectedIndex(), currentImpostazioniAggiuntivePanel);
+		currentImpostazioniAggiuntivePanel = refreshaPannelloImpostazioniAggiuntive(comboBoxSpecializzazione, comboBoxSpecializzazione.getSelectedIndex(), currentImpostazioniAggiuntivePanel, l);
 		
 		
 	}
@@ -264,13 +270,15 @@ public class CreazioneLuogoPanel extends JPanel {
 	 * @param currentPanel pannello che si sta mostrando attualmente come pannello delle impostazioni aggiuntive
 	 * @return nuovo pannello impostazioni aggiuntive appena settato
 	 */
-	public JPanel refreshaPannelloImpostazioniAggiuntive(JComboBox box, int index, JPanel currentPanel) {
+	public JPanel refreshaPannelloImpostazioniAggiuntive(JComboBox box, int index, JPanel currentPanel, Luogo l) {
 		
 		String item = box.getItemAt(index).toString(); //Crea stringa con la selezione della combobox della specializzazione
 		
 		if(currentPanel == null) {
-			PanelImpostazioniAggiuntivePizzeria panel = new PanelImpostazioniAggiuntivePizzeria(false, "Italiano", false);
+			Pizzeria p = (Pizzeria)l;
+			PanelImpostazioniAggiuntivePizzeria panel = new PanelImpostazioniAggiuntivePizzeria(p.isVegano(), p.getNazionalitaCibo(), p.isAsporto());
 			JPanel basePanel = (JPanel)controller.getComponentByName(this, "panelAttributiAggiuntivi");
+			
 			basePanel.removeAll();
 			basePanel.repaint();
 			basePanel.revalidate();
@@ -285,138 +293,291 @@ public class CreazioneLuogoPanel extends JPanel {
 		
 		switch(item) { //In base a cosa è selezionato
 		case "Pizzeria":{ //Se pizzeria è selezionato
-			PanelImpostazioniAggiuntivePizzeria panel = new PanelImpostazioniAggiuntivePizzeria(false, "Italiano", false);
-			if(currentPanel != null && !currentPanel.getClass().equals(panel.getClass())) {
-				JPanel basePanel = (JPanel)controller.getComponentByName(this, "panelAttributiAggiuntivi");
-				
-				basePanel.removeAll();
-				basePanel.repaint();
-				
-				basePanel.add(panel);
-				basePanel.repaint();
-				basePanel.revalidate();
-				
-				currentPanel = panel; //Imposta il pannello attuale al nuovo pannello
+			if(currentPanel.getClass().toString().contentEquals("class javax.swing.JPanel")) {
+				Pizzeria p = (Pizzeria)l;
+				PanelImpostazioniAggiuntivePizzeria panel = new PanelImpostazioniAggiuntivePizzeria(p.isVegano(), p.getNazionalitaCibo(), p.isAsporto());
+				if(currentPanel != null && !currentPanel.getClass().equals(panel.getClass())) {
+					JPanel basePanel = (JPanel)controller.getComponentByName(this, "panelAttributiAggiuntivi");
+					
+					basePanel.removeAll();
+					basePanel.repaint();
+					
+					basePanel.add(panel);
+					basePanel.repaint();
+					basePanel.revalidate();
+					
+					currentPanel = panel; //Imposta il pannello attuale al nuovo pannello
+				}
+			}else {
+				PanelImpostazioniAggiuntivePizzeria panel = new PanelImpostazioniAggiuntivePizzeria(false, "Italiano", false);
+				if(currentPanel != null && !currentPanel.getClass().equals(panel.getClass())) {
+					JPanel basePanel = (JPanel)controller.getComponentByName(this, "panelAttributiAggiuntivi");
+					
+					basePanel.removeAll();
+					basePanel.repaint();
+					
+					basePanel.add(panel);
+					basePanel.repaint();
+					basePanel.revalidate();
+					
+					currentPanel = panel; //Imposta il pannello attuale al nuovo pannello
+				}
 			}
 		}break;
 		case "Braceria":{ //Se braceria è selezionato
-			PanelImpostazioniAggiuntiveBracieria panel = new PanelImpostazioniAggiuntiveBracieria(false, "Italiano", "Pollo");
-			if(currentPanel != null && !currentPanel.getClass().equals(panel.getClass())) {
-				JPanel basePanel = (JPanel)controller.getComponentByName(this, "panelAttributiAggiuntivi");
-				
-				basePanel.removeAll();
-				basePanel.repaint();
-				
-				basePanel.add(panel);
-				basePanel.repaint();
-				basePanel.revalidate();
-				
-				currentPanel = panel; //Imposta il pannello attuale al nuovo pannello
+			if(currentPanel.getClass().toString().contentEquals("class javax.swing.JPanel")) {
+				Braceria b = (Braceria)l;
+				PanelImpostazioniAggiuntiveBracieria panel = new PanelImpostazioniAggiuntiveBracieria(b.isVegano(), b.getNazionalitaCibo(), b.getTipoCarne());
+				if(currentPanel != null && !currentPanel.getClass().equals(panel.getClass())) {
+					JPanel basePanel = (JPanel)controller.getComponentByName(this, "panelAttributiAggiuntivi");
+					
+					basePanel.removeAll();
+					basePanel.repaint();
+					
+					basePanel.add(panel);
+					basePanel.repaint();
+					basePanel.revalidate();
+					
+					currentPanel = panel; //Imposta il pannello attuale al nuovo pannello
+				}
+			}else {
+				PanelImpostazioniAggiuntiveBracieria panel = new PanelImpostazioniAggiuntiveBracieria(false, "Italiano", "Pollo");
+				if(currentPanel != null && !currentPanel.getClass().equals(panel.getClass())) {
+					JPanel basePanel = (JPanel)controller.getComponentByName(this, "panelAttributiAggiuntivi");
+					
+					basePanel.removeAll();
+					basePanel.repaint();
+					
+					basePanel.add(panel);
+					basePanel.repaint();
+					basePanel.revalidate();
+					
+					currentPanel = panel; //Imposta il pannello attuale al nuovo pannello
+				}
 			}
 		}break;
 		case "Pub":{ //Se ristorante è selezionato
-			PanelImpostazioniAggiuntivePub panel = new PanelImpostazioniAggiuntivePub(false, "Italiano", "Spina");
-			if(currentPanel != null && !currentPanel.getClass().equals(panel.getClass())) {
-				JPanel basePanel = (JPanel)controller.getComponentByName(this, "panelAttributiAggiuntivi");
-				
-				basePanel.removeAll();
-				basePanel.repaint();
-				
-				basePanel.add(panel);
-				basePanel.repaint();
-				basePanel.revalidate();
-				
-				currentPanel = panel; //Imposta il pannello attuale al nuovo pannello
+			if(currentPanel.getClass().toString().contentEquals("class javax.swing.JPanel")) {
+				Pub p = (Pub)l;
+				PanelImpostazioniAggiuntivePub panel = new PanelImpostazioniAggiuntivePub(p.isVegano(), p.getNazionalitaCibo(), p.getTipoBirra());
+				if(currentPanel != null && !currentPanel.getClass().equals(panel.getClass())) {
+					JPanel basePanel = (JPanel)controller.getComponentByName(this, "panelAttributiAggiuntivi");
+					
+					basePanel.removeAll();
+					basePanel.repaint();
+					
+					basePanel.add(panel);
+					basePanel.repaint();
+					basePanel.revalidate();
+					
+					currentPanel = panel; //Imposta il pannello attuale al nuovo pannello
+				}
+			}else {
+				PanelImpostazioniAggiuntivePub panel = new PanelImpostazioniAggiuntivePub(false, "Italiano", "Spina");
+				if(currentPanel != null && !currentPanel.getClass().equals(panel.getClass())) {
+					JPanel basePanel = (JPanel)controller.getComponentByName(this, "panelAttributiAggiuntivi");
+					
+					basePanel.removeAll();
+					basePanel.repaint();
+					
+					basePanel.add(panel);
+					basePanel.repaint();
+					basePanel.revalidate();
+					
+					currentPanel = panel; //Imposta il pannello attuale al nuovo pannello
+				}
 			}
 		}break;
 		case "Hotel":{ //Se hotel è selezionato
-			PanelImpostazioniAggiuntiveHotel panel = new PanelImpostazioniAggiuntiveHotel(false, false, "", 1);
-			if(currentPanel != null && !currentPanel.getClass().equals(panel.getClass())) {
-				JPanel basePanel = (JPanel)controller.getComponentByName(this, "panelAttributiAggiuntivi");
-				
-				basePanel.removeAll();
-				basePanel.repaint();
-				
-				basePanel.add(panel);
-				basePanel.repaint();
-				basePanel.revalidate();
-				
-				currentPanel = panel; //Imposta il pannello attuale al nuovo pannello
+			if(currentPanel.getClass().toString().contentEquals("class javax.swing.JPanel")) {
+				Hotel h = (Hotel)l;
+				PanelImpostazioniAggiuntiveHotel panel = new PanelImpostazioniAggiuntiveHotel(h.isPiscina(), h.isWifi(), String.valueOf(h.getNumeroStanze()), h.getNumeroStelle());
+				if(currentPanel != null && !currentPanel.getClass().equals(panel.getClass())) {
+					JPanel basePanel = (JPanel)controller.getComponentByName(this, "panelAttributiAggiuntivi");
+					
+					basePanel.removeAll();
+					basePanel.repaint();
+					
+					basePanel.add(panel);
+					basePanel.repaint();
+					basePanel.revalidate();
+					
+					currentPanel = panel; //Imposta il pannello attuale al nuovo pannello
+				}
+			}else {
+				PanelImpostazioniAggiuntiveHotel panel = new PanelImpostazioniAggiuntiveHotel(false, false, "", 1);
+				if(currentPanel != null && !currentPanel.getClass().equals(panel.getClass())) {
+					JPanel basePanel = (JPanel)controller.getComponentByName(this, "panelAttributiAggiuntivi");
+					
+					basePanel.removeAll();
+					basePanel.repaint();
+					
+					basePanel.add(panel);
+					basePanel.repaint();
+					basePanel.revalidate();
+					
+					currentPanel = panel; //Imposta il pannello attuale al nuovo pannello
+				}
 			}
 		}break;
 		case "B&B":{ //Se B&B è selezionato
-			PanelImpostazioniAggiuntiveBB panel = new PanelImpostazioniAggiuntiveBB(false, false, "", false);
-			if(currentPanel != null && !currentPanel.getClass().equals(panel.getClass())) {
-				JPanel basePanel = (JPanel)controller.getComponentByName(this, "panelAttributiAggiuntivi");
-				
-				basePanel.removeAll();
-				basePanel.repaint();
-				
-				basePanel.add(panel);
-				basePanel.repaint();
-				basePanel.revalidate();
-				
-				currentPanel = panel; //Imposta il pannello attuale al nuovo pannello
+			if(currentPanel.getClass().toString().contentEquals("class javax.swing.JPanel")) {
+				BB b = (BB)l;
+				PanelImpostazioniAggiuntiveBB panel = new PanelImpostazioniAggiuntiveBB(b.isPiscina(), b.isWifi(), String.valueOf(b.getNumeroStanze()), b.isColazione());
+				if(currentPanel != null && !currentPanel.getClass().equals(panel.getClass())) {
+					JPanel basePanel = (JPanel)controller.getComponentByName(this, "panelAttributiAggiuntivi");
+					
+					basePanel.removeAll();
+					basePanel.repaint();
+					
+					basePanel.add(panel);
+					basePanel.repaint();
+					basePanel.revalidate();
+					
+					currentPanel = panel; //Imposta il pannello attuale al nuovo pannello
+				}
+			}else {
+				PanelImpostazioniAggiuntiveBB panel = new PanelImpostazioniAggiuntiveBB(false, false, "", false);
+				if(currentPanel != null && !currentPanel.getClass().equals(panel.getClass())) {
+					JPanel basePanel = (JPanel)controller.getComponentByName(this, "panelAttributiAggiuntivi");
+					
+					basePanel.removeAll();
+					basePanel.repaint();
+					
+					basePanel.add(panel);
+					basePanel.repaint();
+					basePanel.revalidate();
+					
+					currentPanel = panel; //Imposta il pannello attuale al nuovo pannello
+				}
 			}
 		}break;
 		case "Motel":{ //Se motel è selezionato
-			PanelImpostazioniAggiuntiveMotel panel = new PanelImpostazioniAggiuntiveMotel(false, false, "", false);
-			if(currentPanel != null && !currentPanel.getClass().equals(panel.getClass())) {
-				JPanel basePanel = (JPanel)controller.getComponentByName(this, "panelAttributiAggiuntivi");
-				
-				basePanel.removeAll();
-				basePanel.repaint();
-				
-				basePanel.add(panel);
-				basePanel.repaint();
-				basePanel.revalidate();
-				
-				currentPanel = panel; //Imposta il pannello attuale al nuovo pannello
+			if(currentPanel.getClass().toString().contentEquals("class javax.swing.JPanel")) {
+				Motel m = (Motel)l;
+				PanelImpostazioniAggiuntiveMotel panel = new PanelImpostazioniAggiuntiveMotel(m.isPiscina(), m.isWifi(), String.valueOf(m.getNumeroStanze()), m.isAssistenzaAuto());
+				if(currentPanel != null && !currentPanel.getClass().equals(panel.getClass())) {
+					JPanel basePanel = (JPanel)controller.getComponentByName(this, "panelAttributiAggiuntivi");
+					
+					basePanel.removeAll();
+					basePanel.repaint();
+					
+					basePanel.add(panel);
+					basePanel.repaint();
+					basePanel.revalidate();
+					
+					currentPanel = panel; //Imposta il pannello attuale al nuovo pannello
+				}
+			}else {
+				PanelImpostazioniAggiuntiveMotel panel = new PanelImpostazioniAggiuntiveMotel(false, false, "", false);
+				if(currentPanel != null && !currentPanel.getClass().equals(panel.getClass())) {
+					JPanel basePanel = (JPanel)controller.getComponentByName(this, "panelAttributiAggiuntivi");
+					
+					basePanel.removeAll();
+					basePanel.repaint();
+					
+					basePanel.add(panel);
+					basePanel.repaint();
+					basePanel.revalidate();
+					
+					currentPanel = panel; //Imposta il pannello attuale al nuovo pannello
+				}
 			}
 		}break;
 		case "Museo":{ //Se intrattenimento è selezionato
-			PanelImpostazioniAggiuntiveMuseo panel = new PanelImpostazioniAggiuntiveMuseo(false, "Artistico");
-			if(currentPanel != null && !currentPanel.getClass().equals(panel.getClass())) {
-				JPanel basePanel = (JPanel)controller.getComponentByName(this, "panelAttributiAggiuntivi");
-				
-				basePanel.removeAll();
-				basePanel.repaint();
-				
-				basePanel.add(panel);
-				basePanel.repaint();
-				basePanel.revalidate();
-				
-				currentPanel = panel; //Imposta il pannello attuale al nuovo pannello
+			if(currentPanel.getClass().toString().contentEquals("class javax.swing.JPanel")) {
+				Museo m = (Museo)l;
+				PanelImpostazioniAggiuntiveMuseo panel = new PanelImpostazioniAggiuntiveMuseo(m.isPromozioneStudenti(), m.getTipoMuseo());
+				if(currentPanel != null && !currentPanel.getClass().equals(panel.getClass())) {
+					JPanel basePanel = (JPanel)controller.getComponentByName(this, "panelAttributiAggiuntivi");
+					
+					basePanel.removeAll();
+					basePanel.repaint();
+					
+					basePanel.add(panel);
+					basePanel.repaint();
+					basePanel.revalidate();
+					
+					currentPanel = panel; //Imposta il pannello attuale al nuovo pannello
+				}
+			}else {
+				PanelImpostazioniAggiuntiveMuseo panel = new PanelImpostazioniAggiuntiveMuseo(false, "Artistico");
+				if(currentPanel != null && !currentPanel.getClass().equals(panel.getClass())) {
+					JPanel basePanel = (JPanel)controller.getComponentByName(this, "panelAttributiAggiuntivi");
+					
+					basePanel.removeAll();
+					basePanel.repaint();
+					
+					basePanel.add(panel);
+					basePanel.repaint();
+					basePanel.revalidate();
+					
+					currentPanel = panel; //Imposta il pannello attuale al nuovo pannello
+				}
 			}
 		}break;
 		case "Zoo":{ //Se culturale è selezionato
-			PanelImpostazioniAggiuntiveZoo panel = new PanelImpostazioniAggiuntiveZoo(false, "Primati");
-			if(currentPanel != null && !currentPanel.getClass().equals(panel.getClass())) {
-				JPanel basePanel = (JPanel)controller.getComponentByName(this, "panelAttributiAggiuntivi");
-				
-				basePanel.removeAll();
-				basePanel.repaint();
-				
-				basePanel.add(panel);
-				basePanel.repaint();
-				basePanel.revalidate();
-				
-				currentPanel = panel; //Imposta il pannello attuale al nuovo pannello
+			if(currentPanel.getClass().toString().contentEquals("class javax.swing.JPanel")) {
+				Zoo z = (Zoo)l;
+				PanelImpostazioniAggiuntiveZoo panel = new PanelImpostazioniAggiuntiveZoo(z.isPromozioneStudenti(), z.getSpecie());
+				if(currentPanel != null && !currentPanel.getClass().equals(panel.getClass())) {
+					JPanel basePanel = (JPanel)controller.getComponentByName(this, "panelAttributiAggiuntivi");
+					
+					basePanel.removeAll();
+					basePanel.repaint();
+					
+					basePanel.add(panel);
+					basePanel.repaint();
+					basePanel.revalidate();
+					
+					currentPanel = panel; //Imposta il pannello attuale al nuovo pannello
+				}
+			}else {
+				PanelImpostazioniAggiuntiveZoo panel = new PanelImpostazioniAggiuntiveZoo(false, "Primati");
+				if(currentPanel != null && !currentPanel.getClass().equals(panel.getClass())) {
+					JPanel basePanel = (JPanel)controller.getComponentByName(this, "panelAttributiAggiuntivi");
+					
+					basePanel.removeAll();
+					basePanel.repaint();
+					
+					basePanel.add(panel);
+					basePanel.repaint();
+					basePanel.revalidate();
+					
+					currentPanel = panel; //Imposta il pannello attuale al nuovo pannello
+				}
 			}
 		}break;
 		case "Parco":{ //Se culturale è selezionato
-			PanelImpostazioniAggiuntiveParco panel = new PanelImpostazioniAggiuntiveParco(false, false);
-			if(currentPanel != null && !currentPanel.getClass().equals(panel.getClass())) {
-				JPanel basePanel = (JPanel)controller.getComponentByName(this, "panelAttributiAggiuntivi");
-				
-				basePanel.removeAll();
-				basePanel.repaint();
-				
-				basePanel.add(panel);
-				basePanel.repaint();
-				basePanel.revalidate();
-				
-				currentPanel = panel; //Imposta il pannello attuale al nuovo pannello
+			if(currentPanel.getClass().toString().contentEquals("class javax.swing.JPanel")) {
+				Parco p = (Parco)l;
+				PanelImpostazioniAggiuntiveParco panel = new PanelImpostazioniAggiuntiveParco(p.isPromozioneStudenti(), p.isIngressoGratuito());
+				if(currentPanel != null && !currentPanel.getClass().equals(panel.getClass())) {
+					JPanel basePanel = (JPanel)controller.getComponentByName(this, "panelAttributiAggiuntivi");
+					
+					basePanel.removeAll();
+					basePanel.repaint();
+					
+					basePanel.add(panel);
+					basePanel.repaint();
+					basePanel.revalidate();
+					
+					currentPanel = panel; //Imposta il pannello attuale al nuovo pannello
+				}
+			}else {
+				PanelImpostazioniAggiuntiveParco panel = new PanelImpostazioniAggiuntiveParco(false, false);
+				if(currentPanel != null && !currentPanel.getClass().equals(panel.getClass())) {
+					JPanel basePanel = (JPanel)controller.getComponentByName(this, "panelAttributiAggiuntivi");
+					
+					basePanel.removeAll();
+					basePanel.repaint();
+					
+					basePanel.add(panel);
+					basePanel.repaint();
+					basePanel.revalidate();
+					
+					currentPanel = panel; //Imposta il pannello attuale al nuovo pannello
+				}
 			}
 		}break;
 		}

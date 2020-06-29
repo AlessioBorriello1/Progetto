@@ -9,8 +9,8 @@ import javax.swing.JComboBox;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class PanelImpostazioniAggiuntiveMuseo extends JPanel {
-
-	public PanelImpostazioniAggiuntiveMuseo() {
+	
+	public PanelImpostazioniAggiuntiveMuseo(boolean promozione, String tipoMuseo) {
 		setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		
 		setName("panelImpostazioniAggiuntiveMuseo");
@@ -20,12 +20,14 @@ public class PanelImpostazioniAggiuntiveMuseo extends JPanel {
 		
 		JCheckBox chckbxPromozioneStudenti = new JCheckBox("Promozione studenti");
 		chckbxPromozioneStudenti.setName("chckbxPromozioneStudenti");
+		chckbxPromozioneStudenti.setSelected(promozione);
 		
 		JComboBox comboBoxTipoMuseo = new JComboBox();
 		comboBoxTipoMuseo.addItem("Artistico");
 		comboBoxTipoMuseo.addItem("Storico");
 		comboBoxTipoMuseo.addItem("Archeologico");
 		comboBoxTipoMuseo.setName("comboBoxTipoMuseo");
+		comboBoxTipoMuseo.setSelectedItem(tipoMuseo);
 		
 		JLabel lblTipoMuseo = new JLabel("Tipo museo");
 		GroupLayout groupLayout = new GroupLayout(this);

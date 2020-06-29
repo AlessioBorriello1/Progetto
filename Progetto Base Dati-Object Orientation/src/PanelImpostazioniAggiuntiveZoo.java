@@ -10,7 +10,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class PanelImpostazioniAggiuntiveZoo extends JPanel {
 
-	public PanelImpostazioniAggiuntiveZoo() {
+	public PanelImpostazioniAggiuntiveZoo(boolean promozione, String specie) {
 		setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		
 		setName("panelImpostazioniAggiuntiveZoo");
@@ -20,12 +20,14 @@ public class PanelImpostazioniAggiuntiveZoo extends JPanel {
 		
 		JCheckBox chckbxPromozioneStudenti = new JCheckBox("Promozione studenti");
 		chckbxPromozioneStudenti.setName("chckbxPromozioneStudenti");
+		chckbxPromozioneStudenti.setSelected(promozione);
 		
 		JComboBox comboBoxSpecie = new JComboBox();
 		comboBoxSpecie.addItem("Primati");
 		comboBoxSpecie.addItem("Felini");
 		comboBoxSpecie.addItem("Rettili");
 		comboBoxSpecie.setName("comboBoxSpecie");
+		comboBoxSpecie.setSelectedItem(specie);
 		
 		
 		JLabel lblSpecie = new JLabel("Specie");

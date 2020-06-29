@@ -8,7 +8,7 @@ import javax.swing.JCheckBox;
 
 public class PanelImpostazioniAggiuntiveParco extends JPanel {
 
-	public PanelImpostazioniAggiuntiveParco() {
+	public PanelImpostazioniAggiuntiveParco(boolean promozione, boolean gratuito) {
 		setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		
 		setName("panelImpostazioniAggiuntiveParco");
@@ -18,9 +18,11 @@ public class PanelImpostazioniAggiuntiveParco extends JPanel {
 		
 		JCheckBox chckbxPromozioneStudenti = new JCheckBox("Promozione studenti");
 		chckbxPromozioneStudenti.setName("chckbxPromozioneStudenti");
+		chckbxPromozioneStudenti.setSelected(promozione);
 		
 		JCheckBox chckbxIngressoGratuito = new JCheckBox("Ingresso gratuito");
 		chckbxIngressoGratuito.setName("chckbxIngressoGratuito");
+		chckbxIngressoGratuito.setSelected(gratuito);
 		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(

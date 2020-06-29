@@ -15,7 +15,7 @@ import javax.swing.SpinnerNumberModel;
 
 public class PanelImpostazioniAggiuntiveHotel extends JPanel {
 	
-	public PanelImpostazioniAggiuntiveHotel() {
+	public PanelImpostazioniAggiuntiveHotel(boolean piscina, boolean wifi, String numeroStanze, int numeroStelle) {
 		setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		
 		setName("panelImpostazioniAggiuntiveHotel");
@@ -25,13 +25,16 @@ public class PanelImpostazioniAggiuntiveHotel extends JPanel {
 		
 		JCheckBox chckbxPiscina = new JCheckBox("Piscina");
 		chckbxPiscina.setName("chckbxPiscina");
+		chckbxPiscina.setSelected(piscina);
 		
 		JCheckBox chckbxWifi = new JCheckBox("WiFi");
 		chckbxWifi.setName("chckbxWifi");
+		chckbxWifi.setSelected(wifi);
 		
 		JTextField textFieldNumeroStanze = new JTextField();
 		textFieldNumeroStanze.setColumns(10);
 		textFieldNumeroStanze.setName("textFieldNumeroStanze");
+		textFieldNumeroStanze.setText(numeroStanze);
 		textFieldNumeroStanze.addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent e) {
 				String s = textFieldNumeroStanze.getText();
@@ -60,6 +63,7 @@ public class PanelImpostazioniAggiuntiveHotel extends JPanel {
 		JSpinner spinnerNumeroStelle = new JSpinner();
 		spinnerNumeroStelle.setModel(new SpinnerNumberModel(1, 1, 5, 1));
 		spinnerNumeroStelle.setName("spinnerNumeroStelle");
+		spinnerNumeroStelle.setValue(numeroStelle);
 		
 		JLabel lblStelle = new JLabel("Stelle");
 		lblStelle.setFont(new Font("Tahoma", Font.BOLD, 11));

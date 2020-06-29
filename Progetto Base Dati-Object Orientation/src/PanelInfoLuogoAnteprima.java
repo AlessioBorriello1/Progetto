@@ -39,7 +39,11 @@ public class PanelInfoLuogoAnteprima extends JPanel {
 				if(cliccabile) {
 					if(controller.getUtente() != null) {
 						if(l.getNomeUtente().contentEquals(controller.getUtente().getNomeUtente())) {
-							System.out.println("Modifica luogo");
+							if(!controller.getCurrentPanel().getClass().toString().contentEquals("class HomePanel")) {
+								mainFrame.cambiaPannelloLavoroAPanelModificaLuogo(workPanel, l);
+							}else {
+								mainFrame.cambiaPannelloLavoroAPanelInfoLuogo(workPanel, l);
+							}
 						}else {
 							mainFrame.cambiaPannelloLavoroAPanelInfoLuogo(workPanel, l);
 						}

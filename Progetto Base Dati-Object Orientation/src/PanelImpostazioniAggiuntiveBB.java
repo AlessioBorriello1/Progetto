@@ -13,7 +13,7 @@ import javax.swing.JTextField;
 
 public class PanelImpostazioniAggiuntiveBB extends JPanel {
 
-	public PanelImpostazioniAggiuntiveBB() {
+	public PanelImpostazioniAggiuntiveBB(boolean piscina, boolean wifi, String numeroStanze, boolean colazione) {
 		setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		
 		setName("panelImpostazioniAggiuntiveBB");
@@ -23,13 +23,16 @@ public class PanelImpostazioniAggiuntiveBB extends JPanel {
 		
 		JCheckBox chckbxPiscina = new JCheckBox("Piscina");
 		chckbxPiscina.setName("chckbxPiscina");
+		chckbxPiscina.setSelected(piscina);
 		
 		JCheckBox chckbxWifi = new JCheckBox("WiFi");
 		chckbxWifi.setName("chckbxWifi");
+		chckbxWifi.setSelected(wifi);
 		
 		JTextField textFieldNumeroStanze = new JTextField();
 		textFieldNumeroStanze.setColumns(10);
 		textFieldNumeroStanze.setName("textFieldNumeroStanze");
+		textFieldNumeroStanze.setText(numeroStanze);
 		textFieldNumeroStanze.addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent e) {
 				String s = textFieldNumeroStanze.getText();
@@ -57,6 +60,7 @@ public class PanelImpostazioniAggiuntiveBB extends JPanel {
 		
 		JCheckBox chckbxColazione = new JCheckBox("Colazione");
 		chckbxColazione.setName("chckbxColazione");
+		chckbxColazione.setSelected(colazione);
 		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
