@@ -722,5 +722,15 @@ public class MainFrame extends JFrame {
 		frame.setVisible(true);
 		
 	}
+	
+	public boolean createConfirmationFrame(String notification) {
+		
+		confirmationFrame frame = new confirmationFrame(notification, this);
+		frame.setVisible(true);
+		boolean answer = frame.getAnswer();
+		return answer;
+		
+	}
+
 
 }

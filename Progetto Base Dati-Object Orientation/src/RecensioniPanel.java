@@ -1,8 +1,12 @@
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ComponentListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.List;
 
 import javax.swing.JPanel;
@@ -10,13 +14,17 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.Box;
 import javax.swing.GroupLayout;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class RecensioniPanel extends JPanel {
@@ -99,7 +107,10 @@ public class RecensioniPanel extends JPanel {
 				verticalBox.add(removeButton);
 				removeButton.addMouseListener(new MouseAdapter() {
 					public void mouseClicked(MouseEvent e) {
-						System.out.println(r.getTesto());
+						boolean answer = mainFrame.createConfirmationFrame("Sei sicuro di voler cancellare questa recensione?");
+						if(answer) {
+							System.out.println("Cancellazione recensione");
+						}
 					}
 				});
 				

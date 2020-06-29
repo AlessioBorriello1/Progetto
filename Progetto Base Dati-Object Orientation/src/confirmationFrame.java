@@ -1,31 +1,34 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.FlowLayout;
-
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import java.awt.GridLayout;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
 import java.awt.Font;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
+import java.awt.Window.Type;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.EtchedBorder;
-import java.awt.Window.Type;
-import java.awt.Cursor;
 
-public class notificationFrame extends JDialog {
+import javax.swing.GroupLayout;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
+import javax.swing.LayoutStyle.ComponentPlacement;
+
+public class confirmationFrame extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JButton okButton;
+	private JButton cancellaButton;
+	private JButton pressedButton;
 	private MainFrame mainFrame;
+	
+	boolean answer = false; //False = cancella, True = ok;
 
-	public notificationFrame(String notification, MainFrame mainFrame) {
+	public confirmationFrame(String notification, MainFrame mainFrame) {
 		
 		this.mainFrame = mainFrame;
 		
@@ -60,30 +63,49 @@ public class notificationFrame extends JDialog {
 				okButton.addMouseListener(new MouseAdapter() {
 					public void mouseClicked(MouseEvent e) {
 						setVisible(false);
+						answer = true;
 						dispose();
 					}
 				});
 				okButton.setActionCommand("OK");
 				getRootPane().setDefaultButton(okButton);
 			}
+			
+			cancellaButton = new JButton("CANCELLA");
+			cancellaButton.addMouseListener(new MouseAdapter() {
+				public void mouseClicked(MouseEvent e) {
+					setVisible(false);
+					answer = false;
+					dispose();
+				}
+			});
+			cancellaButton.setActionCommand("CANCELLA");
 			GroupLayout gl_buttonPane = new GroupLayout(buttonPane);
 			gl_buttonPane.setHorizontalGroup(
 				gl_buttonPane.createParallelGroup(Alignment.LEADING)
-					.addGroup(gl_buttonPane.createSequentialGroup()
-						.addGap(137)
+					.addGroup(Alignment.TRAILING, gl_buttonPane.createSequentialGroup()
+						.addContainerGap()
+						.addComponent(cancellaButton, GroupLayout.PREFERRED_SIZE, 135, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
 						.addComponent(okButton, GroupLayout.PREFERRED_SIZE, 135, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(137, Short.MAX_VALUE))
+						.addContainerGap())
 			);
 			gl_buttonPane.setVerticalGroup(
-				gl_buttonPane.createParallelGroup(Alignment.LEADING)
-					.addGroup(Alignment.TRAILING, gl_buttonPane.createSequentialGroup()
+				gl_buttonPane.createParallelGroup(Alignment.TRAILING)
+					.addGroup(gl_buttonPane.createSequentialGroup()
 						.addContainerGap(19, Short.MAX_VALUE)
-						.addComponent(okButton, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_buttonPane.createParallelGroup(Alignment.LEADING)
+							.addComponent(cancellaButton, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
+							.addComponent(okButton, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
 						.addContainerGap())
 			);
 			buttonPane.setLayout(gl_buttonPane);
 		}
 		
+	}
+	
+	public boolean getAnswer() {
+		return answer;
 	}
 
 }
