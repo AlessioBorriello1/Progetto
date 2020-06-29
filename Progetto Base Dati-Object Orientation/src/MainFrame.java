@@ -418,12 +418,14 @@ public class MainFrame extends JFrame {
 				if(!controller.isLoggedIn()) { //Se non sono loggato (sto premendo su login)
 					cambiaPannelloLavoroALoginPanel(workPanel); //Vai al pannello LoginPanel
 				}else { //Se sono loggato (sto premendo su logout)
-					controller.setLoggedIn(false); //Imposta loggedIn del controller a falso
-					controller.setUtente(null); //Imposta utente del controller a null
-					refreshaLoginButton(); //Refresha il bottone (per vedere quale icona deve mostrare)
-					refreshaPannelloInfo(); //Cambia pannello info utente se sono loggato o meno
-					createNotificationFrame("Non sei più collegato al tuo account"); //Notifica che l'utente ha sloggato
-					cambiaPannelloLavoroAHomePanel(workPanel); //Vai al pannello HomePanel
+					if(createConfirmationFrame("Sei sicuro di voler uscire?")) {
+						controller.setLoggedIn(false); //Imposta loggedIn del controller a falso
+						controller.setUtente(null); //Imposta utente del controller a null
+						refreshaLoginButton(); //Refresha il bottone (per vedere quale icona deve mostrare)
+						refreshaPannelloInfo(); //Cambia pannello info utente se sono loggato o meno
+						createNotificationFrame("Non sei più collegato al tuo account"); //Notifica che l'utente ha sloggato
+						cambiaPannelloLavoroAHomePanel(workPanel); //Vai al pannello HomePanel
+					}
 				}
 			}
 			//Quando il mouse passa sul bottone
