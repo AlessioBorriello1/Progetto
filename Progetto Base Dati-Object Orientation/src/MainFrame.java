@@ -219,27 +219,32 @@ public class MainFrame extends JFrame {
 		panelNotLogged.setLayout(gl_panelNotLogged); //Imposta layout gl_panelNotLogged in panelNotLogged
 		
 		JPanel panelLogged = new JPanel(); //Nuovo pannello logged
+		panelLogged.setAlignmentX(Component.LEFT_ALIGNMENT);
 		panelLogged.setName("panelLogged"); //Imposta nome
 		panelInfoUtente.add(panelLogged, "name_254788425247100"); //Aggiungi pannello al pannello panelInfoUtente
 		panelLogged.setBackground(dashBoardPanel.getBackground()); //Colore background (Uguale a quello del pannello dove si trova(dashBoardPanel))
 		
-		JLabel lblNomeUtente = new JLabel("Nome utente:"); //Nuovo label Nome utente
+		JLabel lblNomeUtente = new JLabel("Nome:"); //Nuovo label Nome utente
 		lblNomeUtente.setName("lblNomeUtente"); //Imposta nome
+		lblNomeUtente.setHorizontalAlignment(SwingConstants.LEADING);
 		lblNomeUtente.setFont(new Font("Tahoma", Font.BOLD, 11)); //Imposta font
 		lblNomeUtente.setForeground(controller.steel); //Imposta colore font
 		
 		JLabel lblEmail = new JLabel("Email:"); //Nuovo label Email
 		lblEmail.setName("lblEmail"); //Imposta nome
+		lblEmail.setHorizontalAlignment(SwingConstants.LEADING);
 		lblEmail.setFont(new Font("Tahoma", Font.BOLD, 11)); //Imposta font
 		lblEmail.setForeground(controller.steel); //Imposta colore font
 		
 		JLabel lblNumeroLuoghi = new JLabel("Numero luoghi:"); //Nuovo label Numero luoghi
 		lblNumeroLuoghi.setName("lblNumeroLuoghi"); //Imposta nome
+		lblNumeroLuoghi.setHorizontalAlignment(SwingConstants.LEADING);
 		lblNumeroLuoghi.setFont(new Font("Tahoma", Font.BOLD, 11)); //Imposta font
 		lblNumeroLuoghi.setForeground(controller.steel);
 		
 		JLabel lblNumeroRecensioni = new JLabel("Numero recensioni:");
 		lblNumeroRecensioni.setName("lblNumeroRecensioni");
+		lblNumeroRecensioni.setHorizontalAlignment(SwingConstants.LEADING);
 		lblNumeroRecensioni.setForeground(controller.steel);
 		lblNumeroRecensioni.setFont(new Font("Tahoma", Font.BOLD, 11));
 		GroupLayout gl_panelLogged = new GroupLayout(panelLogged);
@@ -247,10 +252,10 @@ public class MainFrame extends JFrame {
 			gl_panelLogged.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelLogged.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_panelLogged.createParallelGroup(Alignment.TRAILING)
-						.addComponent(lblNomeUtente, GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
-						.addComponent(lblEmail, GroupLayout.PREFERRED_SIZE, 158, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNumeroLuoghi, GroupLayout.PREFERRED_SIZE, 158, GroupLayout.PREFERRED_SIZE)
+					.addGroup(gl_panelLogged.createParallelGroup(Alignment.TRAILING, false)
+						.addComponent(lblNomeUtente, GroupLayout.PREFERRED_SIZE, 158, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblEmail, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 158, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblNumeroLuoghi, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 158, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblNumeroRecensioni, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 158, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap())
 		);

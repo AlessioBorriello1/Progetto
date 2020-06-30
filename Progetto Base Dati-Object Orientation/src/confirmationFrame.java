@@ -71,7 +71,7 @@ public class confirmationFrame extends JDialog {
 				getRootPane().setDefaultButton(okButton);
 			}
 			
-			cancellaButton = new JButton("CANCELLA");
+			cancellaButton = new JButton("ANNULLA");
 			cancellaButton.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e) {
 					setVisible(false);
