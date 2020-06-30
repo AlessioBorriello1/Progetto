@@ -66,13 +66,9 @@ public class Utente {
 	}
 	
 	//Setter e getter lista recensioni utente
-
-
 	public List<Recensione> getRecensioniUtente() {
 		return recensioniUtente;
 	}
-
-
 	public void setRecensioniUtente(List<Recensione> recensioniUtente) {
 		this.recensioniUtente = recensioniUtente;
 	}

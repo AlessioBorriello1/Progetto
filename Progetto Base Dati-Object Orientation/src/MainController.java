@@ -163,6 +163,10 @@ public class MainController {
 			dao2.updateNumeroLuoghi(utente.getNomeUtente());
 			mainFrame.refreshaPannelloInfo();
 			mainFrame.createNotificationFrame("Eliminazione completata");
+			
+			utente.getLuoghiUtente().removeAll(utente.getLuoghiUtente());
+			utente.setRecensioniUtente();
+			
 			mainFrame.cambiaPannelloLavoroAHomePanel(workPanel);
 			return true;
 		}else {
