@@ -141,4 +141,59 @@ public class AlloggioDAO {
 		
 	}
 	
+	public boolean rimuoviAlloggio(Alloggio a) {
+		
+		try {
+			
+			if(a.getAttributoAttivita().contentEquals("Hotel")) {
+				
+				String q = "DELETE FROM hotel WHERE idalloggio = " + a.getID();
+				String connectionURL = MainController.URL; //URL di connessione
+				
+		        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
+		        Statement st = con.createStatement(); //Creo statement
+		        st.executeUpdate(q);
+		        
+			}else if(a.getAttributoAttivita().contentEquals("Motel")) {
+				
+				String q = "DELETE FROM motel WHERE idalloggio = " + a.getID();
+				String connectionURL = MainController.URL; //URL di connessione
+				
+		        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
+		        Statement st = con.createStatement(); //Creo statement
+		        st.executeUpdate(q);
+				
+			}else {
+				
+				String q = "DELETE FROM bedbreakfast WHERE idalloggio = " + a.getID();
+				String connectionURL = MainController.URL; //URL di connessione
+				
+		        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
+		        Statement st = con.createStatement(); //Creo statement
+		        st.executeUpdate(q);
+				
+			}
+			
+			Class.forName("com.mysql.jdbc.Driver");
+			String q = "DELETE FROM alloggio WHERE idluogo = " + a.getID();
+			
+			String connectionURL = MainController.URL; //URL di connessione
+	
+	        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
+	        Statement st = con.createStatement(); //Creo statement
+	        
+			st.executeUpdate(q); //Eseguo la query contenuta in stringa q2
+			
+			con.close(); //Chiudi connessione
+			st.close(); //Chiudi statement
+			
+			return true;
+			
+		}catch(Exception e) { //Error catching
+			System.out.println(e);
+			return false; //Operazione inserimento fallita, restituisce false
+		}
+		
+	}
+
 }

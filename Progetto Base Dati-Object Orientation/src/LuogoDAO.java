@@ -451,9 +451,57 @@ public class LuogoDAO {
 		
 	}
 
-	public boolean rimuoviLuogo(Luogo l) {
+	public boolean rimuoviLuogo(MainController controller, Luogo l, Utente u) {
 		
-		return true;
+		try {
+			//Rimuoviamo innanzitutto tutte le recensioni e aggiorniamo il numero recensioni degli utente che le hanno create
+			RecensioneDAO dao = new RecensioneDAO();
+			List <Recensione> recensioniLuogo = dao.getListaRecensioniLuogo(l);
+			int numero = recensioniLuogo.size();
+			
+			for(Recensione r: recensioniLuogo) {
+				dao.rimuoviRecensioneLuogo(controller, l, r, numero);
+				UtenteDAO dao2 = new UtenteDAO();
+				Utente utente = dao2.getUtenteByNomeUtente(r.getNomeUtente());
+				utente.setNumeroRecensioni(utente.getNumeroRecensioni() - 1);
+				dao2.updateNumeroRecensioni(utente);
+			}
+			
+			//Rimuovi rispettiva specializzazione
+			if(l.getTipoAttivita().contentEquals("Ristorante")) {
+				Ristorante r = (Ristorante)l;
+				RistoranteDAO dao3 = new RistoranteDAO();
+				dao3.rimuoviRistorante(r);
+			}else if(l.getTipoAttivita().contentEquals("Alloggio")) {
+				
+				Alloggio a = (Alloggio)l;
+				AlloggioDAO dao3 = new AlloggioDAO();
+				dao3.rimuoviAlloggio(a);
+			}else {
+				Attrazione a = (Attrazione)l;
+				AttrazioneDAO dao3 = new AttrazioneDAO();
+				dao3.rimuoviAttrazione(a);
+			}
+			
+			Class.forName("com.mysql.jdbc.Driver");
+			String q = "DELETE FROM luogo WHERE IdLuogo = " + l.getID();
+			
+			String connectionURL = MainController.URL; //URL di connessione
+	
+	        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
+	        Statement st = con.createStatement(); //Creo statement
+	        
+			st.executeUpdate(q); //Eseguo la query contenuta in stringa q2
+			
+			con.close(); //Chiudi connessione
+			st.close(); //Chiudi statement
+			
+			return true;
+		
+		}catch(Exception e) { //Error catching
+			System.out.println(e);
+			return false; //Operazione inserimento fallita, restituisce false
+		}
 		
 	}
 	

@@ -154,18 +154,22 @@ public class MainController {
 			
 	}
 
-	public boolean rimuoviLuogo(MainFrame mainFrame, MainController controller, Luogo l) {
-		/*
-		LuogoDAO dao = LuogoDAO();
-		if(dao.rimuoviLuogo(l)) {
+	public boolean rimuoviLuogo(MainFrame mainFrame, MainController controller, JPanel workPanel, Luogo l) {
+		
+		LuogoDAO dao = new LuogoDAO();
+		if(dao.rimuoviLuogo(this, l, utente)) {
 			
+			utente.setNumeroLuoghi(utente.getNumeroLuoghi()-1);
+			UtenteDAO dao2 = new UtenteDAO();
+			dao2.updateNumeroLuoghi(utente);
+			mainFrame.refreshaPannelloInfo();
+			mainFrame.createNotificationFrame("Eliminazione completata");
+			mainFrame.cambiaPannelloLavoroAHomePanel(workPanel);
 			return true;
 		}else {
 			mainFrame.createNotificationFrame("Qualcosa è andato storto!");
 			return false;
 		}
-		*/
-		return true;
 	}
 
 	public boolean lasciaRecensione(MainFrame mainFrame, Luogo l, int voto, String recensione, int numeroRecensioni) {

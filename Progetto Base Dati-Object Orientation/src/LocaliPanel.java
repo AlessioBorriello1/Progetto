@@ -113,9 +113,9 @@ public class LocaliPanel extends JPanel {
 				verticalBox.add(removeButton);
 				removeButton.addMouseListener(new MouseAdapter() {
 					public void mouseClicked(MouseEvent e) {
-						boolean answer = mainFrame.createConfirmationFrame("Sei sicuro di voler cancellare questa recensione?");
+						boolean answer = mainFrame.createConfirmationFrame("Sei sicuro di voler cancellare questo luogo?");
 						if(answer) {
-							controller.rimuoviLuogo(mainFrame, controller, l);
+							controller.rimuoviLuogo(mainFrame, controller, workPanel, l);
 						}
 					}
 				});

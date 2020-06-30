@@ -217,5 +217,45 @@ public class UtenteDAO {
 		}
 	}
 
+	public Utente getUtenteByNomeUtente(String nomeUtente) {
+		
+		try {
+			
+			Class.forName("com.mysql.jdbc.Driver");
+			String q = "Select * from utente where Idutente = '" + nomeUtente + "'" ; //Inizializzo query
+			Utente u = new Utente(); //Instanzio nuovo utente
+			
+			String connectionURL = MainController.URL; //URL di connessione
 
+	        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
+			Statement st = con.createStatement(); //Creo statement
+			ResultSet rs = st.executeQuery(q); //Eseguo la query contenuta in stringa q
+			
+			if(rs.next()) { //Se l'utente è stato trovato
+				
+				u.setNomeUtente(rs.getString("Idutente")); //Setta variabile nomeUtente dell'utente "u" uguale al campo "Idutente"
+				u.setEmail(rs.getString("Email")); //Setta variabile email dell'utente "u" uguale al campo "Email"
+				u.setNumeroLuoghi(rs.getInt("NumeroLuoghi")); //Setta variabile numeroLuoghi dell'utente "u" uguale al campo "NumeroLuoghi"
+				u.setNumeroRecensioni(rs.getInt("NumeroRecensioni")); //Setta variabile numeroRecensioni dell'utente "u" uguale al campo "NumeroRecensioni"
+				
+				con.close(); //Chiudi connessione
+				st.close(); //Chiudi statement
+				return u;
+				
+			}else { //Se l'utente non è stato trovato (result set vuoto)
+				
+				System.out.println("Resul set vuoto");
+				con.close(); //Chiudi connessione
+				st.close(); //Chiudi statement
+				return null; //Restituisci null
+				
+			}
+			
+		}catch(Exception e) { //Error catching
+			System.out.println(e);
+			return null;
+		}
+		
+	}
+	
 }

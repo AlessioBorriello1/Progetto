@@ -259,7 +259,6 @@ public class RecensioneDAO {
 			}
 			
 			
-			
 			return true; //Operazione inserimento riuscita, restituisce true
 			
 			}catch(Exception e) { //Error catching
