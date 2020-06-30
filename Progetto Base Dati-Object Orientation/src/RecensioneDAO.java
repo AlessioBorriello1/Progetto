@@ -9,20 +9,18 @@ import java.util.List;
 
 public class RecensioneDAO {
 
-	public boolean lasciaRecensioneALuogo(MainFrame mainFrame, Utente u, Luogo l, int voto, String recensione, int numeroRecensioni) {
+	public boolean lasciaRecensioneALuogo(MainFrame mainFrame, Utente u, Luogo l, Recensione r) {
+		
+		
+		int voto = r.getVoto();
+		String recensione = r.getTesto();
 		
 		try {
-			
-		RecensioneDAO daor = new RecensioneDAO();
-		int somma = 0;
-		for(Recensione r: daor.getListaRecensioniLuogo(l)) {
-			somma += r.getVoto();
-		}
 			
 		LocalDateTime now = LocalDateTime.now();  
 		
 		Class.forName("com.mysql.jdbc.Driver");
-		String q = "INSERT INTO recensione(IdLuogo, Voto, Idutente, Data, Testo)\r\n" + 
+		String q = "INSERT INTO recensione(idLuogo, voto, nomeUtente, data, testo)\r\n" + 
 				"VALUES ('"+ l.getID() +"','"+ voto +"', '"+ u.getNomeUtente()+ "','" +  now +"','" + recensione +"');"; //Inizializzo query
 		
 		String connectionURL = MainController.URL; //URL di connessione
@@ -36,9 +34,9 @@ public class RecensioneDAO {
 		
 		mainFrame.createNotificationFrame("Recensione inserita!");
 		
-		float media = (float)(somma + voto) / (numeroRecensioni + 1);
-		l.setMediaRecensioni(media);
 		LuogoDAO dao = new LuogoDAO();
+		float media = dao.calcolaMediaRecensioniLuogo(l);
+		l.setMediaRecensioni(media);
 		dao.updateMediaRecensioni(l, media);
 		
 		return true; //Operazione inserimento riuscita, restituisce true
@@ -57,17 +55,9 @@ public class RecensioneDAO {
 	public boolean modificaRecensioneLuogo(MainFrame mainFrame, Utente u, Luogo l, int voto, String recensione, int numeroRecensioni, Recensione r) {
 		
 		try {
-			
-		RecensioneDAO daor = new RecensioneDAO();
-		int somma = 0;
-		for(Recensione rev: daor.getListaRecensioniLuogo(l)) {
-			somma += rev.getVoto();
-		}
-		
-		LocalDateTime now = LocalDateTime.now();  
 		
 		Class.forName("com.mysql.jdbc.Driver");
-		String q = "UPDATE recensione SET Voto = " + voto + ", Testo = '" + recensione  + "' WHERE IdLuogo = " + l.getID() + " AND Idutente = '" + u.getNomeUtente() + "'";
+		String q = "UPDATE recensione SET voto = " + voto + ", testo = '" + recensione  + "' WHERE idLuogo = " + l.getID() + " AND nomeUtente = '" + u.getNomeUtente() + "'";
 		
 		String connectionURL = MainController.URL; //URL di connessione
 
@@ -80,9 +70,9 @@ public class RecensioneDAO {
 		
 		mainFrame.createNotificationFrame("Recensione modificata!");
 		
-		float media = (float)(somma - r.getVoto() + voto) / (numeroRecensioni);
-		l.setMediaRecensioni(media);
 		LuogoDAO dao = new LuogoDAO();
+		float media = dao.calcolaMediaRecensioniLuogo(l);
+		l.setMediaRecensioni(media);
 		dao.updateMediaRecensioni(l, media);
 		
 		r.setTesto(recensione);
@@ -108,7 +98,7 @@ public class RecensioneDAO {
 		try {
 
 			Class.forName("com.mysql.jdbc.Driver");
-			String q = "SELECT * FROM recensione WHERE IdLuogo = '" + l.getID() + "' AND Idutente = '" + nomeUtente + "'"; //Inizializzo query
+			String q = "SELECT * FROM recensione WHERE idLuogo = '" + l.getID() + "' AND nomeUtente = '" + nomeUtente + "'"; //Inizializzo query
 			
 			String connectionURL = MainController.URL; //URL di connessione
 
@@ -120,11 +110,11 @@ public class RecensioneDAO {
 			if(rs.next()) { //Se la recensione è stata trovata
 				
 				Recensione r = new Recensione();
-				r.setData(rs.getDate("Data"));
+				r.setData(rs.getDate("data"));
 				r.setIDLuogo(l.getID());
 				r.setNomeUtente(nomeUtente);
-				r.setVoto(rs.getInt("Voto"));
-				r.setTesto(rs.getString("Testo"));
+				r.setVoto(rs.getInt("voto"));
+				r.setTesto(rs.getString("testo"));
 				
 				con.close(); //Chiudi connessione
 				st.close(); //Chiudi statement
@@ -150,7 +140,7 @@ public class RecensioneDAO {
 		try {
 			
 			Class.forName("com.mysql.jdbc.Driver");
-			String q = "Select * from recensione where IdLuogo= '" + l.getID() + "'" ; //Inizializzo query
+			String q = "Select * from recensione where idLuogo= '" + l.getID() + "'" ; //Inizializzo query
 			
 			String connectionURL = MainController.URL; //URL di connessione
 
@@ -163,11 +153,11 @@ public class RecensioneDAO {
 			while(rs.next()) {
 				
 				Recensione r = new Recensione();
-				r.setData(rs.getDate("Data"));
+				r.setData(rs.getDate("data"));
 				r.setIDLuogo(l.getID());
-				r.setNomeUtente(rs.getString("Idutente"));
-				r.setVoto(rs.getInt("Voto"));
-				r.setTesto(rs.getString("Testo"));
+				r.setNomeUtente(rs.getString("nomeUtente"));
+				r.setVoto(rs.getInt("voto"));
+				r.setTesto(rs.getString("testo"));
 				
 				recensioni.add(r);
 				
@@ -189,7 +179,7 @@ public class RecensioneDAO {
 		try {
 			
 			Class.forName("com.mysql.jdbc.Driver");
-			String q = "Select * from recensione where Idutente = '" + nomeUtente + "'" ; //Inizializzo query
+			String q = "Select * from recensione where nomeUtente = '" + nomeUtente + "'" ; //Inizializzo query
 			
 			String connectionURL = MainController.URL; //URL di connessione
 
@@ -202,11 +192,11 @@ public class RecensioneDAO {
 			while(rs.next()) {
 				
 				Recensione r = new Recensione();
-				r.setData(rs.getDate("Data"));
+				r.setData(rs.getDate("data"));
 				r.setNomeUtente(nomeUtente);
-				r.setTesto(rs.getString("Testo"));
-				r.setVoto(rs.getInt("Voto"));
-				r.setIDLuogo(rs.getInt("IdLuogo"));
+				r.setTesto(rs.getString("testo"));
+				r.setVoto(rs.getInt("voto"));
+				r.setIDLuogo(rs.getInt("idLuogo"));
 				
 				recensioni.add(r);
 				
@@ -227,14 +217,8 @@ public class RecensioneDAO {
 		
 		try {
 			
-			RecensioneDAO daor = new RecensioneDAO();
-			int somma = 0;
-			for(Recensione rev: daor.getListaRecensioniLuogo(l)) {
-				somma += rev.getVoto();
-			}
-			
 			Class.forName("com.mysql.jdbc.Driver");
-			String q = "DELETE FROM recensione WHERE IdLuogo = " + r.getIDLuogo() + " AND Idutente = '" + r.getNomeUtente() + "'";
+			String q = "DELETE FROM recensione WHERE idLuogo = " + r.getIDLuogo() + " AND nomeUtente = '" + r.getNomeUtente() + "'";
 			
 			String connectionURL = MainController.URL; //URL di connessione
 
@@ -245,18 +229,10 @@ public class RecensioneDAO {
 			con.close(); //Chiudi connessione
 			st.close(); //Chiudi statement
 			
-			float media;;
-			if(numeroRecensioni-1 == 0) {
-				l.setMediaRecensioni(0);
-				LuogoDAO dao = new LuogoDAO();
-				dao.updateMediaRecensioni(l, 0);
-			}else {
-				media = (float)(somma - r.getVoto()) / (numeroRecensioni-1);
-				l.setMediaRecensioni(media);
-				LuogoDAO dao = new LuogoDAO();
-				dao.updateMediaRecensioni(l, media);
-				
-			}
+			LuogoDAO dao = new LuogoDAO();
+			float media = dao.calcolaMediaRecensioniLuogo(l);
+			l.setMediaRecensioni(media);
+			dao.updateMediaRecensioni(l, media);
 			
 			
 			return true; //Operazione inserimento riuscita, restituisce true

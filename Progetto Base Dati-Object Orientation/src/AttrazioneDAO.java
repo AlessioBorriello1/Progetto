@@ -81,20 +81,20 @@ public class AttrazioneDAO {
 	        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
 	        Statement st = con.createStatement(); //Creo statement
 	        
-	        String q = "SELECT * FROM attrazione WHERE idluogo = '" + ID + "'";
+	        String q = "SELECT * FROM attrazione WHERE idLuogo = '" + ID + "'";
 	        ResultSet rs = st.executeQuery(q);
 	        
 	        rs.next(); //Vai a inizio risultati
 	        
-	        boolean promozione = rs.getBoolean("promozionestudenti");
+	        boolean promozione = rs.getBoolean("promozioneStudenti");
 	        
 	        rs.close();
 	        
 			if(specializzazione.contentEquals("Museo")) {
-				q = "SELECT * FROM museo WHERE idattrazione = '" + ID + "'";
+				q = "SELECT * FROM museo WHERE idAttrazione = '" + ID + "'";
 				ResultSet r = st.executeQuery(q); //Eseguo la query contenuta in stringa
 				r.next(); //Vai a inizio risultati
-				String tipoMuseo = r.getString("tipomuseo");
+				String tipoMuseo = r.getString("tipoMuseo");
 				Museo m = new Museo();
 				m.setPromozioneStudenti(promozione);
 				m.setTipoMuseo(tipoMuseo);
@@ -102,7 +102,7 @@ public class AttrazioneDAO {
 				st.close(); //Chiudi statement
 				return m;
 			}else if(specializzazione.contentEquals("Zoo")) {
-				q = "SELECT * FROM zoo WHERE idattrazione = '" + ID + "'";
+				q = "SELECT * FROM zoo WHERE idAttrazione = '" + ID + "'";
 				ResultSet r = st.executeQuery(q); //Eseguo la query contenuta in stringa
 				r.next(); //Vai a inizio risultati
 				String specie = r.getString("specie");
@@ -113,10 +113,10 @@ public class AttrazioneDAO {
 				st.close(); //Chiudi statement
 				return z;
 			}else {
-				q = "SELECT * FROM parco WHERE idattrazione = '" + ID + "'";
+				q = "SELECT * FROM parco WHERE idAttrazione = '" + ID + "'";
 				ResultSet r = st.executeQuery(q); //Eseguo la query contenuta in stringa
 				r.next(); //Vai a inizio risultati
-				boolean ingresso = r.getBoolean("ingressogratuito");
+				boolean ingresso = r.getBoolean("ingressoGratuito");
 				Parco p = new Parco();
 				p.setPromozioneStudenti(promozione);
 				p.setIngressoGratuito(ingresso);
@@ -132,60 +132,6 @@ public class AttrazioneDAO {
 		
 		
 	}
-	
-	public boolean rimuoviAttrazione(Attrazione a) {
-		
-		try {
-			
-			if(a.getAttributoAttivita().contentEquals("Museo")) {
-				
-				String q = "DELETE FROM museo WHERE idattrazione = " + a.getID();
-				String connectionURL = MainController.URL; //URL di connessione
-				
-		        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
-		        Statement st = con.createStatement(); //Creo statement
-		        st.executeUpdate(q);
-		        
-			}else if(a.getAttributoAttivita().contentEquals("Zoo")) {
-				
-				String q = "DELETE FROM zoo WHERE idattrazione = " + a.getID();
-				String connectionURL = MainController.URL; //URL di connessione
-				
-		        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
-		        Statement st = con.createStatement(); //Creo statement
-		        st.executeUpdate(q);
-				
-			}else {
-				
-				String q = "DELETE FROM parco WHERE idattrazione = " + a.getID();
-				String connectionURL = MainController.URL; //URL di connessione
-				
-		        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
-		        Statement st = con.createStatement(); //Creo statement
-		        st.executeUpdate(q);
-				
-			}
-			
-			Class.forName("com.mysql.jdbc.Driver");
-			String q = "DELETE FROM attrazione WHERE idluogo = " + a.getID();
-			
-			String connectionURL = MainController.URL; //URL di connessione
-	
-	        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
-	        Statement st = con.createStatement(); //Creo statement
-	        
-			st.executeUpdate(q); //Eseguo la query contenuta in stringa q2
-			
-			con.close(); //Chiudi connessione
-			st.close(); //Chiudi statement
-			
-			return true;
-			
-		}catch(Exception e) { //Error catching
-			System.out.println(e);
-			return false; //Operazione inserimento fallita, restituisce false
-		}
-		
-	}
+
 
 }

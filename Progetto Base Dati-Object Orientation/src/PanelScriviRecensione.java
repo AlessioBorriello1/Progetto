@@ -26,12 +26,11 @@ public class PanelScriviRecensione extends JPanel {
 	private JPanel workPanel;
 	private int numeroRecensioni;
 
-	public PanelScriviRecensione(MainController controller, MainFrame mainFrame, JPanel workPanel, Luogo l, int numeroRecensioni) {
+	public PanelScriviRecensione(MainController controller, MainFrame mainFrame, JPanel workPanel, Luogo l) {
 		
 		this.controller = controller;
 		this.mainFrame = mainFrame;
 		this.workPanel = workPanel;
-		this.numeroRecensioni = numeroRecensioni;
 		
 		setBackground(controller.skyWhiter);
 		
@@ -112,10 +111,13 @@ public class PanelScriviRecensione extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				
 				if(mainFrame.createConfirmationFrame("Lasciare questa recensione?")) {
-					if(controller.lasciaRecensione(mainFrame, l, Integer.parseInt(spinnerVoto.getValue().toString()), editorPaneScriviRecensione.getText(), numeroRecensioni)) {
+					Recensione r = new Recensione();
+					r.setVoto(Integer.parseInt(spinnerVoto.getValue().toString()));
+					r.setTesto(editorPaneScriviRecensione.getText());
+					if(controller.lasciaRecensione(mainFrame, l, r)) {
 						mainFrame.cambiaPannelloLavoroAHomePanel(workPanel);
 						UtenteDAO dao = new UtenteDAO();
-						dao.updateNumeroRecensioni(controller.getUtente());
+						dao.updateNumeroRecensioni(controller.getUtente().getNomeUtente());
 					}
 				}
 				

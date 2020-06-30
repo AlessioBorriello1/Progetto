@@ -33,7 +33,7 @@ public class UtenteDAO {
 			}
 			
 			Class.forName("com.mysql.jdbc.Driver");
-			String q = "Select * from utente where (Idutente = '" + nomeUtente + "' OR Email = '" + nomeUtente + "') AND Password = '" + password + "'" ; //Inizializzo query
+			String q = "Select * from utente where (nomeUtente = '" + nomeUtente + "' OR email = '" + nomeUtente + "') AND password = '" + password + "'" ; //Inizializzo query
 			Utente u = new Utente(); //Instanzio nuovo utente
 			
 			String connectionURL = MainController.URL; //URL di connessione
@@ -44,10 +44,10 @@ public class UtenteDAO {
 			
 			if(rs.next()) { //Se l'utente è stato trovato
 				
-				u.setNomeUtente(rs.getString("Idutente")); //Setta variabile nomeUtente dell'utente "u" uguale al campo "Idutente"
-				u.setEmail(rs.getString("Email")); //Setta variabile email dell'utente "u" uguale al campo "Email"
-				u.setNumeroLuoghi(rs.getInt("NumeroLuoghi")); //Setta variabile numeroLuoghi dell'utente "u" uguale al campo "NumeroLuoghi"
-				u.setNumeroRecensioni(rs.getInt("NumeroRecensioni")); //Setta variabile numeroRecensioni dell'utente "u" uguale al campo "NumeroRecensioni"
+				u.setNomeUtente(rs.getString("nomeUtente")); //Setta variabile nomeUtente dell'utente "u" uguale al campo "Idutente"
+				u.setEmail(rs.getString("email")); //Setta variabile email dell'utente "u" uguale al campo "Email"
+				u.setNumeroLuoghi(rs.getInt("numeroLuoghi")); //Setta variabile numeroLuoghi dell'utente "u" uguale al campo "NumeroLuoghi"
+				u.setNumeroRecensioni(rs.getInt("numeroRecensioni")); //Setta variabile numeroRecensioni dell'utente "u" uguale al campo "NumeroRecensioni"
 				
 				con.close(); //Chiudi connessione
 				st.close(); //Chiudi statement
@@ -95,7 +95,7 @@ public class UtenteDAO {
 				}
 				
 				Class.forName("com.mysql.jdbc.Driver");
-				String q = "INSERT INTO utente(Idutente, Email, Password, NumeroRecensioni, NumeroLuoghi)\r\n" + 
+				String q = "INSERT INTO utente(nomeUtente, email, password, numeroRecensioni, numeroLuoghi)\r\n" + 
 						"VALUES ('"+ nomeUtente +"','"+ email +"', '"+ password+ "','0','0');"; //Inizializzo query
 				
 				String connectionURL = MainController.URL; //URL di connessione
@@ -129,7 +129,7 @@ public class UtenteDAO {
 		try {
 			
 			Class.forName("com.mysql.jdbc.Driver");
-			String q = "Select * from utente where Idutente = '" + nomeUtente + "' OR Email = '" + email + "'" ; //Inizializzo query
+			String q = "Select * from utente where nomeUtente = '" + nomeUtente + "' OR email = '" + email + "'" ; //Inizializzo query
 			
 			String connectionURL = MainController.URL; //URL di connessione
 
@@ -157,18 +157,11 @@ public class UtenteDAO {
 		}
 	}
 	
-	public boolean updateNumeroLuoghi(Utente u) {
+	public boolean updateNumeroLuoghi(String nomeUtente) {
 		try {
 			
-			if(!utenteEsiste(u.getNomeUtente(), u.getEmail())) { //Controlla se l'utente è già nel database
-				
-				System.out.println("Utente non esiste, impossibile aggiornare numero luoghi");
-				return false; //Operazione inserimento fallita, restituisce false
-				
-			}
-			
 			Class.forName("com.mysql.jdbc.Driver");
-			String q = "UPDATE utente SET NumeroLuoghi = " + u.getNumeroLuoghi() + " WHERE Idutente = '" + u.getNomeUtente() + "'";//Inizializzo query
+			String q = "UPDATE utente SET numeroLuoghi = (SELECT COUNT(*) FROM luogo WHERE nomeUtente = '" + nomeUtente + "') WHERE nomeUtente = '" + nomeUtente + "'";//Inizializzo query
 			
 			String connectionURL = MainController.URL; //URL di connessione
 
@@ -187,18 +180,11 @@ public class UtenteDAO {
 		}
 	}
 	
-	public boolean updateNumeroRecensioni(Utente u) {
+	public boolean updateNumeroRecensioni(String nomeUtente) {
 		try {
 			
-			if(!utenteEsiste(u.getNomeUtente(), u.getEmail())) { //Controlla se l'utente è già nel database
-				
-				System.out.println("Utente non esiste, impossibile aggiornare numero recensioni");
-				return false; //Operazione inserimento fallita, restituisce false
-				
-			}
-			
 			Class.forName("com.mysql.jdbc.Driver");
-			String q = "UPDATE utente SET NumeroRecensioni = " + u.getNumeroRecensioni() + " WHERE Idutente = '" + u.getNomeUtente() + "'";//Inizializzo query
+			String q = "UPDATE utente SET numeroRecensioni = (SELECT COUNT(*) FROM recensione WHERE nomeUtente = '" + nomeUtente + "') WHERE nomeUtente = '" + nomeUtente + "'";//Inizializzo query
 			
 			String connectionURL = MainController.URL; //URL di connessione
 
@@ -222,7 +208,7 @@ public class UtenteDAO {
 		try {
 			
 			Class.forName("com.mysql.jdbc.Driver");
-			String q = "Select * from utente where Idutente = '" + nomeUtente + "'" ; //Inizializzo query
+			String q = "Select * from utente where nomeUtente = '" + nomeUtente + "'" ; //Inizializzo query
 			Utente u = new Utente(); //Instanzio nuovo utente
 			
 			String connectionURL = MainController.URL; //URL di connessione
@@ -233,10 +219,10 @@ public class UtenteDAO {
 			
 			if(rs.next()) { //Se l'utente è stato trovato
 				
-				u.setNomeUtente(rs.getString("Idutente")); //Setta variabile nomeUtente dell'utente "u" uguale al campo "Idutente"
-				u.setEmail(rs.getString("Email")); //Setta variabile email dell'utente "u" uguale al campo "Email"
-				u.setNumeroLuoghi(rs.getInt("NumeroLuoghi")); //Setta variabile numeroLuoghi dell'utente "u" uguale al campo "NumeroLuoghi"
-				u.setNumeroRecensioni(rs.getInt("NumeroRecensioni")); //Setta variabile numeroRecensioni dell'utente "u" uguale al campo "NumeroRecensioni"
+				u.setNomeUtente(rs.getString("nomeUtente")); //Setta variabile nomeUtente dell'utente "u" uguale al campo "Idutente"
+				u.setEmail(rs.getString("email")); //Setta variabile email dell'utente "u" uguale al campo "Email"
+				u.setNumeroLuoghi(rs.getInt("numeroLuoghi")); //Setta variabile numeroLuoghi dell'utente "u" uguale al campo "NumeroLuoghi"
+				u.setNumeroRecensioni(rs.getInt("numeroRecensioni")); //Setta variabile numeroRecensioni dell'utente "u" uguale al campo "NumeroRecensioni"
 				
 				con.close(); //Chiudi connessione
 				st.close(); //Chiudi statement

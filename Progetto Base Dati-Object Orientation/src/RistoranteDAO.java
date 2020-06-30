@@ -17,7 +17,7 @@ public class RistoranteDAO {
 			String nazionalita = ((JComboBox)c.getComponentByName(pannelloImpostazioniAggiuntive, "comboBoxNazionalitCibo")).getSelectedItem().toString();
 			
 			Class.forName("com.mysql.jdbc.Driver");
-			String q = "INSERT INTO ristorante(idluogo, vegano, tiporistorante)\r\n" + 
+			String q = "INSERT INTO ristorante(idLuogo, vegano, tipoRistorante)\r\n" + 
 					"VALUES ('"+ ID +"','"+ ((vegano) ? 1:0) + "','" + nazionalita + "');"; //Inizializzo query 2
 			
 			String connectionURL = MainController.URL; //URL di connessione
@@ -31,7 +31,7 @@ public class RistoranteDAO {
 				System.out.println("Inserimento pizzeria");
 				boolean asporto = ((JCheckBox)c.getComponentByName(pannelloImpostazioniAggiuntive,  "chckbxAsporto")).isSelected();
 				
-				q = "INSERT INTO pizzeria(idristorante, asporto)\r\n" + 
+				q = "INSERT INTO pizzeria(idRistorante, asporto)\r\n" + 
 					"VALUES ('"+ ID + "','" + ((asporto) ? 1:0) + "');"; //Inizializzo query 3
 				
 				st.executeUpdate(q); //Eseguo la query contenuta in stringa q3
@@ -43,7 +43,7 @@ public class RistoranteDAO {
 				System.out.println("Inserimento braceria");
 				String tipoCarne = ((JComboBox)c.getComponentByName(pannelloImpostazioniAggiuntive, "comboBoxTipoCarne")).getSelectedItem().toString();
 				
-				q = "INSERT INTO braceria(idristorante, tipocarne)\r\n" + 
+				q = "INSERT INTO braceria(idRistorante, tipoCarne)\r\n" + 
 					"VALUES ('"+ ID + "','" + tipoCarne + "');"; //Inizializzo query 3
 				
 				st.executeUpdate(q); //Eseguo la query contenuta in stringa q3
@@ -55,7 +55,7 @@ public class RistoranteDAO {
 				System.out.println("Inserimento pub");
 				String tipoBirra = ((JComboBox)c.getComponentByName(pannelloImpostazioniAggiuntive, "comboBoxTipoBirra")).getSelectedItem().toString();
 				
-				q = "INSERT INTO pub(idristorante, tipobirra)\r\n" + 
+				q = "INSERT INTO pub(idRistorante, tipoBirra)\r\n" + 
 					"VALUES ('"+ ID + "','" + tipoBirra + "');"; //Inizializzo query 3
 				
 				st.executeUpdate(q); //Eseguo la query contenuta in stringa q3
@@ -82,7 +82,7 @@ public class RistoranteDAO {
 	        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
 	        Statement st = con.createStatement(); //Creo statement
 	        
-	        String q = "SELECT * FROM ristorante WHERE idluogo = '" + ID + "'";
+	        String q = "SELECT * FROM ristorante WHERE idLuogo = '" + ID + "'";
 	        ResultSet rs = st.executeQuery(q);
 	        
 	        rs.next(); //Vai a inizio risultati
@@ -92,7 +92,7 @@ public class RistoranteDAO {
 	        rs.close();
 	        
 			if(specializzazione.contentEquals("Pizzeria")) {
-				q = "SELECT * FROM pizzeria WHERE idristorante = '" + ID + "'";
+				q = "SELECT * FROM pizzeria WHERE idRistorante = '" + ID + "'";
 				ResultSet r = st.executeQuery(q); //Eseguo la query contenuta in stringa
 				r.next(); //Vai a inizio risultati
 				boolean asporto = r.getBoolean("asporto");
@@ -104,10 +104,10 @@ public class RistoranteDAO {
 				st.close(); //Chiudi statement
 				return p;
 			}else if(specializzazione.contentEquals("Braceria")) {
-				q = "SELECT * FROM braceria WHERE idristorante = '" + ID + "'";
+				q = "SELECT * FROM braceria WHERE idRistorante = '" + ID + "'";
 				ResultSet r = st.executeQuery(q); //Eseguo la query contenuta in stringa
 				r.next(); //Vai a inizio risultati
-				String tipoCarne = r.getString("tipocarne");
+				String tipoCarne = r.getString("tipoCarne");
 				Braceria b = new Braceria();
 				b.setVegano(vegano);
 				b.setNazionalitaCibo(nazione);
@@ -116,10 +116,10 @@ public class RistoranteDAO {
 				st.close(); //Chiudi statement
 				return b;
 			}else {
-				q = "SELECT * FROM pub WHERE idristorante = '" + ID + "'";
+				q = "SELECT * FROM pub WHERE idRistorante = '" + ID + "'";
 				ResultSet r = st.executeQuery(q); //Eseguo la query contenuta in stringa
 				r.next(); //Vai a inizio risultati
-				String tipoBirra = r.getString("tipobirra");
+				String tipoBirra = r.getString("tipoBirra");
 				Pub p = new Pub();
 				p.setVegano(vegano);
 				p.setNazionalitaCibo(nazione);
@@ -136,60 +136,6 @@ public class RistoranteDAO {
 		
 		
 	}
-	
-	public boolean rimuoviRistorante(Ristorante r) {
-		
-		try {
-			
-			if(r.getAttributoAttivita().contentEquals("Pizzeria")) {
-				
-				String q = "DELETE FROM pizzeria WHERE idristorante = " + r.getID();
-				String connectionURL = MainController.URL; //URL di connessione
-				
-		        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
-		        Statement st = con.createStatement(); //Creo statement
-		        st.executeUpdate(q);
-		        
-			}else if(r.getAttributoAttivita().contentEquals("Braceria")) {
-				
-				String q = "DELETE FROM braceria WHERE idristorante = " + r.getID();
-				String connectionURL = MainController.URL; //URL di connessione
-				
-		        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
-		        Statement st = con.createStatement(); //Creo statement
-		        st.executeUpdate(q);
-				
-			}else {
-				
-				String q = "DELETE FROM pub WHERE idristorante = " + r.getID();
-				String connectionURL = MainController.URL; //URL di connessione
-				
-		        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
-		        Statement st = con.createStatement(); //Creo statement
-		        st.executeUpdate(q);
-				
-			}
-			
-			Class.forName("com.mysql.jdbc.Driver");
-			String q = "DELETE FROM ristorante WHERE idluogo = " + r.getID();
-			
-			String connectionURL = MainController.URL; //URL di connessione
-	
-	        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
-	        Statement st = con.createStatement(); //Creo statement
-	        
-			st.executeUpdate(q); //Eseguo la query contenuta in stringa q2
-			
-			con.close(); //Chiudi connessione
-			st.close(); //Chiudi statement
-			
-			return true;
-			
-		}catch(Exception e) { //Error catching
-			System.out.println(e);
-			return false; //Operazione inserimento fallita, restituisce false
-		}
-		
-	}
+
 
 }

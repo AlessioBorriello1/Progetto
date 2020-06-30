@@ -644,7 +644,7 @@ public class MainFrame extends JFrame {
 			workPanel.revalidate();
 			
 			//Aggiungi nuovo PanelInfoLuogo al workPanel
-			PanelScriviRecensione panel = new PanelScriviRecensione(controller, this, workPanel, l, numeroRecensioni);
+			PanelScriviRecensione panel = new PanelScriviRecensione(controller, this, workPanel, l);
 			controller.setCurrentPanel(panel); //Imposta il pannello appena creato nella variabile currentPanel del controller
 			workPanel.add(panel);
 			workPanel.repaint();

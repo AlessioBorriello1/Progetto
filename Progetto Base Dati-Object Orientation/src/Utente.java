@@ -45,7 +45,7 @@ public class Utente {
 		this.numeroLuoghi = numeroLuoghi;
 		//Aggiorna anche nel database
 		UtenteDAO dao = new UtenteDAO();
-		dao.updateNumeroLuoghi(this);
+		dao.updateNumeroLuoghi(this.getNomeUtente());
 	}
 
 	

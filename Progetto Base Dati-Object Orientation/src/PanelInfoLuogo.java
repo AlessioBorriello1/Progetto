@@ -46,7 +46,11 @@ public class PanelInfoLuogo extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 			
 				if(controller.getUtente()!= null) {
-					mainFrame.cambiaPannelloLavoroAPanelScriviRecensione(workPanel, l, numeroRecensioni);
+					if(!l.getNomeUtente().contentEquals(controller.getUtente().getNomeUtente())) {
+						mainFrame.cambiaPannelloLavoroAPanelScriviRecensione(workPanel, l, numeroRecensioni);
+					}else {
+						mainFrame.createNotificationFrame("Non puoi lasciare una recensione al tuo stesso luogo!");
+					}
 				}else {
 					mainFrame.createNotificationFrame("Devi prima eseguire il Login!");
 					mainFrame.cambiaPannelloLavoroALoginPanel(workPanel);

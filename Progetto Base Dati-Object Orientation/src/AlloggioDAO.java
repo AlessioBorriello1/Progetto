@@ -19,7 +19,7 @@ public class AlloggioDAO {
 			int numeroStanze = Integer.parseInt(((JTextField)c.getComponentByName(pannelloImpostazioniAggiuntive, "textFieldNumeroStanze")).getText().toString());
 			
 			Class.forName("com.mysql.jdbc.Driver");
-			String q = "INSERT INTO alloggio(idluogo, piscina, NumeroStanze, WiFi)\r\n" + 
+			String q = "INSERT INTO alloggio(idLuogo, piscina, numeroStanze, wifi)\r\n" + 
 					"VALUES ('"+ ID +"','"+ ((piscina) ? 1:0) + "','" + numeroStanze + "','" + ((wifi) ? 1:0) + "');"; //Inizializzo query 2
 			
 			String connectionURL = MainController.URL; //URL di connessione
@@ -32,7 +32,7 @@ public class AlloggioDAO {
 				System.out.println("Inserimento hotel");
 				int numeroStelle = Integer.parseInt(((JSpinner)c.getComponentByName(pannelloImpostazioniAggiuntive, "spinnerNumeroStelle")).getValue().toString());
 				
-				String q2 = "INSERT INTO hotel(idalloggio, numerostelle)\r\n" + 
+				String q2 = "INSERT INTO hotel(idAlloggio, numeroStelle)\r\n" + 
 						"VALUES ('"+ ID + "','" + numeroStelle + "');"; //Inizializzo query 3
 				
 				st.executeUpdate(q2); //Eseguo la query contenuta in stringa q3
@@ -44,7 +44,7 @@ public class AlloggioDAO {
 				System.out.println("Inserimento motel");
 				boolean assistenzaAutovetture = ((JCheckBox)c.getComponentByName(pannelloImpostazioniAggiuntive,  "chckbxAssistenzaAutovetture")).isSelected();
 				
-				String q2 = "INSERT INTO motel(idalloggio, assistenzaautovetture)\r\n" + 
+				String q2 = "INSERT INTO motel(idAlloggio, assistenzaAutovetture)\r\n" + 
 						"VALUES ('"+ ID + "','" + ((assistenzaAutovetture) ? 1:0) + "');"; //Inizializzo query 3
 				
 				st.executeUpdate(q2); //Eseguo la query contenuta in stringa q3
@@ -56,7 +56,7 @@ public class AlloggioDAO {
 				System.out.println("Inserimento BB");
 				boolean colazione = ((JCheckBox)c.getComponentByName(pannelloImpostazioniAggiuntive,  "chckbxColazione")).isSelected();
 				
-				String q2 = "INSERT INTO bedbreakfast(idalloggio, colazione)\r\n" + 
+				String q2 = "INSERT INTO bedbreakfast(idAlloggio, colazione)\r\n" + 
 						"VALUES ('"+ ID + "','" + ((colazione) ? 1:0) + "');"; //Inizializzo query 3
 				
 				st.executeUpdate(q2); //Eseguo la query contenuta in stringa q3
@@ -82,22 +82,22 @@ public class AlloggioDAO {
 	        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
 	        Statement st = con.createStatement(); //Creo statement
 	        
-	        String q = "SELECT * FROM alloggio WHERE idluogo = '" + ID + "'";
+	        String q = "SELECT * FROM alloggio WHERE idLuogo = '" + ID + "'";
 	        ResultSet rs = st.executeQuery(q);
 	        
 	        rs.next(); //Vai a inizio risultati
 	        
 	        boolean piscina = rs.getBoolean("piscina");
-	        boolean wifi = rs.getBoolean("WiFi");
-	        int numeroStanze = rs.getInt("NumeroStanze");
+	        boolean wifi = rs.getBoolean("wifi");
+	        int numeroStanze = rs.getInt("numeroStanze");
 	        
 	        rs.close();
 	        
 			if(specializzazione.contentEquals("Hotel")) {
-				q = "SELECT * FROM hotel WHERE idalloggio = '" + ID + "'";
+				q = "SELECT * FROM hotel WHERE idAlloggio = '" + ID + "'";
 				ResultSet r = st.executeQuery(q); //Eseguo la query contenuta in stringa
 				r.next(); //Vai a inizio risultati
-				int numeroStelle = r.getInt("numerostelle");
+				int numeroStelle = r.getInt("numeroStelle");
 				Hotel h = new Hotel();
 				h.setNumeroStanze(numeroStanze);
 				h.setPiscina(piscina);
@@ -107,10 +107,10 @@ public class AlloggioDAO {
 				st.close(); //Chiudi statement
 				return h;
 			}else if(specializzazione.contentEquals("Motel")) {
-				q = "SELECT * FROM motel WHERE idalloggio = '" + ID + "'";
+				q = "SELECT * FROM motel WHERE idAlloggio = '" + ID + "'";
 				ResultSet r = st.executeQuery(q); //Eseguo la query contenuta in stringa
 				r.next(); //Vai a inizio risultati
-				boolean assitenza = r.getBoolean("assistenzaautovetture");
+				boolean assitenza = r.getBoolean("assistenzaAutovetture");
 				Motel m = new Motel();
 				m.setNumeroStanze(numeroStanze);
 				m.setPiscina(piscina);
@@ -120,7 +120,7 @@ public class AlloggioDAO {
 				st.close(); //Chiudi statement
 				return m;
 			}else {
-				q = "SELECT * FROM bedbreakfast WHERE idalloggio = '" + ID + "'";
+				q = "SELECT * FROM bedbreakfast WHERE idAlloggio = '" + ID + "'";
 				ResultSet r = st.executeQuery(q); //Eseguo la query contenuta in stringa
 				r.next(); //Vai a inizio risultati
 				boolean colazione = r.getBoolean("colazione");
@@ -137,61 +137,6 @@ public class AlloggioDAO {
 		}catch(Exception e) { //Error catching
 			System.out.println(e);
 			return null; //Operazione inserimento fallita, restituisce false
-		}
-		
-	}
-	
-	public boolean rimuoviAlloggio(Alloggio a) {
-		
-		try {
-			
-			if(a.getAttributoAttivita().contentEquals("Hotel")) {
-				
-				String q = "DELETE FROM hotel WHERE idalloggio = " + a.getID();
-				String connectionURL = MainController.URL; //URL di connessione
-				
-		        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
-		        Statement st = con.createStatement(); //Creo statement
-		        st.executeUpdate(q);
-		        
-			}else if(a.getAttributoAttivita().contentEquals("Motel")) {
-				
-				String q = "DELETE FROM motel WHERE idalloggio = " + a.getID();
-				String connectionURL = MainController.URL; //URL di connessione
-				
-		        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
-		        Statement st = con.createStatement(); //Creo statement
-		        st.executeUpdate(q);
-				
-			}else {
-				
-				String q = "DELETE FROM bedbreakfast WHERE idalloggio = " + a.getID();
-				String connectionURL = MainController.URL; //URL di connessione
-				
-		        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
-		        Statement st = con.createStatement(); //Creo statement
-		        st.executeUpdate(q);
-				
-			}
-			
-			Class.forName("com.mysql.jdbc.Driver");
-			String q = "DELETE FROM alloggio WHERE idluogo = " + a.getID();
-			
-			String connectionURL = MainController.URL; //URL di connessione
-	
-	        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
-	        Statement st = con.createStatement(); //Creo statement
-	        
-			st.executeUpdate(q); //Eseguo la query contenuta in stringa q2
-			
-			con.close(); //Chiudi connessione
-			st.close(); //Chiudi statement
-			
-			return true;
-			
-		}catch(Exception e) { //Error catching
-			System.out.println(e);
-			return false; //Operazione inserimento fallita, restituisce false
 		}
 		
 	}

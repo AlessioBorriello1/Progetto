@@ -36,7 +36,7 @@ public class LuogoDAO {
 			}
 			
 			Class.forName("com.mysql.jdbc.Driver");
-			String q = "INSERT INTO luogo(Nome, Indirizzo, Telefono, Proprietario, Idutente, tipoattivita, attributoattivita)\r\n" + 
+			String q = "INSERT INTO luogo(nome, indirizzo, telefono, proprietario, nomeUtente, tipoAttivita, attributoAttivita)\r\n" + 
 					"VALUES ('"+ nome +"','"+ indirizzo +"','"+ telefono + "','" + proprietario + "','" + u.getNomeUtente() + "','" + tipoAttivita + "','" + specializzazione + "');"; //Inizializzo query 1
 			
 			String connectionURL = MainController.URL; //URL di connessione
@@ -86,7 +86,7 @@ public class LuogoDAO {
 		try {
 			
 			Class.forName("com.mysql.jdbc.Driver");
-			String q = "Select * from luogo where Nome = '" + nome + "' AND Proprietario = '" + proprietario + "'" ; //Inizializzo query
+			String q = "Select * from luogo where nome = '" + nome + "' AND proprietario = '" + proprietario + "'" ; //Inizializzo query
 			
 			String connectionURL = MainController.URL; //URL di connessione
 
@@ -121,7 +121,7 @@ public class LuogoDAO {
 		try {
 			
 			Class.forName("com.mysql.jdbc.Driver");
-			String q = "Select * from luogo where Nome = '" + nome + "' AND Proprietario = '" + proprietario + "'" ; //Inizializzo query
+			String q = "Select * from luogo where nome = '" + nome + "' AND proprietario = '" + proprietario + "'" ; //Inizializzo query
 			
 			String connectionURL = MainController.URL; //URL di connessione
 
@@ -155,7 +155,7 @@ public class LuogoDAO {
 		try {
 			
 			Class.forName("com.mysql.jdbc.Driver");
-			String q = "Select * from luogo where Idutente = '" + nomeUtente + "'" ; //Inizializzo query
+			String q = "Select * from luogo where nomeUtente = '" + nomeUtente + "'" ; //Inizializzo query
 			
 			String connectionURL = MainController.URL; //URL di connessione
 
@@ -167,14 +167,14 @@ public class LuogoDAO {
 			
 			while(rs.next()) {
 				
-				int ID = rs.getInt("IdLuogo"); //ID unico luogo
-				String nome = rs.getString("Nome"); //Nome luogo
-				String indirizzo = rs.getString("Indirizzo"); //Indirizzo luogo
-				String telefono = rs.getString("Telefono"); //Numero telefono luogo
-				String proprietario = rs.getString("Proprietario"); //Nome proprietario
-				float mediaRecensioni = rs.getFloat("MediaRecensioni"); //Media recensioni
-				String tipoAttivita = rs.getString("tipoattivita"); //Tipo attività (Ristorante, Alloggio, Attrazione)
-				String attributoAttivita = rs.getString("attributoattivita"); //Specializzazione attività ((Pizzeria, Ristorante, Braceria) (Hotel, Motel, B&B) (Intrattenimento, Culturale))
+				int ID = rs.getInt("idLuogo"); //ID unico luogo
+				String nome = rs.getString("nome"); //Nome luogo
+				String indirizzo = rs.getString("indirizzo"); //Indirizzo luogo
+				String telefono = rs.getString("telefono"); //Numero telefono luogo
+				String proprietario = rs.getString("proprietario"); //Nome proprietario
+				float mediaRecensioni = rs.getFloat("mediaRecensioni"); //Media recensioni
+				String tipoAttivita = rs.getString("tipoAttivita"); //Tipo attività (Ristorante, Alloggio, Attrazione)
+				String attributoAttivita = rs.getString("attributoAttivita"); //Specializzazione attività ((Pizzeria, Ristorante, Braceria) (Hotel, Motel, B&B) (Intrattenimento, Culturale))
 				
 				if(tipoAttivita.contentEquals("Ristorante")) {
 					
@@ -244,7 +244,7 @@ public class LuogoDAO {
 		try {
 			
 			Class.forName("com.mysql.jdbc.Driver");
-			String q = "Select * from luogo where IdLuogo = '" + ID + "'" ; //Inizializzo query
+			String q = "Select * from luogo where idLuogo = '" + ID + "'" ; //Inizializzo query
 			
 			String connectionURL = MainController.URL; //URL di connessione
 
@@ -256,14 +256,14 @@ public class LuogoDAO {
 			
 			if(rs.next()) { //Luogo trovato
 				
-				String nomeUtente = rs.getString("Idutente"); //Nickname utente
-				String nome = rs.getString("Nome"); //Nome luogo
-				String indirizzo = rs.getString("Indirizzo"); //Indirizzo luogo
-				String telefono = rs.getString("Telefono"); //Numero telefono luogo
-				String proprietario = rs.getString("Proprietario"); //Nome proprietario
-				float mediaRecensioni = rs.getFloat("MediaRecensioni"); //Media recensioni
-				String tipoAttivita = rs.getString("tipoattivita"); //Tipo attività (Ristorante, Alloggio, Attrazione)
-				String attributoAttivita = rs.getString("attributoattivita"); //Specializzazione attività ((Pizzeria, Ristorante, Braceria) (Hotel, Motel, B&B) (Intrattenimento, Culturale))
+				String nomeUtente = rs.getString("nomeUtente"); //Nickname utente
+				String nome = rs.getString("nome"); //Nome luogo
+				String indirizzo = rs.getString("indirizzo"); //Indirizzo luogo
+				String telefono = rs.getString("telefono"); //Numero telefono luogo
+				String proprietario = rs.getString("proprietario"); //Nome proprietario
+				float mediaRecensioni = rs.getFloat("mediaRecensioni"); //Media recensioni
+				String tipoAttivita = rs.getString("tipoAttivita"); //Tipo attività (Ristorante, Alloggio, Attrazione)
+				String attributoAttivita = rs.getString("attributoAttivita"); //Specializzazione attività ((Pizzeria, Ristorante, Braceria) (Hotel, Motel, B&B) (Intrattenimento, Culturale))
 				
 				if(tipoAttivita.contentEquals("Ristorante")) {
 					
@@ -354,15 +354,15 @@ public class LuogoDAO {
 			
 			while(rs.next()) {
 				
-				int ID = rs.getInt("IdLuogo"); //ID unico luogo
-				String nomeUtente = rs.getString("Idutente"); //Nome utente
-				String nome = rs.getString("Nome"); //Nome luogo
-				String indirizzo = rs.getString("Indirizzo"); //Indirizzo luogo
-				String telefono = rs.getString("Telefono"); //Numero telefono luogo
-				String proprietario = rs.getString("Proprietario"); //Nome proprietario
-				float mediaRecensioni = rs.getFloat("MediaRecensioni"); //Media recensioni
-				String tipoAttivita = rs.getString("tipoattivita"); //Tipo attività (Ristorante, Alloggio, Attrazione)
-				String attributoAttivita = rs.getString("attributoattivita"); //Specializzazione attività ((Pizzeria, Ristorante, Braceria) (Hotel, Motel, B&B) (Intrattenimento, Culturale))
+				int ID = rs.getInt("idLuogo"); //ID unico luogo
+				String nomeUtente = rs.getString("nomeUtente"); //Nome utente
+				String nome = rs.getString("nome"); //Nome luogo
+				String indirizzo = rs.getString("indirizzo"); //Indirizzo luogo
+				String telefono = rs.getString("telefono"); //Numero telefono luogo
+				String proprietario = rs.getString("proprietario"); //Nome proprietario
+				float mediaRecensioni = rs.getFloat("mediaRecensioni"); //Media recensioni
+				String tipoAttivita = rs.getString("tipoAttivita"); //Tipo attività (Ristorante, Alloggio, Attrazione)
+				String attributoAttivita = rs.getString("attributoAttivita"); //Specializzazione attività ((Pizzeria, Ristorante, Braceria) (Hotel, Motel, B&B) (Intrattenimento, Culturale))
 				
 				if(tipoAttivita.contentEquals("Ristorante")) {
 					
@@ -426,12 +426,34 @@ public class LuogoDAO {
 		
 	}
 
-	public boolean updateMediaRecensioni(Luogo l, float media) {
+	public float calcolaMediaRecensioniLuogo(Luogo l) {
 		
+		RecensioneDAO dao = new RecensioneDAO();
+		List<Recensione> lista = new ArrayList<Recensione>();
+		lista = dao.getListaRecensioniLuogo(l);
+		
+		int somma = 0;
+		int c = 0;
+		for(Recensione r: lista) {
+			somma += r.getVoto();
+			c++;
+		}
+		
+		if(c == 0) {
+			return 0;
+		}else {
+			return (float)somma/c;
+		}
+		
+		
+	}
+
+	public boolean updateMediaRecensioni(Luogo l, float media) {
+
 		try {
 			
 			Class.forName("com.mysql.jdbc.Driver");
-			String q = "UPDATE luogo SET MediaRecensioni = " + media + " WHERE IdLuogo = " + l.getID();//Inizializzo query
+			String q = "UPDATE luogo SET mediaRecensioni = " + media + " WHERE idLuogo = " + l.getID();//Inizializzo query
 			
 			String connectionURL = MainController.URL; //URL di connessione
 
@@ -454,37 +476,12 @@ public class LuogoDAO {
 	public boolean rimuoviLuogo(MainController controller, Luogo l, Utente u) {
 		
 		try {
-			//Rimuoviamo innanzitutto tutte le recensioni e aggiorniamo il numero recensioni degli utente che le hanno create
+			
 			RecensioneDAO dao = new RecensioneDAO();
-			List <Recensione> recensioniLuogo = dao.getListaRecensioniLuogo(l);
-			int numero = recensioniLuogo.size();
-			
-			for(Recensione r: recensioniLuogo) {
-				dao.rimuoviRecensioneLuogo(controller, l, r, numero);
-				UtenteDAO dao2 = new UtenteDAO();
-				Utente utente = dao2.getUtenteByNomeUtente(r.getNomeUtente());
-				utente.setNumeroRecensioni(utente.getNumeroRecensioni() - 1);
-				dao2.updateNumeroRecensioni(utente);
-			}
-			
-			//Rimuovi rispettiva specializzazione
-			if(l.getTipoAttivita().contentEquals("Ristorante")) {
-				Ristorante r = (Ristorante)l;
-				RistoranteDAO dao3 = new RistoranteDAO();
-				dao3.rimuoviRistorante(r);
-			}else if(l.getTipoAttivita().contentEquals("Alloggio")) {
-				
-				Alloggio a = (Alloggio)l;
-				AlloggioDAO dao3 = new AlloggioDAO();
-				dao3.rimuoviAlloggio(a);
-			}else {
-				Attrazione a = (Attrazione)l;
-				AttrazioneDAO dao3 = new AttrazioneDAO();
-				dao3.rimuoviAttrazione(a);
-			}
+			List<Recensione> lista = dao.getListaRecensioniLuogo(l);
 			
 			Class.forName("com.mysql.jdbc.Driver");
-			String q = "DELETE FROM luogo WHERE IdLuogo = " + l.getID();
+			String q = "DELETE FROM luogo WHERE idLuogo = " + l.getID();
 			
 			String connectionURL = MainController.URL; //URL di connessione
 	
@@ -495,6 +492,13 @@ public class LuogoDAO {
 			
 			con.close(); //Chiudi connessione
 			st.close(); //Chiudi statement
+			
+			for(Recensione r : lista) {
+				
+				UtenteDAO dao2 = new UtenteDAO();
+				dao2.updateNumeroRecensioni(r.getNomeUtente());
+			
+			}
 			
 			return true;
 		

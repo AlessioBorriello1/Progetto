@@ -101,7 +101,6 @@ public class MainController {
 		UtenteDAO dao = new UtenteDAO(); //Istanzia un UtenteDAO per eseguire la ricerca
 		Utente u = dao.getUtente(nomeUtente, password, mainFrame); //Funzione UtenteDAO che restituisce (se lo trova) un utente
 		setUtente(u); //Imposta il nuovo utente trovato (o meno) nella variabile utente del controller
-		
 		if(u != null) { //Se utente trovato
 			u.setLuoghiUtente(); //Inizializza array luoghi
 			u.setRecensioniUtente(); //Inizializza array recensioni
@@ -161,7 +160,7 @@ public class MainController {
 			
 			utente.setNumeroLuoghi(utente.getNumeroLuoghi()-1);
 			UtenteDAO dao2 = new UtenteDAO();
-			dao2.updateNumeroLuoghi(utente);
+			dao2.updateNumeroLuoghi(utente.getNomeUtente());
 			mainFrame.refreshaPannelloInfo();
 			mainFrame.createNotificationFrame("Eliminazione completata");
 			mainFrame.cambiaPannelloLavoroAHomePanel(workPanel);
@@ -172,11 +171,11 @@ public class MainController {
 		}
 	}
 
-	public boolean lasciaRecensione(MainFrame mainFrame, Luogo l, int voto, String recensione, int numeroRecensioni) {
+	public boolean lasciaRecensione(MainFrame mainFrame, Luogo l, Recensione r) {
 		
-		if(!recensione.contentEquals("")) {
+		if(!r.getTesto().contentEquals("")) {
 			RecensioneDAO dao = new RecensioneDAO();
-			if(dao.lasciaRecensioneALuogo(mainFrame, utente, l, voto, recensione, numeroRecensioni)) {
+			if(dao.lasciaRecensioneALuogo(mainFrame, utente, l, r)) {
 				utente.setNumeroRecensioni(getUtente().getNumeroRecensioni() + 1); //Aumenta numero delle recensioni di quell'utente
 				utente.getRecensioniUtente().add(dao.getRecensioneLuogoByNomeUtente(l, utente.getNomeUtente()));
 				mainFrame.refreshaPannelloInfo(); //Refresha pannello
@@ -210,7 +209,8 @@ public class MainController {
 		if(dao.rimuoviRecensioneLuogo(this, l, r, numeroRecensioni)) {
 			utente.setNumeroRecensioni(utente.getNumeroRecensioni() - 1);
 			UtenteDAO dao2 = new UtenteDAO();
-			dao2.updateNumeroRecensioni(utente);
+			dao2.updateNumeroRecensioni(utente.getNomeUtente());
+			
 			utente.getRecensioniUtente().removeAll(utente.getRecensioniUtente());
 			RecensioneDAO dao3 = new RecensioneDAO();
 			utente.setRecensioniUtente(dao3.getListaRecensioniByNomeUtente(utente.getNomeUtente()));
