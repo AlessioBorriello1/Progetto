@@ -58,7 +58,6 @@ public class RecensioneDAO {
 		
 		try {
 			
-			
 		RecensioneDAO daor = new RecensioneDAO();
 		int somma = 0;
 		for(Recensione rev: daor.getListaRecensioniLuogo(l)) {
@@ -222,6 +221,50 @@ public class RecensioneDAO {
 			return null;
 		}
 		
+	}
+
+	public boolean rimuoviRecensioneLuogo(MainController controller, Luogo l, Recensione r, int numeroRecensioni) {
+		
+		try {
+			
+			RecensioneDAO daor = new RecensioneDAO();
+			int somma = 0;
+			for(Recensione rev: daor.getListaRecensioniLuogo(l)) {
+				somma += rev.getVoto();
+			}
+			
+			Class.forName("com.mysql.jdbc.Driver");
+			String q = "DELETE FROM recensione WHERE IdLuogo = " + r.getIDLuogo() + " AND Idutente = '" + r.getNomeUtente() + "'";
+			
+			String connectionURL = MainController.URL; //URL di connessione
+
+	        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
+			Statement st = con.createStatement(); //Creo statement
+			st.executeUpdate(q); //Eseguo la query contenuta in stringa q
+			
+			con.close(); //Chiudi connessione
+			st.close(); //Chiudi statement
+			
+			float media;;
+			if(numeroRecensioni-1 == 0) {
+				l.setMediaRecensioni(0);
+				LuogoDAO dao = new LuogoDAO();
+				dao.updateMediaRecensioni(l, 0);
+			}else {
+				media = (float)(somma - r.getVoto()) / (numeroRecensioni-1);
+				l.setMediaRecensioni(media);
+				LuogoDAO dao = new LuogoDAO();
+				dao.updateMediaRecensioni(l, media);
+				
+			}
+			
+			
+			
+			return true; //Operazione inserimento riuscita, restituisce true
+			
+			}catch(Exception e) { //Error catching
+				return false; //Operazione inserimento fallita, restituisce false
+			}
 	}
 
 }

@@ -109,6 +109,16 @@ public class LocaliPanel extends JPanel {
 				
 				PanelInfoLuogoAnteprima panel = new PanelInfoLuogoAnteprima(controller, mainFrame, l, true, workPanel);
 				verticalBox.add(panel);
+				JButton removeButton = new JButton("X");
+				verticalBox.add(removeButton);
+				removeButton.addMouseListener(new MouseAdapter() {
+					public void mouseClicked(MouseEvent e) {
+						boolean answer = mainFrame.createConfirmationFrame("Sei sicuro di voler cancellare questa recensione?");
+						if(answer) {
+							controller.rimuoviLuogo(mainFrame, controller, l);
+						}
+					}
+				});
 				
 				verticalBox.add(Box.createRigidArea(new Dimension(0, 8)));
 				

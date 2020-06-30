@@ -451,4 +451,10 @@ public class LuogoDAO {
 		
 	}
 
+	public boolean rimuoviLuogo(Luogo l) {
+		
+		return true;
+		
+	}
+	
 }

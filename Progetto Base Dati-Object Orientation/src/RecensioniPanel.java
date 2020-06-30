@@ -109,7 +109,11 @@ public class RecensioniPanel extends JPanel {
 					public void mouseClicked(MouseEvent e) {
 						boolean answer = mainFrame.createConfirmationFrame("Sei sicuro di voler cancellare questa recensione?");
 						if(answer) {
-							System.out.println("Rimuovi recensione");
+							LuogoDAO dao = new LuogoDAO();
+							Luogo l = dao.getLuogoByID(r.getIDLuogo());
+							RecensioneDAO dao2 = new RecensioneDAO();
+							int numero = dao2.getListaRecensioniLuogo(l).size();
+							controller.rimuoviRecensione(mainFrame, workPanel, l, r, numero);
 						}
 					}
 				});

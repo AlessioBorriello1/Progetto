@@ -154,6 +154,20 @@ public class MainController {
 			
 	}
 
+	public boolean rimuoviLuogo(MainFrame mainFrame, MainController controller, Luogo l) {
+		/*
+		LuogoDAO dao = LuogoDAO();
+		if(dao.rimuoviLuogo(l)) {
+			
+			return true;
+		}else {
+			mainFrame.createNotificationFrame("Qualcosa è andato storto!");
+			return false;
+		}
+		*/
+		return true;
+	}
+
 	public boolean lasciaRecensione(MainFrame mainFrame, Luogo l, int voto, String recensione, int numeroRecensioni) {
 		
 		if(!recensione.contentEquals("")) {
@@ -186,6 +200,26 @@ public class MainController {
 			
 	}
 
+	public boolean rimuoviRecensione(MainFrame mainFrame, JPanel workPanel, Luogo l, Recensione r, int numeroRecensioni) {
+		
+		RecensioneDAO dao = new RecensioneDAO();
+		if(dao.rimuoviRecensioneLuogo(this, l, r, numeroRecensioni)) {
+			utente.setNumeroRecensioni(utente.getNumeroRecensioni() - 1);
+			UtenteDAO dao2 = new UtenteDAO();
+			dao2.updateNumeroRecensioni(utente);
+			utente.getRecensioniUtente().removeAll(utente.getRecensioniUtente());
+			RecensioneDAO dao3 = new RecensioneDAO();
+			utente.setRecensioniUtente(dao3.getListaRecensioniByNomeUtente(utente.getNomeUtente()));
+			mainFrame.refreshaPannelloInfo(); //Refresha pannello
+			mainFrame.createNotificationFrame("Eliminazione compleatata");
+			mainFrame.cambiaPannelloLavoroAHomePanel(workPanel);
+			return true;
+		}else {
+			mainFrame.createNotificationFrame("Qualcosa è andato storto");
+			return false;
+		}
+	}
+	
 	//Getter per variabile currentPanel
 	public JPanel getCurrentPanel() {
 		return currentPanel;
