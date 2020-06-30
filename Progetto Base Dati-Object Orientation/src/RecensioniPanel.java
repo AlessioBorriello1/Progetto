@@ -112,8 +112,7 @@ public class RecensioniPanel extends JPanel {
 							LuogoDAO dao = new LuogoDAO();
 							Luogo l = dao.getLuogoByID(r.getIDLuogo());
 							RecensioneDAO dao2 = new RecensioneDAO();
-							int numero = dao2.getListaRecensioniLuogo(l).size();
-							controller.rimuoviRecensione(mainFrame, workPanel, l, r, numero);
+							controller.rimuoviRecensione(mainFrame, workPanel, l, r);
 						}
 					}
 				});

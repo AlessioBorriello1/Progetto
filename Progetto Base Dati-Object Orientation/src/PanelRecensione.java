@@ -56,9 +56,7 @@ public class PanelRecensione extends JPanel {
 					int ID = r.getIDLuogo();
 					LuogoDAO dao = new LuogoDAO();
 					Luogo l = dao.getLuogoByID(ID);
-					RecensioneDAO daor = new RecensioneDAO();
-					int numeroRecensioni = daor.getListaRecensioniLuogo(l).size();
-					mainFrame.cambiaPannelloLavoroAModificaRecensionePanel(workPanel, l, numeroRecensioni, r);
+					mainFrame.cambiaPannelloLavoroAModificaRecensionePanel(workPanel, l, r);
 				}
 			}
 		});
@@ -81,9 +79,7 @@ public class PanelRecensione extends JPanel {
 					int ID = r.getIDLuogo();
 					LuogoDAO dao = new LuogoDAO();
 					Luogo l = dao.getLuogoByID(ID);
-					RecensioneDAO daor = new RecensioneDAO();
-					int numeroRecensioni = daor.getListaRecensioniLuogo(l).size();
-					mainFrame.cambiaPannelloLavoroAModificaRecensionePanel(workPanel, l, numeroRecensioni, r);
+					mainFrame.cambiaPannelloLavoroAModificaRecensionePanel(workPanel, l, r);
 				}
 			}
 		});

@@ -635,7 +635,7 @@ public class MainFrame extends JFrame {
 		
 	}
 
-	public void cambiaPannelloLavoroAPanelScriviRecensione(JPanel workPanel, Luogo l, int numeroRecensioni) {
+	public void cambiaPannelloLavoroAPanelScriviRecensione(JPanel workPanel, Luogo l) {
 		
 		if(controller.getCurrentPanel() == null || !controller.getCurrentPanel().getClass().toString().contentEquals("class PanelScriviRecensione")) { //Se non sono già sullo stesso panel
 			//Rimuovi vecchio panel dal workPanel
@@ -653,7 +653,7 @@ public class MainFrame extends JFrame {
 		
 	}
 	
-	public void cambiaPannelloLavoroAModificaRecensionePanel(JPanel workPanel, Luogo l, int numeroRecensioni, Recensione r) {
+	public void cambiaPannelloLavoroAModificaRecensionePanel(JPanel workPanel, Luogo l, Recensione r) {
 		
 		if(controller.getCurrentPanel() == null || !controller.getCurrentPanel().getClass().toString().contentEquals("class PanelModificaRecensione")) { //Se non sono già sullo stesso panel
 			//Rimuovi vecchio panel dal workPanel
@@ -662,7 +662,7 @@ public class MainFrame extends JFrame {
 			workPanel.revalidate();
 			
 			//Aggiungi nuovo PanelInfoLuogo al workPanel
-			PanelModificaRecensione panel = new PanelModificaRecensione(controller, this, workPanel, l, numeroRecensioni, r);
+			PanelModificaRecensione panel = new PanelModificaRecensione(controller, this, workPanel, l, r);
 			controller.setCurrentPanel(panel); //Imposta il pannello appena creato nella variabile currentPanel del controller
 			workPanel.add(panel);
 			workPanel.repaint();

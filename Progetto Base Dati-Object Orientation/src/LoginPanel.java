@@ -63,7 +63,6 @@ public class LoginPanel extends JPanel {
 				String password = String.valueOf(passwordField.getPassword()); //Prendi password dal rispettivo campo
 				
 				controller.login(nomeUtente, password, mainFrame); //Bottone login premuto
-				System.out.println("NO");
 			}
 		});
 		buttonLogin.setBounds(402, 267, 220, 30);

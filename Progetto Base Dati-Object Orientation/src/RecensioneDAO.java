@@ -52,7 +52,7 @@ public class RecensioneDAO {
 		
 	}
 	
-	public boolean modificaRecensioneLuogo(MainFrame mainFrame, Utente u, Luogo l, int voto, String recensione, int numeroRecensioni, Recensione r) {
+	public boolean modificaRecensioneLuogo(MainFrame mainFrame, Utente u, Luogo l, int voto, String recensione, Recensione r) {
 		
 		try {
 		
@@ -213,7 +213,7 @@ public class RecensioneDAO {
 		
 	}
 
-	public boolean rimuoviRecensioneLuogo(MainController controller, Luogo l, Recensione r, int numeroRecensioni) {
+	public boolean rimuoviRecensioneLuogo(MainController controller, Luogo l, Recensione r) {
 		
 		try {
 			

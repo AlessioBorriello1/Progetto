@@ -134,14 +134,15 @@ public class MainController {
 		
 	}
 
-	public boolean creaLuogo(MainFrame mainFrame, String nome, String indirizzo, String telefono, String proprietario, String tipoAttivita, String specializzazione, JPanel pannelloImpostazioniAggiuntive) {
+	public boolean creaLuogo(MainFrame mainFrame, Luogo l, JPanel pannelloImpostazioniAggiuntive) {
 		
 		LuogoDAO dao = new LuogoDAO();
-		if(dao.creaLuogo(this, mainFrame, nome, indirizzo, telefono, proprietario, tipoAttivita, specializzazione, pannelloImpostazioniAggiuntive, getUtente())) {
+		System.out.println(l.getAttributoAttivita());
+		if(dao.creaLuogo(this, mainFrame, l.getNome(), l.getIndirizzo(), l.getTelefono(), l.getProprietario(), l.getTipoAttivita(), l.getAttributoAttivita(), pannelloImpostazioniAggiuntive, getUtente())) {
 			System.out.println("Operazione riuscita");
 			getUtente().setNumeroLuoghi(getUtente().getNumeroLuoghi() + 1); //Aumenta numero dei luoghi di quell'utente
 			mainFrame.refreshaPannelloInfo(); //Refresha pannello
-			int ID = dao.getIDLuogoByNomeAndPossessore(nome, proprietario);
+			int ID = dao.getIDLuogoByNomeAndPossessore(l.getNome(), l.getProprietario());
 			getUtente().getLuoghiUtente().add(dao.getLuogoByID(ID));
 			mainFrame.createNotificationFrame("Luogo aggiunto correttamente!");
 			mainFrame.cambiaPannelloLavoroALocaliPanel((JPanel)getComponentByName(mainFrame, "workPanel"));
@@ -195,10 +196,10 @@ public class MainController {
 		}
 	}
 	
-	public boolean modificaRecensione(MainFrame mainFrame, Luogo l, int voto, String recensione, int numeroRecensioni, Recensione r) {
-		if(!recensione.contentEquals("")) {
+	public boolean modificaRecensione(MainFrame mainFrame, Luogo l, Recensione nuovaRecensione, Recensione vecchiaRecensione) {
+		if(!nuovaRecensione.getTesto().contentEquals("")) {
 			RecensioneDAO dao = new RecensioneDAO();
-			return dao.modificaRecensioneLuogo(mainFrame, utente, l, voto, recensione, numeroRecensioni, r);
+			return dao.modificaRecensioneLuogo(mainFrame, utente, l, nuovaRecensione.getVoto(), nuovaRecensione.getTesto(), vecchiaRecensione);
 		}else {
 			System.out.println("Operazione fallita");
 			mainFrame.createNotificationFrame("Inserire il testo della recensione!");
@@ -207,10 +208,10 @@ public class MainController {
 			
 	}
 
-	public boolean rimuoviRecensione(MainFrame mainFrame, JPanel workPanel, Luogo l, Recensione r, int numeroRecensioni) {
+	public boolean rimuoviRecensione(MainFrame mainFrame, JPanel workPanel, Luogo l, Recensione r) {
 		
 		RecensioneDAO dao = new RecensioneDAO();
-		if(dao.rimuoviRecensioneLuogo(this, l, r, numeroRecensioni)) {
+		if(dao.rimuoviRecensioneLuogo(this, l, r)) {
 			utente.setNumeroRecensioni(utente.getNumeroRecensioni() - 1);
 			UtenteDAO dao2 = new UtenteDAO();
 			dao2.updateNumeroRecensioni(utente.getNomeUtente());

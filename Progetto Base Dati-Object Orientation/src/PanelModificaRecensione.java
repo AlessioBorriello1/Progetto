@@ -24,12 +24,11 @@ public class PanelModificaRecensione extends JPanel {
 	private JPanel workPanel;
 	private int numeroRecensioni;
 	
-	public PanelModificaRecensione(MainController controller, MainFrame mainFrame, JPanel workPanel, Luogo l, int numeroRecensioni, Recensione r) {
+	public PanelModificaRecensione(MainController controller, MainFrame mainFrame, JPanel workPanel, Luogo l, Recensione r) {
 		
 		this.controller = controller;
 		this.mainFrame = mainFrame;
 		this.workPanel = workPanel;
-		this.numeroRecensioni = numeroRecensioni;
 		
 		setBackground(controller.skyWhiter);
 		
@@ -112,7 +111,10 @@ public class PanelModificaRecensione extends JPanel {
 		JButton btnModificaRecensione = new JButton("Modifica la recensione");
 		btnModificaRecensione.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				if(controller.modificaRecensione(mainFrame, l, Integer.parseInt(spinnerVoto.getValue().toString()), editorPaneScriviRecensione.getText(), numeroRecensioni, r)) {
+				Recensione rNuova = new Recensione();
+				rNuova.setTesto(editorPaneScriviRecensione.getText());
+				rNuova.setVoto(Integer.parseInt(spinnerVoto.getValue().toString()));
+				if(controller.modificaRecensione(mainFrame, l, rNuova, r)) {
 					mainFrame.cambiaPannelloLavoroAHomePanel(workPanel);
 				}
 			}

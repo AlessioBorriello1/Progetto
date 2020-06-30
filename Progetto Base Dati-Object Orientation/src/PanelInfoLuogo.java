@@ -24,7 +24,6 @@ public class PanelInfoLuogo extends JPanel {
 	private MainFrame mainFrame;
 	private JPanel workPanel;
 	private List<Recensione> recensioniLuogo;
-	private int numeroRecensioni;
 	
 	public PanelInfoLuogo(MainController controller, MainFrame mainFrame, JPanel workPanel, Luogo l) {
 		
@@ -47,7 +46,7 @@ public class PanelInfoLuogo extends JPanel {
 			
 				if(controller.getUtente()!= null) {
 					if(!l.getNomeUtente().contentEquals(controller.getUtente().getNomeUtente())) {
-						mainFrame.cambiaPannelloLavoroAPanelScriviRecensione(workPanel, l, numeroRecensioni);
+						mainFrame.cambiaPannelloLavoroAPanelScriviRecensione(workPanel, l);
 					}else {
 						mainFrame.createNotificationFrame("Non puoi lasciare una recensione al tuo stesso luogo!");
 					}
@@ -110,7 +109,6 @@ public class PanelInfoLuogo extends JPanel {
 		
 		RecensioneDAO dao = new RecensioneDAO();
 		recensioniLuogo = dao.getListaRecensioniLuogo(l);
-		numeroRecensioni = recensioniLuogo.size();
 		
 		
 		if(!recensioniLuogo.isEmpty()) {
@@ -133,4 +131,5 @@ public class PanelInfoLuogo extends JPanel {
 		
 		
 	}
+
 }

@@ -213,7 +213,14 @@ public class CreazioneLuogoPanel extends JPanel {
 			public void mouseClicked(MouseEvent e) { //Mouse cliccato
 				//Funzione crea luogo del controller, passa le informazioni scelte dall'utente nei vari pannelli
 				if(mainFrame.createConfirmationFrame("Creare luogo con queste informazioni?")) {
-					controller.creaLuogo(mainFrame, textFieldNome.getText(), textFieldIndirizzo.getText(), textFieldTelefono.getText(), textFieldNomePropretario.getText(), comboBoxTipoAttivita.getSelectedItem().toString(), comboBoxSpecializzazione.getSelectedItem().toString(), currentImpostazioniAggiuntivePanel);
+					Luogo l = new Luogo();
+					l.setNome(textFieldNome.getText());
+					l.setIndirizzo(textFieldIndirizzo.getText());
+					l.setTelefono(textFieldTelefono.getText());
+					l.setProprietario(textFieldNomePropretario.getText());
+					l.setTipoAttivita(comboBoxTipoAttivita.getSelectedItem().toString());
+					l.setAttributoAttivita(comboBoxSpecializzazione.getSelectedItem().toString());
+					controller.creaLuogo(mainFrame, l, currentImpostazioniAggiuntivePanel);
 				}
 			}
 		});
