@@ -22,7 +22,7 @@ public class PanelImpostazioniAggiuntiveBracieria extends JPanel {
 		chckbxCiboVegano.setName("chckbxCiboVegano");
 		chckbxCiboVegano.setSelected(vegano);
 		
-		JComboBox comboBoxNazionalitaCibo = new JComboBox();
+		JComboBox<String> comboBoxNazionalitaCibo = new JComboBox();
 		comboBoxNazionalitaCibo.setName("comboBoxNazionalitCibo");
 		comboBoxNazionalitaCibo.addItem("Italiano");
 		comboBoxNazionalitaCibo.addItem("Messicano");

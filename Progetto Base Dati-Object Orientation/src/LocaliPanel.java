@@ -1,5 +1,7 @@
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
@@ -20,6 +22,7 @@ import javax.swing.Box;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
+import java.awt.Component;
 
 public class LocaliPanel extends JPanel {
 
@@ -44,12 +47,12 @@ public class LocaliPanel extends JPanel {
 		panelLocali.getVerticalScrollBar().setUnitIncrement(16);
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(panelLocali, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 752, Short.MAX_VALUE)
-						.addComponent(panelControl, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 752, Short.MAX_VALUE))
+						.addComponent(panelLocali, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
+						.addComponent(panelControl, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -58,7 +61,7 @@ public class LocaliPanel extends JPanel {
 					.addContainerGap()
 					.addComponent(panelControl, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(panelLocali, GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE)
+					.addComponent(panelLocali, GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
 					.addContainerGap())
 		);
 		
@@ -109,11 +112,16 @@ public class LocaliPanel extends JPanel {
 				
 				PanelInfoLuogoAnteprima panel = new PanelInfoLuogoAnteprima(controller, mainFrame, l, true, workPanel);
 				verticalBox.add(panel);
+				JPanel removeButtonPanel = new JPanel();
+				removeButtonPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
+				removeButtonPanel.setBackground(getBackground());
+				removeButtonPanel.setMaximumSize(new Dimension(800, 26));
+				verticalBox.add(removeButtonPanel);
 				JButton removeButton = new JButton("X");
-				verticalBox.add(removeButton);
+				removeButtonPanel.add(removeButton);
 				removeButton.addMouseListener(new MouseAdapter() {
 					public void mouseClicked(MouseEvent e) {
-						boolean answer = mainFrame.createConfirmationFrame("Sei sicuro di voler cancellare questo luogo?");
+						boolean answer = mainFrame.createConfirmationFrame("Sei sicuro di voler cancellare il luogo " + l.getNome() + "?");
 						if(answer) {
 							controller.rimuoviLuogo(mainFrame, controller, workPanel, l);
 						}

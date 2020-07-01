@@ -5,11 +5,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.JSpinner;
 
 public class LuogoDAO {
 	
@@ -45,29 +42,23 @@ public class LuogoDAO {
 			Statement st = con.createStatement(); //Creo statement
 			st.executeUpdate(q); //Eseguo la query contenuta in stringa q1
 			
+			con.close(); //Chiudi connessione
+			st.close(); //Chiudi statement
+			
 			if(tipoAttivita.contentEquals("Ristorante")) {
 				//Crea ristorante
-				con.close(); //Chiudi connessione
-				st.close(); //Chiudi statement
-				
 				RistoranteDAO dao = new RistoranteDAO();
 				int ID = getIDLuogoByNomeAndPossessore(nome, proprietario);
 				return dao.creaRistorante(c, mf, nome, indirizzo, telefono, proprietario, tipoAttivita, specializzazione, pannelloImpostazioniAggiuntive, u, ID);
 				
 			}else if(tipoAttivita.contentEquals("Alloggio")) {
 				//Crea alloggio
-				con.close(); //Chiudi connessione
-				st.close(); //Chiudi statement
-				
 				AlloggioDAO dao = new AlloggioDAO();
 				int ID = getIDLuogoByNomeAndPossessore(nome, proprietario);
 				return dao.creaAlloggio(c, mf, nome, indirizzo, telefono, proprietario, tipoAttivita, specializzazione, pannelloImpostazioniAggiuntive, u, ID);
 				
 			}else {
 				//Crea attrazione
-				con.close(); //Chiudi connessione
-				st.close(); //Chiudi statement
-				
 				AttrazioneDAO dao = new AttrazioneDAO();
 				int ID = getIDLuogoByNomeAndPossessore(nome, proprietario);
 				return dao.creaAttrazione(c, mf, nome, indirizzo, telefono, proprietario, tipoAttivita, specializzazione, pannelloImpostazioniAggiuntive, u, ID);
@@ -251,8 +242,6 @@ public class LuogoDAO {
 	        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
 			Statement st = con.createStatement(); //Creo statement
 			ResultSet rs = st.executeQuery(q); //Eseguo la query contenuta in stringa q
-			
-			List<Luogo> luoghi = new ArrayList<Luogo>();
 			
 			if(rs.next()) { //Luogo trovato
 				
@@ -509,4 +498,45 @@ public class LuogoDAO {
 		
 	}
 	
+	public boolean modificaLuogo(MainController c, Luogo nuovoLuogo, Luogo vecchioLuogo, JPanel pannelloImpostazioniAggiuntive) {
+		
+		try {
+			
+		Class.forName("com.mysql.jdbc.Driver");
+		String q = "UPDATE luogo SET nome = '" + nuovoLuogo.getNome() + "', indirizzo = '" + nuovoLuogo.getIndirizzo()  
+		+ "', telefono = '" + nuovoLuogo.getTelefono() + "', proprietario = '" + nuovoLuogo.getProprietario() + "' WHERE idLuogo = " + vecchioLuogo.getID();
+		
+		String connectionURL = MainController.URL; //URL di connessione
+
+        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
+		Statement st = con.createStatement(); //Creo statement
+		st.executeUpdate(q); //Eseguo la query contenuta in stringa q
+		
+		con.close(); //Chiudi connessione
+		st.close(); //Chiudi statement
+		
+		if(vecchioLuogo.getTipoAttivita().contentEquals("Ristorante")) {
+			//Modifica ristorante
+			RistoranteDAO dao = new RistoranteDAO();
+			return dao.modificaRistorante(c, vecchioLuogo, pannelloImpostazioniAggiuntive);
+			
+		}else if(vecchioLuogo.getTipoAttivita().contentEquals("Alloggio")) {
+			//Modifica alloggio
+			AlloggioDAO dao = new AlloggioDAO();
+			return dao.modificaAlloggio(c, vecchioLuogo, pannelloImpostazioniAggiuntive);
+			
+		}else {
+			//Modifica attrazione
+			AttrazioneDAO dao = new AttrazioneDAO();
+			return dao.modificaAttrazione(c, vecchioLuogo, pannelloImpostazioniAggiuntive);
+		
+		}
+		
+		}catch(Exception e) { //Error catching
+			System.out.println(e);
+			return false; //Operazione modifica fallita, restituisce false
+		}
+			
+	}
+
 }

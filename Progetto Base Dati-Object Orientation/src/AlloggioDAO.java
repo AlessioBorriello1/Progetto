@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
@@ -137,6 +138,68 @@ public class AlloggioDAO {
 		}catch(Exception e) { //Error catching
 			System.out.println(e);
 			return null; //Operazione inserimento fallita, restituisce false
+		}
+		
+	}
+
+	public boolean modificaAlloggio(MainController c, Luogo vecchioLuogo, JPanel pannelloImpostazioniAggiuntive) {
+		
+		try {
+			
+		System.out.println("Modifica alloggio");
+		boolean piscina = ((JCheckBox)c.getComponentByName(pannelloImpostazioniAggiuntive,  "chckbxPiscina")).isSelected();
+		boolean wifi = ((JCheckBox)c.getComponentByName(pannelloImpostazioniAggiuntive,  "chckbxWifi")).isSelected();
+		int numeroStanze = Integer.parseInt(((JTextField)c.getComponentByName(pannelloImpostazioniAggiuntive, "textFieldNumeroStanze")).getText().toString());
+		String specializzazione = vecchioLuogo.getAttributoAttivita();
+		
+		Class.forName("com.mysql.jdbc.Driver");
+		String q = "UPDATE alloggio SET piscina = " + ((piscina) ? 1:0) + ", numeroStanze = " + numeroStanze  + ", wifi = " + ((wifi)? 1:0) + " WHERE idLuogo = " + vecchioLuogo.getID();
+		
+		String connectionURL = MainController.URL; //URL di connessione
+
+        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
+        Statement st = con.createStatement(); //Creo statement
+        
+		st.executeUpdate(q); //Eseguo la query contenuta in stringa q2
+		
+		if(specializzazione.contentEquals("Hotel")) {
+			System.out.println("Modifica Hotel");
+			int numeroStelle = Integer.parseInt(((JSpinner)c.getComponentByName(pannelloImpostazioniAggiuntive, "spinnerNumeroStelle")).getValue().toString());
+			
+			q = "UPDATE hotel SET numeroStelle = " + numeroStelle + " WHERE idAlloggio = " + vecchioLuogo.getID();
+			
+			st.executeUpdate(q); //Eseguo la query contenuta in stringa q3
+			con.close(); //Chiudi connessione
+			st.close(); //Chiudi statement
+			return true;
+			
+		}else if(specializzazione.contentEquals("Motel")) {
+			System.out.println("Modifica Motel");
+			boolean assistenzaAutovetture = ((JCheckBox)c.getComponentByName(pannelloImpostazioniAggiuntive,  "chckbxAssistenzaAutovetture")).isSelected();
+			
+			q = "UPDATE motel SET assistenzaAutovetture = " + ((assistenzaAutovetture)? 1:0) + " WHERE idAlloggio = " + vecchioLuogo.getID();
+			
+			st.executeUpdate(q); //Eseguo la query contenuta in stringa q3
+			con.close(); //Chiudi connessione
+			st.close(); //Chiudi statement
+			return true;
+			
+		}else {
+			System.out.println("Modifica BB");
+			boolean colazione = ((JCheckBox)c.getComponentByName(pannelloImpostazioniAggiuntive,  "chckbxColazione")).isSelected();
+			
+			q = "UPDATE bedbreakfast SET colazione = " + ((colazione)? 1:0) + " WHERE idAlloggio = " + vecchioLuogo.getID();
+			
+			st.executeUpdate(q); //Eseguo la query contenuta in stringa q3
+			con.close(); //Chiudi connessione
+			st.close(); //Chiudi statement
+			return true;
+		
+		}
+			
+		}catch(Exception e) { //Error catching
+			System.out.println(e);
+			return false; //Operazione inserimento fallita, restituisce false
 		}
 		
 	}

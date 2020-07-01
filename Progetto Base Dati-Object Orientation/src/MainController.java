@@ -154,6 +154,22 @@ public class MainController {
 			
 	}
 
+	public boolean modificaLuogo(MainFrame mainFrame, JPanel workPanel, Luogo nuovoLuogo, Luogo vecchioLuogo, JPanel pannelloImpostazioniAggiuntive){
+		
+		LuogoDAO dao = new LuogoDAO();
+		if(dao.modificaLuogo(this, nuovoLuogo, vecchioLuogo, pannelloImpostazioniAggiuntive)) {
+			utente.getLuoghiUtente().removeAll(utente.getLuoghiUtente());
+			utente.setLuoghiUtente();
+			mainFrame.createNotificationFrame("Modifica completata!");
+			mainFrame.cambiaPannelloLavoroALocaliPanel(workPanel);
+			return true;
+		}else {
+			mainFrame.createNotificationFrame("Qualcosa è andato storto!");
+			return false;
+		}
+		
+	}
+
 	public boolean rimuoviLuogo(MainFrame mainFrame, MainController controller, JPanel workPanel, Luogo l) {
 		
 		LuogoDAO dao = new LuogoDAO();

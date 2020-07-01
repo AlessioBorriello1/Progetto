@@ -6,6 +6,8 @@ import java.sql.Statement;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
+import javax.swing.JTextField;
 
 public class AttrazioneDAO {
 
@@ -133,5 +135,64 @@ public class AttrazioneDAO {
 		
 	}
 
+	public boolean modificaAttrazione(MainController c, Luogo vecchioLuogo, JPanel pannelloImpostazioniAggiuntive) {
+		
+		try {
+			
+		System.out.println("Modifica alloggio");
+		boolean promozione = ((JCheckBox)c.getComponentByName(pannelloImpostazioniAggiuntive,  "chckbxPromozioneStudenti")).isSelected();
+		String specializzazione = vecchioLuogo.getAttributoAttivita();
+		
+		Class.forName("com.mysql.jdbc.Driver");
+		String q = "UPDATE attrazione SET promozioneStudenti = " + ((promozione) ? 1:0) + " WHERE idLuogo = " + vecchioLuogo.getID();
+		
+		String connectionURL = MainController.URL; //URL di connessione
 
+        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
+        Statement st = con.createStatement(); //Creo statement
+        
+		st.executeUpdate(q); //Eseguo la query contenuta in stringa q2
+		
+		if(specializzazione.contentEquals("Museo")) {
+			System.out.println("Modifica museo");
+			String tipoMuseo = ((JComboBox)c.getComponentByName(pannelloImpostazioniAggiuntive, "comboBoxTipoMuseo")).getSelectedItem().toString();
+			
+			q = "UPDATE museo SET tipoMuseo = '" + tipoMuseo + "' WHERE idAttrazione = " + vecchioLuogo.getID();
+			
+			st.executeUpdate(q); //Eseguo la query contenuta in stringa q3
+			con.close(); //Chiudi connessione
+			st.close(); //Chiudi statement
+			return true;
+			
+		}else if(specializzazione.contentEquals("Zoo")) {
+			System.out.println("Modifica zoo");
+			String tipoSpecie = ((JComboBox)c.getComponentByName(pannelloImpostazioniAggiuntive, "comboBoxSpecie")).getSelectedItem().toString();
+			
+			q = "UPDATE zoo SET specie = '" + tipoSpecie + "' WHERE idAttrazione = " + vecchioLuogo.getID();
+			
+			st.executeUpdate(q); //Eseguo la query contenuta in stringa q3
+			con.close(); //Chiudi connessione
+			st.close(); //Chiudi statement
+			return true;
+			
+		}else {
+			System.out.println("Modifica parco");
+			boolean gratuito = ((JCheckBox)c.getComponentByName(pannelloImpostazioniAggiuntive,  "chckbxIngressoGratuito")).isSelected();
+			
+			q = "UPDATE parco SET ingressoGratuito = " + ((gratuito)? 1:0) + " WHERE idAttrazione = " + vecchioLuogo.getID();
+			
+			st.executeUpdate(q); //Eseguo la query contenuta in stringa q3
+			con.close(); //Chiudi connessione
+			st.close(); //Chiudi statement
+			return true;
+		
+		}
+			
+		}catch(Exception e) { //Error catching
+			System.out.println(e);
+			return false; //Operazione inserimento fallita, restituisce false
+		}
+		
+	}
+	
 }

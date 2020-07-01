@@ -14,6 +14,7 @@ import javax.swing.JComboBox;
 import java.awt.CardLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import javax.swing.event.PopupMenuListener;
 
 import javax.swing.event.PopupMenuEvent;
@@ -103,7 +104,7 @@ public class PanelModificaLuogo extends JPanel {
 			}
 		});
 		
-		JComboBox comboBoxTipoAttivita = new JComboBox(); //ComboBox tipo attività (ristorante, alloggio, attrazione)
+		JComboBox<String> comboBoxTipoAttivita = new JComboBox(); //ComboBox tipo attività (ristorante, alloggio, attrazione)
 		comboBoxTipoAttivita.setEnabled(false);
 		comboBoxTipoAttivita.addPopupMenuListener(new PopupMenuListener() {
 			public void popupMenuCanceled(PopupMenuEvent e) {
@@ -217,7 +218,13 @@ public class PanelModificaLuogo extends JPanel {
 			public void mouseClicked(MouseEvent e) { //Mouse cliccato
 				//Funzione crea luogo del controller, passa le informazioni scelte dall'utente nei vari pannelli
 				if(mainFrame.createConfirmationFrame("Modificare luogo con queste nuove informazioni?")) {
-					System.out.println("Modifica");
+					Luogo nuovoLuogo = new Luogo();
+					nuovoLuogo.setNome(textFieldNome.getText());
+					nuovoLuogo.setIndirizzo(textFieldIndirizzo.getText());
+					nuovoLuogo.setProprietario(textFieldNomePropretario.getText());
+					nuovoLuogo.setTelefono(textFieldTelefono.getText());
+					
+					controller.modificaLuogo(mainFrame, workPanel, nuovoLuogo, l, panelAttributiAggiuntivi);
 				}
 			}
 		});

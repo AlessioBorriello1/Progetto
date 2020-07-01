@@ -22,7 +22,6 @@ public class PanelModificaRecensione extends JPanel {
 	private MainController controller;
 	private MainFrame mainFrame;
 	private JPanel workPanel;
-	private int numeroRecensioni;
 	
 	public PanelModificaRecensione(MainController controller, MainFrame mainFrame, JPanel workPanel, Luogo l, Recensione r) {
 		
