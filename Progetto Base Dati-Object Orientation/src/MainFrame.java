@@ -79,13 +79,11 @@ public class MainFrame extends JFrame {
 		    }
 		});
 		upperPanel.setBackground(controller.steel); //Imposta colore background upper panel
-		getContentPane().add(upperPanel); //Aggiungi upper panel al mainFrame
-		upperPanel.setLayout(null); //Imposta layout upper panel
+		getContentPane().add(upperPanel);
 		
 		
 		JButton btnClose = new JButton(); //Nuovo bottone close
-		btnClose.setName("btnClose"); //Imposta nome
-		btnClose.setBounds(960, 0, 30, 30); //Posizione e dimensioni
+		btnClose.setName("btnClose");
 		//Impostazioni bottone close
 		btnClose.setContentAreaFilled(false); //Lascia trasparente il bottone (mostra solo icona di esso)
 		btnClose.setBorder(null); //Nessun bordo per il bottone
@@ -105,7 +103,6 @@ public class MainFrame extends JFrame {
 				btnClose.setIcon(new ImageIcon(MainFrame.class.getResource("/icons/Exit.png"))); //Imposta icona a "Exit"
 			}
 		});
-		upperPanel.add(btnClose); //Aggiungi bottone close all'upper panel
 		
 		
 		JButton btnMinimize = new JButton(); //Nuovo bottone minimize
@@ -113,8 +110,7 @@ public class MainFrame extends JFrame {
 		//Impostazioni bottone minimize
 		btnMinimize.setIcon(new ImageIcon(MainFrame.class.getResource("/icons/Minimize.png"))); //Imposta icona a "Minimize"
 		btnMinimize.setContentAreaFilled(false); //Lascia trasparente il bottone (mostra solo icona di esso)
-		btnMinimize.setBorder(null); //Nessun bordo per il bottone
-		btnMinimize.setBounds(930, 0, 30, 30); //Posiziona
+		btnMinimize.setBorder(null);
 		btnMinimize.addMouseListener(new MouseAdapter() {
 			//Quando premo il mouse
 			public void mouseClicked(MouseEvent e) {
@@ -129,20 +125,31 @@ public class MainFrame extends JFrame {
 				btnMinimize.setIcon(new ImageIcon(MainFrame.class.getResource("/icons/Minimize.png"))); //Imposta icona a "Minimize"
 			}
 		});
-		upperPanel.add(btnMinimize); //Aggiungi bottone minimize all'upper panel
 		
-		
-		JTextPane txtpnTripadvisor = new JTextPane(); //Nuovo pannello di testo ("Titolo finestra")
-		txtpnTripadvisor.setName("txtpnTripadvisor"); //Imposta nome
-		//Impostazioni testo
-		txtpnTripadvisor.setFont(new Font("Tahoma", Font.BOLD, 20)); //Font
-		txtpnTripadvisor.setBounds(0, 0, 128, 30); //Posizione e dimensioni
-		txtpnTripadvisor.setHighlighter(null); //Non evidenziabile
-		txtpnTripadvisor.setForeground(controller.electric); //Colora
-		txtpnTripadvisor.setEditable(false); //Non editabile
-		txtpnTripadvisor.setBackground(upperPanel.getBackground()); //Colore background (Uguale a quello del pannello dove si trova(upperPanel))
-		txtpnTripadvisor.setText("TripAdvisor"); //Imposta testo
-		upperPanel.add(txtpnTripadvisor); //Aggiungi testo TripAdvisor all'upper panel
+		JLabel lblBlueGuide = new JLabel("Blue Guide");
+		lblBlueGuide.setForeground(controller.electric);
+		lblBlueGuide.setFont(new Font("Bauhaus 93", Font.BOLD, 24));
+		GroupLayout gl_upperPanel = new GroupLayout(upperPanel);
+		gl_upperPanel.setHorizontalGroup(
+			gl_upperPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_upperPanel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblBlueGuide, GroupLayout.PREFERRED_SIZE, 157, GroupLayout.PREFERRED_SIZE)
+					.addGap(767)
+					.addComponent(btnMinimize, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+					.addComponent(btnClose, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		gl_upperPanel.setVerticalGroup(
+			gl_upperPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_upperPanel.createSequentialGroup()
+					.addGroup(gl_upperPanel.createParallelGroup(Alignment.LEADING)
+						.addComponent(btnClose, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnMinimize, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblBlueGuide))
+					.addContainerGap())
+		);
+		upperPanel.setLayout(gl_upperPanel);
 		
 		
 		JPanel mainPanel = new JPanel(); //Nuovo pannello (Pannello principale in cui vi sono workPanel e dashboardPanel)

@@ -44,7 +44,8 @@ public class notificationFrame extends JDialog {
 			JLabel lblNotification = new JLabel("Notification");
 			lblNotification.setBorder(null);
 			lblNotification.setText(notification);
-			lblNotification.setFont(new Font("Tahoma", Font.PLAIN, 14));
+			lblNotification.setFont(new Font("Georgia", Font.PLAIN, 14));
+			lblNotification.setForeground(new Color(76, 81, 109));
 			lblNotification.setHorizontalAlignment(SwingConstants.CENTER);
 			lblNotification.setBounds(10, 11, 389, 143);
 			contentPanel.add(lblNotification);
@@ -56,6 +57,7 @@ public class notificationFrame extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				okButton = new JButton("OK");
+				okButton.setFocusable(false);
 				okButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 				okButton.addMouseListener(new MouseAdapter() {
 					public void mouseClicked(MouseEvent e) {
