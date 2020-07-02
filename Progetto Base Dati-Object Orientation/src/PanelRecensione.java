@@ -37,6 +37,7 @@ public class PanelRecensione extends JPanel {
 		this.workPanel = workPanel;
 		
 		setMaximumSize(new Dimension(786, 100));
+		setPreferredSize(new Dimension(786, 100));
 		
 		if(controller.getUtente() != null) {
 			cliccabile = (controller.getUtente().getNomeUtente().contentEquals(r.getNomeUtente()));
@@ -95,15 +96,11 @@ public class PanelRecensione extends JPanel {
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-							.addComponent(textArea)
-							.addContainerGap())
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(lblVoto)
-							.addPreferredGap(ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
-							.addComponent(lblDate)
-							.addGap(25))))
+					.addComponent(lblVoto)
+					.addPreferredGap(ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+					.addComponent(lblDate)
+					.addGap(25))
+				.addComponent(textArea, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)

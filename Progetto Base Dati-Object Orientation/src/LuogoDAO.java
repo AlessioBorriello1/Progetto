@@ -10,7 +10,15 @@ import javax.swing.JTextField;
 
 public class LuogoDAO {
 	
-	public boolean creaLuogo(MainController c, MainFrame mf, String nome, String indirizzo, String telefono, String proprietario, String tipoAttivita, String specializzazione, JPanel pannelloImpostazioniAggiuntive, Utente u) {
+	public boolean creaLuogo(MainController c, MainFrame mf, Luogo l, JPanel pannelloImpostazioniAggiuntive) {
+		
+		Utente u = c.getUtente();
+		String nome = l.getNome();
+		String indirizzo = l.getIndirizzo();
+		String telefono = l.getTelefono();
+		String proprietario = l.getProprietario();
+		String tipoAttivita = l.getTipoAttivita();
+		String specializzazione = l.getAttributoAttivita();
 		
 		try {
 			
@@ -537,6 +545,152 @@ public class LuogoDAO {
 			return false; //Operazione modifica fallita, restituisce false
 		}
 			
+	}
+
+	public List<Luogo> faiRicerca(String proprietarioRicerca, String nomeRicerca, String ristorante, String alloggio, String attrazione, int votoMinimo, String ordine, boolean invertito){
+		
+		try {
+			
+			Class.forName("com.mysql.jdbc.Driver");
+			String q = generaQueryRicerca(proprietarioRicerca, nomeRicerca, ristorante, alloggio, attrazione, votoMinimo, ordine, invertito); //Inizializzo query
+			
+			String connectionURL = MainController.URL; //URL di connessione
+
+	        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
+			Statement st = con.createStatement(); //Creo statement
+			ResultSet rs = st.executeQuery(q); //Eseguo la query contenuta in stringa q
+			
+			List<Luogo> luoghi = new ArrayList<Luogo>();
+			
+			while(rs.next()) {
+				
+				int ID = rs.getInt("idLuogo"); //ID unico luogo
+				String nomeUtente = rs.getString("nomeUtente"); //Nome utente
+				String nome = rs.getString("nome"); //Nome luogo
+				String indirizzo = rs.getString("indirizzo"); //Indirizzo luogo
+				String telefono = rs.getString("telefono"); //Numero telefono luogo
+				String proprietario = rs.getString("proprietario"); //Nome proprietario
+				float mediaRecensioni = rs.getFloat("mediaRecensioni"); //Media recensioni
+				String tipoAttivita = rs.getString("tipoAttivita"); //Tipo attività (Ristorante, Alloggio, Attrazione)
+				String attributoAttivita = rs.getString("attributoAttivita"); //Specializzazione attività ((Pizzeria, Ristorante, Braceria) (Hotel, Motel, B&B) (Intrattenimento, Culturale))
+				
+				if(tipoAttivita.contentEquals("Ristorante")) {
+					
+					RistoranteDAO dao = new RistoranteDAO();
+					Luogo l = dao.getRistoranteByID(ID, attributoAttivita);
+					
+					l.setID(ID);
+					l.setIndirizzo(indirizzo);
+					l.setMediaRecensioni(mediaRecensioni);
+					l.setNome(nome);
+					l.setProprietario(proprietario);
+					l.setNomeUtente(nomeUtente);
+					l.setTelefono(telefono);
+					l.setAttributoAttivita(attributoAttivita);
+					l.setTipoAttivita(tipoAttivita);
+					
+					luoghi.add(l);
+					
+				}else if(tipoAttivita.contentEquals("Alloggio")) {
+					
+					AlloggioDAO dao = new AlloggioDAO();
+					Luogo l = dao.getAlloggioByID(ID, attributoAttivita);
+					
+					l.setID(ID);
+					l.setIndirizzo(indirizzo);
+					l.setMediaRecensioni(mediaRecensioni);
+					l.setNome(nome);
+					l.setProprietario(proprietario);
+					l.setNomeUtente(nomeUtente);
+					l.setTelefono(telefono);
+					l.setAttributoAttivita(attributoAttivita);
+					l.setTipoAttivita(tipoAttivita);
+					
+					luoghi.add(l);
+					
+				}else {
+					
+					AttrazioneDAO dao = new AttrazioneDAO();
+					Luogo l = dao.getAttrazioneByID(ID, attributoAttivita);
+					l.setID(ID);
+					l.setIndirizzo(indirizzo);
+					l.setMediaRecensioni(mediaRecensioni);
+					l.setNome(nome);
+					l.setProprietario(proprietario);
+					l.setNomeUtente(nomeUtente);
+					l.setTelefono(telefono);
+					l.setAttributoAttivita(attributoAttivita);
+					l.setTipoAttivita(tipoAttivita);
+					
+					luoghi.add(l);
+				}
+			}
+			
+			con.close(); //Chiudi connessione
+			st.close(); //Chiudi statement
+			return luoghi; //Restituisci lista luoghi
+			
+		}catch(Exception e) { //Error catching
+			System.out.println(e);
+			return null;
+		}
+		
+	}
+	
+	public String generaQueryRicerca(String proprietario, String nome, String ristorante, String alloggio, String attrazione, int votoMinimo, String ordine, boolean invertito) {
+		
+		proprietario = (!proprietario.contentEquals(""))? proprietario : null;
+		nome = (!nome.contentEquals(""))? nome : null;
+		
+		String nomeQuery;
+		if(nome != null) {
+			nomeQuery = "(nome LIKE '%" + nome + "%' OR '" + nome + "' IS NULL)";
+		}else {
+			nomeQuery = "(nome LIKE '" + nome + "' OR " + nome + " IS NULL)";
+		}
+		
+		String proprietarioQuery;
+		if(proprietario != null) {
+			proprietarioQuery = "(proprietario = '%" + proprietario + "%' OR '" + proprietario + "' IS NULL)";
+		}else {
+			proprietarioQuery = "(proprietario = '" + proprietario + "' OR " + proprietario + " IS NULL)";
+		}
+		
+		String query = null;
+		
+		query = "SELECT * FROM luogo WHERE (";
+		query += nomeQuery + " AND " + proprietarioQuery + " AND (mediaRecensioni >= " + votoMinimo + "))";
+		
+		if(ristorante == null && alloggio == null && attrazione != null) { //001
+			query += "AND ((tipoAttivita = '" + attrazione + "'))";
+		}else if(ristorante == null && alloggio != null && attrazione == null) { //010
+			query += "AND ((tipoAttivita = '" + alloggio + "'))";
+		}else if(ristorante == null && alloggio != null && attrazione != null) { //011
+			query += "AND ((tipoAttivita = '" + alloggio + "') OR (tipoAttivita = '" + attrazione + "'))";
+		}else if(ristorante != null && alloggio == null && attrazione == null) { //100
+			query += "AND ((tipoAttivita = '" + ristorante + "'))";
+		}else if(ristorante != null && alloggio == null && attrazione != null) { //101
+			query += "AND ((tipoAttivita = '" + ristorante + "') OR (tipoAttivita = '" + attrazione + "'))";
+		}else if(ristorante != null && alloggio != null && attrazione == null) { //110
+			query += "AND ((tipoAttivita = '" + ristorante + "') OR (tipoAttivita = '" + alloggio + "'))";
+		}else { //111 e 000
+			query += "AND ((tipoAttivita = '" + ristorante + "') OR (tipoAttivita = '" + alloggio + "') OR (tipoAttivita = '" + attrazione + "'))";
+		}
+		
+		switch(ordine) {
+		case "Ordine alfabetico": query += " ORDER BY nome"; break;
+		case "Valutazione": query += " ORDER BY mediaRecensioni"; break;
+		case "Ordine creazione": query += " ORDER BY idLuogo"; break;
+		}
+		
+		if(!invertito) {
+			query += " ASC";
+		}else {
+			query += " DESC";
+		}
+		
+		return query;
+		
 	}
 
 }

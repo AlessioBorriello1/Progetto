@@ -14,6 +14,8 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JScrollBar;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
@@ -22,9 +24,10 @@ import javax.swing.Box;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
+
 import java.awt.Component;
 
-public class LocaliPanel extends JPanel {
+public class LocaliPanel extends JPanel  {
 
 	MainController controller;
 	MainFrame mainFrame;

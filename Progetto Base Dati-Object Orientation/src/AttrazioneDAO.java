@@ -6,8 +6,6 @@ import java.sql.Statement;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
-import javax.swing.JSpinner;
-import javax.swing.JTextField;
 
 public class AttrazioneDAO {
 

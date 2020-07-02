@@ -83,5 +83,18 @@ public class LoginPanel extends JPanel {
 		buttonRegistrati.setBounds(402, 374, 220, 30);
 		add(buttonRegistrati);
 		
+		JButton buttonCheckPasswordField = new JButton("");
+		buttonCheckPasswordField.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				passwordField.setEchoChar((char)0);
+			}
+			public void mouseReleased(MouseEvent e) {
+				passwordField.setEchoChar('*');
+			}
+		});
+		buttonCheckPasswordField.setBounds(632, 197, 17, 17);
+		add(buttonCheckPasswordField);
+		
 	}
+
 }

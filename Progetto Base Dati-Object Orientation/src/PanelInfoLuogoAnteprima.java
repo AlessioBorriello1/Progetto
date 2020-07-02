@@ -11,7 +11,10 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 
 import javax.swing.SwingConstants;
+
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.lang.ModuleLayer.Controller;
@@ -60,6 +63,7 @@ public class PanelInfoLuogoAnteprima extends JPanel {
 		}else {
 			setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		}
+		
 		setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		setBackground(controller.sky);
 		
@@ -118,7 +122,7 @@ public class PanelInfoLuogoAnteprima extends JPanel {
 		JLabel lblProprietarioVariabile = new JLabel(l.getProprietario());
 		lblProprietarioVariabile.setForeground(controller.independence);
 		
-		JLabel lblValutazioneVariabile = new JLabel(String.valueOf(l.getMediaRecensioni()));
+		JLabel lblValutazioneVariabile = new JLabel(String.format("%.2f", l.getMediaRecensioni()));
 		lblValutazioneVariabile.setForeground(controller.independence);
 		
 		JLabel lblSpecializzazioneVariabile = new JLabel(specializzazione);
@@ -497,5 +501,6 @@ public class PanelInfoLuogoAnteprima extends JPanel {
 		box.repaint();
 		
 	}
+
 
 }

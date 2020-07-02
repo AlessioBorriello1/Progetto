@@ -5,6 +5,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JPanel;
+
 public class UtenteDAO {
 	
 	/**
@@ -78,45 +80,46 @@ public class UtenteDAO {
 	 * @return boolean (Se operazione riuscita)
 	 */
 	public boolean registraUtente(String nomeUtente, String email, String password, MainFrame mf) {
-			try {
+			
+		try {
 				
-				if(nomeUtente.contentEquals("") || email.contentEquals("") || password.contentEquals("")) {
-					System.out.println("Valori non inseriti");
-					mf.createNotificationFrame("Completa tutti i campi!");
-					return false; //Operazione inserimento fallita, restituisce false
-				}
-				
-				if(utenteEsiste(nomeUtente, email)) { //Controlla se l'utente è già nel database
-					
-					System.out.println("Utente già esistente");
-					mf.createNotificationFrame("Esiste già un utente con questo Nome utente o Email");
-					return false; //Operazione inserimento fallita, restituisce false
-					
-				}
-				
-				Class.forName("com.mysql.jdbc.Driver");
-				String q = "INSERT INTO utente(nomeUtente, email, password, numeroRecensioni, numeroLuoghi)\r\n" + 
-						"VALUES ('"+ nomeUtente +"','"+ email +"', '"+ password+ "','0','0');"; //Inizializzo query
-				
-				String connectionURL = MainController.URL; //URL di connessione
-	
-		        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
-				Statement st = con.createStatement(); //Creo statement
-				st.executeUpdate(q); //Eseguo la query contenuta in stringa q
-				
-				con.close(); //Chiudi connessione
-				st.close(); //Chiudi statement
-				
-				mf.createNotificationFrame("Registrazione completata!");
-				
-				return true; //Operazione inserimento riuscita, restituisce true
-				
-			}catch(Exception e) { //Error catching
-				System.out.println(e);
-				mf.createNotificationFrame("Qualcosa è andato storto!");
+			if(nomeUtente.contentEquals("") || email.contentEquals("") || password.contentEquals("")) {
+				System.out.println("Valori non inseriti");
+				mf.createNotificationFrame("Completa tutti i campi!");
 				return false; //Operazione inserimento fallita, restituisce false
 			}
+			
+			if(utenteEsiste(nomeUtente, email)) { //Controlla se l'utente è già nel database
+				
+				System.out.println("Utente già esistente");
+				mf.createNotificationFrame("Nome utente o Email non diponibili!");
+				return false; //Operazione inserimento fallita, restituisce false
+				
+			}
+			
+			Class.forName("com.mysql.jdbc.Driver");
+			String q = "INSERT INTO utente(nomeUtente, email, password, numeroRecensioni, numeroLuoghi)\r\n" + 
+					"VALUES ('"+ nomeUtente +"','"+ email +"', '"+ password+ "','0','0');"; //Inizializzo query
+			
+			String connectionURL = MainController.URL; //URL di connessione
+
+	        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
+			Statement st = con.createStatement(); //Creo statement
+			st.executeUpdate(q); //Eseguo la query contenuta in stringa q
+			
+			con.close(); //Chiudi connessione
+			st.close(); //Chiudi statement
+			
+			mf.createNotificationFrame("Registrazione completata!");
+			
+			return true; //Operazione inserimento riuscita, restituisce true
+			
+		}catch(Exception e) { //Error catching
+			System.out.println(e);
+			mf.createNotificationFrame("Qualcosa è andato storto!");
+			return false; //Operazione inserimento fallita, restituisce false
 		}
+	}
 	
 	/**
 	 * Controlla in base a nomeUtente e Email se un utente è presente nel database
@@ -181,13 +184,14 @@ public class UtenteDAO {
 	}
 	
 	public boolean updateNumeroRecensioni(String nomeUtente) {
+		
 		try {
 			
 			Class.forName("com.mysql.jdbc.Driver");
 			String q = "UPDATE utente SET numeroRecensioni = (SELECT COUNT(*) FROM recensione WHERE nomeUtente = '" + nomeUtente + "') WHERE nomeUtente = '" + nomeUtente + "'";//Inizializzo query
 			
 			String connectionURL = MainController.URL; //URL di connessione
-
+	
 	        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
 			Statement st = con.createStatement(); //Creo statement
 			st.executeUpdate(q); //Eseguo la query contenuta in stringa q
@@ -203,45 +207,5 @@ public class UtenteDAO {
 		}
 	}
 
-	public Utente getUtenteByNomeUtente(String nomeUtente) {
-		
-		try {
-			
-			Class.forName("com.mysql.jdbc.Driver");
-			String q = "Select * from utente where nomeUtente = '" + nomeUtente + "'" ; //Inizializzo query
-			Utente u = new Utente(); //Instanzio nuovo utente
-			
-			String connectionURL = MainController.URL; //URL di connessione
 
-	        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
-			Statement st = con.createStatement(); //Creo statement
-			ResultSet rs = st.executeQuery(q); //Eseguo la query contenuta in stringa q
-			
-			if(rs.next()) { //Se l'utente è stato trovato
-				
-				u.setNomeUtente(rs.getString("nomeUtente")); //Setta variabile nomeUtente dell'utente "u" uguale al campo "Idutente"
-				u.setEmail(rs.getString("email")); //Setta variabile email dell'utente "u" uguale al campo "Email"
-				u.setNumeroLuoghi(rs.getInt("numeroLuoghi")); //Setta variabile numeroLuoghi dell'utente "u" uguale al campo "NumeroLuoghi"
-				u.setNumeroRecensioni(rs.getInt("numeroRecensioni")); //Setta variabile numeroRecensioni dell'utente "u" uguale al campo "NumeroRecensioni"
-				
-				con.close(); //Chiudi connessione
-				st.close(); //Chiudi statement
-				return u;
-				
-			}else { //Se l'utente non è stato trovato (result set vuoto)
-				
-				System.out.println("Resul set vuoto");
-				con.close(); //Chiudi connessione
-				st.close(); //Chiudi statement
-				return null; //Restituisci null
-				
-			}
-			
-		}catch(Exception e) { //Error catching
-			System.out.println(e);
-			return null;
-		}
-		
-	}
-	
 }

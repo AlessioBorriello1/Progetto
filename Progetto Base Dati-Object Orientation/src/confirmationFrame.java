@@ -1,9 +1,7 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
-import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.Window.Type;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -14,7 +12,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
@@ -23,14 +20,12 @@ public class confirmationFrame extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JButton okButton;
 	private JButton cancellaButton;
-	private JButton pressedButton;
-	private MainFrame mainFrame;
 	
 	boolean answer = false; //False = cancella, True = ok;
 
-	public confirmationFrame(String notification, MainFrame mainFrame) {
+	public confirmationFrame(String notification, MainFrame mf) {
 		
-		this.mainFrame = mainFrame;
+		MainFrame mainFrame = mf;
 		
 		setType(Type.POPUP);
 		setAlwaysOnTop(true);

@@ -80,6 +80,18 @@ public class RegistrazionePanel extends JPanel {
 		buttonRegistrati.setBounds(486, 308, 220, 30);
 		add(buttonRegistrati);
 		
+		JButton buttonCheckPasswordField = new JButton("");
+		buttonCheckPasswordField.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				passwordField.setEchoChar((char)0);
+			}
+			public void mouseReleased(MouseEvent e) {
+				passwordField.setEchoChar('*');
+			}
+		});
+		buttonCheckPasswordField.setBounds(716, 225, 17, 17);
+		add(buttonCheckPasswordField);
+		
 	}
 
 }

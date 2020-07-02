@@ -319,7 +319,7 @@ public class MainFrame extends JFrame {
 		JButton buttonHome = new JButton(""); //Nuovo bottone Home
 		buttonHome.setName("buttonHome"); //Imposta nome
 		buttonHome.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); //Quando il mouse passa sopra rendi l'icona del mouse quella della mano
-		buttonHome.setIcon(new ImageIcon(MainFrame.class.getResource("/icons/buttonHome.png"))); //Imposta icona bottone a "buttonHome"
+		buttonHome.setIcon(new ImageIcon(MainFrame.class.getResource("/icons/buttonHome.png")));
 		buttonHome.setBorder(null); //Nessun bordo
 		//Costraints per limitarne la posizione in base al layout
 		sl_panelControl.putConstraint(SpringLayout.NORTH, buttonHome, 10, SpringLayout.NORTH, panelControl);
@@ -458,12 +458,7 @@ public class MainFrame extends JFrame {
 		sl_panelControl.putConstraint(SpringLayout.WEST, btnRegistrati, 0, SpringLayout.WEST, buttonHome);
 		sl_panelControl.putConstraint(SpringLayout.SOUTH, btnRegistrati, 36, SpringLayout.SOUTH, buttonLogin);
 		sl_panelControl.putConstraint(SpringLayout.EAST, btnRegistrati, 0, SpringLayout.EAST, buttonHome);
-		
-		JButton button = new JButton("");
-		button.setName("btnUtenteSettings");
-		dashBoardPanel.add(button);
-		
-		
+			
 		mainPanel.setLayout(gl_mainPanel); //Imposta layout gl_mainPanel (Salvato prima, riga 150) in mainPanel
 	}
 	
@@ -713,7 +708,7 @@ public class MainFrame extends JFrame {
 				if(lbl.getClass().getName().toString().contentEquals("javax.swing.JLabel")) { //Se la classe della componente è JLabel
 					JLabel label = (JLabel) lbl; //Converti a classe Jlabel
 					switch(label.getName()) { //Switch per il nome del label
-					case "lblNomeUtente": label.setText("Nome Utente: " + controller.getUtente().getNomeUtente()); break; //Se il nome è lblNomeUtente
+					case "lblNomeUtente": label.setText("Nome: " + controller.getUtente().getNomeUtente()); break; //Se il nome è lblNomeUtente
 					case "lblEmail": label.setText("Email: " + controller.getUtente().getEmail()); break; //Se il nome è lblEmail
 					case "lblNumeroLuoghi": label.setText("Numero luoghi: " + controller.getUtente().getNumeroLuoghi()); break; //Se il nome è lblNumeroLuoghi
 					case "lblNumeroRecensioni": label.setText("Numero recensioni: " + controller.getUtente().getNumeroRecensioni()); break; //Se il nome è lblNumeroRecensioni

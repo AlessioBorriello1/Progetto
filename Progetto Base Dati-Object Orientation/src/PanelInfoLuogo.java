@@ -7,6 +7,8 @@ import java.awt.Dimension;
 import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Font;
+import java.awt.Point;
+
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
@@ -69,11 +71,11 @@ public class PanelInfoLuogo extends JPanel {
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(scrollPane, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 710, Short.MAX_VALUE)
-						.addComponent(panelLuogo, GroupLayout.DEFAULT_SIZE, 710, Short.MAX_VALUE)
+						.addComponent(scrollPane, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
+						.addComponent(panelLuogo, GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(lblRecensioni)
-							.addPreferredGap(ComponentPlacement.RELATED, 499, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED, 219, Short.MAX_VALUE)
 							.addComponent(btnLasciaRecensione)))
 					.addContainerGap())
 		);
@@ -82,19 +84,19 @@ public class PanelInfoLuogo extends JPanel {
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(panelLuogo, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 						.addComponent(btnLasciaRecensione)
 						.addComponent(lblRecensioni))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 353, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 355, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		
 		Box verticalBox = Box.createVerticalBox();
-		scrollPane.setViewportView(verticalBox);
 		verticalBox.setBackground(controller.skyWhiter);
 		verticalBox.setOpaque(true);
+		
 		GroupLayout gl_panelLuogo = new GroupLayout(panelLuogo);
 		gl_panelLuogo.setHorizontalGroup(
 			gl_panelLuogo.createParallelGroup(Alignment.LEADING)
@@ -110,15 +112,13 @@ public class PanelInfoLuogo extends JPanel {
 		RecensioneDAO dao = new RecensioneDAO();
 		recensioniLuogo = dao.getListaRecensioniLuogo(l);
 		
-		
+		int height = 0;
 		if(!recensioniLuogo.isEmpty()) {
 			for(Recensione r : recensioniLuogo) {
-				
 				PanelRecensione panel = new PanelRecensione(controller, mainFrame, r, workPanel);
 				verticalBox.add(panel);
-				
 				verticalBox.add(Box.createRigidArea(new Dimension(0, 8)));
-				
+				height += 120;
 			}
 		}else {
 			JLabel lblNessunaRecensione = new JLabel("  Nessuna recensione");
@@ -128,6 +128,17 @@ public class PanelInfoLuogo extends JPanel {
 			verticalBox.add(lblNessunaRecensione);
 			
 		}
+		
+		height = (height <= 360)? 0:height;
+		verticalBox.setPreferredSize(new Dimension(verticalBox.getWidth(), height));
+		
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+			   public void run() { 
+			       scrollPane.getVerticalScrollBar().setValue(0);
+			       scrollPane.setViewportView(verticalBox);
+			       scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+			   }
+			});
 		
 		
 	}

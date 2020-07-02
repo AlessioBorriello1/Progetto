@@ -1,4 +1,3 @@
-import javax.swing.JPanel;
 
 public class Attrazione extends Luogo{
 	
