@@ -339,7 +339,7 @@ public class LuogoDAO {
 		try {
 			
 			Class.forName("com.mysql.jdbc.Driver");
-			String q = "Select * from luogo" ; //Inizializzo query
+			String q = "Select * from luogo order by nome ASC" ; //Inizializzo query
 			
 			String connectionURL = MainController.URL; //URL di connessione
 

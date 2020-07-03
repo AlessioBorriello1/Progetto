@@ -125,8 +125,8 @@ public class LoginPanel extends JPanel {
 		JLabel lblUtenteIcon = new JLabel("");
 		lblUtenteIcon.setIcon(new ImageIcon(LoginPanel.class.getResource("/icons/LoginIconSmall.png")));
 		
-		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon(LoginPanel.class.getResource("/icons/PasswordIconSmall.png")));
+		JLabel lblPasswordIcon = new JLabel("");
+		lblPasswordIcon.setIcon(new ImageIcon(LoginPanel.class.getResource("/icons/PasswordIconSmall.png")));
 		GroupLayout gl_panelLogin = new GroupLayout(panelLogin);
 		gl_panelLogin.setHorizontalGroup(
 			gl_panelLogin.createParallelGroup(Alignment.TRAILING)
@@ -135,7 +135,7 @@ public class LoginPanel extends JPanel {
 					.addContainerGap(61, Short.MAX_VALUE)
 					.addGroup(gl_panelLogin.createParallelGroup(Alignment.TRAILING, false)
 						.addComponent(lblUtenteIcon, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-						.addComponent(label, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+						.addComponent(lblPasswordIcon, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
 					.addGap(10)
 					.addGroup(gl_panelLogin.createParallelGroup(Alignment.TRAILING)
 						.addComponent(lblPassword, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
@@ -161,7 +161,7 @@ public class LoginPanel extends JPanel {
 									.addGap(66)
 									.addComponent(lblUtenteIcon, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 									.addGap(54)
-									.addComponent(label, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+									.addComponent(lblPasswordIcon, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
 								.addGroup(gl_panelLogin.createSequentialGroup()
 									.addGap(27)
 									.addComponent(lblNomeUtente, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)

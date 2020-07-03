@@ -319,7 +319,6 @@ public class MainFrame extends JFrame {
 		);
 		workPanel.setLayout(new CardLayout(0, 0)); //Imposta layout per workPanel
 		
-		
 		//Imposta primo pannello di lavoro (workPanel) a HomePanel
 		cambiaPannelloLavoroAHomePanel(workPanel);
 		
@@ -519,7 +518,6 @@ public class MainFrame extends JFrame {
 			workPanel.repaint();
 			workPanel.revalidate();
 		}
-		
 	}
 	
 	/**
