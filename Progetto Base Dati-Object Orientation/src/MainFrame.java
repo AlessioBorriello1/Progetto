@@ -202,9 +202,9 @@ public class MainFrame extends JFrame {
 		
 		JLabel lblNotLogged = new JLabel("Effettua il login"); //Nuovo label notLogged
 		lblNotLogged.setName("lblNotLogged"); //Imposta nome
-		lblNotLogged.setFont(new Font("Tahoma", Font.BOLD, 16)); //Imposta font
+		lblNotLogged.setFont(new Font("Georgia", Font.BOLD, 18)); //Imposta font
 		lblNotLogged.setBackground(panelInfoUtente.getBackground()); //Colore background (Uguale a quello del pannello dove si trova(panelInfoUtente))
-		lblNotLogged.setForeground(Color.CYAN); //Colore font
+		lblNotLogged.setForeground(controller.steel); //Colore font
 		lblNotLogged.setHorizontalAlignment(SwingConstants.CENTER); //Allinea il testo al centro
 		GroupLayout gl_panelNotLogged = new GroupLayout(panelNotLogged); //GroupLayout per panelNotLogged (e salvato in gl_panelNotLogged)
 		//Allinea orizzontale
@@ -350,7 +350,9 @@ public class MainFrame extends JFrame {
 		panelControl.add(buttonHome); //Aggiungi bottone Home al pannello di controllo
 		
 		
-		JButton btnGestisciLocali = new JButton("Gestisci locali"); //Nuovo bottone Gestisci Locali
+		JButton btnGestisciLocali = new JButton(""); //Nuovo bottone Gestisci Locali
+		btnGestisciLocali.setBorder(null);
+		btnGestisciLocali.setIcon(new ImageIcon(MainFrame.class.getResource("/icons/buttonLocali.png")));
 		btnGestisciLocali.setName("btnGestisciLocali"); //Imposta nome
 		btnGestisciLocali.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); //Quando il mouse passa sopra rendi l'icona del mouse quella della mano
 		//Costraints per limitarne la posizione in base al layout
@@ -367,12 +369,22 @@ public class MainFrame extends JFrame {
 					cambiaPannelloLavoroALoginPanel(workPanel);
 				}
 			}
+			//Quando il mouse passa sul bottone
+			public void mouseEntered(MouseEvent e) {
+				btnGestisciLocali.setIcon(new ImageIcon(MainFrame.class.getResource("/icons/buttonLocali Highlighted.png"))); //Imposta icona a "buttonHome Highlighted"
+			}
+			//Quando il mouse esce dal bottone
+			public void mouseExited(MouseEvent e) {
+				btnGestisciLocali.setIcon(new ImageIcon(MainFrame.class.getResource("/icons/buttonLocali.png"))); //Imposta icona a "buttonHome"
+			}
 		});
 		panelControl.add(btnGestisciLocali); //Aggiungi bottone Gestisci Locali al pannello di controllo
 		
 		
-		JButton btnGestisciRecensioni = new JButton("Gestisci recensioni"); //Nuovo bottone Gestisci Recensioni
+		JButton btnGestisciRecensioni = new JButton(""); //Nuovo bottone Gestisci Recensioni
+		btnGestisciRecensioni.setBorder(null);
 		btnGestisciRecensioni.setName("btnGestisciRecensioni"); //Imposta nome
+		btnGestisciRecensioni.setIcon(new ImageIcon(MainFrame.class.getResource("/icons/buttonRecensioni.png"))); 
 		btnGestisciRecensioni.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); //Quando il mouse passa sopra rendi l'icona del mouse quella della mano
 		//Costraints per limitarne la posizione in base al layout
 		sl_panelControl.putConstraint(SpringLayout.NORTH, btnGestisciRecensioni, 82, SpringLayout.NORTH, panelControl);
@@ -390,12 +402,22 @@ public class MainFrame extends JFrame {
 					cambiaPannelloLavoroALoginPanel(workPanel);
 				}
 			}
+			//Quando il mouse passa sul bottone
+			public void mouseEntered(MouseEvent e) {
+				btnGestisciRecensioni.setIcon(new ImageIcon(MainFrame.class.getResource("/icons/buttonRecensioni Highlighted.png"))); //Imposta icona a "buttonHome Highlighted"
+			}
+			//Quando il mouse esce dal bottone
+			public void mouseExited(MouseEvent e) {
+				btnGestisciRecensioni.setIcon(new ImageIcon(MainFrame.class.getResource("/icons/buttonRecensioni.png"))); //Imposta icona a "buttonHome"
+			}
 		});
 		panelControl.add(btnGestisciRecensioni); //Aggiungi bottone Gestisci Recensioni al pannello di controllo
 		
 		
-		JButton btnRegistrati = new JButton("Registrati"); //Nuovo bottone Registrati
+		JButton btnRegistrati = new JButton(""); //Nuovo bottone Registrati
+		btnRegistrati.setBorder(null);
 		btnRegistrati.setName("btnRegistrati"); //Imposta nome
+		btnRegistrati.setIcon(new ImageIcon(MainFrame.class.getResource("/icons/buttonRegistrazione.png")));
 		btnRegistrati.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); //Quando il mouse passa sopra rendi l'icona del mouse quella della mano
 		btnRegistrati.setEnabled(!controller.isLoggedIn()); //Abilita solo se IsLoggedIn del controller = 0
 		btnRegistrati.setVisible(btnRegistrati.isEnabled()); //Rendi visibile solo se è abilitato
@@ -404,11 +426,20 @@ public class MainFrame extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				cambiaPannelloLavoroARegistrazionePanel(workPanel); //Imposta il pannello di lavoro (workPanel) a RegistrazionePanel
 			}
+			//Quando il mouse passa sul bottone
+			public void mouseEntered(MouseEvent e) {
+				btnRegistrati.setIcon(new ImageIcon(MainFrame.class.getResource("/icons/buttonRegistrazione Highlighted.png"))); //Imposta icona a "buttonHome Highlighted"
+			}
+			//Quando il mouse esce dal bottone
+			public void mouseExited(MouseEvent e) {
+				btnRegistrati.setIcon(new ImageIcon(MainFrame.class.getResource("/icons/buttonRegistrazione.png"))); //Imposta icona a "buttonHome"
+			}
 		});
 		panelControl.add(btnRegistrati); //Aggiungi bottone Registrati al pannello di controllo
 		
 		
 		JButton buttonLogin = new JButton(); //Nuovo bottone Login (o logout)
+		sl_panelControl.putConstraint(SpringLayout.SOUTH, btnRegistrati, 36, SpringLayout.SOUTH, buttonLogin);
 		buttonLogin.setName("buttonLogin"); //Imposta nome
 		buttonLogin.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); //Quando il mouse passa sopra rendi l'icona del mouse quella della mano
 		buttonLogin.setIcon(new ImageIcon(MainFrame.class.getResource("/icons/buttonLogin.png"))); //Per anteprima del bottone nella tab design (non necessario)
@@ -463,7 +494,6 @@ public class MainFrame extends JFrame {
 		//Costraints per limitarne la posizione in base al layout del bottone Registrati (Va più sotto perchè si basa su un altra componente dichiarata dopo (buttonHome))
 		sl_panelControl.putConstraint(SpringLayout.NORTH, btnRegistrati, 6, SpringLayout.SOUTH, buttonLogin);
 		sl_panelControl.putConstraint(SpringLayout.WEST, btnRegistrati, 0, SpringLayout.WEST, buttonHome);
-		sl_panelControl.putConstraint(SpringLayout.SOUTH, btnRegistrati, 36, SpringLayout.SOUTH, buttonLogin);
 		sl_panelControl.putConstraint(SpringLayout.EAST, btnRegistrati, 0, SpringLayout.EAST, buttonHome);
 			
 		mainPanel.setLayout(gl_mainPanel); //Imposta layout gl_mainPanel (Salvato prima, riga 150) in mainPanel

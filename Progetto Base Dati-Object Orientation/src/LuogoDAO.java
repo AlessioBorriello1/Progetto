@@ -684,9 +684,18 @@ public class LuogoDAO {
 		}
 		
 		if(!invertito) {
-			query += " ASC";
+			if(!ordine.contentEquals("Valutazione")) {
+				query += " ASC";
+			}else {
+				query += " DESC";
+			}
+				
 		}else {
-			query += " DESC";
+			if(!ordine.contentEquals("Valutazione")) {
+				query += " DESC";
+			}else {
+				query += " ASC";
+			}
 		}
 		
 		return query;

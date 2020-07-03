@@ -42,7 +42,8 @@ public class confirmationFrame extends JDialog {
 			JLabel lblNotification = new JLabel("Notification");
 			lblNotification.setBorder(null);
 			lblNotification.setText(notification);
-			lblNotification.setFont(new Font("Tahoma", Font.PLAIN, 14));
+			lblNotification.setFont(new Font("Georgia", Font.PLAIN, 14));
+			lblNotification.setForeground(new Color(76, 81, 109));
 			lblNotification.setHorizontalAlignment(SwingConstants.CENTER);
 			lblNotification.setBounds(10, 11, 389, 143);
 			contentPanel.add(lblNotification);
@@ -54,6 +55,7 @@ public class confirmationFrame extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				okButton = new JButton("OK");
+				okButton.setFocusable(false);
 				okButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 				okButton.addMouseListener(new MouseAdapter() {
 					public void mouseClicked(MouseEvent e) {
@@ -67,6 +69,7 @@ public class confirmationFrame extends JDialog {
 			}
 			
 			cancellaButton = new JButton("ANNULLA");
+			cancellaButton.setFocusable(false);
 			cancellaButton.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e) {
 					setVisible(false);
@@ -77,13 +80,13 @@ public class confirmationFrame extends JDialog {
 			cancellaButton.setActionCommand("CANCELLA");
 			GroupLayout gl_buttonPane = new GroupLayout(buttonPane);
 			gl_buttonPane.setHorizontalGroup(
-				gl_buttonPane.createParallelGroup(Alignment.LEADING)
-					.addGroup(Alignment.TRAILING, gl_buttonPane.createSequentialGroup()
-						.addContainerGap()
+				gl_buttonPane.createParallelGroup(Alignment.TRAILING)
+					.addGroup(gl_buttonPane.createSequentialGroup()
+						.addGap(52)
 						.addComponent(cancellaButton, GroupLayout.PREFERRED_SIZE, 135, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
+						.addPreferredGap(ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
 						.addComponent(okButton, GroupLayout.PREFERRED_SIZE, 135, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap())
+						.addGap(52))
 			);
 			gl_buttonPane.setVerticalGroup(
 				gl_buttonPane.createParallelGroup(Alignment.TRAILING)
