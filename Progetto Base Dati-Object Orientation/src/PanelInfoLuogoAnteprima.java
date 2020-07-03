@@ -1,6 +1,8 @@
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
+import java.awt.Component;
+
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.GroupLayout;
@@ -36,7 +38,8 @@ public class PanelInfoLuogoAnteprima extends JPanel {
 		this.workPanel = workPanel;
 		this.cliccabile = cliccabile;
 		
-		setMaximumSize(new Dimension(786, 130));
+		setMaximumSize(new Dimension(752, 134));
+		setAlignmentX(Component.LEFT_ALIGNMENT);
 		addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				if(cliccabile) {
@@ -160,49 +163,53 @@ public class PanelInfoLuogoAnteprima extends JPanel {
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(lblSpecializzazione)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblSpecializzazioneVariabile))
-						.addComponent(panelInformazioniUniche, GroupLayout.PREFERRED_SIZE, 135, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+							.addComponent(lblSpecializzazioneVariabile)
+							.addPreferredGap(ComponentPlacement.RELATED, 363, Short.MAX_VALUE)
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(lblCreatoDa)
+									.addGap(19))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(lblId)
+									.addGap(27))))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(lblCreatoDa)
-							.addGap(19))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(lblId)
-							.addGap(27))))
+							.addComponent(panelInformazioniUniche, GroupLayout.PREFERRED_SIZE, 135, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap())))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNome)
-						.addComponent(lblNomeVariabile)
-						.addComponent(lblCreatoDa)
-						.addComponent(lblSpecializzazione)
-						.addComponent(lblSpecializzazioneVariabile))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
+							.addContainerGap()
 							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblIndirizzo)
-								.addComponent(lblIndirizzoVariabile))
-							.addPreferredGap(ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
-							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblTelefono)
-								.addComponent(lblTelefonoVariabile))
+								.addComponent(lblNome)
+								.addComponent(lblNomeVariabile)
+								.addComponent(lblCreatoDa)
+								.addComponent(lblSpecializzazione)
+								.addComponent(lblSpecializzazioneVariabile))
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblProprietario)
-								.addComponent(lblProprietarioVariabile))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblValutazione)
-								.addComponent(lblValutazioneVariabile)))
-						.addComponent(lblId)
-						.addComponent(panelInformazioniUniche, GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE))
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+									.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+										.addComponent(lblIndirizzo)
+										.addComponent(lblIndirizzoVariabile))
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+										.addComponent(lblTelefono)
+										.addComponent(lblTelefonoVariabile))
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+										.addComponent(lblProprietario)
+										.addComponent(lblProprietarioVariabile))
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+										.addComponent(lblValutazione)
+										.addComponent(lblValutazioneVariabile)))
+								.addComponent(lblId)
+								.addComponent(panelInformazioniUniche, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)))
+						.addComponent(labelImmagine, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap())
-				.addComponent(labelImmagine, GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
 		);
 		SpringLayout sl_panelInformazioniUniche = new SpringLayout();
 		panelInformazioniUniche.setLayout(sl_panelInformazioniUniche);
@@ -210,7 +217,7 @@ public class PanelInfoLuogoAnteprima extends JPanel {
 		Box verticalBox = Box.createVerticalBox();
 		sl_panelInformazioniUniche.putConstraint(SpringLayout.NORTH, verticalBox, 0, SpringLayout.NORTH, panelInformazioniUniche);
 		sl_panelInformazioniUniche.putConstraint(SpringLayout.WEST, verticalBox, 0, SpringLayout.WEST, panelInformazioniUniche);
-		sl_panelInformazioniUniche.putConstraint(SpringLayout.SOUTH, verticalBox, 81, SpringLayout.NORTH, panelInformazioniUniche);
+		sl_panelInformazioniUniche.putConstraint(SpringLayout.SOUTH, verticalBox, 91, SpringLayout.NORTH, panelInformazioniUniche);
 		sl_panelInformazioniUniche.putConstraint(SpringLayout.EAST, verticalBox, 135, SpringLayout.WEST, panelInformazioniUniche);
 		panelInformazioniUniche.add(verticalBox);
 		setLayout(groupLayout);

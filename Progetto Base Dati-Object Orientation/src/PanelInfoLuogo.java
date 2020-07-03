@@ -100,11 +100,11 @@ public class PanelInfoLuogo extends JPanel {
 		GroupLayout gl_panelLuogo = new GroupLayout(panelLuogo);
 		gl_panelLuogo.setHorizontalGroup(
 			gl_panelLuogo.createParallelGroup(Alignment.LEADING)
-				.addComponent(infoLuogo, GroupLayout.DEFAULT_SIZE, 752, Short.MAX_VALUE)
+				.addComponent(infoLuogo, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 		);
 		gl_panelLuogo.setVerticalGroup(
 			gl_panelLuogo.createParallelGroup(Alignment.LEADING)
-				.addComponent(infoLuogo, GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+				.addComponent(infoLuogo, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)
 		);
 		panelLuogo.setLayout(gl_panelLuogo);
 		setLayout(groupLayout);

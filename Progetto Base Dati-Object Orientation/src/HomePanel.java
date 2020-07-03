@@ -54,13 +54,14 @@ public class HomePanel extends JPanel {
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(panelRicerca, GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE))
+							.addComponent(panelRicerca, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(10)
-							.addComponent(panelMostraLuoghi, GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)))
+							.addComponent(panelMostraLuoghi, GroupLayout.DEFAULT_SIZE, 753, Short.MAX_VALUE)
+							.addGap(0)))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -69,7 +70,7 @@ public class HomePanel extends JPanel {
 					.addGap(4)
 					.addComponent(panelRicerca, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addGap(2)
-					.addComponent(panelMostraLuoghi, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+					.addComponent(panelMostraLuoghi, GroupLayout.DEFAULT_SIZE, 392, Short.MAX_VALUE)
 					.addContainerGap())
 		);
 		

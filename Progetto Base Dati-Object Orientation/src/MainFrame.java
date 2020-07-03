@@ -127,6 +127,7 @@ public class MainFrame extends JFrame {
 		});
 		
 		JLabel lblBlueGuide = new JLabel("Blue Guide");
+		lblBlueGuide.setIcon(null);
 		lblBlueGuide.setForeground(controller.electric);
 		lblBlueGuide.setFont(new Font("Bauhaus 93", Font.BOLD, 24));
 		GroupLayout gl_upperPanel = new GroupLayout(upperPanel);
@@ -134,8 +135,8 @@ public class MainFrame extends JFrame {
 			gl_upperPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_upperPanel.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(lblBlueGuide, GroupLayout.PREFERRED_SIZE, 157, GroupLayout.PREFERRED_SIZE)
-					.addGap(767)
+					.addComponent(lblBlueGuide, GroupLayout.PREFERRED_SIZE, 179, GroupLayout.PREFERRED_SIZE)
+					.addGap(745)
 					.addComponent(btnMinimize, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
 					.addComponent(btnClose, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -325,8 +326,8 @@ public class MainFrame extends JFrame {
 		
 		JButton buttonHome = new JButton(""); //Nuovo bottone Home
 		buttonHome.setName("buttonHome"); //Imposta nome
-		buttonHome.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); //Quando il mouse passa sopra rendi l'icona del mouse quella della mano
 		buttonHome.setIcon(new ImageIcon(MainFrame.class.getResource("/icons/buttonHome.png")));
+		buttonHome.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); //Quando il mouse passa sopra rendi l'icona del mouse quella della mano
 		buttonHome.setBorder(null); //Nessun bordo
 		//Costraints per limitarne la posizione in base al layout
 		sl_panelControl.putConstraint(SpringLayout.NORTH, buttonHome, 10, SpringLayout.NORTH, panelControl);
@@ -788,6 +789,4 @@ public class MainFrame extends JFrame {
 		return answer;
 		
 	}
-
-
 }
