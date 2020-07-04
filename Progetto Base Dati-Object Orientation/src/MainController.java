@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
@@ -62,11 +63,19 @@ public class MainController {
 
 	public static void main(String[] args) {
 		
-		//Crea Main frame
-		MainController controller = new MainController();
-		MainFrame mainFrame = new MainFrame(controller);
-		mainFrame.setVisible(true);
-	
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					//Crea Main frame
+					MainController controller = new MainController();
+					MainFrame mainFrame = new MainFrame(controller);
+					mainFrame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		
 	}
 	
 	//Getter per variabile loggedIn
