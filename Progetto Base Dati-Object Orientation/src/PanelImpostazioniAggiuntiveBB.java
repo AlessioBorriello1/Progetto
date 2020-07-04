@@ -3,6 +3,8 @@ import javax.swing.JPanel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.border.EtchedBorder;
+
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -14,20 +16,24 @@ import javax.swing.JTextField;
 public class PanelImpostazioniAggiuntiveBB extends JPanel {
 
 	public PanelImpostazioniAggiuntiveBB(boolean piscina, boolean wifi, String numeroStanze, boolean colazione) {
-		setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		setBorder(null);
+		setBackground(new Color(149, 200, 216));
 		
 		setName("panelImpostazioniAggiuntiveBB");
 		
 		JLabel lblImpostazioniAggiuntiveBB = new JLabel("Impostazioni aggiuntive B&B");
-		lblImpostazioniAggiuntiveBB.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblImpostazioniAggiuntiveBB.setFont(new Font("Georgia", Font.BOLD, 14));
 		
 		JCheckBox chckbxPiscina = new JCheckBox("Piscina");
+		chckbxPiscina.setFont(new Font("Georgia", Font.PLAIN, 11));
 		chckbxPiscina.setName("chckbxPiscina");
 		chckbxPiscina.setSelected(piscina);
-		
+		chckbxPiscina.setBackground(null);
 		JCheckBox chckbxWifi = new JCheckBox("WiFi");
+		chckbxWifi.setFont(new Font("Georgia", Font.PLAIN, 11));
 		chckbxWifi.setName("chckbxWifi");
 		chckbxWifi.setSelected(wifi);
+		chckbxWifi.setBackground(null);
 		
 		JTextField textFieldNumeroStanze = new JTextField();
 		textFieldNumeroStanze.setColumns(10);
@@ -56,11 +62,13 @@ public class PanelImpostazioniAggiuntiveBB extends JPanel {
 		});
 		
 		JLabel lblNumeroStanze = new JLabel("Numero stanze");
-		lblNumeroStanze.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNumeroStanze.setFont(new Font("Georgia", Font.PLAIN, 11));
 		
 		JCheckBox chckbxColazione = new JCheckBox("Colazione");
+		chckbxColazione.setFont(new Font("Georgia", Font.PLAIN, 11));
 		chckbxColazione.setName("chckbxColazione");
 		chckbxColazione.setSelected(colazione);
+		chckbxColazione.setBackground(null);
 		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(

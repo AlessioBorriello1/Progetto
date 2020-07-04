@@ -2,6 +2,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+
+import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -11,18 +13,22 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 public class PanelImpostazioniAggiuntivePub extends JPanel {
 	
 	public PanelImpostazioniAggiuntivePub(boolean vegano, String nazione, String tipoBirra) {
-		setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		setBorder(null);
+		setBackground(new Color(149, 200, 216));
 		
 		setName("panelImpostazioniAggiuntivePub");
 		
 		JLabel lblImpostazioniAggiuntivePub = new JLabel("Impostazioni aggiuntive pub");
-		lblImpostazioniAggiuntivePub.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblImpostazioniAggiuntivePub.setFont(new Font("Georgia", Font.BOLD, 14));
 		
 		JCheckBox chckbxCiboVegano = new JCheckBox("Cibo vegano");
+		chckbxCiboVegano.setFont(new Font("Georgia", Font.PLAIN, 11));
 		chckbxCiboVegano.setName("chckbxCiboVegano");
 		chckbxCiboVegano.setSelected(vegano);
+		chckbxCiboVegano.setBackground(null);
 		
 		JComboBox comboBoxNazionalitaCibo = new JComboBox();
+		comboBoxNazionalitaCibo.setFont(new Font("Georgia", Font.PLAIN, 11));
 		comboBoxNazionalitaCibo.setName("comboBoxNazionalitCibo");
 		comboBoxNazionalitaCibo.addItem("Italiano");
 		comboBoxNazionalitaCibo.addItem("Messicano");
@@ -30,16 +36,17 @@ public class PanelImpostazioniAggiuntivePub extends JPanel {
 		comboBoxNazionalitaCibo.setSelectedItem(nazione);
 		
 		JLabel lblNazionalitaCibo = new JLabel("Nazionalit\u00E0 cibo");
-		lblNazionalitaCibo.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblNazionalitaCibo.setFont(new Font("Georgia", Font.PLAIN, 11));
 		
 		JComboBox comboBoxTipoBirra = new JComboBox();
+		comboBoxTipoBirra.setFont(new Font("Georgia", Font.PLAIN, 11));
 		comboBoxTipoBirra.setName("comboBoxTipoBirra");
 		comboBoxTipoBirra.addItem("Spina");
 		comboBoxTipoBirra.addItem("Malto");
 		comboBoxTipoBirra.setSelectedItem(tipoBirra);
 		
 		JLabel lblTipoBirra = new JLabel("Tipo birra");
-		lblTipoBirra.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblTipoBirra.setFont(new Font("Georgia", Font.PLAIN, 11));
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)

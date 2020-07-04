@@ -13,19 +13,23 @@ import javax.swing.border.EtchedBorder;
 public class PanelImpostazioniAggiuntivePizzeria extends JPanel {
 	
 	public PanelImpostazioniAggiuntivePizzeria(boolean vegano, String nazionalita, boolean asporto) {
-		setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		setBackground(Color.WHITE);
+		
+		setBorder(null);
+		setBackground(new Color(149, 200, 216));
 		
 		setName("panelImpostazioniAggiuntivePizzeria");
 		
 		JLabel lblImpostazioniAggiuntivePizzeria = new JLabel("Impostazioni aggiuntive pizzeria");
-		lblImpostazioniAggiuntivePizzeria.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblImpostazioniAggiuntivePizzeria.setFont(new Font("Georgia", Font.BOLD, 14));
 		
 		JCheckBox chckbxCiboVegano = new JCheckBox("Cibo vegano");
+		chckbxCiboVegano.setFont(new Font("Georgia", Font.PLAIN, 11));
 		chckbxCiboVegano.setName("chckbxCiboVegano");
 		chckbxCiboVegano.setSelected(vegano);
+		chckbxCiboVegano.setBackground(null);
 		
 		JComboBox comboBoxNazionalitCibo = new JComboBox();
+		comboBoxNazionalitCibo.setFont(new Font("Georgia", Font.PLAIN, 11));
 		comboBoxNazionalitCibo.setName("comboBoxNazionalitCibo");
 		comboBoxNazionalitCibo.addItem("Italiano");
 		comboBoxNazionalitCibo.addItem("Messicano");
@@ -33,11 +37,13 @@ public class PanelImpostazioniAggiuntivePizzeria extends JPanel {
 		comboBoxNazionalitCibo.setSelectedItem(nazionalita);
 		
 		JLabel lblNazionalitaCibo = new JLabel("Nazionalit\u00E0 cibo");
-		lblNazionalitaCibo.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblNazionalitaCibo.setFont(new Font("Georgia", Font.PLAIN, 11));
 		
 		JCheckBox chckbxAsporto = new JCheckBox("Asporto");
+		chckbxAsporto.setFont(new Font("Georgia", Font.PLAIN, 11));
 		chckbxAsporto.setName("chckbxAsporto");
 		chckbxAsporto.setSelected(asporto);
+		chckbxAsporto.setBackground(null);
 		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(

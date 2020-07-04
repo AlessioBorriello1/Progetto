@@ -3,6 +3,8 @@ import javax.swing.JPanel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.border.EtchedBorder;
+
+import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -11,18 +13,22 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 public class PanelImpostazioniAggiuntiveZoo extends JPanel {
 
 	public PanelImpostazioniAggiuntiveZoo(boolean promozione, String specie) {
-		setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		setBorder(null);
 		
 		setName("panelImpostazioniAggiuntiveZoo");
+		setBackground(new Color(149, 200, 216));
 		
 		JLabel lblImpostazioniAggiuntiveZoo = new JLabel("Impostazioni aggiuntive Zoo");
-		lblImpostazioniAggiuntiveZoo.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblImpostazioniAggiuntiveZoo.setFont(new Font("Georgia", Font.BOLD, 14));
 		
 		JCheckBox chckbxPromozioneStudenti = new JCheckBox("Promozione studenti");
+		chckbxPromozioneStudenti.setFont(new Font("Georgia", Font.PLAIN, 11));
 		chckbxPromozioneStudenti.setName("chckbxPromozioneStudenti");
 		chckbxPromozioneStudenti.setSelected(promozione);
+		chckbxPromozioneStudenti.setBackground(null);
 		
 		JComboBox comboBoxSpecie = new JComboBox();
+		comboBoxSpecie.setFont(new Font("Georgia", Font.PLAIN, 11));
 		comboBoxSpecie.addItem("Primati");
 		comboBoxSpecie.addItem("Felini");
 		comboBoxSpecie.addItem("Rettili");
@@ -31,6 +37,7 @@ public class PanelImpostazioniAggiuntiveZoo extends JPanel {
 		
 		
 		JLabel lblSpecie = new JLabel("Specie");
+		lblSpecie.setFont(new Font("Georgia", Font.PLAIN, 11));
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)

@@ -38,8 +38,9 @@ public class PanelInfoLuogoAnteprima extends JPanel {
 		this.workPanel = workPanel;
 		this.cliccabile = cliccabile;
 		
-		setMaximumSize(new Dimension(752, 134));
 		setAlignmentX(Component.LEFT_ALIGNMENT);
+		setMaximumSize(new Dimension(752, 134));
+		
 		addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				if(cliccabile) {

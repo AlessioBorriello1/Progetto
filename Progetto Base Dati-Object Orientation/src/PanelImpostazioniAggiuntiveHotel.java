@@ -3,6 +3,8 @@ import javax.swing.JPanel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.border.EtchedBorder;
+
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -16,20 +18,25 @@ import javax.swing.SpinnerNumberModel;
 public class PanelImpostazioniAggiuntiveHotel extends JPanel {
 	
 	public PanelImpostazioniAggiuntiveHotel(boolean piscina, boolean wifi, String numeroStanze, int numeroStelle) {
-		setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		setBorder(null);
+		setBackground(new Color(149, 200, 216));
 		
 		setName("panelImpostazioniAggiuntiveHotel");
 		
 		JLabel lblImpostazioniaggiuntivehotel = new JLabel("Impostazioni aggiuntive hotel");
-		lblImpostazioniaggiuntivehotel.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblImpostazioniaggiuntivehotel.setFont(new Font("Georgia", Font.BOLD, 14));
 		
 		JCheckBox chckbxPiscina = new JCheckBox("Piscina");
+		chckbxPiscina.setFont(new Font("Georgia", Font.PLAIN, 11));
 		chckbxPiscina.setName("chckbxPiscina");
 		chckbxPiscina.setSelected(piscina);
+		chckbxPiscina.setBackground(null);
 		
 		JCheckBox chckbxWifi = new JCheckBox("WiFi");
+		chckbxWifi.setFont(new Font("Georgia", Font.PLAIN, 11));
 		chckbxWifi.setName("chckbxWifi");
 		chckbxWifi.setSelected(wifi);
+		chckbxWifi.setBackground(null);
 		
 		JTextField textFieldNumeroStanze = new JTextField();
 		textFieldNumeroStanze.setColumns(10);
@@ -58,7 +65,7 @@ public class PanelImpostazioniAggiuntiveHotel extends JPanel {
 		});
 		
 		JLabel lblNumeroStanze = new JLabel("Numero stanze");
-		lblNumeroStanze.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNumeroStanze.setFont(new Font("Georgia", Font.PLAIN, 11));
 		
 		JSpinner spinnerNumeroStelle = new JSpinner();
 		spinnerNumeroStelle.setModel(new SpinnerNumberModel(1, 1, 5, 1));
@@ -66,7 +73,7 @@ public class PanelImpostazioniAggiuntiveHotel extends JPanel {
 		spinnerNumeroStelle.setValue(numeroStelle);
 		
 		JLabel lblStelle = new JLabel("Stelle");
-		lblStelle.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblStelle.setFont(new Font("Georgia", Font.PLAIN, 11));
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)

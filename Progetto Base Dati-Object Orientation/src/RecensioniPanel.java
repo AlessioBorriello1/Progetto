@@ -26,6 +26,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.border.LineBorder;
 
 public class RecensioniPanel extends JPanel {
 
@@ -42,7 +43,8 @@ public class RecensioniPanel extends JPanel {
 		setBackground(controller.skyWhiter);
 		
 		JPanel panelControl = new JPanel();
-		panelControl.setBackground(controller.sky);
+		panelControl.setBorder(new LineBorder(controller.independence, 2, true));
+		panelControl.setBackground(controller.steel);
 		
 		JScrollPane panelLocali = new JScrollPane();
 		panelLocali.setBorder(null);
@@ -74,8 +76,8 @@ public class RecensioniPanel extends JPanel {
 		panelLocali.setViewportView(verticalBox);
 		
 		JLabel lblLeMieRecensioni = new JLabel("Le mie recensioni:");
-		lblLeMieRecensioni.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblLeMieRecensioni.setForeground(controller.egyptian);
+		lblLeMieRecensioni.setFont(new Font("Georgia", Font.BOLD, 20));
+		lblLeMieRecensioni.setForeground(controller.electric);
 		GroupLayout gl_panelControl = new GroupLayout(panelControl);
 		gl_panelControl.setHorizontalGroup(
 			gl_panelControl.createParallelGroup(Alignment.LEADING)

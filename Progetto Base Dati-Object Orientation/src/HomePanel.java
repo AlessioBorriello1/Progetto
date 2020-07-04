@@ -81,26 +81,37 @@ public class HomePanel extends JPanel {
 		textFieldProprietario.setColumns(10);
 		
 		JCheckBox chckbxRistorante = new JCheckBox("Ristorante");
-		chckbxRistorante.setFont(new Font("Tahoma", Font.BOLD, 11));
+		chckbxRistorante.setFont(new Font("Georgia", Font.BOLD, 11));
 		chckbxRistorante.setSelected(true);
+		chckbxRistorante.setFocusable(false);
+		chckbxRistorante.setForeground(controller.egyptian);
+		chckbxRistorante.setBackground(null);
 		
 		JCheckBox chckbxAlloggio = new JCheckBox("Alloggio");
-		chckbxAlloggio.setFont(new Font("Tahoma", Font.BOLD, 11));
+		chckbxAlloggio.setFont(new Font("Georgia", Font.BOLD, 11));
 		chckbxAlloggio.setSelected(true);
+		chckbxAlloggio.setFocusable(false);
+		chckbxAlloggio.setForeground(controller.egyptian);
+		chckbxAlloggio.setBackground(null);
 		
 		JCheckBox chckbxAttrazione = new JCheckBox("Attrazione");
-		chckbxAttrazione.setFont(new Font("Tahoma", Font.BOLD, 11));
+		chckbxAttrazione.setFont(new Font("Georgia", Font.BOLD, 11));
 		chckbxAttrazione.setSelected(true);
+		chckbxAttrazione.setFocusable(false);
+		chckbxAttrazione.setForeground(controller.egyptian);
+		chckbxAttrazione.setBackground(null);
 		
 		JSpinner spinnerVotoMinimo = new JSpinner();
 		spinnerVotoMinimo.setModel(new SpinnerNumberModel(0, 0, 5, 1));
 		
 		JLabel lblVotoMinimo = new JLabel("Voto minimo");
-		lblVotoMinimo.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblVotoMinimo.setFont(new Font("Georgia", Font.BOLD, 11));
+		lblVotoMinimo.setForeground(controller.egyptian);
 		
 		JLabel lblOrdinaPer = new JLabel("Ordina per:");
-		lblOrdinaPer.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblOrdinaPer.setFont(new Font("Georgia", Font.BOLD, 11));
 		lblOrdinaPer.setHorizontalAlignment(SwingConstants.CENTER);
+		lblOrdinaPer.setForeground(controller.egyptian);
 		
 		JComboBox<String> comboBoxOrdine = new JComboBox<String>();
 		comboBoxOrdine.addItem("Ordine alfabetico");
@@ -108,15 +119,21 @@ public class HomePanel extends JPanel {
 		comboBoxOrdine.addItem("Ordine creazione");
 		
 		JButton btnCerca = new JButton("Cerca");
+		btnCerca.setFocusable(false);
 		
 		JCheckBox chckbxInvertiRisultati = new JCheckBox("Inverti risultati");
-		chckbxInvertiRisultati.setFont(new Font("Tahoma", Font.BOLD, 11));
+		chckbxInvertiRisultati.setFont(new Font("Georgia", Font.BOLD, 11));
+		chckbxInvertiRisultati.setForeground(controller.egyptian);
+		chckbxInvertiRisultati.setBackground(null);
+		chckbxInvertiRisultati.setFocusable(false);
 		
 		JLabel lblNomeLuogo = new JLabel("Nome luogo");
-		lblNomeLuogo.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNomeLuogo.setFont(new Font("Georgia", Font.BOLD, 11));
+		lblNomeLuogo.setForeground(controller.egyptian);
 		
 		JLabel lblProprietario = new JLabel("Proprietario");
-		lblProprietario.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblProprietario.setForeground(controller.egyptian);
+		lblProprietario.setFont(new Font("Georgia", Font.BOLD, 11));
 		GroupLayout gl_panelRicerca = new GroupLayout(panelRicerca);
 		gl_panelRicerca.setHorizontalGroup(
 			gl_panelRicerca.createParallelGroup(Alignment.LEADING)
@@ -127,9 +144,9 @@ public class HomePanel extends JPanel {
 						.addComponent(textFieldProprietario, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panelRicerca.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblNomeLuogo, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblProprietario, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
+						.addComponent(lblNomeLuogo)
+						.addComponent(lblProprietario))
+					.addGap(16)
 					.addGroup(gl_panelRicerca.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panelRicerca.createSequentialGroup()
 							.addGroup(gl_panelRicerca.createParallelGroup(Alignment.LEADING)
@@ -147,7 +164,7 @@ public class HomePanel extends JPanel {
 							.addComponent(btnCerca))
 						.addGroup(gl_panelRicerca.createSequentialGroup()
 							.addComponent(chckbxRistorante)
-							.addGap(44)
+							.addGap(35)
 							.addComponent(lblVotoMinimo)
 							.addGap(59)
 							.addComponent(lblOrdinaPer)))
@@ -241,4 +258,5 @@ public class HomePanel extends JPanel {
 		}
 		
 	}
+
 }

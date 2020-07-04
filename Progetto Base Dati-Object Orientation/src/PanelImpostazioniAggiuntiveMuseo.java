@@ -3,6 +3,8 @@ import javax.swing.JPanel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.border.EtchedBorder;
+
+import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -11,18 +13,22 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 public class PanelImpostazioniAggiuntiveMuseo extends JPanel {
 	
 	public PanelImpostazioniAggiuntiveMuseo(boolean promozione, String tipoMuseo) {
-		setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		setBorder(null);
+		setBackground(new Color(149, 200, 216));
 		
 		setName("panelImpostazioniAggiuntiveMuseo");
 		
 		JLabel lblImpostazioniAggiuntiveMuseo = new JLabel("Impostazioni aggiuntive museo");
-		lblImpostazioniAggiuntiveMuseo.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblImpostazioniAggiuntiveMuseo.setFont(new Font("Georgia", Font.BOLD, 14));
 		
 		JCheckBox chckbxPromozioneStudenti = new JCheckBox("Promozione studenti");
+		chckbxPromozioneStudenti.setFont(new Font("Georgia", Font.PLAIN, 11));
 		chckbxPromozioneStudenti.setName("chckbxPromozioneStudenti");
 		chckbxPromozioneStudenti.setSelected(promozione);
+		chckbxPromozioneStudenti.setBackground(null);
 		
 		JComboBox comboBoxTipoMuseo = new JComboBox();
+		comboBoxTipoMuseo.setFont(new Font("Georgia", Font.PLAIN, 11));
 		comboBoxTipoMuseo.addItem("Artistico");
 		comboBoxTipoMuseo.addItem("Storico");
 		comboBoxTipoMuseo.addItem("Archeologico");
@@ -30,6 +36,7 @@ public class PanelImpostazioniAggiuntiveMuseo extends JPanel {
 		comboBoxTipoMuseo.setSelectedItem(tipoMuseo);
 		
 		JLabel lblTipoMuseo = new JLabel("Tipo museo");
+		lblTipoMuseo.setFont(new Font("Georgia", Font.PLAIN, 11));
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)

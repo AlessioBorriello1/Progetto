@@ -3,26 +3,33 @@ import javax.swing.JPanel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.border.EtchedBorder;
+
+import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JCheckBox;
 
 public class PanelImpostazioniAggiuntiveParco extends JPanel {
 
 	public PanelImpostazioniAggiuntiveParco(boolean promozione, boolean gratuito) {
-		setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		setBorder(null);
+		setBackground(new Color(149, 200, 216));
 		
 		setName("panelImpostazioniAggiuntiveParco");
 		
 		JLabel lblImpostazioniAggiuntiveParco = new JLabel("Impostazioni aggiuntive parco");
-		lblImpostazioniAggiuntiveParco.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblImpostazioniAggiuntiveParco.setFont(new Font("Georgia", Font.BOLD, 14));
 		
 		JCheckBox chckbxPromozioneStudenti = new JCheckBox("Promozione studenti");
+		chckbxPromozioneStudenti.setFont(new Font("Georgia", Font.PLAIN, 11));
 		chckbxPromozioneStudenti.setName("chckbxPromozioneStudenti");
 		chckbxPromozioneStudenti.setSelected(promozione);
+		chckbxPromozioneStudenti.setBackground(null);
 		
 		JCheckBox chckbxIngressoGratuito = new JCheckBox("Ingresso gratuito");
+		chckbxIngressoGratuito.setFont(new Font("Georgia", Font.PLAIN, 11));
 		chckbxIngressoGratuito.setName("chckbxIngressoGratuito");
 		chckbxIngressoGratuito.setSelected(gratuito);
+		chckbxIngressoGratuito.setBackground(null);
 		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(

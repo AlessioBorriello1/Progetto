@@ -3,6 +3,8 @@ import javax.swing.JPanel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.border.EtchedBorder;
+
+import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -11,18 +13,22 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 public class PanelImpostazioniAggiuntiveBracieria extends JPanel {
 
 	public PanelImpostazioniAggiuntiveBracieria(boolean vegano, String nazionalita, String tipoCarne) {
-		setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		setBorder(null);
+		setBackground(new Color(149, 200, 216));
 		
 		setName("panelImpostazioniAggiuntiveBracieria");
 		
 		JLabel lblImpostazioniAggiuntiveBracieria = new JLabel("Impostazioni aggiuntive bracieria");
-		lblImpostazioniAggiuntiveBracieria.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblImpostazioniAggiuntiveBracieria.setFont(new Font("Georgia", Font.BOLD, 14));
 		
 		JCheckBox chckbxCiboVegano = new JCheckBox("Cibo vegano");
+		chckbxCiboVegano.setFont(new Font("Georgia", Font.PLAIN, 11));
 		chckbxCiboVegano.setName("chckbxCiboVegano");
 		chckbxCiboVegano.setSelected(vegano);
+		chckbxCiboVegano.setBackground(null);
 		
 		JComboBox<String> comboBoxNazionalitaCibo = new JComboBox();
+		comboBoxNazionalitaCibo.setFont(new Font("Georgia", Font.PLAIN, 11));
 		comboBoxNazionalitaCibo.setName("comboBoxNazionalitCibo");
 		comboBoxNazionalitaCibo.addItem("Italiano");
 		comboBoxNazionalitaCibo.addItem("Messicano");
@@ -30,9 +36,10 @@ public class PanelImpostazioniAggiuntiveBracieria extends JPanel {
 		comboBoxNazionalitaCibo.setSelectedItem(nazionalita);
 		
 		JLabel lblNazionalitCibo = new JLabel("Nazionalit\u00E0 cibo");
-		lblNazionalitCibo.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblNazionalitCibo.setFont(new Font("Georgia", Font.PLAIN, 11));
 		
 		JComboBox comboBoxTipoCarne = new JComboBox();
+		comboBoxTipoCarne.setFont(new Font("Georgia", Font.PLAIN, 11));
 		comboBoxTipoCarne.setName("comboBoxTipoCarne");
 		comboBoxTipoCarne.addItem("Pollo");
 		comboBoxTipoCarne.addItem("Manzo");
@@ -40,7 +47,7 @@ public class PanelImpostazioniAggiuntiveBracieria extends JPanel {
 		comboBoxTipoCarne.setSelectedItem(tipoCarne);
 		
 		JLabel lblTipoCarne = new JLabel("Tipo carne");
-		lblTipoCarne.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblTipoCarne.setFont(new Font("Georgia", Font.PLAIN, 11));
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)

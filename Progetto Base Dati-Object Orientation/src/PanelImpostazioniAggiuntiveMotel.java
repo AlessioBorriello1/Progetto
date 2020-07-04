@@ -3,6 +3,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EtchedBorder;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -14,20 +16,25 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 public class PanelImpostazioniAggiuntiveMotel extends JPanel {
 
 	public PanelImpostazioniAggiuntiveMotel(boolean piscina, boolean wifi, String numeroStanze, boolean assistenza) {
-		setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		setBorder(null);
+		setBackground(new Color(149, 200, 216));
 		
 		setName("panelImpostazioniAggiuntiveMotel");
 		
 		JLabel lblImpostazioniAggiuntiveMotel = new JLabel("Impostazioni aggiuntive motel");
-		lblImpostazioniAggiuntiveMotel.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblImpostazioniAggiuntiveMotel.setFont(new Font("Georgia", Font.BOLD, 14));
 		
 		JCheckBox chckbxPiscina = new JCheckBox("Piscina");
+		chckbxPiscina.setFont(new Font("Georgia", Font.PLAIN, 11));
 		chckbxPiscina.setName("chckbxPiscina");
 		chckbxPiscina.setSelected(piscina);
+		chckbxPiscina.setBackground(null);
 		
 		JCheckBox chckbxWifi = new JCheckBox("WiFi");
+		chckbxWifi.setFont(new Font("Georgia", Font.PLAIN, 11));
 		chckbxWifi.setName("chckbxWifi");
 		chckbxWifi.setSelected(wifi);
+		chckbxWifi.setBackground(null);
 		
 		JTextField textFieldNumeroStanze = new JTextField();
 		textFieldNumeroStanze.setColumns(10);
@@ -56,11 +63,13 @@ public class PanelImpostazioniAggiuntiveMotel extends JPanel {
 		});
 		
 		JLabel lblNumeroStanze = new JLabel("Numero stanze");
-		lblNumeroStanze.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNumeroStanze.setFont(new Font("Georgia", Font.PLAIN, 11));
 		
 		JCheckBox chckbxAssistenzaAutovetture = new JCheckBox("Assistenza autovetture");
+		chckbxAssistenzaAutovetture.setFont(new Font("Georgia", Font.PLAIN, 11));
 		chckbxAssistenzaAutovetture.setName("chckbxAssistenzaAutovetture");
 		chckbxAssistenzaAutovetture.setSelected(assistenza);
+		chckbxAssistenzaAutovetture.setBackground(null);
 		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
