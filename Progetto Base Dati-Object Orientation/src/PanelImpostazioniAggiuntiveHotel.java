@@ -71,6 +71,7 @@ public class PanelImpostazioniAggiuntiveHotel extends JPanel {
 		spinnerNumeroStelle.setModel(new SpinnerNumberModel(1, 1, 5, 1));
 		spinnerNumeroStelle.setName("spinnerNumeroStelle");
 		spinnerNumeroStelle.setValue(numeroStelle);
+		((JSpinner.DefaultEditor) spinnerNumeroStelle.getEditor()).getTextField().setEditable(false);
 		
 		JLabel lblStelle = new JLabel("Stelle");
 		lblStelle.setFont(new Font("Georgia", Font.PLAIN, 11));

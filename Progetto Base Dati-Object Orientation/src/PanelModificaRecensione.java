@@ -85,6 +85,7 @@ public class PanelModificaRecensione extends JPanel {
 		JSpinner spinnerVoto = new JSpinner();
 		spinnerVoto.setModel(new SpinnerNumberModel(1, 1, 5, 1));
 		spinnerVoto.setValue(r.getVoto());
+		((JSpinner.DefaultEditor) spinnerVoto.getEditor()).getTextField().setEditable(false);
 		
 		JEditorPane editorPaneScriviRecensione = new JEditorPane();
 		editorPaneScriviRecensione.setText(r.getTesto());

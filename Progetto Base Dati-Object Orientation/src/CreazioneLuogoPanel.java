@@ -81,6 +81,7 @@ public class CreazioneLuogoPanel extends JPanel {
 		
 		JLabel lblCreaLuogo = new JLabel("Crea luogo");
 		lblCreaLuogo.setFont(new Font("Georgia", Font.BOLD, 30));
+		lblCreaLuogo.setForeground(controller.electric);
 		GroupLayout gl_upperPanel = new GroupLayout(upperPanel);
 		gl_upperPanel.setHorizontalGroup(
 			gl_upperPanel.createParallelGroup(Alignment.LEADING)
@@ -91,7 +92,7 @@ public class CreazioneLuogoPanel extends JPanel {
 		gl_upperPanel.setVerticalGroup(
 			gl_upperPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_upperPanel.createSequentialGroup()
-					.addComponent(lblCreaLuogo, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+					.addComponent(lblCreaLuogo)
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		upperPanel.setLayout(gl_upperPanel);
@@ -155,6 +156,7 @@ public class CreazioneLuogoPanel extends JPanel {
 		textFieldNomePropretario.setColumns(10);
 		
 		JComboBox comboBoxTipoAttivita = new JComboBox(); //ComboBox tipo attività (ristorante, alloggio, attrazione)
+		comboBoxTipoAttivita.setFont(new Font("Georgia", Font.PLAIN, 11));
 		comboBoxTipoAttivita.addPopupMenuListener(new PopupMenuListener() {
 			public void popupMenuCanceled(PopupMenuEvent e) {
 				//Questo metodo deve esistere per forza
@@ -174,6 +176,7 @@ public class CreazioneLuogoPanel extends JPanel {
 		comboBoxTipoAttivita.addItem("Attrazione"); //Aggiungo Attrazione alla combo box
 		
 		comboBoxSpecializzazione = new JComboBox(); //ComboBox specializzazione (pizzeria, braceria, pub, hotel, motel....)
+		comboBoxSpecializzazione.setFont(new Font("Georgia", Font.PLAIN, 11));
 		comboBoxSpecializzazione.addPopupMenuListener(new PopupMenuListener() {
 			public void popupMenuCanceled(PopupMenuEvent e) {
 				//Questo metodo deve esistere per forza
@@ -193,6 +196,7 @@ public class CreazioneLuogoPanel extends JPanel {
 		currentImpostazioniAggiuntivePanel = refreshaPannelloImpostazioniAggiuntive(comboBoxSpecializzazione, comboBoxSpecializzazione.getSelectedIndex(), currentImpostazioniAggiuntivePanel);
 		
 		JButton btnCreaLuogo = new JButton("Crea luogo");
+		btnCreaLuogo.setFont(new Font("Georgia", Font.PLAIN, 13));
 		
 			btnCreaLuogo.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e) { //Mouse cliccato

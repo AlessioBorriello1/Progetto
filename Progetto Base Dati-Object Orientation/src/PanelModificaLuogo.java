@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Component;
 
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
@@ -20,9 +21,12 @@ import javax.swing.event.PopupMenuListener;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.border.LineBorder;
 import javax.swing.JFormattedTextField;
+
+import java.awt.event.ComponentListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.JCheckBox;
+import javax.swing.border.MatteBorder;
 
 public class PanelModificaLuogo extends JPanel {
 
@@ -39,13 +43,101 @@ public class PanelModificaLuogo extends JPanel {
 		
 		setBackground(controller.skyWhiter); //Imposta colore
 		
+		JPanel panelAttributiAggiuntivi = new JPanel(); //Pannello attributi aggiuntivi (quello dinamico)
+		panelAttributiAggiuntivi.setBackground(controller.sky);
+		panelAttributiAggiuntivi.setBorder(new MatteBorder(2, 2, 2, 2, controller.independence));
+		panelAttributiAggiuntivi.setName("panelAttributiAggiuntivi");
+		panelAttributiAggiuntivi.setAlignmentX(Component.LEFT_ALIGNMENT);
+		
+		JPanel panelDati = new JPanel();
+		panelDati.setBorder(new MatteBorder(2, 2, 2, 2, controller.independence));
+		panelDati.setBackground(controller.sky);
+		
+		JPanel upperPanel = new JPanel();
+		upperPanel.setBorder(new LineBorder(controller.independence, 2));
+		upperPanel.setBackground(controller.steel);
+		
+		JLabel lblModificaLuogo = new JLabel("Modifica luogo");
+		lblModificaLuogo.setForeground((Color) null);
+		lblModificaLuogo.setFont(new Font("Georgia", Font.BOLD, 30));
+		GroupLayout gl_upperPanel = new GroupLayout(upperPanel);
+		gl_upperPanel.setHorizontalGroup(
+			gl_upperPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_upperPanel.createSequentialGroup()
+					.addComponent(lblModificaLuogo, GroupLayout.PREFERRED_SIZE, 275, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(464, Short.MAX_VALUE))
+		);
+		gl_upperPanel.setVerticalGroup(
+			gl_upperPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_upperPanel.createSequentialGroup()
+					.addComponent(lblModificaLuogo)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		upperPanel.setLayout(gl_upperPanel);
+		
+		//Allineamento orizzontale
+		GroupLayout groupLayout = new GroupLayout(this);
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(panelDati, GroupLayout.PREFERRED_SIZE, 401, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(panelAttributiAggiuntivi, GroupLayout.PREFERRED_SIZE, 336, GroupLayout.PREFERRED_SIZE))
+						.addComponent(upperPanel, GroupLayout.PREFERRED_SIZE, 743, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(0, Short.MAX_VALUE))
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(106)
+					.addComponent(upperPanel, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(panelDati, GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
+							.addGap(149))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(panelAttributiAggiuntivi, GroupLayout.PREFERRED_SIZE, 255, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap())))
+		);
+		
+		JLabel lblNomeLuogo = new JLabel("Nome luogo:"); //Label nome luogo
+		lblNomeLuogo.setFont(new Font("Georgia", Font.BOLD, 16));
+		lblNomeLuogo.setHorizontalAlignment(SwingConstants.TRAILING);
+		
+		JLabel lblIndirizzo = new JLabel("Indirizzo:"); //Label indirizzo
+		lblIndirizzo.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblIndirizzo.setFont(new Font("Georgia", Font.BOLD, 16));
+		
+		JLabel lblTelefono = new JLabel("Telefono (10 cifre):"); //Labl telefono
+		lblTelefono.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblTelefono.setFont(new Font("Georgia", Font.BOLD, 16));
+		
+		JLabel lblNomeProprietario = new JLabel("Nome proprietario:"); //Label nome propretario
+		lblNomeProprietario.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblNomeProprietario.setFont(new Font("Georgia", Font.BOLD, 16));
+		
+		JLabel labelTipoAttivita = new JLabel("Tipo attivit\u00E0:"); //Label tipo attività
+		labelTipoAttivita.setHorizontalAlignment(SwingConstants.TRAILING);
+		labelTipoAttivita.setFont(new Font("Georgia", Font.BOLD, 16));
+		
+		JLabel labelSpecializzazione = new JLabel("Specializzazione:"); //Label specializzazione
+		labelSpecializzazione.setHorizontalAlignment(SwingConstants.TRAILING);
+		labelSpecializzazione.setFont(new Font("Georgia", Font.BOLD, 16));
+		
 		JTextField textFieldNome = new JTextField(l.getNome()); //Nuovo textField Nome
+		textFieldNome.setFont(new Font("Georgia", Font.PLAIN, 11));
 		textFieldNome.setColumns(10);
 		
 		JTextField textFieldIndirizzo = new JTextField(l.getIndirizzo()); //Nuovo textField Indirizzo
+		textFieldIndirizzo.setFont(new Font("Georgia", Font.PLAIN, 11));
 		textFieldIndirizzo.setColumns(10);
 		
 		JTextField textFieldTelefono = new JTextField(l.getTelefono()); //Nuovo textField Telefono
+		textFieldTelefono.setFont(new Font("Georgia", Font.PLAIN, 11));
 		textFieldTelefono.addKeyListener(new KeyAdapter() {
 			//Tasto premuto
 			public void keyPressed(KeyEvent e) {
@@ -71,25 +163,12 @@ public class PanelModificaLuogo extends JPanel {
 		textFieldTelefono.setColumns(10);
 		
 		JTextField textFieldNomePropretario = new JTextField(l.getProprietario()); //Nuovo textField Nome proprietario
+		textFieldNomePropretario.setFont(new Font("Georgia", Font.PLAIN, 11));
 		textFieldNomePropretario.setColumns(10);
 		
-		JLabel lblNomeLuogo = new JLabel("Nome luogo:"); //Label nome luogo
-		lblNomeLuogo.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblNomeLuogo.setHorizontalAlignment(SwingConstants.TRAILING);
-		
-		JLabel lblIndirizzo = new JLabel("Indirizzo:"); //Label indirizzo
-		lblIndirizzo.setHorizontalAlignment(SwingConstants.TRAILING);
-		lblIndirizzo.setFont(new Font("Tahoma", Font.BOLD, 16));
-		
-		JLabel lblTelefono = new JLabel("Telefono (10 cifre):"); //Labl telefono
-		lblTelefono.setHorizontalAlignment(SwingConstants.TRAILING);
-		lblTelefono.setFont(new Font("Tahoma", Font.BOLD, 16));
-		
-		JLabel lblNomeProprietario = new JLabel("Nome proprietario:"); //Label nome propretario
-		lblNomeProprietario.setHorizontalAlignment(SwingConstants.TRAILING);
-		lblNomeProprietario.setFont(new Font("Tahoma", Font.BOLD, 16));
 		
 		JComboBox comboBoxSpecializzazione = new JComboBox(); //ComboBox specializzazione (pizzeria, braceria, pub, hotel, motel....)
+		comboBoxSpecializzazione.setFont(new Font("Georgia", Font.PLAIN, 11));
 		comboBoxSpecializzazione.setEnabled(false);
 		comboBoxSpecializzazione.addPopupMenuListener(new PopupMenuListener() {
 			public void popupMenuCanceled(PopupMenuEvent e) {
@@ -103,8 +182,10 @@ public class PanelModificaLuogo extends JPanel {
 				//Questo metodo deve esistere per forza
 			}
 		});
+		comboBoxSpecializzazione.setSelectedItem(l.getAttributoAttivita());
 		
 		JComboBox<String> comboBoxTipoAttivita = new JComboBox(); //ComboBox tipo attività (ristorante, alloggio, attrazione)
+		comboBoxTipoAttivita.setFont(new Font("Georgia", Font.PLAIN, 11));
 		comboBoxTipoAttivita.setEnabled(false);
 		comboBoxTipoAttivita.addPopupMenuListener(new PopupMenuListener() {
 			public void popupMenuCanceled(PopupMenuEvent e) {
@@ -124,117 +205,101 @@ public class PanelModificaLuogo extends JPanel {
 		comboBoxTipoAttivita.addItem("Alloggio"); //Aggiungo Alloggio alla combo box
 		comboBoxTipoAttivita.addItem("Attrazione"); //Aggiungo Attrazione alla combo box
 		comboBoxTipoAttivita.setSelectedItem(l.getTipoAttivita());
+		
 		//Fai mostrare alla combobox specializzazione le corrette specializzazioni in base al tipo di attività
 		refreshaComboBoxSpecializzazione(comboBoxSpecializzazione, comboBoxTipoAttivita.getSelectedIndex());
-		comboBoxSpecializzazione.setSelectedItem(l.getAttributoAttivita());
 		
-		JLabel labelTipoAttivita = new JLabel("Tipo attivit\u00E0:"); //Label tipo attività
-		labelTipoAttivita.setHorizontalAlignment(SwingConstants.TRAILING);
-		labelTipoAttivita.setFont(new Font("Tahoma", Font.BOLD, 16));
+		//Imposta il pannello impostazioni aggiuntive in base all'elemento selezionato della combobox alla creazione del pannello
+		currentImpostazioniAggiuntivePanel = refreshaPannelloImpostazioniAggiuntive(comboBoxSpecializzazione, comboBoxSpecializzazione.getSelectedIndex(), currentImpostazioniAggiuntivePanel, l);
 		
-		JLabel labelSpecializzazione = new JLabel("Specializzazione:"); //Label specializzazione
-		labelSpecializzazione.setHorizontalAlignment(SwingConstants.TRAILING);
-		labelSpecializzazione.setFont(new Font("Tahoma", Font.BOLD, 16));
+		JButton btnModificaLuogo = new JButton("Modifica luogo");
+		btnModificaLuogo.setFont(new Font("Georgia", Font.PLAIN, 13));
 		
-		JPanel panelAttributiAggiuntivi = new JPanel(); //Pannello attributi aggiuntivi (quello dinamico)
-		panelAttributiAggiuntivi.setBackground(controller.sky);
-		panelAttributiAggiuntivi.setBorder(null);
-		panelAttributiAggiuntivi.setName("panelAttributiAggiuntivi");
-		
-		JButton btnModificaLuogo = new JButton("Modifica luogo"); //Crea bottone
-		
-		//Allineamento orizzontale
-		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(groupLayout.createSequentialGroup()
+		btnModificaLuogo.addMouseListener(new MouseAdapter() {
+				public void mouseClicked(MouseEvent e) { //Mouse cliccato
+					//Funzione crea luogo del controller, passa le informazioni scelte dall'utente nei vari pannelli
+					if(mainFrame.createConfirmationFrame("Modificare luogo con queste nuove informazioni?")) {
+						Luogo nuovoLuogo = new Luogo();
+						nuovoLuogo.setNome(textFieldNome.getText());
+						nuovoLuogo.setIndirizzo(textFieldIndirizzo.getText());
+						nuovoLuogo.setProprietario(textFieldNomePropretario.getText());
+						nuovoLuogo.setTelefono(textFieldTelefono.getText());
+						
+						controller.modificaLuogo(mainFrame, workPanel, nuovoLuogo, l, panelAttributiAggiuntivi);
+					}
+				}
+			});
+		GroupLayout gl_panelDati = new GroupLayout(panelDati);
+		gl_panelDati.setHorizontalGroup(
+			gl_panelDati.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelDati.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblTelefono, GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
-								.addComponent(lblIndirizzo, GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
-								.addComponent(lblNomeLuogo, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE))
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(textFieldNome, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
-								.addComponent(textFieldIndirizzo, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)
-								.addComponent(textFieldTelefono, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblNomeProprietario, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE)
-								.addComponent(labelTipoAttivita, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE)
-								.addComponent(labelSpecializzazione, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(comboBoxTipoAttivita, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(textFieldNomePropretario, GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
-								.addComponent(comboBoxSpecializzazione, 0, 207, Short.MAX_VALUE))))
-					.addGap(18)
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+					.addGroup(gl_panelDati.createParallelGroup(Alignment.TRAILING, false)
 						.addComponent(btnModificaLuogo, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(panelAttributiAggiuntivi, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 338, Short.MAX_VALUE))
-					.addGap(27))
+						.addGroup(Alignment.LEADING, gl_panelDati.createSequentialGroup()
+							.addComponent(lblNomeLuogo, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(textFieldNome))
+						.addGroup(Alignment.LEADING, gl_panelDati.createSequentialGroup()
+							.addComponent(lblIndirizzo, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(textFieldIndirizzo, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE))
+						.addGroup(Alignment.LEADING, gl_panelDati.createSequentialGroup()
+							.addComponent(lblTelefono, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(textFieldTelefono, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE))
+						.addGroup(Alignment.LEADING, gl_panelDati.createSequentialGroup()
+							.addComponent(lblNomeProprietario, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(textFieldNomePropretario, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE))
+						.addGroup(Alignment.LEADING, gl_panelDati.createSequentialGroup()
+							.addComponent(labelTipoAttivita, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(comboBoxTipoAttivita, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE))
+						.addGroup(Alignment.LEADING, gl_panelDati.createSequentialGroup()
+							.addComponent(labelSpecializzazione, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(comboBoxSpecializzazione, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(0, Short.MAX_VALUE))
 		);
-		//Allineamento verticale
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(71)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblNomeLuogo)
-								.addComponent(textFieldNome, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblIndirizzo, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-								.addComponent(textFieldIndirizzo, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblTelefono, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-								.addComponent(textFieldTelefono, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblNomeProprietario, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-								.addComponent(textFieldNomePropretario, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(comboBoxTipoAttivita, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(labelTipoAttivita, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(comboBoxSpecializzazione, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(labelSpecializzazione, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)))
-						.addComponent(panelAttributiAggiuntivi, GroupLayout.PREFERRED_SIZE, 255, GroupLayout.PREFERRED_SIZE))
-					.addGap(44)
+		gl_panelDati.setVerticalGroup(
+			gl_panelDati.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelDati.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_panelDati.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblNomeLuogo)
+						.addComponent(textFieldNome, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panelDati.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblIndirizzo)
+						.addComponent(textFieldIndirizzo, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panelDati.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblTelefono)
+						.addComponent(textFieldTelefono, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panelDati.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblNomeProprietario)
+						.addComponent(textFieldNomePropretario, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panelDati.createParallelGroup(Alignment.BASELINE)
+						.addComponent(labelTipoAttivita)
+						.addComponent(comboBoxTipoAttivita, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panelDati.createParallelGroup(Alignment.BASELINE)
+						.addComponent(labelSpecializzazione)
+						.addComponent(comboBoxSpecializzazione, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
 					.addComponent(btnModificaLuogo)
-					.addGap(153))
+					.addContainerGap())
 		);
+		panelDati.setLayout(gl_panelDati);
 		panelAttributiAggiuntivi.setLayout(new CardLayout(0, 0)); //Imposta layout pannello attributi aggiuntivi a cardLayout
 		setLayout(groupLayout);
-	
-		btnModificaLuogo.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) { //Mouse cliccato
-				//Funzione crea luogo del controller, passa le informazioni scelte dall'utente nei vari pannelli
-				if(mainFrame.createConfirmationFrame("Modificare luogo con queste nuove informazioni?")) {
-					Luogo nuovoLuogo = new Luogo();
-					nuovoLuogo.setNome(textFieldNome.getText());
-					nuovoLuogo.setIndirizzo(textFieldIndirizzo.getText());
-					nuovoLuogo.setProprietario(textFieldNomePropretario.getText());
-					nuovoLuogo.setTelefono(textFieldTelefono.getText());
-					
-					controller.modificaLuogo(mainFrame, workPanel, nuovoLuogo, l, panelAttributiAggiuntivi);
-				}
-			}
-		});
 		
 		//Inizializza currentImpostazioniAggiuntivePanel a PanelImpostazioniAggiuntivePizzeria (di base, poi controlla effettivamente la selezione)
 		JPanel panel = new JPanel();
 		currentImpostazioniAggiuntivePanel = panel;
-		
-		//Imposta il pannello impostazioni aggiuntive in base all'elemento selezionato della combobox alla creazione del pannello
-		currentImpostazioniAggiuntivePanel = refreshaPannelloImpostazioniAggiuntive(comboBoxSpecializzazione, comboBoxSpecializzazione.getSelectedIndex(), currentImpostazioniAggiuntivePanel, l);
 		
 		
 	}
