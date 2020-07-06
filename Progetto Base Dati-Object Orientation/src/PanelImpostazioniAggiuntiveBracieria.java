@@ -12,6 +12,12 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class PanelImpostazioniAggiuntiveBracieria extends JPanel {
 
+	/**
+	 * Pannello contenente le impostazioni uniche per Ristorante e Braceria
+	 * @param vegano Se il ristorante fa cibo vegano
+	 * @param nazionalita Nazione cibo del ristorante
+	 * @param tipoCarne Tipo di carne della braceria
+	 */
 	public PanelImpostazioniAggiuntiveBracieria(boolean vegano, String nazionalita, String tipoCarne) {
 		setBorder(null);
 		setBackground(new Color(149, 200, 216));

@@ -10,6 +10,11 @@ import javax.swing.JCheckBox;
 
 public class PanelImpostazioniAggiuntiveParco extends JPanel {
 
+	/**
+	 * Pannello contenente le impostazioni uniche per Attrazione e Parco
+	 * @param promozione Se l'attrazione ha la promozione studenti
+	 * @param gratuito Se il parco ha l'ingresso gratuito
+	 */
 	public PanelImpostazioniAggiuntiveParco(boolean promozione, boolean gratuito) {
 		setBorder(null);
 		setBackground(new Color(149, 200, 216));

@@ -35,6 +35,13 @@ public class PanelModificaLuogo extends JPanel {
 	private JPanel workPanel; //Pannello con informazioni sul luogo da creare (fisso)
 	private JPanel currentImpostazioniAggiuntivePanel = null; //Pannello con informazioni aggiuntive sul luogo da creare (in base al tipo)
 	
+	/**
+	 * Pannello modifica luogo, permette di modificare gli attributi di un certo luogo
+	 * @param controller MainController
+	 * @param mainFrame MainFrame in cui mostrare il pannello
+	 * @param workPanel JPanel dove mostrare il pannello
+	 * @param l Luogo da modificare
+	 */
 	public PanelModificaLuogo(MainController controller, MainFrame mainFrame, JPanel workPanel, Luogo l) {
 		
 		this.controller = controller; //Collega controller
@@ -217,7 +224,7 @@ public class PanelModificaLuogo extends JPanel {
 		
 		btnModificaLuogo.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e) { //Mouse cliccato
-					//Funzione crea luogo del controller, passa le informazioni scelte dall'utente nei vari pannelli
+					//Funzione modifica luogo del controller, passa le informazioni scelte dall'utente nei vari pannelli
 					if(mainFrame.createConfirmationFrame("Modificare luogo con queste nuove informazioni?")) {
 						Luogo nuovoLuogo = new Luogo();
 						nuovoLuogo.setNome(textFieldNome.getText());
@@ -225,7 +232,7 @@ public class PanelModificaLuogo extends JPanel {
 						nuovoLuogo.setProprietario(textFieldNomePropretario.getText());
 						nuovoLuogo.setTelefono(textFieldTelefono.getText());
 						
-						controller.modificaLuogo(mainFrame, workPanel, nuovoLuogo, l, panelAttributiAggiuntivi);
+						controller.modificaLuogo(mainFrame, nuovoLuogo, l, panelAttributiAggiuntivi);
 					}
 				}
 			});
@@ -303,6 +310,7 @@ public class PanelModificaLuogo extends JPanel {
 		
 		
 	}
+	
 	/**
 	 * Ricarica combo box che mostra le specializzazioni in base al tipo di attività selezionata
 	 * @param box La comboBox da ricaricare

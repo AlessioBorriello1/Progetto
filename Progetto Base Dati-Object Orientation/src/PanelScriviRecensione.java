@@ -26,6 +26,13 @@ public class PanelScriviRecensione extends JPanel {
 	private JPanel workPanel;
 	private int numeroRecensioni;
 
+	/**
+	 * Pannello scrivi una nuova recensione
+	 * @param controller MainController
+	 * @param mainFrame MainFrame in cui mostrare il pannello
+	 * @param workPanel JPanel dove mostrare il pannello
+	 * @param l Luogo a cui attribuire la recensione scritta
+	 */
 	public PanelScriviRecensione(MainController controller, MainFrame mainFrame, JPanel workPanel, Luogo l) {
 		
 		this.controller = controller;
@@ -91,7 +98,9 @@ public class PanelScriviRecensione extends JPanel {
 		editorPaneScriviRecensione.addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent e) {
 				int lenght = editorPaneScriviRecensione.getText().length();
-				if(lenght > 406) { //Se la stringa è più corta di 10 caratteri (numeri)
+				//Limita il numero di caratteri nella recensione
+				int maxLenght = 406;
+				if(lenght > maxLenght) {
 					if(e.getKeyCode() != KeyEvent.VK_BACK_SPACE && e.getKeyCode() != KeyEvent.VK_DELETE) {
 						editorPaneScriviRecensione.setEditable(false);
 					}else {
@@ -113,11 +122,15 @@ public class PanelScriviRecensione extends JPanel {
 				
 				if(mainFrame.createConfirmationFrame("Lasciare questa recensione?")) {
 					Recensione r = new Recensione();
+					//Prende informazioni della recensione
 					r.setVoto(Integer.parseInt(spinnerVoto.getValue().toString()));
 					r.setTesto(editorPaneScriviRecensione.getText());
+					//Lascia recension e
 					if(controller.lasciaRecensione(mainFrame, l, r)) {
+						//Se riuscito torna alla home
 						mainFrame.cambiaPannelloLavoroAHomePanel(workPanel);
 						UtenteDAO dao = new UtenteDAO();
+						//Aggiorna il numero di recensioni dell'utente
 						dao.updateNumeroRecensioni(controller.getUtente().getNomeUtente());
 					}
 				}

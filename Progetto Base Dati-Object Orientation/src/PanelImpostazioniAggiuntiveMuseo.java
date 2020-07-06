@@ -12,6 +12,11 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class PanelImpostazioniAggiuntiveMuseo extends JPanel {
 	
+	/**
+	 * Pannello contenente le impostazioni uniche per Attrazione e Museo
+	 * @param promozione Se l'attrazione ha la promozione studenti
+	 * @param tipoMuseo Tipo museo
+	 */
 	public PanelImpostazioniAggiuntiveMuseo(boolean promozione, String tipoMuseo) {
 		setBorder(null);
 		setBackground(new Color(149, 200, 216));

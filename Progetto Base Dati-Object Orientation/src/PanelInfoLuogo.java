@@ -25,8 +25,15 @@ public class PanelInfoLuogo extends JPanel {
 	private MainController controller;
 	private MainFrame mainFrame;
 	private JPanel workPanel;
-	private List<Recensione> recensioniLuogo;
+	private List<Recensione> recensioniLuogo; //Lista recensioni del luogo
 	
+	/**
+	 * Pannello per vedere le recensioni e le caratteristiche di un luogo
+	 * @param controller MainController
+	 * @param mainFrame MainFrame in cui mostrare il pannello
+	 * @param workPanel JPanel dove mostrare il pannello
+	 * @param l Luogo di cui vedere le recensioni e caratteristiche
+	 */
 	public PanelInfoLuogo(MainController controller, MainFrame mainFrame, JPanel workPanel, Luogo l) {
 		
 		this.controller = controller;
@@ -46,9 +53,11 @@ public class PanelInfoLuogo extends JPanel {
 		btnLasciaRecensione.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 			
+				//Se sono loggato
 				if(controller.getUtente()!= null) {
+					//Se l'utente non è il creatore del luogo
 					if(!l.getNomeUtente().contentEquals(controller.getUtente().getNomeUtente())) {
-						mainFrame.cambiaPannelloLavoroAPanelScriviRecensione(workPanel, l);
+						mainFrame.cambiaPannelloLavoroAPanelScriviRecensione(workPanel, l); //Lascia recensione
 					}else {
 						mainFrame.createNotificationFrame("Non puoi lasciare una recensione al tuo stesso luogo!");
 					}
@@ -110,7 +119,7 @@ public class PanelInfoLuogo extends JPanel {
 		setLayout(groupLayout);
 		
 		RecensioneDAO dao = new RecensioneDAO();
-		recensioniLuogo = dao.getListaRecensioniLuogo(l);
+		recensioniLuogo = dao.getListaRecensioniLuogo(l); //Popola la lista delle recensioni
 		
 		int height = 0;
 		if(!recensioniLuogo.isEmpty()) {
@@ -132,6 +141,7 @@ public class PanelInfoLuogo extends JPanel {
 		height = (height <= 360)? 0:height;
 		verticalBox.setPreferredSize(new Dimension(verticalBox.getWidth(), height));
 		
+		//Aggiorna il JScrollPane delle recensioni dopo aver popolato la lista
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 			   public void run() { 
 			       scrollPane.getVerticalScrollBar().setValue(0);

@@ -17,6 +17,13 @@ import javax.swing.SpinnerNumberModel;
 
 public class PanelImpostazioniAggiuntiveHotel extends JPanel {
 	
+	/**
+	 * Pannello contenente le impostazioni uniche per Alloggio e Hotel
+	 * @param piscina Se il alloggio ha una piscina
+	 * @param wifi Se il alloggio ha il wifi
+	 * @param numeroStanze Numero stanze del alloggio
+	 * @param numeroStelle Numero di stelle dell'hotel
+	 */
 	public PanelImpostazioniAggiuntiveHotel(boolean piscina, boolean wifi, String numeroStanze, int numeroStelle) {
 		setBorder(null);
 		setBackground(new Color(149, 200, 216));

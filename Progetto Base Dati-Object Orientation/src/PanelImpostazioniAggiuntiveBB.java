@@ -15,6 +15,13 @@ import javax.swing.JTextField;
 
 public class PanelImpostazioniAggiuntiveBB extends JPanel {
 
+	/**
+	 * Pannello contenente le impostazioni uniche per Alloggio e Bed&Breakfast
+	 * @param piscina Se il alloggio ha una piscina
+	 * @param wifi Se il alloggio ha il wifi
+	 * @param numeroStanze Numero stanze del alloggio
+	 * @param colazione Se il BB ha la colazione
+	 */
 	public PanelImpostazioniAggiuntiveBB(boolean piscina, boolean wifi, String numeroStanze, boolean colazione) {
 		setBorder(null);
 		setBackground(new Color(149, 200, 216));

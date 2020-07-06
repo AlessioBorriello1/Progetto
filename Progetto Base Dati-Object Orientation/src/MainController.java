@@ -34,33 +34,17 @@ public class MainController {
 	
 	//Palette colori
 	public Color lightGrey = new Color(210, 210, 210);
-	public Color turquoise = new Color(63, 224, 208);
-	public Color powder = new Color(196, 243, 249);
 	public Color sky = new Color(149, 200, 216);
 	public Color skyWhiter = new Color(200, 255, 255);
 	public Color electric = new Color(126, 249, 255);
-	public Color airForce = new Color(88, 139, 174);
-	public Color babyBlue = new Color(137, 207, 240);
-	public Color tiffany = new Color(129, 216, 208);
 	public Color steel = new Color(70, 130, 180);
-	public Color carolina = new Color(87, 160, 211);
-	public Color trukishBlue = new Color(79, 151, 163);
 	public Color pigeon = new Color(114, 133, 165);
-	public Color maya = new Color(115, 194, 251);
-	public Color teal = new Color(0, 128, 129);
 	public Color independence = new Color(76, 81, 109);
-	public Color cornflower = new Color(101, 147, 245);
-	public Color olympic = new Color(0, 142, 204);
-	public Color sapphire = new Color(15, 82, 186);
-	public Color azure = new Color(0, 128, 255);
 	public Color egyptian = new Color(16, 52, 166);
-	public Color yale = new Color(14, 77, 146);
-	public Color navy = new Color(0, 0, 128);
 	public Color prussian = new Color(0, 49, 82);
-	public Color space = new Color(29, 41, 81);
-	public Color royale = new Color(17, 30, 108);
 	public Color white = new Color(255, 255, 255);
 
+	//Inizio del programma
 	public static void main(String[] args) {
 		
 		EventQueue.invokeLater(new Runnable() {
@@ -144,114 +128,164 @@ public class MainController {
 		
 	}
 
+	/**
+	 * Crea un nuovo luogo nel database
+	 * @param mainFrame MainFrame
+	 * @param l Luogo da cui prendere le informazioni da inserire nel database
+	 * @param pannelloImpostazioniAggiuntive Pannello contenente le informazioni uniche in base al tipo di luogo
+	 * @return Operazione riuscita o meno
+	 */
 	public boolean creaLuogo(MainFrame mainFrame, Luogo l, JPanel pannelloImpostazioniAggiuntive) {
 		
 		LuogoDAO dao = new LuogoDAO();
 		System.out.println(l.getAttributoAttivita());
 		if(dao.creaLuogo(this, mainFrame, l, pannelloImpostazioniAggiuntive)) {
+			//Se sono riuscito a creare il luogo
 			System.out.println("Operazione riuscita");
 			getUtente().setNumeroLuoghi(getUtente().getNumeroLuoghi() + 1); //Aumenta numero dei luoghi di quell'utente
 			mainFrame.refreshaPannelloInfo(); //Refresha pannello
 			int ID = dao.getIDLuogoByNomeAndPossessore(l.getNome(), l.getProprietario());
-			getUtente().getLuoghiUtente().add(dao.getLuogoByID(ID));
+			getUtente().getLuoghiUtente().add(dao.getLuogoByID(ID)); //Aggiungi il luogo appena creato alla lista dei lughi dell'utente
 			mainFrame.createNotificationFrame("Luogo aggiunto correttamente!");
-			mainFrame.cambiaPannelloLavoroALocaliPanel((JPanel)getComponentByName(mainFrame, "workPanel"));
-			return true;
+			mainFrame.cambiaPannelloLavoroALocaliPanel((JPanel)getComponentByName(mainFrame, "workPanel")); //Vai al pannello locali Panel
+			return true; //Operazione riuscita
 		}else {
 			System.out.println("Operazione fallita");
-			return false;
+			return false; //Operazione fallita
 		}
 			
 	}
 
-	public boolean modificaLuogo(MainFrame mainFrame, JPanel workPanel, Luogo nuovoLuogo, Luogo vecchioLuogo, JPanel pannelloImpostazioniAggiuntive){
+	/**
+	 * Modifica un luogo
+	 * @param mainFrame MainFrame
+	 * @param nuovoLuogo Luogo con le nuove informazioni
+	 * @param vecchioLuogo Luogo da modificare
+	 * @param pannelloImpostazioniAggiuntive Pannello contenente le informazioni uniche in base al tipo di luogo
+	 * @return Operazione riuscita o meno
+	 */
+	public boolean modificaLuogo(MainFrame mainFrame, Luogo nuovoLuogo, Luogo vecchioLuogo, JPanel pannelloImpostazioniAggiuntive){
 		
 		LuogoDAO dao = new LuogoDAO();
 		if(dao.modificaLuogo(this, nuovoLuogo, vecchioLuogo, pannelloImpostazioniAggiuntive)) {
-			utente.getLuoghiUtente().removeAll(utente.getLuoghiUtente());
-			utente.setLuoghiUtente();
+			//Modifica riuscita
+			utente.getLuoghiUtente().removeAll(utente.getLuoghiUtente()); //Svuota lista dei luoghi dell'utente
+			utente.setLuoghiUtente(); //Popola lista dei luoghi utente
 			mainFrame.createNotificationFrame("Modifica completata!");
-			mainFrame.cambiaPannelloLavoroALocaliPanel(workPanel);
-			return true;
+			mainFrame.cambiaPannelloLavoroALocaliPanel((JPanel)getComponentByName(mainFrame, "workPanel")); //Vai al pannello locali Panel
+			return true; //Operazione riuscita
 		}else {
 			mainFrame.createNotificationFrame("Qualcosa è andato storto!");
-			return false;
+			return false; //Operazione fallita
 		}
 		
 	}
 
-	public boolean rimuoviLuogo(MainFrame mainFrame, MainController controller, JPanel workPanel, Luogo l) {
+	/**
+	 * Rimuovi un luogo
+	 * @param mainFrame MainFrame
+	 * @param l Luogo da eliminare
+	 * @return Operazione riuscita o meno
+	 */
+	public boolean rimuoviLuogo(MainFrame mainFrame, Luogo l) {
 		
 		LuogoDAO dao = new LuogoDAO();
-		if(dao.rimuoviLuogo(this, l, utente)) {
-			
-			utente.setNumeroLuoghi(utente.getNumeroLuoghi()-1);
+		if(dao.rimuoviLuogo(this, l)) {
+			//Modifica riuscita
+			utente.setNumeroLuoghi(utente.getNumeroLuoghi()-1); //Imposta il nuovo numero di luoghi
 			UtenteDAO dao2 = new UtenteDAO();
-			dao2.updateNumeroLuoghi(utente.getNomeUtente());
+			dao2.updateNumeroLuoghi(utente.getNomeUtente()); //Aggiorna numero luoghi nel database
 			mainFrame.refreshaPannelloInfo();
 			mainFrame.createNotificationFrame("Eliminazione completata");
 			
-			utente.getLuoghiUtente().removeAll(utente.getLuoghiUtente());
-			utente.setRecensioniUtente();
+			utente.getLuoghiUtente().removeAll(utente.getLuoghiUtente()); //Svuota lista dei luoghi dell'utente
+			utente.setRecensioniUtente(); //Popola lista dei luoghi utente
 			
-			mainFrame.cambiaPannelloLavoroAHomePanel(workPanel);
-			return true;
+			mainFrame.cambiaPannelloLavoroAHomePanel((JPanel)getComponentByName(mainFrame, "workPanel"));
+			return true; //Operazione riuscita
 		}else {
 			mainFrame.createNotificationFrame("Qualcosa è andato storto!");
-			return false;
+			return false; //Operazione fallita
 		}
 	}
 
+	/**
+	 * Lascia una recensione per un determinato luogo e la aggiunge al database
+	 * @param mainFrame MainFrame
+	 * @param l Luogo della recensione
+	 * @param r Recensione
+	 * @return Operazione riuscita o meno
+	 */
 	public boolean lasciaRecensione(MainFrame mainFrame, Luogo l, Recensione r) {
 		
+		//Se il testo della recensione non è vuoto
 		if(!r.getTesto().contentEquals("")) {
 			RecensioneDAO dao = new RecensioneDAO();
 			if(dao.lasciaRecensioneALuogo(mainFrame, utente, l, r)) {
+				//Recensione lasciata con successo
 				utente.setNumeroRecensioni(getUtente().getNumeroRecensioni() + 1); //Aumenta numero delle recensioni di quell'utente
-				utente.getRecensioniUtente().add(dao.getRecensioneLuogoByNomeUtente(l, utente.getNomeUtente()));
+				utente.getRecensioniUtente().add(dao.getRecensioneLuogoByNomeUtente(l, utente.getNomeUtente())); //Aggiungi recensione alla lista delle recensioni dell'utente
 				mainFrame.refreshaPannelloInfo(); //Refresha pannello
-				return true;
+				return true; //Operazione riuscita
 			}else {
 				System.out.println("Operazione fallita");
-				return false;
+				return false; //Operazione fallita
 			}
 		}else {
 			System.out.println("Operazione fallita");
 			mainFrame.createNotificationFrame("Inserire il testo della recensione!");
-			return false;
+			return false; //Operazione fallita
 		}
 	}
 	
+	/**
+	 * Modifica una recensione
+	 * @param mainFrame MainFrame
+	 * @param l Luogo della recensione da modificare
+	 * @param nuovaRecensione Recensione nuova
+	 * @param vecchiaRecensione Recensione vecchia, da sostituire
+	 * @return Operazione riuscita o meno
+	 */
 	public boolean modificaRecensione(MainFrame mainFrame, Luogo l, Recensione nuovaRecensione, Recensione vecchiaRecensione) {
+		
+		//Se il testo della recensione non è vuoto
 		if(!nuovaRecensione.getTesto().contentEquals("")) {
 			RecensioneDAO dao = new RecensioneDAO();
-			return dao.modificaRecensioneLuogo(mainFrame, utente, l, nuovaRecensione.getVoto(), nuovaRecensione.getTesto(), vecchiaRecensione);
+			return dao.modificaRecensioneLuogo(mainFrame, utente, l, nuovaRecensione.getVoto(), nuovaRecensione.getTesto(), vecchiaRecensione); //Modifica la recensione nel database
 		}else {
 			System.out.println("Operazione fallita");
 			mainFrame.createNotificationFrame("Inserire il testo della recensione!");
-			return false;
+			return false; //Operazione fallita
 		}
 			
 	}
 
-	public boolean rimuoviRecensione(MainFrame mainFrame, JPanel workPanel, Luogo l, Recensione r) {
+	/**
+	 * Rimuovi una recensione
+	 * @param mainFrame MainFrame
+	 * @param l Luogo della recensione da eliminare
+	 * @param r Recensione da eliminare
+	 * @return Operazione riuscita o meno
+	 */
+	public boolean rimuoviRecensione(MainFrame mainFrame, Luogo l, Recensione r) {
 		
 		RecensioneDAO dao = new RecensioneDAO();
 		if(dao.rimuoviRecensioneLuogo(this, l, r)) {
-			utente.setNumeroRecensioni(utente.getNumeroRecensioni() - 1);
+			//Se ho rimosso la recensione con successo
+			utente.setNumeroRecensioni(utente.getNumeroRecensioni() - 1); //Aggiorna numero recensioni
 			UtenteDAO dao2 = new UtenteDAO();
-			dao2.updateNumeroRecensioni(utente.getNomeUtente());
+			dao2.updateNumeroRecensioni(utente.getNomeUtente()); //Aggiorna numero recensioni del database
 			
-			utente.getRecensioniUtente().removeAll(utente.getRecensioniUtente());
+			utente.getRecensioniUtente().removeAll(utente.getRecensioniUtente()); //Svuota lista recensioni utente
 			RecensioneDAO dao3 = new RecensioneDAO();
-			utente.setRecensioniUtente(dao3.getListaRecensioniByNomeUtente(utente.getNomeUtente()));
+			utente.setRecensioniUtente(dao3.getListaRecensioniByNomeUtente(utente.getNomeUtente())); //Popola le recensioni dell'utente
 			mainFrame.refreshaPannelloInfo(); //Refresha pannello
 			mainFrame.createNotificationFrame("Eliminazione compleatata");
-			mainFrame.cambiaPannelloLavoroAHomePanel(workPanel);
-			return true;
+			mainFrame.cambiaPannelloLavoroAHomePanel((JPanel)getComponentByName(mainFrame, "workPanel")); //Vai al pannello home
+			return true; //Operazione riuscita
 		}else {
 			mainFrame.createNotificationFrame("Qualcosa è andato storto");
-			return false;
+			return false; //Operazione fallita
 		}
 	}
 	

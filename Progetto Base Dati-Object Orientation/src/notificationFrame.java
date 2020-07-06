@@ -25,6 +25,11 @@ public class notificationFrame extends JDialog {
 	private JButton okButton;
 	private MainFrame mainFrame;
 
+	/**
+	 * Frame che mostra una notifica all'utente
+	 * @param notification Stringa della notifica da mostrare
+	 * @param mainFrame MainFrame che crea la notifica
+	 */
 	public notificationFrame(String notification, MainFrame mainFrame) {
 		
 		this.mainFrame = mainFrame;

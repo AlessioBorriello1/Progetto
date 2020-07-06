@@ -7,7 +7,6 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -15,12 +14,8 @@ import java.awt.Dimension;
 import javax.swing.SwingConstants;
 
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.lang.ModuleLayer.Controller;
-import java.awt.FlowLayout;
 import javax.swing.Box;
 import javax.swing.SpringLayout;
 
@@ -31,6 +26,14 @@ public class PanelInfoLuogoAnteprima extends JPanel {
 	private JPanel workPanel;
 	boolean cliccabile;
 	
+	/**
+	 * Mostra un pannello di anteprima con le info del luogo
+	 * @param controller MainController
+	 * @param mainFrame MainFrame in cui mostrare il pannello
+	 * @param l Luogo di cui mostrare le info
+	 * @param cliccabile Se il pannello è cliccabile o meno per rimandare al pannello di info luogo vero e proprio o al pannello di modifica
+	 * @param workPanel JPanel dove mostrare il pannello
+	 */
 	public PanelInfoLuogoAnteprima(MainController controller, MainFrame mainFrame, Luogo l, boolean cliccabile, JPanel workPanel) {
 		
 		this.controller = controller;
@@ -43,11 +46,11 @@ public class PanelInfoLuogoAnteprima extends JPanel {
 		
 		addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				if(cliccabile) {
-					if(controller.getUtente() != null) {
-						if(l.getNomeUtente().contentEquals(controller.getUtente().getNomeUtente())) {
-							if(!controller.getCurrentPanel().getClass().toString().contentEquals("class HomePanel")) {
-								mainFrame.cambiaPannelloLavoroAPanelModificaLuogo(workPanel, l);
+				if(cliccabile) { //Se è cliccabile
+					if(controller.getUtente() != null) { //Se sono loggato
+						if(l.getNomeUtente().contentEquals(controller.getUtente().getNomeUtente())) { //Se l'utente è il creatore del luogo
+							if(!controller.getCurrentPanel().getClass().toString().contentEquals("class HomePanel")) { //Se non sono nell'home panel
+								mainFrame.cambiaPannelloLavoroAPanelModificaLuogo(workPanel, l); //Modifica luogo
 							}else {
 								mainFrame.cambiaPannelloLavoroAPanelInfoLuogo(workPanel, l);
 							}
@@ -223,292 +226,19 @@ public class PanelInfoLuogoAnteprima extends JPanel {
 		panelInformazioniUniche.add(verticalBox);
 		setLayout(groupLayout);
 		
+		//Casta il tipo corretto in base alla specializzazione e aggiungi il corretto pannello al pannello informazioni uniche
 		switch(specializzazione) {
-		case "Pizzeria": drawInformazioniUnichePizzeria(verticalBox, labelImmagine, l); break;
-		case "Braceria": drawInformazioniUnicheBraceria(verticalBox, labelImmagine, l); break;
-		case "Pub": drawInformazioniUnichePub(verticalBox, labelImmagine, l); break;
-		case "Hotel": drawInformazioniUnicheHotel(verticalBox, labelImmagine, l); break;
-		case "Motel": drawInformazioniUnicheMotel(verticalBox, labelImmagine, l); break;
-		case "B&B": drawInformazioniUnicheBB(verticalBox, labelImmagine, l); break;
-		case "Museo": drawInformazioniUnicheMuseo(verticalBox, labelImmagine, l); break;
-		case "Zoo": drawInformazioniUnicheZoo(verticalBox, labelImmagine, l); break;
-		case "Parco": drawInformazioniUnicheParco(verticalBox, labelImmagine, l); break;
+		case "Pizzeria": Pizzeria pizzeria = (Pizzeria)l; pizzeria.drawInformazioniUniche(controller, verticalBox, labelImmagine); break;
+		case "Braceria": Braceria braceria = (Braceria)l; braceria.drawInformazioniUniche(controller, verticalBox, labelImmagine); break;
+		case "Pub": Pub pub = (Pub)l; pub.drawInformazioniUniche(controller, verticalBox, labelImmagine); break;
+		case "Hotel": Hotel hotel = (Hotel)l; hotel.drawInformazioniUniche(controller, verticalBox, labelImmagine); break;
+		case "Motel": Motel motel = (Motel)l; motel.drawInformazioniUniche(controller, verticalBox, labelImmagine); break;
+		case "B&B": BB bb = (BB)l; bb.drawInformazioniUniche(controller, verticalBox, labelImmagine); break;
+		case "Museo": Museo museo = (Museo)l; museo.drawInformazioniUniche(controller, verticalBox, labelImmagine); break;
+		case "Zoo": Zoo zoo = (Zoo)l; zoo.drawInformazioniUniche(controller, verticalBox, labelImmagine); break;
+		case "Parco": Parco parco = (Parco)l; parco.drawInformazioniUniche(controller, verticalBox, labelImmagine); break;
 		}
 		
 	}
-	
-	public void drawInformazioniUnichePizzeria(Box box, JLabel immagine, Luogo luogo) {
-		
-		immagine.setIcon(new ImageIcon(PanelInfoLuogoAnteprima.class.getResource("/icons/AnteprimaPizzeria.png")));
-		Pizzeria l = (Pizzeria)luogo;
-		
-		boolean vegano = l.isVegano();
-		String cibo = l.getNazionalitaCibo();
-		boolean asporto = l.isAsporto();
-		
-		JLabel lblCibo = new JLabel("Cibo: " + cibo);
-		lblCibo.setForeground(controller.independence);
-		box.add(lblCibo);
-		
-		if(vegano) {
-			JLabel lblVegano = new JLabel("Vegano");
-			lblVegano.setForeground(controller.independence);
-			box.add(lblVegano);
-		}
-
-		if(asporto) {
-			JLabel lblAsporto = new JLabel("Asporto");
-			lblAsporto.setForeground(controller.independence);
-			box.add(lblAsporto);
-		}
-		
-		box.revalidate();
-		box.repaint();
-		
-	}
-	
-	public void drawInformazioniUnicheBraceria(Box box, JLabel immagine, Luogo luogo) {
-		
-		immagine.setIcon(new ImageIcon(PanelInfoLuogoAnteprima.class.getResource("/icons/AnteprimaBraceria.png")));
-		Braceria l = (Braceria)luogo;
-		
-		boolean vegano = l.isVegano();
-		String cibo = l.getNazionalitaCibo();
-		String carne = l.getTipoCarne();
-		
-		JLabel lblCibo = new JLabel("Cibo: " + cibo);
-		lblCibo.setForeground(controller.independence);
-		box.add(lblCibo);
-		
-		if(vegano) {
-			JLabel lblVegano = new JLabel("Vegano");
-			lblVegano.setForeground(controller.independence);
-			box.add(lblVegano);
-		}
-		
-		JLabel lblCarne = new JLabel("Carne: " + carne);
-		lblCarne.setForeground(controller.independence);
-		box.add(lblCarne);
-		
-		
-		box.revalidate();
-		box.repaint();
-		
-	}
-	
-	public void drawInformazioniUnichePub(Box box, JLabel immagine, Luogo luogo) {
-		
-		immagine.setIcon(new ImageIcon(PanelInfoLuogoAnteprima.class.getResource("/icons/AnteprimaPub.png")));
-		Pub l = (Pub)luogo;
-		
-		boolean vegano = l.isVegano();
-		String cibo = l.getNazionalitaCibo();
-		String birra = l.getTipoBirra();
-		
-		JLabel lblCibo = new JLabel("Cibo: " + cibo);
-		lblCibo.setForeground(controller.independence);
-		box.add(lblCibo);
-		
-		if(vegano) {
-			JLabel lblVegano = new JLabel("Vegano");
-			lblVegano.setForeground(controller.independence);
-			box.add(lblVegano);
-		}
-		
-		JLabel lblBirra = new JLabel("Birra: " + birra);
-		lblBirra.setForeground(controller.independence);
-		box.add(lblBirra);
-		
-		
-		box.revalidate();
-		box.repaint();
-		
-	}
-	
-	public void drawInformazioniUnicheHotel(Box box, JLabel immagine, Luogo luogo) {
-		
-		immagine.setIcon(new ImageIcon(PanelInfoLuogoAnteprima.class.getResource("/icons/AnteprimaHotel.png")));
-		Hotel l = (Hotel)luogo;
-		
-		boolean piscina = l.isPiscina();
-		boolean wifi = l.isWifi();
-		int numeroStanze = l.getNumeroStanze();
-		
-		int numeroStelle = l.getNumeroStelle();
-		
-		JLabel lblNumeroStanze = new JLabel("Numero stanze: " + numeroStanze);
-		lblNumeroStanze.setForeground(controller.independence);
-		box.add(lblNumeroStanze);
-		
-		if(piscina) {
-			JLabel lblPiscina = new JLabel("Piscina");
-			lblPiscina.setForeground(controller.independence);
-			box.add(lblPiscina);
-		}
-		
-		if(wifi) {
-			JLabel lblWifi = new JLabel("Wifi");
-			lblWifi.setForeground(controller.independence);
-			box.add(lblWifi);
-		}
-		
-		JLabel lblNumeroStelle = new JLabel("Stelle: " + numeroStelle);
-		lblNumeroStelle.setForeground(controller.independence);
-		box.add(lblNumeroStelle);
-		
-		box.revalidate();
-		box.repaint();
-		
-	}
-	
-	public void drawInformazioniUnicheMotel(Box box, JLabel immagine, Luogo luogo) {
-		
-		immagine.setIcon(new ImageIcon(PanelInfoLuogoAnteprima.class.getResource("/icons/AnteprimaMotel.png")));
-		Motel l = (Motel)luogo;
-		
-		boolean piscina = l.isPiscina();
-		boolean wifi = l.isWifi();
-		int numeroStanze = l.getNumeroStanze();
-		
-		boolean assistenza = l.isAssistenzaAuto();
-		
-		JLabel lblNumeroStanze = new JLabel("Numero stanze: " + numeroStanze);
-		lblNumeroStanze.setForeground(controller.independence);
-		box.add(lblNumeroStanze);
-		
-		if(piscina) {
-			JLabel lblPiscina = new JLabel("Piscina");
-			lblPiscina.setForeground(controller.independence);
-			box.add(lblPiscina);
-		}
-		
-		if(wifi) {
-			JLabel lblWifi = new JLabel("Wifi");
-			lblWifi.setForeground(controller.independence);
-			box.add(lblWifi);
-		}
-		
-		if(assistenza) {
-			JLabel lblAssistenza = new JLabel("Assistenza vetture");
-			lblAssistenza.setForeground(controller.independence);
-			box.add(lblAssistenza);
-		}
-		
-		box.revalidate();
-		box.repaint();
-		
-	}
-
-	public void drawInformazioniUnicheBB(Box box, JLabel immagine, Luogo luogo) {
-		
-		immagine.setIcon(new ImageIcon(PanelInfoLuogoAnteprima.class.getResource("/icons/AnteprimaBB.png")));
-		BB l = (BB)luogo;
-		
-		boolean piscina = l.isPiscina();
-		boolean wifi = l.isWifi();
-		int numeroStanze = l.getNumeroStanze();
-		
-		boolean colazione = l.isColazione();
-		
-		JLabel lblNumeroStanze = new JLabel("Numero stanze: " + numeroStanze);
-		lblNumeroStanze.setForeground(controller.independence);
-		box.add(lblNumeroStanze);
-		
-		if(piscina) {
-			JLabel lblPiscina = new JLabel("Piscina");
-			lblPiscina.setForeground(controller.independence);
-			box.add(lblPiscina);
-		}
-		
-		if(wifi) {
-			JLabel lblWifi = new JLabel("Wifi");
-			lblWifi.setForeground(controller.independence);
-			box.add(lblWifi);
-		}
-		
-		if(colazione) {
-			JLabel lblColazione = new JLabel("Colazione");
-			lblColazione.setForeground(controller.independence);
-			box.add(lblColazione);
-		}
-		
-		box.revalidate();
-		box.repaint();
-		
-	}
-
-	public void drawInformazioniUnicheMuseo(Box box, JLabel immagine, Luogo luogo) {
-		
-		immagine.setIcon(new ImageIcon(PanelInfoLuogoAnteprima.class.getResource("/icons/AnteprimaMuseo.png")));
-		Museo l = (Museo)luogo;
-		
-		boolean promozione = l.isPromozioneStudenti();
-		
-		String tipoMuseo = l.getTipoMuseo();
-		
-		if(promozione) {
-			JLabel lblPromozione = new JLabel("Promozione studenti");
-			lblPromozione.setForeground(controller.independence);
-			box.add(lblPromozione);
-		}
-		
-		JLabel lblTipoMuseo = new JLabel("Museo: " + tipoMuseo);
-		lblTipoMuseo.setForeground(controller.independence);
-		box.add(lblTipoMuseo);
-		
-		box.revalidate();
-		box.repaint();
-		
-	}
-
-	public void drawInformazioniUnicheZoo(Box box, JLabel immagine, Luogo luogo) {
-		
-		immagine.setIcon(new ImageIcon(PanelInfoLuogoAnteprima.class.getResource("/icons/AnteprimaZoo.png")));
-		Zoo l = (Zoo)luogo;
-		
-		boolean promozione = l.isPromozioneStudenti();
-		
-		String specie = l.getSpecie();
-		
-		if(promozione) {
-			JLabel lblPromozione = new JLabel("Promozione studenti");
-			lblPromozione.setForeground(controller.independence);
-			box.add(lblPromozione);
-		}
-		
-		JLabel lblTipoSpecie = new JLabel("Specie: " + specie);
-		lblTipoSpecie.setForeground(controller.independence);
-		box.add(lblTipoSpecie);
-		
-		box.revalidate();
-		box.repaint();
-		
-	}
-
-	public void drawInformazioniUnicheParco(Box box, JLabel immagine, Luogo luogo) {
-		
-		immagine.setIcon(new ImageIcon(PanelInfoLuogoAnteprima.class.getResource("/icons/AnteprimaParco.png")));
-		Parco l = (Parco)luogo;
-		
-		boolean promozione = l.isPromozioneStudenti();
-		boolean gratuito = l.isIngressoGratuito();
-		
-		if(promozione) {
-			JLabel lblPromozione = new JLabel("Promozione studenti");
-			lblPromozione.setForeground(controller.independence);
-			box.add(lblPromozione);
-		}
-		
-		if(gratuito) {
-			JLabel lblGratuito = new JLabel("Ingresso gratuito");
-			lblGratuito.setForeground(controller.independence);
-			box.add(lblGratuito);
-		}
-		
-		box.revalidate();
-		box.repaint();
-		
-	}
-
 
 }

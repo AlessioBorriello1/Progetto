@@ -49,6 +49,10 @@ public class MainFrame extends JFrame {
 	private MainController controller; //Controller che chiama il mainFrame
 	private Point mouseClickPoint; //Posizione mouse (per trascinare finestra)
 	
+	/**
+	 * Frame principale in cui mostrare tutti i vari pannelli
+	 * @param controller MainController da legare al frame
+	 */
 	public MainFrame(MainController controller) {
 		
 		this.controller = controller; //Collega variabile controller al controller che ha creato il mainFrame
@@ -630,6 +634,11 @@ public class MainFrame extends JFrame {
 		
 	}
 	
+	/**
+	 * Fa mostrare il pannello Modifica Luogo nel workPanel
+	 * @param workPanel pannello dove mostrare il pannello
+	 * @param l Luogo da modificare per riempire i campi con i suoi attribuiti attuali
+	 */
 	public void cambiaPannelloLavoroAPanelModificaLuogo(JPanel workPanel, Luogo l) {
 		
 		if(controller.getCurrentPanel() == null || !controller.getCurrentPanel().getClass().toString().contentEquals("class CreazioneLuogoPanel")) { //Se non sono già sullo stesso panel
@@ -648,6 +657,11 @@ public class MainFrame extends JFrame {
 		
 	}
 	
+	/**
+	 * Fa mostrare il pannello Info Luogo nel workPanel
+	 * @param workPanel pannello dove mostrare il pannello
+	 * @param l Luogo di cui mostrare gli attributi
+	 */
 	public void cambiaPannelloLavoroAPanelInfoLuogo(JPanel workPanel, Luogo l) {
 		
 		if(controller.getCurrentPanel() == null || !controller.getCurrentPanel().getClass().toString().contentEquals("class PanelInfoLuogo")) { //Se non sono già sullo stesso panel
@@ -666,6 +680,11 @@ public class MainFrame extends JFrame {
 		
 	}
 
+	/**
+	 * Fa mostrare il pannello Scrivi Recensione nel workPanel
+	 * @param workPanel pannello dove mostrare il pannello
+	 * @param l Luogo a cui aggiungere la recensione
+	 */
 	public void cambiaPannelloLavoroAPanelScriviRecensione(JPanel workPanel, Luogo l) {
 		
 		if(controller.getCurrentPanel() == null || !controller.getCurrentPanel().getClass().toString().contentEquals("class PanelScriviRecensione")) { //Se non sono già sullo stesso panel
@@ -684,6 +703,12 @@ public class MainFrame extends JFrame {
 		
 	}
 	
+	/**
+	 * Fa mostrare il pannello Modifica Recensione nel workPanel
+	 * @param workPanel pannello dove mostrare il pannello
+	 * @param l Luogo che possiede la recensione da modificare (Per aggiornarne la media se si modifica la recensione)
+	 * @param r Recensione da modificare
+	 */
 	public void cambiaPannelloLavoroAModificaRecensionePanel(JPanel workPanel, Luogo l, Recensione r) {
 		
 		if(controller.getCurrentPanel() == null || !controller.getCurrentPanel().getClass().toString().contentEquals("class PanelModificaRecensione")) { //Se non sono già sullo stesso panel
@@ -779,6 +804,11 @@ public class MainFrame extends JFrame {
 		
 	}
 	
+	/**
+	 * Cre una finestra di conferma che chiede all'utente di scegliere se proseguire con l'azione o annullarla
+	 * @param notification Stringa da mostrare all'utente
+	 * @return Boolean della risposta data dall'utente: 0 = annulla, 1 = ok;
+	 */
 	public boolean createConfirmationFrame(String notification) {
 		
 		confirmationFrame frame = new confirmationFrame(notification, this);
@@ -787,4 +817,5 @@ public class MainFrame extends JFrame {
 		return answer;
 		
 	}
+
 }

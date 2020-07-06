@@ -12,6 +12,12 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class PanelImpostazioniAggiuntivePub extends JPanel {
 	
+	/**
+	 * Pannello contenente le impostazioni uniche per Ristorante e Pub
+	 * @param vegano Se il ristorante fa cibo vegano
+	 * @param nazionalita Nazione cibo del ristorante
+	 * @param tipoCarne Tipo di birra del Pub
+	 */
 	public PanelImpostazioniAggiuntivePub(boolean vegano, String nazione, String tipoBirra) {
 		setBorder(null);
 		setBackground(new Color(149, 200, 216));

@@ -32,6 +32,12 @@ public class CreazioneLuogoPanel extends JPanel {
 	private JPanel currentImpostazioniAggiuntivePanel = null; //Pannello con informazioni aggiuntive sul luogo da creare (in base al tipo)
 	JComboBox comboBoxSpecializzazione;
 	
+	/**
+	 * Pannello per la creazione di un nuovo luogo
+	 * @param controller MainController
+	 * @param mainFrame MainFrame in cui mostrare il pannello
+	 * @param workPanel JPanel dove mostrare il pannello
+	 */
 	public CreazioneLuogoPanel(MainController controller, MainFrame mainFrame, JPanel workPanel) {
 		
 		this.controller = controller; //Collega controller
@@ -281,8 +287,8 @@ public class CreazioneLuogoPanel extends JPanel {
 		panelAttributiAggiuntivi.setLayout(new CardLayout(0, 0)); //Imposta layout pannello attributi aggiuntivi a cardLayout
 		setLayout(groupLayout);
 		
-		
 	}
+	
 	/**
 	 * Ricarica combo box che mostra le specializzazioni in base al tipo di attività selezionata
 	 * @param box La comboBox da ricaricare

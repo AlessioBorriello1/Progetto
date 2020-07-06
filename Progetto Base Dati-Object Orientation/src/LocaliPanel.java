@@ -35,6 +35,12 @@ public class LocaliPanel extends JPanel  {
 	MainFrame mainFrame;
 	JPanel workPanel;
 
+	/**
+	 * Pannello LocaliPanel del programma, mostra i luoghi dell'utente che ha fatto il login
+	 * @param controller MainController
+	 * @param mainFrame MainFrame in cui mostrare il pannello
+	 * @param workPanel JPanel dove mostrare il pannello
+	 */
 	public LocaliPanel(MainController controller, MainFrame mainFrame, JPanel workPanel) {
 		
 		this.controller = controller;
@@ -127,7 +133,7 @@ public class LocaliPanel extends JPanel  {
 					public void mouseClicked(MouseEvent e) {
 						boolean answer = mainFrame.createConfirmationFrame("Sei sicuro di voler cancellare il luogo " + l.getNome() + "?");
 						if(answer) {
-							controller.rimuoviLuogo(mainFrame, controller, workPanel, l);
+							controller.rimuoviLuogo(mainFrame, l);
 						}
 					}
 				});

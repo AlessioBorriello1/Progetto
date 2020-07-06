@@ -9,49 +9,73 @@ import java.util.List;
 
 public class RecensioneDAO {
 
+	/**
+	 * Aggiungi una recensione all'interno del database
+	 * @param mainFrame MainFrame
+	 * @param u Utente che crea la recensione
+	 * @param l Luogo a cui attribuire la recensione
+	 * @param r Recensione da creare
+	 * @return Operazione riuscita o meno
+	 */
 	public boolean lasciaRecensioneALuogo(MainFrame mainFrame, Utente u, Luogo l, Recensione r) {
 		
+		//Prendi lista recensioni dell'utente che vuole creare la recensione
+		List<Recensione> lista = getListaRecensioniByNomeUtente(u.getNomeUtente());
+		for(Recensione recensione : lista) {
+			//Se l'utente ha già creato una recensione per quel luogo
+			if(recensione.getIDLuogo() == l.getID()) {
+				mainFrame.createNotificationFrame("Hai già creato una recensione per questo luogo!");
+				return false;
+			}
+			
+		}
 		
 		int voto = r.getVoto();
 		String recensione = r.getTesto();
 		
 		try {
 			
-		LocalDateTime now = LocalDateTime.now();  
-		
-		Class.forName("com.mysql.jdbc.Driver");
-		String q = "INSERT INTO recensione(idLuogo, voto, nomeUtente, data, testo)\r\n" + 
-				"VALUES ('"+ l.getID() +"','"+ voto +"', '"+ u.getNomeUtente()+ "','" +  now +"','" + recensione +"');"; //Inizializzo query
-		
-		String connectionURL = MainController.URL; //URL di connessione
-
-        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
-		Statement st = con.createStatement(); //Creo statement
-		st.executeUpdate(q); //Eseguo la query contenuta in stringa q
-		
-		con.close(); //Chiudi connessione
-		st.close(); //Chiudi statement
-		
-		mainFrame.createNotificationFrame("Recensione inserita!");
-		
-		LuogoDAO dao = new LuogoDAO();
-		float media = dao.calcolaMediaRecensioniLuogo(l);
-		l.setMediaRecensioni(media);
-		dao.updateMediaRecensioni(l, media);
-		
-		return true; //Operazione inserimento riuscita, restituisce true
+			LocalDateTime now = LocalDateTime.now();  
+			
+			Class.forName("com.mysql.jdbc.Driver");
+			String q = "INSERT INTO recensione(idLuogo, voto, nomeUtente, data, testo)\r\n" + 
+					"VALUES ('"+ l.getID() +"','"+ voto +"', '"+ u.getNomeUtente()+ "','" +  now +"','" + recensione +"');"; //Inizializzo query
+			
+			String connectionURL = MainController.URL; //URL di connessione
+	
+	        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
+			Statement st = con.createStatement(); //Creo statement
+			st.executeUpdate(q); //Eseguo la query contenuta in stringa q
+			
+			con.close(); //Chiudi connessione
+			st.close(); //Chiudi statement
+			
+			mainFrame.createNotificationFrame("Recensione inserita!");
+			
+			LuogoDAO dao = new LuogoDAO();
+			float media = dao.calcolaMediaRecensioniLuogo(l); //Calcolo la nuova media
+			l.setMediaRecensioni(media); //Setto la media del luogo
+			dao.updateMediaRecensioni(l, media); //Aggiorno la media nel database
+			
+			return true; //Operazione riuscita
 		
 		}catch(Exception e) { //Error catching
-			if(e.getClass().toString().contentEquals("class com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException")) {
-				mainFrame.createNotificationFrame("Hai già creato una recensione per questo luogo!");
-				return false; //Operazione inserimento fallita, restituisce false
-			}
 			mainFrame.createNotificationFrame("Qualcosa è andato storto!");
-			return false; //Operazione inserimento fallita, restituisce false
+			return false; //Operazione fallita
 		}
 		
 	}
 	
+	/**
+	 * Modifica una recensione all'interno del database
+	 * @param mainFrame MainFrame
+	 * @param u Utente che modifica la recensione
+	 * @param l Luogo a cui modificare la recensione
+	 * @param voto Voto della recensione
+	 * @param recensione Stringa testo della recensione
+	 * @param r Recensione da modificare
+	 * @return Operazione riuscita o meno
+	 */
 	public boolean modificaRecensioneLuogo(MainFrame mainFrame, Utente u, Luogo l, int voto, String recensione, Recensione r) {
 		
 		try {
@@ -71,28 +95,30 @@ public class RecensioneDAO {
 		mainFrame.createNotificationFrame("Recensione modificata!");
 		
 		LuogoDAO dao = new LuogoDAO();
-		float media = dao.calcolaMediaRecensioniLuogo(l);
-		l.setMediaRecensioni(media);
-		dao.updateMediaRecensioni(l, media);
+		float media = dao.calcolaMediaRecensioniLuogo(l); //Calcolo la nuova media
+		l.setMediaRecensioni(media); //Setto la media del luogo
+		dao.updateMediaRecensioni(l, media); //Aggiorno la media nel database
 		
+		//Imposta i nuovi valori della recensione nell'oggetto
 		r.setTesto(recensione);
 		r.setVoto(voto);
 		
-		return true; //Operazione inserimento riuscita, restituisce true
+		return true; //Operazione riuscita
 		
 		}catch(Exception e) { //Error catching
-			if(e.getClass().toString().contentEquals("class com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException")) {
-				System.out.println(e);
-				mainFrame.createNotificationFrame("Hai già creato una recensione per questo luogo!");
-				return false; //Operazione inserimento fallita, restituisce false
-			}
 			System.out.println(e);
 			mainFrame.createNotificationFrame("Qualcosa è andato storto!");
-			return false; //Operazione inserimento fallita, restituisce false
+			return false; //Operazione fallita
 		}
 		
 	}
 	
+	/**
+	 * Prende la recensione in un certo luogo di un determinato utente
+	 * @param l Luogo a cui è riferita la recensione
+	 * @param nomeUtente Stringa nome dell'utente che ha creato la recensione
+	 * @return Recensione del luogo specificato creata dall'utente specificato
+	 */
 	public Recensione getRecensioneLuogoByNomeUtente(Luogo l, String nomeUtente) {
 		
 		try {
@@ -118,9 +144,9 @@ public class RecensioneDAO {
 				
 				con.close(); //Chiudi connessione
 				st.close(); //Chiudi statement
-				return r;
+				return r; //Restituisci recensione
 				
-			}else { //Se l'utente non è stato trovato (result set vuoto)
+			}else { //Se la recensione non è stata trovata (result set vuoto)
 				
 				con.close(); //Chiudi connessione
 				st.close(); //Chiudi statement
@@ -130,11 +156,16 @@ public class RecensioneDAO {
 			
 			}catch(Exception e) { //Error catching
 				System.out.println(e);
-				return null; //Operazione inserimento fallita, restituisce false
+				return null; //Restituisci null
 			}
 		
 		}
 	
+	/**
+	 * Ottieni lista recensioni di un certo luogo
+	 * @param l Luogo da cui prendere le recensioni
+	 * @return Lista recensioni del luogo specificato
+	 */
 	public List<Recensione> getListaRecensioniLuogo(Luogo l){
 		
 		try {
@@ -148,7 +179,7 @@ public class RecensioneDAO {
 			Statement st = con.createStatement(); //Creo statement
 			ResultSet rs = st.executeQuery(q); //Eseguo la query contenuta in stringa q
 			
-			List<Recensione> recensioni = new ArrayList<Recensione>();
+			List<Recensione> recensioni = new ArrayList<Recensione>(); //Lista delle recensioni
 			
 			while(rs.next()) {
 				
@@ -159,7 +190,7 @@ public class RecensioneDAO {
 				r.setVoto(rs.getInt("voto"));
 				r.setTesto(rs.getString("testo"));
 				
-				recensioni.add(r);
+				recensioni.add(r); //Inserisci recensione nella lista
 				
 			}
 			
@@ -169,11 +200,16 @@ public class RecensioneDAO {
 			
 		}catch(Exception e) { //Error catching
 			System.out.println(e);
-			return null;
+			return null; //Restituisci null
 		}
 		
 	}
 	
+	/**
+	 * Ottieni lista recensioni di un certo utente
+	 * @param nomeUtente Stringa nome dell'utente da cui prendere le recensioni
+	 * @return Lista recensioni dell'utente specificato
+	 */
 	public List<Recensione> getListaRecensioniByNomeUtente(String nomeUtente) {
 		
 		try {
@@ -187,7 +223,7 @@ public class RecensioneDAO {
 			Statement st = con.createStatement(); //Creo statement
 			ResultSet rs = st.executeQuery(q); //Eseguo la query contenuta in stringa q
 			
-			List<Recensione> recensioni = new ArrayList<Recensione>();
+			List<Recensione> recensioni = new ArrayList<Recensione>(); //Lista recensioni
 			
 			while(rs.next()) {
 				
@@ -198,21 +234,28 @@ public class RecensioneDAO {
 				r.setVoto(rs.getInt("voto"));
 				r.setIDLuogo(rs.getInt("idLuogo"));
 				
-				recensioni.add(r);
+				recensioni.add(r); 
 				
 			}
 			
 			con.close(); //Chiudi connessione
 			st.close(); //Chiudi statement
-			return recensioni; //Restituisci lista luoghi
+			return recensioni; //Restituisci lista recensioni
 			
 		}catch(Exception e) { //Error catching
 			System.out.println(e);
-			return null;
+			return null; //Restituisci null
 		}
 		
 	}
 
+	/**
+	 * Rimuovi recensione dal database
+	 * @param controller MainController
+	 * @param l Luogo che possiede la recensione da eliminare
+	 * @param r Recensione da eliminare
+	 * @return Operazione riuscita o meno
+	 */
 	public boolean rimuoviRecensioneLuogo(MainController controller, Luogo l, Recensione r) {
 		
 		try {
@@ -230,15 +273,15 @@ public class RecensioneDAO {
 			st.close(); //Chiudi statement
 			
 			LuogoDAO dao = new LuogoDAO();
-			float media = dao.calcolaMediaRecensioniLuogo(l);
-			l.setMediaRecensioni(media);
-			dao.updateMediaRecensioni(l, media);
+			float media = dao.calcolaMediaRecensioniLuogo(l); //Ricalocala media senza la recensione appena eliminata
+			l.setMediaRecensioni(media); //imposta media recensione per il luogo0
+			dao.updateMediaRecensioni(l, media); //Aggiorna la media nel database
 			
 			
-			return true; //Operazione inserimento riuscita, restituisce true
+			return true; //Operazione eliminazione riuscita, restituisce true
 			
 			}catch(Exception e) { //Error catching
-				return false; //Operazione inserimento fallita, restituisce false
+				return false; //Operazione eliminazione fallita, restituisce false
 			}
 	}
 

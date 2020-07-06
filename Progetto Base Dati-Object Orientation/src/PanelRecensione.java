@@ -28,6 +28,13 @@ public class PanelRecensione extends JPanel {
 	private JPanel workPanel;
 	private boolean cliccabile;
 	
+	/**
+	 * Pannello che mostra le informazioni di una certa recensione
+	 * @param controller MainController
+	 * @param mainFrame MainFrame in cui mostrare il pannello
+	 * @param r Recensione di cui mostrare le informazioni
+	 * @param workPanel JPanel dove mostrare il pannello
+	 */
 	public PanelRecensione(MainController controller, MainFrame mainFrame, Recensione r, JPanel workPanel) {
 		
 		setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -53,6 +60,7 @@ public class PanelRecensione extends JPanel {
 		
 		addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
+				//Se è cliccabile vai al pannello di modifica recensione
 				if(cliccabile) {
 					int ID = r.getIDLuogo();
 					LuogoDAO dao = new LuogoDAO();
@@ -76,6 +84,7 @@ public class PanelRecensione extends JPanel {
 		JTextArea textArea = new JTextArea();
 		textArea.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
+				//Se è cliccabile vai al pannello di modifica recensione
 				if(cliccabile) {
 					int ID = r.getIDLuogo();
 					LuogoDAO dao = new LuogoDAO();
@@ -117,6 +126,7 @@ public class PanelRecensione extends JPanel {
 		
 	}
 
+	//Setter cliccabile
 	public void setCliccabile(boolean cliccabile) {
 		this.cliccabile = cliccabile;
 	}

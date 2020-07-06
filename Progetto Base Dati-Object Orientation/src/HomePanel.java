@@ -22,15 +22,17 @@ import java.awt.event.MouseEvent;
 
 public class HomePanel extends JPanel {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	MainController controller;
 	MainFrame mainFrame;
 	JPanel workPanel;
 	private List<Luogo> ricerca; //Array list che contiene la lista dei luoghi in base alla ricerca effettuata
 
+	/**
+	 * Pannello HomePage del programma, mostra i luoghi e permette una ricerca
+	 * @param controller MainController
+	 * @param mainFrame MainFrame in cui mostrare il pannello
+	 * @param workPanel JPanel dove mostrare il pannello
+	 */
 	public HomePanel(MainController controller, MainFrame mainFrame, JPanel workPanel) {
 		
 		this.controller = controller;

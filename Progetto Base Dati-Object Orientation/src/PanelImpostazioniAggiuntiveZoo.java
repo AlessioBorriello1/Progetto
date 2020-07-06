@@ -12,6 +12,11 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class PanelImpostazioniAggiuntiveZoo extends JPanel {
 
+	/**
+	 * Pannello contenente le impostazioni uniche per Attrazione e Zoo
+	 * @param promozione Se l'attrazione ha la promozione studenti
+	 * @param specie Tipo della specia dello zoo
+	 */
 	public PanelImpostazioniAggiuntiveZoo(boolean promozione, String specie) {
 		setBorder(null);
 		

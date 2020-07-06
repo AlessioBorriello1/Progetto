@@ -9,8 +9,8 @@ public class Utente {
 	private int numeroRecensioni; //Numero delle recensioni dell'utente
 	private int numeroLuoghi; //Numero dei luoghi in possesso dell'utente
 	
-	private List<Luogo> luoghiUtente;
-	private List<Recensione> recensioniUtente;
+	private List<Luogo> luoghiUtente; //Luoghi dell'utente
+	private List<Recensione> recensioniUtente; //Recensioni dell'utente
 	
 	
 	//Setter e getter variabile nomeUtente
@@ -48,7 +48,6 @@ public class Utente {
 		dao.updateNumeroLuoghi(this.getNomeUtente());
 	}
 
-	
 	//Setter e getter lista luoghi utente
 	public List<Luogo> getLuoghiUtente() {
 		return luoghiUtente;
@@ -80,7 +79,5 @@ public class Utente {
 		this.recensioniUtente = dao.getListaRecensioniByNomeUtente(nomeUtente);
 		
 	}
-	
-	
-	
+
 }

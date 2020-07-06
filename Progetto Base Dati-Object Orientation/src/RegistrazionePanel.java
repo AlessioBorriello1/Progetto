@@ -29,6 +29,12 @@ public class RegistrazionePanel extends JPanel {
 	JTextField emailField;
 	JPasswordField passwordField;
 
+	/**
+	 * Pannello Registrazione permette la registrazione di un nuovo utente
+	 * @param controller MainController
+	 * @param mainFrame MainFrame in cui mostrare il pannello
+	 * @param wP JPanel dove mostrare il pannello
+	 */
 	public RegistrazionePanel(MainController controller, MainFrame mainFrame, JPanel wP) {
 		
 		this.controller = controller;
@@ -91,10 +97,12 @@ public class RegistrazionePanel extends JPanel {
 		buttonCheckPasswordField.setIcon(new ImageIcon(LoginPanel.class.getResource("/icons/EyeIconClosed.png")));
 		buttonCheckPasswordField.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		buttonCheckPasswordField.addMouseListener(new MouseAdapter() {
+			//Mostra il campo password se il bottone è premuto
 			public void mousePressed(MouseEvent e) {
 				passwordField.setEchoChar((char)0);
 				buttonCheckPasswordField.setIcon(new ImageIcon(LoginPanel.class.getResource("/icons/EyeIcon.png")));
 			}
+			//Nascondi il campo password se il bottone non è premuto
 			public void mouseReleased(MouseEvent e) {
 				passwordField.setEchoChar('*');
 				buttonCheckPasswordField.setIcon(new ImageIcon(LoginPanel.class.getResource("/icons/EyeIconClosed.png")));
@@ -205,7 +213,7 @@ public class RegistrazionePanel extends JPanel {
 		buttonRegistrati.setBorder(null);
 		buttonRegistrati.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				
+				//Registrati con le credenziali inserite
 				if(mainFrame.createConfirmationFrame("Creare account con queste informazioni?")) {
 					String nomeUtente = nomeUtenteField.getText(); //Prendi nome utente dal rispettivo campo
 					String email = emailField.getText(); //Prendi email dal rispettivo campo

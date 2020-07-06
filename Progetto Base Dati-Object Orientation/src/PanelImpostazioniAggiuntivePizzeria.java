@@ -12,6 +12,12 @@ import javax.swing.border.EtchedBorder;
 
 public class PanelImpostazioniAggiuntivePizzeria extends JPanel {
 	
+	/**
+	 * Pannello contenente le impostazioni uniche per Ristorante e Pizzeria
+	 * @param vegano Se il ristorante fa cibo vegano
+	 * @param nazionalita Nazione cibo del ristorante
+	 * @param asporto Se la pizzeria fa asporto
+	 */
 	public PanelImpostazioniAggiuntivePizzeria(boolean vegano, String nazionalita, boolean asporto) {
 		
 		setBorder(null);

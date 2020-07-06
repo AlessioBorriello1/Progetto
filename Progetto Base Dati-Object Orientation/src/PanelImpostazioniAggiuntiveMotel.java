@@ -15,6 +15,13 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class PanelImpostazioniAggiuntiveMotel extends JPanel {
 
+	/**
+	 * Pannello contenente le impostazioni uniche per Alloggio e Motel
+	 * @param piscina Se il alloggio ha una piscina
+	 * @param wifi Se il alloggio ha il wifi
+	 * @param numeroStanze Numero stanze del alloggio
+	 * @param assistenza Se il Motel ha l'assistenza
+	 */
 	public PanelImpostazioniAggiuntiveMotel(boolean piscina, boolean wifi, String numeroStanze, boolean assistenza) {
 		setBorder(null);
 		setBackground(new Color(149, 200, 216));

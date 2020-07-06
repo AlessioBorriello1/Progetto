@@ -34,6 +34,12 @@ public class RecensioniPanel extends JPanel {
 	MainFrame mainFrame;
 	JPanel workPanel;
 
+	/**
+	 * Pannello Recensioni mostra le recensioni dell'utente loggato
+	 * @param controller MainController
+	 * @param mainFrame MainFrame in cui mostrare il pannello
+	 * @param workPanel JPanel dove mostrare il pannello
+	 */
 	public RecensioniPanel(MainController controller, MainFrame mainFrame, JPanel workPanel) {
 		
 		this.controller = controller;
@@ -98,7 +104,7 @@ public class RecensioniPanel extends JPanel {
 		
 		RecensioneDAO dao = new RecensioneDAO();
 		
-		List<Recensione> recensioniUtente = dao.getListaRecensioniByNomeUtente(controller.getUtente().getNomeUtente());
+		List<Recensione> recensioniUtente = dao.getListaRecensioniByNomeUtente(controller.getUtente().getNomeUtente()); //Ottieni la lista delle recensioni dell'utente
 		
 		if(!recensioniUtente.isEmpty()) {
 			for(Recensione r : recensioniUtente) {
@@ -109,12 +115,13 @@ public class RecensioniPanel extends JPanel {
 				verticalBox.add(removeButton);
 				removeButton.addMouseListener(new MouseAdapter() {
 					public void mouseClicked(MouseEvent e) {
+						//Rimuovi recensione
 						boolean answer = mainFrame.createConfirmationFrame("Sei sicuro di voler cancellare questa recensione?");
 						if(answer) {
 							LuogoDAO dao = new LuogoDAO();
 							Luogo l = dao.getLuogoByID(r.getIDLuogo());
 							RecensioneDAO dao2 = new RecensioneDAO();
-							controller.rimuoviRecensione(mainFrame, workPanel, l, r);
+							controller.rimuoviRecensione(mainFrame, l, r);
 						}
 					}
 				});

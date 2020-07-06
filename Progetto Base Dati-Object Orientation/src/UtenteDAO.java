@@ -160,6 +160,11 @@ public class UtenteDAO {
 		}
 	}
 	
+	/**
+	 * Aggiorna il numero di luoghi di un certo utente nel database
+	 * @param nomeUtente Stringa nome dell'utente di cui aggiornare il numero dei luoghi
+	 * @return Operazione aggiornamento riuscita o meno
+	 */
 	public boolean updateNumeroLuoghi(String nomeUtente) {
 		try {
 			
@@ -175,14 +180,19 @@ public class UtenteDAO {
 			con.close(); //Chiudi connessione
 			st.close(); //Chiudi statement
 			
-			return true; //Operazione inserimento riuscita, restituisce true
+			return true; //Operazione modifica riuscita, restituisce true
 			
 		}catch(Exception e) { //Error catching
 			System.out.println(e);
-			return false; //Operazione inserimento fallita, restituisce false
+			return false; //Operazione modifica fallita, restituisce false
 		}
 	}
 	
+	/**
+	 * Aggiorna il numero di recensioni di un certo utente nel database
+	 * @param nomeUtente Stringa nome dell'utente di cui aggiornare il numero delle recensioni
+	 * @return Operazione aggiornamento riuscita o meno
+	 */
 	public boolean updateNumeroRecensioni(String nomeUtente) {
 		
 		try {
@@ -199,11 +209,11 @@ public class UtenteDAO {
 			con.close(); //Chiudi connessione
 			st.close(); //Chiudi statement
 			
-			return true; //Operazione inserimento riuscita, restituisce true
+			return true; //Operazione aggiornamento riuscita, restituisce true
 			
 		}catch(Exception e) { //Error catching
 			System.out.println(e);
-			return false; //Operazione inserimento fallita, restituisce false
+			return false; //Operazione aggiornamento fallita, restituisce false
 		}
 	}
 

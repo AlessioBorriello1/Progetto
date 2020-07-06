@@ -23,6 +23,14 @@ public class PanelModificaRecensione extends JPanel {
 	private MainFrame mainFrame;
 	private JPanel workPanel;
 	
+	/**
+	 * Pannello modifica di una recensione
+	 * @param controller MainController
+	 * @param mainFrame MainFrame in cui mostrare il pannello
+	 * @param workPanel JPanel dove mostrare il pannello
+	 * @param l Luogo che possiede la recensione da modificare
+	 * @param r Recensione da modificare
+	 */
 	public PanelModificaRecensione(MainController controller, MainFrame mainFrame, JPanel workPanel, Luogo l, Recensione r) {
 		
 		this.controller = controller;
@@ -92,7 +100,9 @@ public class PanelModificaRecensione extends JPanel {
 		editorPaneScriviRecensione.addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent e) {
 				int lenght = editorPaneScriviRecensione.getText().length();
-				if(lenght > 406) { //Se la stringa è più corta di 10 caratteri (numeri)
+				//Limita il numero di caratteri nella recensione
+				int maxLenght = 406;
+				if(lenght > maxLenght) {
 					if(e.getKeyCode() != KeyEvent.VK_BACK_SPACE && e.getKeyCode() != KeyEvent.VK_DELETE) {
 						editorPaneScriviRecensione.setEditable(false);
 					}else {
@@ -112,9 +122,12 @@ public class PanelModificaRecensione extends JPanel {
 		btnModificaRecensione.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				Recensione rNuova = new Recensione();
+				//Prende informazioni della nuova recensione
 				rNuova.setTesto(editorPaneScriviRecensione.getText());
 				rNuova.setVoto(Integer.parseInt(spinnerVoto.getValue().toString()));
+				//Modifica recensione
 				if(controller.modificaRecensione(mainFrame, l, rNuova, r)) {
+					//Se riuscito torna alla home
 					mainFrame.cambiaPannelloLavoroAHomePanel(workPanel);
 				}
 			}

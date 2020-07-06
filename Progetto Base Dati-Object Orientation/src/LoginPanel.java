@@ -33,7 +33,13 @@ public class LoginPanel extends JPanel {
 	
 	MainController controller;
 	MainFrame mainFrame;
-
+	
+	/**
+	 * Pannello Login del programma, permette il login di un utente
+	 * @param controller MainController
+	 * @param mainFrame MainFrame in cui mostrare il pannello
+	 * @param workPanel JPanel dove mostrare il pannello
+	 */
 	public LoginPanel(MainController controller, MainFrame mainFrame, JPanel wP) {
 		
 		JPanel workPanel = wP;

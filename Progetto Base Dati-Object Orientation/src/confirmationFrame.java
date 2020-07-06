@@ -21,8 +21,13 @@ public class confirmationFrame extends JDialog {
 	private JButton okButton;
 	private JButton cancellaButton;
 	
-	boolean answer = false; //False = cancella, True = ok;
+	boolean answer = false; //False = annulla, True = ok;
 
+	/**
+	 * Crea un pannello di chiede all'utente per conferma di un operazione
+	 * @param notification Stringa da mostrare nel pannello
+	 * @param mf MainFrame che crea la notifica
+	 */
 	public confirmationFrame(String notification, MainFrame mf) {
 		
 		MainFrame mainFrame = mf;
@@ -102,6 +107,7 @@ public class confirmationFrame extends JDialog {
 		
 	}
 	
+	//Getter risposta data al pannello (Annulla o Ok)
 	public boolean getAnswer() {
 		return answer;
 	}
