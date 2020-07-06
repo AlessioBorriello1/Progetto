@@ -91,7 +91,7 @@ public class LoginPanel extends JPanel {
 		lblNomeUtente.setFont(new Font("Georgia", Font.BOLD, 18));
 		lblNomeUtente.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		JLabel lblPassword = new JLabel(MainController.PASSWORD);
+		JLabel lblPassword = new JLabel("Password");
 		lblPassword.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPassword.setFont(new Font("Georgia", Font.BOLD, 18));
 		lblPassword.setForeground(controller.egyptian);
@@ -237,4 +237,5 @@ public class LoginPanel extends JPanel {
 		setLayout(groupLayout);
 		
 	}
+
 }

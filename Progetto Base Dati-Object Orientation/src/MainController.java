@@ -26,9 +26,9 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class MainController {
 	
-	static String URL = "jdbc:mysql://localhost:3306/progetto?autoReconnect=true&useSSL=false"; //URL del database
-	static String PASSWORD = "password";
-	static String UTENTE = "root";
+	static String URL = "jdbc:mysql://bplrildi4wdwcrgrpita-mysql.services.clever-cloud.com:3306/bplrildi4wdwcrgrpita?autoReconnect=true&useSSL=false"; //URL del database
+	static String PASSWORD = "pGCMuO99CWrSjweV0toj";
+	static String UTENTE = "uqp9ovkdodflayr7";
 	
 	private boolean loggedIn = false; //Utente ha fatto il login o meno
 	private JPanel currentPanel = null; //Pannello attualmente mostrato nel workPanel
