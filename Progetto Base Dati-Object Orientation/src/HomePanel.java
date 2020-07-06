@@ -25,7 +25,6 @@ public class HomePanel extends JPanel {
 	MainController controller;
 	MainFrame mainFrame;
 	JPanel workPanel;
-	private List<Luogo> ricerca; //Array list che contiene la lista dei luoghi in base alla ricerca effettuata
 
 	/**
 	 * Pannello HomePage del programma, mostra i luoghi e permette una ricerca
@@ -217,20 +216,19 @@ public class HomePanel extends JPanel {
 		panelMostraLuoghi.setViewportView(verticalBox);
 		setLayout(groupLayout);
 		
-		ricerca = dao.getListaTuttiLuoghi();
 		btnCerca.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				
 				LuogoDAO dao = new LuogoDAO();
-				ricerca = dao.faiRicerca(textFieldProprietario.getText(), textFieldNome.getText(),
+				mainFrame.setRicerca(dao.faiRicerca(textFieldProprietario.getText(), textFieldNome.getText(),
 						 (chckbxRistorante.isSelected())? "Ristorante":null, (chckbxAlloggio.isSelected())? "Alloggio":null, (chckbxAttrazione.isSelected())? "Attrazione":null,
-						 Integer.parseInt(spinnerVotoMinimo.getValue().toString()), comboBoxOrdine.getSelectedItem().toString(), chckbxInvertiRisultati.isSelected());
+						 Integer.parseInt(spinnerVotoMinimo.getValue().toString()), comboBoxOrdine.getSelectedItem().toString(), chckbxInvertiRisultati.isSelected()));
 				
 				verticalBox.removeAll();
 				verticalBox.repaint();
 				verticalBox.revalidate();
-				if(!ricerca.isEmpty()) {
-					for(Luogo l : ricerca) {
+				if(!mainFrame.getRicerca().isEmpty()) {
+					for(Luogo l : mainFrame.getRicerca()) {
 						PanelInfoLuogoAnteprima panel = new PanelInfoLuogoAnteprima(controller, mainFrame, l, true, workPanel);
 						verticalBox.add(panel);
 						verticalBox.add(Box.createRigidArea(new Dimension(0, 8)));
@@ -245,8 +243,8 @@ public class HomePanel extends JPanel {
 			}
 		});
 		
-		if(!ricerca.isEmpty()) {
-			for(Luogo l : ricerca) {
+		if(!mainFrame.getRicerca().isEmpty()) {
+			for(Luogo l : mainFrame.getRicerca()) {
 				PanelInfoLuogoAnteprima panel = new PanelInfoLuogoAnteprima(controller, mainFrame, l, true, workPanel);
 				verticalBox.add(panel);
 				verticalBox.add(Box.createRigidArea(new Dimension(0, 8)));
@@ -258,7 +256,6 @@ public class HomePanel extends JPanel {
 			verticalBox.add(Box.createRigidArea(new Dimension(0, 14)));
 			verticalBox.add(lblNessunLuogo);
 		}
-		
 	}
 
 }

@@ -62,6 +62,7 @@ public class MainController {
 					MainController controller = new MainController();
 					MainFrame mainFrame = new MainFrame(controller);
 					mainFrame.setVisible(true);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -345,6 +346,7 @@ public class MainController {
 	    return listaComponents; //Restituisci lista
 	    
 	}
+
 
 	
 }

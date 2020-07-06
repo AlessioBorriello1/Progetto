@@ -27,6 +27,7 @@ import java.awt.event.MouseEvent;
 import java.awt.SystemColor;
 import javax.swing.JTextPane;
 import java.awt.event.MouseMotionAdapter;
+import java.util.List;
 import java.awt.FlowLayout;
 import javax.swing.JLabel;
 import java.awt.CardLayout;
@@ -48,6 +49,7 @@ public class MainFrame extends JFrame {
 
 	private MainController controller; //Controller che chiama il mainFrame
 	private Point mouseClickPoint; //Posizione mouse (per trascinare finestra)
+	private List<Luogo> ricerca = null; //Array list che contiene la lista dei luoghi in base alla ricerca effettuata
 	
 	/**
 	 * Frame principale in cui mostrare tutti i vari pannelli
@@ -322,6 +324,9 @@ public class MainFrame extends JFrame {
 					.addContainerGap())
 		);
 		workPanel.setLayout(new CardLayout(0, 0)); //Imposta layout per workPanel
+		
+		LuogoDAO dao = new LuogoDAO();
+		setRicerca(dao.getListaTuttiLuoghi());
 		
 		//Imposta primo pannello di lavoro (workPanel) a HomePanel
 		cambiaPannelloLavoroAHomePanel(workPanel);
@@ -818,4 +823,12 @@ public class MainFrame extends JFrame {
 		
 	}
 
+	
+	//Getter e setter della lista di luoghi ricerca
+	public List<Luogo> getRicerca() {
+		return ricerca;
+	}
+	public void setRicerca(List<Luogo> ricerca) {
+		this.ricerca = ricerca;
+	}
 }
