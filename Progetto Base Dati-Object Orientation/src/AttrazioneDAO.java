@@ -39,7 +39,7 @@ public class AttrazioneDAO {
 			
 			String connectionURL = MainController.URL; //URL di connessione
 			
-	        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
+	        Connection con = DriverManager.getConnection(connectionURL, MainController.UTENTE, MainController.PASSWORD);  //Crea connessione
 	        Statement st = con.createStatement(); //Creo statement
 			st.executeUpdate(q); //Eseguo la query contenuta in stringa q
 			
@@ -107,7 +107,7 @@ public class AttrazioneDAO {
 			
 			String connectionURL = MainController.URL; //URL di connessione
 	
-	        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
+	        Connection con = DriverManager.getConnection(connectionURL, MainController.UTENTE, MainController.PASSWORD);  //Crea connessione
 	        Statement st = con.createStatement(); //Creo statement
 	        
 	        String q = "SELECT * FROM attrazione WHERE idLuogo = '" + ID + "'";
@@ -193,7 +193,7 @@ public class AttrazioneDAO {
 			
 			String connectionURL = MainController.URL; //URL di connessione
 	
-	        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
+	        Connection con = DriverManager.getConnection(connectionURL, MainController.UTENTE, MainController.PASSWORD);  //Crea connessione
 	        Statement st = con.createStatement(); //Creo statement
 	        
 			st.executeUpdate(q); //Eseguo la query contenuta in stringa q

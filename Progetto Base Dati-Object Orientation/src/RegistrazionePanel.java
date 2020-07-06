@@ -68,7 +68,7 @@ public class RegistrazionePanel extends JPanel {
 		passwordField.setBackground(controller.sky);
 		passwordField.setBorder(new MatteBorder(0, 0, 2, 0, (Color) controller.pigeon));
 		
-		JLabel lblPassword = new JLabel("Password");
+		JLabel lblPassword = new JLabel(MainController.PASSWORD);
 		lblPassword.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPassword.setFont(new Font("Georgia", Font.BOLD, 18));
 		

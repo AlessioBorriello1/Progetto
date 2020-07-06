@@ -58,7 +58,7 @@ public class LuogoDAO {
 			
 			String connectionURL = MainController.URL; //URL di connessione
 
-	        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
+	        Connection con = DriverManager.getConnection(connectionURL, MainController.UTENTE, MainController.PASSWORD);  //Crea connessione
 			Statement st = con.createStatement(); //Creo statement
 			st.executeUpdate(q); //Eseguo la query contenuta in stringa q1
 			
@@ -110,7 +110,7 @@ public class LuogoDAO {
 			
 			String connectionURL = MainController.URL; //URL di connessione
 
-	        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
+	        Connection con = DriverManager.getConnection(connectionURL, MainController.UTENTE, MainController.PASSWORD);  //Crea connessione
 			Statement st = con.createStatement(); //Creo statement
 			ResultSet rs = st.executeQuery(q); //Eseguo la query contenuta in stringa q
 			
@@ -151,7 +151,7 @@ public class LuogoDAO {
 			
 			String connectionURL = MainController.URL; //URL di connessione
 
-	        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
+	        Connection con = DriverManager.getConnection(connectionURL, MainController.UTENTE, MainController.PASSWORD);  //Crea connessione
 			Statement st = con.createStatement(); //Creo statement
 			ResultSet rs = st.executeQuery(q); //Eseguo la query contenuta in stringa q
 			
@@ -190,7 +190,7 @@ public class LuogoDAO {
 			
 			String connectionURL = MainController.URL; //URL di connessione
 
-	        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
+	        Connection con = DriverManager.getConnection(connectionURL, MainController.UTENTE, MainController.PASSWORD);  //Crea connessione
 			Statement st = con.createStatement(); //Creo statement
 			ResultSet rs = st.executeQuery(q); //Eseguo la query contenuta in stringa q
 			
@@ -290,7 +290,7 @@ public class LuogoDAO {
 			
 			String connectionURL = MainController.URL; //URL di connessione
 
-	        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
+	        Connection con = DriverManager.getConnection(connectionURL, MainController.UTENTE, MainController.PASSWORD);  //Crea connessione
 			Statement st = con.createStatement(); //Creo statement
 			ResultSet rs = st.executeQuery(q); //Eseguo la query contenuta in stringa q
 			
@@ -393,7 +393,7 @@ public class LuogoDAO {
 			
 			String connectionURL = MainController.URL; //URL di connessione
 
-	        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
+	        Connection con = DriverManager.getConnection(connectionURL, MainController.UTENTE, MainController.PASSWORD);  //Crea connessione
 			Statement st = con.createStatement(); //Creo statement
 			ResultSet rs = st.executeQuery(q); //Eseguo la query contenuta in stringa q
 			
@@ -524,7 +524,7 @@ public class LuogoDAO {
 			
 			String connectionURL = MainController.URL; //URL di connessione
 
-	        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
+	        Connection con = DriverManager.getConnection(connectionURL, MainController.UTENTE, MainController.PASSWORD);  //Crea connessione
 			Statement st = con.createStatement(); //Creo statement
 			st.executeUpdate(q); //Eseguo la query contenuta in stringa q
 			
@@ -558,7 +558,7 @@ public class LuogoDAO {
 			
 			String connectionURL = MainController.URL; //URL di connessione
 	
-	        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
+	        Connection con = DriverManager.getConnection(connectionURL, MainController.UTENTE, MainController.PASSWORD);  //Crea connessione
 	        Statement st = con.createStatement(); //Creo statement
 	        
 			st.executeUpdate(q); //Eseguo la query contenuta in stringa q
@@ -601,7 +601,7 @@ public class LuogoDAO {
 			
 			String connectionURL = MainController.URL; //URL di connessione
 	
-	        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
+	        Connection con = DriverManager.getConnection(connectionURL, MainController.UTENTE, MainController.PASSWORD);  //Crea connessione
 			Statement st = con.createStatement(); //Creo statement
 			st.executeUpdate(q); //Eseguo la query contenuta in stringa q
 			
@@ -656,7 +656,7 @@ public class LuogoDAO {
 			
 			String connectionURL = MainController.URL; //URL di connessione
 
-	        Connection con = DriverManager.getConnection(connectionURL, "root", "password");  //Crea connessione
+	        Connection con = DriverManager.getConnection(connectionURL, MainController.UTENTE, MainController.PASSWORD);  //Crea connessione
 			Statement st = con.createStatement(); //Creo statement
 			ResultSet rs = st.executeQuery(q); //Eseguo la query contenuta in stringa q
 			
